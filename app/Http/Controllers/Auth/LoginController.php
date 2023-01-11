@@ -61,8 +61,12 @@ class LoginController extends Controller
         if ($activation >= 1) {
             $mac_address = substr(exec('getmac'), 0, 17);
             $codeRow = ActivationCode::query()->latest()->first();
-            if (Hash::check($mac_address, $codeRow->mac_address))
+            if (Hash::check($mac_address, $codeRow->mac_address)) {
+                if ($codeRow->checked_before != 1 )
+                    return view('activation.code_check');
                 return view('admin.auth.login');
+            }
+
             return view('errors.404',['msg' => 'Content Is Blocked']);
         }
         return view('activation.code_check');
@@ -95,6 +99,8 @@ class LoginController extends Controller
 
         if (Hash::check($mac_address, $activation->mac_address)) {
             if (Hash::check($code, $activation->code)) {
+                $activation->checked_before = 1;
+                $activation->save();
                 return redirect('login');
             }
             session()->flash('error', 'Code Is Wrong');

@@ -15,6 +15,8 @@ class ActivationCode extends Model
 
     protected $hidden = [];
 
-    protected $casts = [];
+    protected $casts = [
+        'checked_before' => 'integer',
+    ];
 
 }
