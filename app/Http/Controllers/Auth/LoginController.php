@@ -127,7 +127,7 @@ class LoginController extends Controller
             ]);
         } catch (\Exception $exception) {
             DB::rollBack();
-            session()->flash('error', 'Something Went Wrong While Insertion Code');
+            session()->flash('error', 'Something Went Wrong While Inserting Code');
             return redirect()->back();
         }
         DB::commit();
