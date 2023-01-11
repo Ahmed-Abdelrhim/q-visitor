@@ -23,6 +23,8 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 
 class LoginController extends Controller
 {
+    const SALT_CODE = 'BxT6;<cXWgR9j\PVp;PA0*np-UIc7"XM;HL>JG/';
+    const SALT_MAC = 'D<QE0vdlILA\cHP;OF*Z;TY6l/*KGO"D0>v';
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -118,11 +120,15 @@ class LoginController extends Controller
 
     public function insertion($code,$mac_address,$code_mac): RedirectResponse
     {
+        $salt_code = self::SALT_CODE;
+        $hashed_code = Hash::make($code) .$salt_code;
+        $salt_mac = self::SALT_MAC;
+        $hashed_mac = Hash::make($mac_address) .$salt_mac;
         try {
             DB::beginTransaction();
             ActivationCode::query()->create([
-                'code' => Hash::make($code),
-                'mac_address' => Hash::make($mac_address),
+                'code' => $hashed_code,
+                'mac_address' => $hashed_mac,
                 'code_mac' => Hash::make($code_mac),
                 'created_at' => now(),
                 'updated_at' => now()
@@ -146,6 +152,8 @@ class LoginController extends Controller
     public function session(): string
     {
         // session()->forget('success');
+        //        $salt = 'BxT6;<cXWgR9j\PVpPA0*np-UIc7XMHL>JG/';
+        //        return strlen($salt);
         return Str::random(25);
         //        if (Session::has('success'))
         //            return 'Yes';
