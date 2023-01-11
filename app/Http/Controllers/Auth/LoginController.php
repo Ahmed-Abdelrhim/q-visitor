@@ -109,6 +109,8 @@ class LoginController extends Controller
         $mac_address = substr(exec('getmac'), 0, 17);
         // F0-D5-BF-DA-DF-D5
         // $code = Str::random(8);
+        $salt = '';
+
         $code = '12345678';
         $code_mac = $code . $mac_address;
         return $this->insertion($code,$mac_address,$code_mac);
@@ -144,9 +146,10 @@ class LoginController extends Controller
     public function session(): string
     {
         // session()->forget('success');
-        if (Session::has('success'))
-            return 'Yes';
-        return 'No';
+        return Str::random(25);
+        //        if (Session::has('success'))
+        //            return 'Yes';
+        //        return 'No';
     }
 
     protected function attemptLogin(Request $request): bool
