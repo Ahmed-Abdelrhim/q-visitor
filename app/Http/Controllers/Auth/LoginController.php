@@ -23,8 +23,6 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 
 class LoginController extends Controller
 {
-    const SALT_CODE = 'BxT6;<cXWgR9j\PVp;PA0*np-UIc7"XM;HL>JG/';
-    const SALT_MAC = 'D<QE0vdlILA\cHP;OF*Z;TY6l/*KGO"D0>v';
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -94,8 +92,10 @@ class LoginController extends Controller
         $current_mac_address = substr(exec('getmac'), 0, 17);
         $code = $request->get('code');
 
-        $hashed_mac_address = str_replace(self::SALT_MAC,'',$activation->mac_address);
-        $hashed_code = str_replace(self::SALT_CODE,'',$activation->code);
+        // $hashed_mac_address = str_replace(self::SALT_MAC,'',$activation->mac_address);
+        $hashed_mac_address = str_replace(env('SALT_MAC'),'',$activation->mac_address);
+        // $hashed_code = str_replace(self::SALT_CODE,'',$activation->code);
+        $hashed_code = str_replace(env('SALT_CODE'),'',$activation->code);
 
         if (Hash::check($current_mac_address, $hashed_mac_address)) {
             if (Hash::check($code, $hashed_code)) {
@@ -124,10 +124,12 @@ class LoginController extends Controller
 
     public function insertion($code,$mac_address,$code_mac): RedirectResponse
     {
-        $salt_code = self::SALT_CODE;
-        $hashed_code = Hash::make($code) .$salt_code;
-        $salt_mac = self::SALT_MAC;
-        $hashed_mac = Hash::make($mac_address) .$salt_mac;
+        // $salt_code = self::SALT_CODE;
+        // $hashed_code = Hash::make($code) .$salt_code;
+        $hashed_code = Hash::make($code) . env('SALT_CODE');
+        // $salt_mac = self::SALT_MAC;
+        // $hashed_mac = Hash::make($mac_address) .$salt_mac;
+        $hashed_mac = Hash::make($mac_address) .env('SALT_MAC');
         try {
             DB::beginTransaction();
             ActivationCode::query()->create([
@@ -153,12 +155,12 @@ class LoginController extends Controller
         return view('activation.code_check');
     }
 
-    public function session(): string
+    public function session()
     {
         // session()->forget('success');
         //        $salt = 'BxT6;<cXWgR9j\PVpPA0*np-UIc7XMHL>JG/';
         //        return strlen($salt);
-        return Str::random(25);
+        // return Str::random(25);
         //        if (Session::has('success'))
         //            return 'Yes';
         //        return 'No';
