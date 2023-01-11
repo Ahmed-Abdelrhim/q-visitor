@@ -82,12 +82,6 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        //        if (Hash::check($code, $activation->code)) {
-        //            return 'Yes The Same Code';
-        //        } else {
-        //            return 'Wrong Code';
-        //        }
-
         $activation = ActivationCode::query()->latest()->first();
         if (!$activation) {
             session()->flash('error','There Is No Codes To Check , You Can Call Qudra-tech for Activation Codes');
