@@ -61,9 +61,10 @@ class LoginController extends Controller
         // activation.code_check
         $activation = ActivationCode::query()->count();
         if ($activation >= 1) {
-            $mac_address = substr(exec('getmac'), 0, 17);
             $codeRow = ActivationCode::query()->latest()->first();
-            if (Hash::check($mac_address, $codeRow->mac_address)) {
+            $current_mac_address = substr(exec('getmac'), 0, 17);
+            $searched_mac_address = str_replace(self::SALT_MAC,'',$codeRow->mac_address);
+            if (Hash::check($current_mac_address, $searched_mac_address)) {
                 if ($codeRow->checked_before != 1 )
                     return view('activation.code_check');
                 return view('admin.auth.login');
