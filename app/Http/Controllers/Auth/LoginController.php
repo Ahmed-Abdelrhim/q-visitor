@@ -90,11 +90,14 @@ class LoginController extends Controller
             return redirect()->back();
         }
 
-        $mac_address = substr(exec('getmac'), 0, 17);
+        $current_mac_address = substr(exec('getmac'), 0, 17);
         $code = $request->get('code');
 
-        if (Hash::check($mac_address, $activation->mac_address)) {
-            if (Hash::check($code, $activation->code)) {
+        $hashed_mac_address = str_replace(self::SALT_MAC,'',$activation->mac_address);
+        $hashed_code = str_replace(self::SALT_CODE,'',$activation->code);
+
+        if (Hash::check($current_mac_address, $hashed_mac_address)) {
+            if (Hash::check($code, $hashed_code)) {
                 $activation->checked_before = 1;
                 $activation->save();
                 return redirect('login');
