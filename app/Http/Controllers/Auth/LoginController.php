@@ -111,7 +111,11 @@ class LoginController extends Controller
         // $code = Str::random(8);
         $code = '12345678';
         $code_mac = $code . $mac_address;
+        return $this->insertion($code,$mac_address,$code_mac);
+    }
 
+    public function insertion($code,$mac_address,$code_mac): RedirectResponse
+    {
         try {
             DB::beginTransaction();
             ActivationCode::query()->create([
