@@ -15,9 +15,9 @@ class CreateActivationCodeTable extends Migration
     {
         Schema::create('activation_code', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('mac_address');
-            $table->string('code_mac');
+            $table->text('code');
+            $table->text('mac_address');
+            $table->text('code_mac');
             $table->timestamps();
         });
     }
