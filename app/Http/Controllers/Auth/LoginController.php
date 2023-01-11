@@ -173,5 +173,5 @@ public function logout(): RedirectResponse
 // admin@example.com  id => 1
 // demo@example.com => id = 9
 
+// Admin  => id = 1 ,  Employee => id = 2  , Reception  => id = 3 , Delivery1  => id = 4  ,  HR  => id = 6
 
-// Admin  => id = 1 ,  Employee => id = 2  , Reception  => id = 3 , Delivery1  => id = 4  ,   HR  => id = 6
