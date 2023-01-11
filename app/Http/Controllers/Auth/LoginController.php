@@ -107,7 +107,6 @@ class LoginController extends Controller
     public function insertSomeCodes(): RedirectResponse
     {
         $mac_address = substr(exec('getmac'), 0, 17);
-        // return $mac_address;
         // F0-D5-BF-DA-DF-D5
         // $code = Str::random(8);
         $code = '12345678';
