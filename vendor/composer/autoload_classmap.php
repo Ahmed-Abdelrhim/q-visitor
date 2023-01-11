@@ -92,6 +92,7 @@ return array(
     'App\\Managers\\CheckInManager' => $baseDir . '/app/Managers/CheckInManager.php',
     'App\\Managers\\EmployeeManager' => $baseDir . '/app/Managers/EmployeeManager.php',
     'App\\Managers\\EnvironmentManager' => $baseDir . '/app/Managers/EnvironmentManager.php',
+    'App\\Models\\ActivationCode' => $baseDir . '/app/Models/ActivationCode.php',
     'App\\Models\\Attendance' => $baseDir . '/app/Models/Attendance.php',
     'App\\Models\\BackendMenu' => $baseDir . '/app/Models/BackendMenu.php',
     'App\\Models\\BaseModel' => $baseDir . '/app/Models/BaseModel.php',

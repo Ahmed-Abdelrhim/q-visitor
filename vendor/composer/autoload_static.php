@@ -812,6 +812,7 @@ class ComposerStaticInit720a1b4ff47f0b6b11d0ab01a08d2b72
         'App\\Managers\\CheckInManager' => __DIR__ . '/../..' . '/app/Managers/CheckInManager.php',
         'App\\Managers\\EmployeeManager' => __DIR__ . '/../..' . '/app/Managers/EmployeeManager.php',
         'App\\Managers\\EnvironmentManager' => __DIR__ . '/../..' . '/app/Managers/EnvironmentManager.php',
+        'App\\Models\\ActivationCode' => __DIR__ . '/../..' . '/app/Models/ActivationCode.php',
         'App\\Models\\Attendance' => __DIR__ . '/../..' . '/app/Models/Attendance.php',
         'App\\Models\\BackendMenu' => __DIR__ . '/../..' . '/app/Models/BackendMenu.php',
         'App\\Models\\BaseModel' => __DIR__ . '/../..' . '/app/Models/BaseModel.php',
