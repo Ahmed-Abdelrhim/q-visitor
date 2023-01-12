@@ -47,14 +47,14 @@
                             </script>
                         @endif
 
-                        @if (Session::has('success'))
-                            <script>
-                                swal({
-                                    text: " {!! Session::get('success') !!}",
-                                    icon: "success",
-                                })
-                            </script>
-                        @endif
+                        {{--                        @if (Session::has('success'))--}}
+                        {{--                            <script>--}}
+                        {{--                                swal({--}}
+                        {{--                                    text: " {!! Session::get('success') !!}",--}}
+                        {{--                                    icon: "success",--}}
+                        {{--                                })--}}
+                        {{--                            </script>--}}
+                        {{--                        @endif--}}
 
                         @if (Session::has('error'))
                             <script>
