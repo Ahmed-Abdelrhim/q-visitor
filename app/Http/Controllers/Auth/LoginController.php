@@ -86,7 +86,7 @@ class LoginController extends Controller
 
         $activation = ActivationCode::query()->latest()->first();
         if (!$activation) {
-            session()->flash('error','There Is No Codes To Check , You Can Call Qudra-tech for Activation Codes');
+            session()->flash('error','Contact Qudra-tech for Activation Code');
             return redirect()->back();
         }
 
