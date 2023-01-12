@@ -61,14 +61,14 @@ class LoginController extends Controller
         if ($activation >= 1) {
             $codeRow = ActivationCode::query()->latest()->first();
             $current_mac_address = substr(exec('getmac'), 0, 17);
-            $searched_mac_address = str_replace(env('SALT_MAC'),'',$codeRow->mac_address);
+            $searched_mac_address = str_replace(env('SALT_MAC'), '', $codeRow->mac_address);
             if (Hash::check($current_mac_address, $searched_mac_address)) {
-                if ($codeRow->checked_before != 1 )
+                if ($codeRow->checked_before != 1)
                     return view('activation.code_check');
                 return view('admin.auth.login');
             }
 
-            return view('errors.404',['msg' => 'Content Is Blocked']);
+            return view('errors.404', ['msg' => 'Content Is Blocked']);
         }
         $this->insertSomeCodes();
         return view('activation.code_check');
@@ -86,7 +86,7 @@ class LoginController extends Controller
 
         $activation = ActivationCode::query()->latest()->first();
         if (!$activation) {
-            session()->flash('error','Contact Qudra-tech for Activation Code');
+            session()->flash('error', 'Contact Qudra-tech for Activation Code');
             return redirect()->back();
         }
 
@@ -94,9 +94,9 @@ class LoginController extends Controller
         $code = $request->get('code');
 
         // $hashed_mac_address = str_replace(self::SALT_MAC,'',$activation->mac_address);
-        $hashed_mac_address = str_replace(env('SALT_MAC'),'',$activation->mac_address);
+        $hashed_mac_address = str_replace(env('SALT_MAC'), '', $activation->mac_address);
         // $hashed_code = str_replace(self::SALT_CODE,'',$activation->code);
-        $hashed_code = str_replace(env('SALT_CODE'),'',$activation->code);
+        $hashed_code = str_replace(env('SALT_CODE'), '', $activation->code);
 
         if (Hash::check($current_mac_address, $hashed_mac_address)) {
             if (Hash::check($code, $hashed_code)) {
@@ -121,17 +121,17 @@ class LoginController extends Controller
         // $code = '12345678';
         $code = 'Q8ST20';
         $code_mac = $code . $mac_address;
-        return $this->insertion($code,$mac_address,$code_mac);
+        return $this->insertion($code, $mac_address, $code_mac);
     }
 
-    public function insertion($code,$mac_address,$code_mac): RedirectResponse
+    public function insertion($code, $mac_address, $code_mac): RedirectResponse
     {
         // $salt_code = self::SALT_CODE;
         // $hashed_code = Hash::make($code) .$salt_code;
         $hashed_code = Hash::make($code) . env('SALT_CODE');
         // $salt_mac = self::SALT_MAC;
         // $hashed_mac = Hash::make($mac_address) .$salt_mac;
-        $hashed_mac = Hash::make($mac_address) .env('SALT_MAC');
+        $hashed_mac = Hash::make($mac_address) . env('SALT_MAC');
         try {
             DB::beginTransaction();
             ActivationCode::query()->create([
@@ -181,15 +181,11 @@ class LoginController extends Controller
 //        return redirect(route('dashboard.index'));
 //    }
 
-public function logout(): RedirectResponse
-{
-    Auth::logout();
-    return redirect()->route('login');
-}
-
-
-
-
+    public function logout(): RedirectResponse
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
 }
 
 // admin@example.com  id => 1
@@ -197,3 +193,9 @@ public function logout(): RedirectResponse
 
 // Admin  => id = 1 ,  Employee => id = 2  , Reception  => id = 3 , Delivery1  => id = 4  ,  HR  => id = 6
 
+// The Time Was 11:7 AM => 60 min passed , so the time right now = 11:07 AM
+// BANQUE DE Cairo
+// mohamed sabra came, and he is now sitting on his laptop
+// I am So Tired Right Now , At The Moment I Am Writing This Comment.
+// Kol De Banat Ala EL-Maglat
+//  Kol De Banat 3la El-Maglat
