@@ -193,9 +193,3 @@ class LoginController extends Controller
 
 // Admin  => id = 1 ,  Employee => id = 2  , Reception  => id = 3 , Delivery1  => id = 4  ,  HR  => id = 6
 
-// The Time Was 11:7 AM => 60 min passed , so the time right now = 11:07 AM
-// BANQUE DE Cairo
-// mohamed sabra came, and he is now sitting on his laptop
-// I am So Tired Right Now , At The Moment I Am Writing This Comment.
-// Kol De Banat Ala EL-Maglat
-//  Kol De Banat 3la El-Maglat
