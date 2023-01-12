@@ -193,3 +193,16 @@ class LoginController extends Controller
 
 // Admin  => id = 1 ,  Employee => id = 2  , Reception  => id = 3 , Delivery1  => id = 4  ,  HR  => id = 6
 
+// The Time Was 11:7 AM => 1hr,35 min passed , so the time right now = 12:38 AM
+// BANQUE DE Cairo
+// Mohamed Sabra Came, And He Is Now Sitting On His Laptop
+// I Am So Tired Right Now , At The Moment I Am Writing This Comment.
+// Kol De Banat Ala EL-Maglat
+//  Kol De Banat 3la El-Maglat
+// I need To Sleep Ya I need To Sleep , To Take A Rest For A While
+
+// I Came at 9:20 AM , So I Have To Leave At 5:23
+
+
+// Show By ID: Cart Page View Is Not
+// He Is Opening You-Tube
