@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
-Route::get('code',[LoginController::class,'insertSomeCodes']);
+//Route::get('code',[LoginController::class,'insertSomeCodes']);
 Route::get('Code/Activation/Page',[LoginController::class,'showCodeActivationPage'])->name('code.activation.page');
 Route::get('session',[LoginController::class,'session'])->name('session');
 Route::post('authenticated/user/logout', [LoginController::class,'logout'])->name('auth.logout');
