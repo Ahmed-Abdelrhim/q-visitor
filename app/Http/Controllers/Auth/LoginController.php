@@ -118,7 +118,8 @@ class LoginController extends Controller
         // $code = Str::random(8);
         $salt = '';
 
-        $code = '12345678';
+        // $code = '12345678';
+        $code = 'Q8ST20';
         $code_mac = $code . $mac_address;
         return $this->insertion($code,$mac_address,$code_mac);
     }
