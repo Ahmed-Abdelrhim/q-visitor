@@ -52,13 +52,7 @@ class BookingController extends Controller
         return view('admin.booking.index', compact('bookings','booking'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     *
-     * @return void
-     */
+
     public function show(Request $request, $id)
     {
         $bookings = $this->bookingService->all($request);
@@ -89,7 +83,7 @@ class BookingController extends Controller
 
     public function postCreateStepOne(Request $request)
     {
-        $employee = Employee::find($request['employeeID']);
+        $employee = Employee::query()->find($request['employeeID']);
         $request->session()->put('employee', $employee);
         return redirect()->route('admin.bookings.step-two');
     }
@@ -189,7 +183,7 @@ class BookingController extends Controller
         $visitor->national_identification_no  = $getVisitor['national_identification_no'];
         $visitor->save();
 
-        if($visitor){
+        if($visitor) {
             $booking                          = new Booking();
             $booking->reg_no                  = $reg_no;
             $booking->purpose                 = $request['purpose'];
