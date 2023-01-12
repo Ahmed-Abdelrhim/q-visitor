@@ -77,7 +77,7 @@ class LoginController extends Controller
     public function codeActivation(Request $request): Redirector|RedirectResponse|Application
     {
         $validator = Validator::make($request->all(), [
-            'code' => 'required|string|min:8',
+            'code' => 'required|string|min:6',
         ]);
 
         if ($validator->fails()) {
