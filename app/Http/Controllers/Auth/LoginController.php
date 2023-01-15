@@ -56,7 +56,7 @@ class LoginController extends Controller
     public function showLoginForm(): Factory|View|Application
     {
         // TODO::Check If The Table Activation Code Has Ans Rows
-        // activation.code_check
+        // activation.code_check .
         $activation = ActivationCode::query()->count();
         if ($activation >= 1) {
             $codeRow = ActivationCode::query()->latest()->first();
