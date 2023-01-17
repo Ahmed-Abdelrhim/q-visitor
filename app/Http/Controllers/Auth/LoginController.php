@@ -165,7 +165,7 @@ class LoginController extends Controller
         // return Str::random(25);
         //        if (Session::has('success'))
         //            return 'Yes';
-        //        return 'No';
+        //        return 'No'; .
     }
 
     protected function attemptLogin(Request $request): bool
