@@ -147,7 +147,7 @@ class LoginController extends Controller
             return redirect()->back();
         }
         DB::commit();
-        // session()->flash('success', 'Code Inserted Successfully');
+        // session()->flash('success', 'Code Inserted Successfully');;
         return redirect()->route('code.activation.page');
     }
 
