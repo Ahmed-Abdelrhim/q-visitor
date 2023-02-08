@@ -9,11 +9,14 @@ use App\Models\Employee;
 use App\Models\Types;
 use App\Models\VisitingDetails;
 use App\Http\Services\Visitor\VisitorService;
+use App\Models\Visitor;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
+use Twilio\Rest\Client;
 
 class VisitorController extends Controller
 {
@@ -45,7 +48,7 @@ class VisitorController extends Controller
     {
 
         $this->data['employees'] = Employee::where('status', Status::ACTIVE)->get();
-		$this->data['types'] = Types::where('status', Status::ACTIVE)->get();
+        $this->data['types'] = Types::where('status', Status::ACTIVE)->get();
 
         return view('admin.visitor.create', $this->data);
     }
@@ -62,7 +65,7 @@ class VisitorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -71,7 +74,7 @@ class VisitorController extends Controller
         $this->data['visitingDetails'] = $this->visitorService->find($id);
         if ($this->data['visitingDetails']) {
             return view('admin.visitor.show', $this->data);
-        }else{
+        } else {
             return redirect()->route('admin.visitors.index');
         }
     }
@@ -79,18 +82,18 @@ class VisitorController extends Controller
     public function edit($id)
     {
         $this->data['employees'] = Employee::where('status', Status::ACTIVE)->get();
-		$this->data['types'] = Types::where('status', Status::ACTIVE)->get();
+        $this->data['types'] = Types::where('status', Status::ACTIVE)->get();
         $this->data['visitingDetails'] = $this->visitorService->find($id);
-        if ($this->data['visitingDetails']){
+        if ($this->data['visitingDetails']) {
             return view('admin.visitor.edit', $this->data);
-        }else {
+        } else {
             return redirect()->route('admin.visitors.index');
         }
     }
 
-    public function update(VisitorRequest $request,VisitingDetails $visitor)
+    public function update(VisitorRequest $request, VisitingDetails $visitor)
     {
-        $this->visitorService->update($request,$visitor->id);
+        $this->visitorService->update($request, $visitor->id);
         return redirect()->route('admin.visitors.index')->withSuccess('The data updated successfully!');
     }
 
@@ -98,7 +101,7 @@ class VisitorController extends Controller
     {
         $this->visitorService->delete($id);
         //return route('admin.visitors.index')->withSuccess('The data delete successfully!');
-		return redirect()->route('admin.visitors.index')->withSuccess('The data delete successfully!');
+        return redirect()->route('admin.visitors.index')->withSuccess('The data delete successfully!');
     }
 
 
@@ -110,47 +113,53 @@ class VisitorController extends Controller
         $visitingDetailArray = [];
         if (!blank($visitingDetails)) {
             foreach ($visitingDetails as $visitingDetail) {
-                $visitingDetailArray[$i]          = $visitingDetail;
+                $visitingDetailArray[$i] = $visitingDetail;
                 $visitingDetailArray[$i]['setID'] = $i;
                 $i++;
             }
         }
         return Datatables::of($visitingDetailArray)
             ->addColumn('action', function ($visitingDetail) {
-                $retAction ='';
-				
-				if(auth()->user()->can('visitors_show')) {
-                    $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="Approve"><i class="far fa-check-circle"></i></a>';
+                $retAction = '';
+
+                if (auth()->user()->can('visitors_show')) {
+                    // $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="Approve"><i class="far fa-check-circle"></i></a>';
+                    $visit = VisitingDetails::query()->find($visitingDetail);
+
+                    $msg = 'Approve & send sms';
+                    if ($visit[0]['sent_sms_before'] == 1 ) {
+                        $msg = 'Re-send sms';
+                    }
+                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="'. $msg .'"><i class="far fa-check-circle"></i></a>';
                 }
-				
-                if(auth()->user()->can('visitors_show')) {
+
+                if (auth()->user()->can('visitors_show')) {
                     $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-info" data-toggle="tooltip" data-placement="top" title="View"><i class="far fa-eye"></i></a>';
                 }
 
-                if(auth()->user()->can('visitors_edit')) {
+                if (auth()->user()->can('visitors_edit')) {
                     $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"> <i class="far fa-edit"></i></a>';
                 }
 
 
-                if(auth()->user()->can('visitors_delete')) {
-                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail). '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"> <i class="fa fa-trash"></i></button></form>';
+                if (auth()->user()->can('visitors_delete')) {
+                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"> <i class="fa fa-trash"></i></button></form>';
                 }
 
                 return $retAction;
             })
-
             ->editColumn('name', function ($visitingDetail) {
                 return Str::limit($visitingDetail->visitor->name, 50);
             })
-			->editColumn('qrcode', function ($visitingDetail) {
+            ->editColumn('qrcode', function ($visitingDetail) {
                 return $visitingDetail->qrcode;
             })
             ->addColumn('image', function ($visitingDetail) {
-				if (str_contains($visitingDetail->visitor->photo, 'data:image')) { 
-					return '<figure class="avatar mr-2"><img src="'.$visitingDetail->visitor->photo . '" alt=""></figure>';
-				}else{
-					return '<figure class="avatar mr-2"><img src="https://www.qudratech-eg.net/visitorpass/public/' . $visitingDetail->visitor->photo . '" alt=""></figure>';
-				}
+                if (str_contains($visitingDetail->visitor->photo, 'data:image')) {
+                    return '<figure class="avatar mr-2"><img src="' . $visitingDetail->visitor->photo . '" alt=""></figure>';
+                } else {
+                    return '<figure class="avatar mr-2"><img src="https://www.qudratech-eg.net/visitorpass/public/' . $visitingDetail->visitor->photo . '" alt=""></figure>';
+                }
             })
             ->editColumn('visitor_id', function ($visitingDetail) {
                 return $visitingDetail->reg_no;
@@ -167,14 +176,41 @@ class VisitorController extends Controller
             ->editColumn('date', function ($visitingDetail) {
                 return date('d-m-Y h:i A', strtotime($visitingDetail->checkin_at));
             })
-			
             ->editColumn('id', function ($visitingDetail) {
                 return $visitingDetail->setID;
             })
-			
             ->rawColumns(['name', 'action'])
             ->escapeColumns([])
             ->make(true);
-			var_dump($visitingDetail);
+        var_dump($visitingDetail);
+    }
+
+    public function sendSms($visitingDetail_id)
+    {
+        $visit_details = VisitingDetails::query()->find($visitingDetail_id);
+        $user_id = $visit_details->visitor_id;
+        $user = Visitor::query()->find($user_id);
+        if (!$user) {
+            $notifications = array('error' => 'User Was Not Found');
+            return redirect()->back()->with($notifications);
+        }
+        if (empty($user->phone)) {
+            $notifications = array('error' => 'User phone number can not be empty');
+            return redirect()->back()->with($notifications);
+        }
+
+        $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid='.$user_id);
+        $send_sms = Http::get('https://www.qudratech-sd.com/sms_api.php?mob='.$user->phone);
+
+        if ( $send_sms->status() == 200 ) {
+            $notifications = array('success' => 'Message Sent Successfully');
+            $visit_details->sent_sms_before = 1;
+            $visit_details->save();
+            return redirect()->back()->with($notifications);
+        } else {
+            $notifications = array('error' => 'Something Went Wrong');
+            return redirect()->back()->with($notifications);
+        }
+
     }
 }

@@ -36,7 +36,7 @@ class DashboardController extends BackendController
             $totalEmployees = count($employees);
         }
 //print_r($visitors);
-        $totalVisitor   = count($visitors);
+        $totalVisitor   = Visitor::query()->count();
         $totalPrerigister = count($preregister);
 
 

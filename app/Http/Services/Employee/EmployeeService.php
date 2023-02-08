@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -114,13 +115,24 @@ class EmployeeService
     public function update($id, EmployeeUpdateRequest $request)
     {
         $employee = Employee::find($id);
+
         $input['first_name'] = $request->input('first_name');
         $input['last_name'] = $request->input('last_name');
         $input['username'] = $this->username($request->input('email'));
         $input['email'] = $request->input('email');
         $input['phone'] = $request->input('phone');
+        // $input['role'] = $request->input('role');
         $user = User::find($employee->user_id);
         $user->update($input);
+        if ($request->get('role') > 0 && is_numeric($request->get('role')) ) {
+
+            DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+
+            $role = Role::find($request->get('role'));
+
+            $user->assignRole($role);
+        }
+
         if ($request->file('image')) {
             $user->media()->delete();
             $user->addMedia($request->file('image'))->toMediaCollection('user');
@@ -137,8 +149,9 @@ class EmployeeService
             $data['about'] = $request->input('about');
             $data['status'] = 5;
             $employee->update($data);
-
         }
+
+
         return $employee;
     }
 

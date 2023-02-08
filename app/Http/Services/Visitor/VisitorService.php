@@ -20,9 +20,9 @@ class VisitorService
     public function all()
     {
 //        if(auth()->user()->getrole->name == 'Employee') {
-        if(auth()->user()->hasRole('Employee')) {
-            return VisitingDetails::query()->where(['employee_id'=>auth()->user()->employee->id])->orderBy('id', 'desc')->get();
-        }else {
+        if (auth()->user()->hasRole('Employee')) {
+            return VisitingDetails::query()->where(['employee_id' => auth()->user()->employee->id])->orderBy('id', 'desc')->get();
+        } else {
             return VisitingDetails::query()->orderBy('id', 'desc')->get();
         }
     }
@@ -34,9 +34,9 @@ class VisitorService
     public function find($id)
     {
 //        if(auth()->user()->getrole->name == 'Employee') {
-        if(auth()->user()->hasRole('Employee')) {
-            return VisitingDetails::query()->where(['id'=>$id,'employee_id'=>auth()->user()->employee->id])->first();
-        }else {
+        if (auth()->user()->hasRole('Employee')) {
+            return VisitingDetails::query()->where(['id' => $id, 'employee_id' => auth()->user()->employee->id])->first();
+        } else {
             return VisitingDetails::query()->find($id);
         }
     }
@@ -78,10 +78,10 @@ class VisitorService
     public function make(VisitorRequest $request)
     {
         $visitor = DB::table('visiting_details')->orderBy('reg_no', 'desc')->first();
-        $date    = date('y-m-d');
-        $data    = substr($date, 0, 2);
-        $data1   = substr($date, 3, 2);
-        $data2   = substr($date, 6, 8);
+        $date = date('y-m-d');
+        $data = substr($date, 0, 2);
+        $data1 = substr($date, 3, 2);
+        $data2 = substr($date, 6, 8);
 
         if ($visitor) {
             $value = substr($visitor->reg_no, -2);
@@ -104,9 +104,9 @@ class VisitorService
         $input['is_pre_register'] = false;
         $input['status'] = Status::ACTIVE;
         $visitor = Visitor::create($input);
-		
-		
-        if($visitor){
+
+
+        if ($visitor) {
             $visiting['reg_no'] = $reg_no;
             $visiting['purpose'] = $request->input('purpose');
             $visiting['company_name'] = $request->input('company_name');
@@ -115,15 +115,15 @@ class VisitorService
             $visiting['visitor_id'] = $visitor->id;
             $visiting['status'] = Status::ACTIVE;
             $visiting['user_id'] = $request->input('employee_id');
-			//$visiting['qrcode'] = $request->input('qrcode');
-			$url = 'https://www.qudratech-eg.net/qrcode/index.php?data='.$input['first_name'].$visitor->id;
-			$data = file_get_contents($url);
-			$visiting['qrcode'] = $data; 
-			
-			$visiting['expiry_date'] = $request->input('expiry_date');
-			$visiting['from_date'] = $request->input('from_date');
+            //$visiting['qrcode'] = $request->input('qrcode');
+            $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
+            $data = file_get_contents($url);
+            $visiting['qrcode'] = $data;
+
+            $visiting['expiry_date'] = $request->input('expiry_date');
+            $visiting['from_date'] = $request->input('from_date');
             $visitingDetails = VisitingDetails::create($visiting);
-									
+
             if ($request->file('image')) {
                 $visitingDetails->addMedia($request->file('image'))->toMediaCollection('visitor');
             }
@@ -134,26 +134,25 @@ class VisitorService
                 // Using a generic exception
 
             }
-        }else{
-            $visitingDetails ='';
+        } else {
+            $visitingDetails = '';
         }
-		
-		if(setting('notifications_email') == 1){
-			$email = $input['email'];
-            $name = $input['first_name'].' '.$input['last_name'];
-			$id = $input['national_identification_no'];
-			$phone = $input['phone'];
-			$fromdate = date('y-m-d');
-			$todate = date('y-m-d', time() + 86400);
-			$time = date('H:i');
-			$vid = $visiting['visitor_id'];
-		//$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
-            file_get_contents('https://qudratech-eg.net/mail/tt.php?vid='.$vid);
-			$sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=".$input['phone']);
+
+        if (setting('notifications_email') == 1) {
+            $email = $input['email'];
+            $name = $input['first_name'] . ' ' . $input['last_name'];
+            $id = $input['national_identification_no'];
+            $phone = $input['phone'];
+            $fromdate = date('y-m-d');
+            $todate = date('y-m-d', time() + 86400);
+            $time = date('H:i');
+            $vid = $visiting['visitor_id'];
+            //$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
+            file_get_contents('https://qudratech-eg.net/mail/tt.php?vid=' . $vid);
+            $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
         }
-		
-		
-		
+
+
         return $visitingDetails;
 
     }
@@ -179,16 +178,16 @@ class VisitorService
         $input['status'] = Status::ACTIVE;
         $visitingDetails->visitor->update($input);
 
-        if($visitingDetails){
+        if ($visitingDetails) {
             $visiting['purpose'] = $request->input('purpose');
             $visiting['company_name'] = $request->input('company_name');
             $visiting['employee_id'] = $request->input('employee_id');
             $visiting['visitor_id'] = $visitingDetails->visitor->id;
             $visiting['status'] = Status::ACTIVE;
             $visiting['user_id'] = $request->input('employee_id');
-			$visiting['qrcode'] = $request->input('qrcode');
-			$visiting['expiry_date'] = $request->input('expiry_date');
-			$visiting['from_date'] = $request->input('from_date');
+            $visiting['qrcode'] = $request->input('qrcode');
+            $visiting['expiry_date'] = $request->input('expiry_date');
+            $visiting['from_date'] = $request->input('from_date');
             $visitingDetails->update($visiting);
         }
 
@@ -201,8 +200,8 @@ class VisitorService
             // Using a generic exception
 
         }
-		$data = file_get_contents("https://qudratech-eg.net/mail/tt.php?vid=".$visiting['visitor_id']."&name=".$input['first_name']);
-		$sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=".$input['phone']);
+        $data = file_get_contents("https://qudratech-eg.net/mail/tt.php?vid=" . $visiting['visitor_id'] . "&name=" . $input['first_name']);
+        $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
         return $visitingDetails;
     }
 

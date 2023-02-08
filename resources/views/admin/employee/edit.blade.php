@@ -88,6 +88,23 @@
                                         @enderror
                                     </div>
 
+                                    <!-- Roles -->
+                                    <div class="form-group col">
+                                        <label for="gender">{{ __('Roles') }}</label> <span class="text-danger">*</span>
+                                        <select id="gender" name="role" class="form-control @error('role') is-invalid @enderror">
+                                            <option selected value="0">choose..</option>
+                                            @foreach($roles as $role)
+                                                <option value="{{$role->id}}">{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('role')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <!-- End Roles -->
+
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">

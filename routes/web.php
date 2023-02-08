@@ -81,6 +81,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed','backend
     //visitors
     Route::resource('visitors', 'VisitorController');
     Route::get('get-visitors', 'VisitorController@getVisitor')->name('visitors.get-visitors');
+    Route::get('send-sms/{visitingDetail}', 'VisitorController@sendSms')->name('visitors.send.sms');
 
     Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
 

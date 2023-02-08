@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 use Yajra\Datatables\Datatables;
 
 class EmployeeController extends Controller
@@ -89,6 +90,7 @@ class EmployeeController extends Controller
         $this->data['employee'] = $this->employeeService->find($id);
         $this->data['designations'] = Designation::where('status', Status::ACTIVE)->get();
         $this->data['departments'] = Department::where('status', Status::ACTIVE)->get();
+        $this->data['roles'] = Role::query()->get();
         return view('admin.employee.edit', $this->data);
     }
     public function update(EmployeeUpdateRequest $request,Employee $employee)

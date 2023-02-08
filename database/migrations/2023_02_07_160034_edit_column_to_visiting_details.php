@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddExpirydate2ToVisitingDetails extends Migration
+class EditColumnToVisitingDetails extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddExpirydate2ToVisitingDetails extends Migration
     public function up()
     {
         Schema::table('visiting_details', function (Blueprint $table) {
-            //
+            $table->tinyInteger('sent_sms_before')->default(0);
         });
     }
 

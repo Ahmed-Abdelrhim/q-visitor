@@ -40,6 +40,7 @@ class EmployeeUpdateRequest extends FormRequest
             'gender'                    => 'required|numeric',
             'date_of_joining'           => 'required',
             'about'                     => 'nullable|max:255',
+            'role'                     => 'nullable|numeric',
             'image'                     => 'image|mimes:jpeg,png,jpg|max:5098',
         ];
     }
