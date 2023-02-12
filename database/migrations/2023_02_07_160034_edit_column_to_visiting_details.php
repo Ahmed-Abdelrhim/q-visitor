@@ -14,7 +14,7 @@ class EditColumnToVisitingDetails extends Migration
     public function up()
     {
         Schema::table('visiting_details', function (Blueprint $table) {
-            $table->tinyInteger('sent_sms_before')->default(0);
+            // $table->tinyInteger('sent_sms_before')->default(0);
         });
     }
 

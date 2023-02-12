@@ -14,9 +14,9 @@ class AddColumnsToTypes extends Migration
     public function up()
     {
         Schema::table('types', function (Blueprint $table) {
-        //            $table->tinyInteger('level');
-        //            $table->string('approval_one');
-        //            $table->string('approval_two');
+            $table->tinyInteger('level');
+            $table->string('role_one')->nullable();
+            $table->string('role_two')->nullable();
         });
     }
 
@@ -28,7 +28,10 @@ class AddColumnsToTypes extends Migration
     public function down()
     {
         Schema::table('types', function (Blueprint $table) {
-            //
+            Schema::dropIfExists('types');
         });
     }
 }
+// Type 1   5
+// Type 1   5
+// visit   10
