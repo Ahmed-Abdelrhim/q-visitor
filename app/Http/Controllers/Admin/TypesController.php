@@ -69,17 +69,20 @@ class TypesController extends Controller
             DB::beginTransaction();
             Types::query()->insert([
                 'name' => $request->get('name'),
+                'level' => $request->get('level'),
                 'role_one' => $request->get('role_one'),
                 'role_two' => $role_two,
                 'status' => $request->get('status'),
                 'created_at' => Carbon::now(),
             ]);
             DB::commit();
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             DB::rollBack();
             $notifications = array('message' => 'Something Went Wrong', 'alert-type' => 'error');
             return redirect()->back()->with($notifications);
         }
+
         $notifications = array('message' => 'Type created successfully', 'alert-type' => 'success');
         return redirect()->route('admin.types.index')->with($notifications);
 

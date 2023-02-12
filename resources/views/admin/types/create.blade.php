@@ -29,13 +29,29 @@
                                     @enderror
                                 </div>
 
+                                <!-- Level -->
+                                <div class="form-group">
+                                    <label>{{ __('Approval Levels') }}</label> <span class="text-danger">*</span>
+                                    <select name="level" class="form-control @error('level') is-invalid @enderror">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                    @error('level')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+
 
                                 <!-- Approval One -->
                                 <div class="form-group">
                                     <label>{{ __('Approval One') }}</label> <span class="text-danger">*</span>
-                                    <select name="role_one" class="form-control @error('role_one') is-invalid @enderror">
+                                    <select name="role_one"
+                                            class="form-control @error('role_one') is-invalid @enderror">
                                         @foreach($roles as $role)
-                                            <option value="{{ $role->id }}" >{{ $role->name }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('role_one')
@@ -49,10 +65,11 @@
                                 <!-- Approval Two -->
                                 <div class="form-group">
                                     <label>{{ __('Approval Two') }}</label> <span class="text-danger">*</span>
-                                    <select name="role_two" class="form-control @error('role_two') is-invalid @enderror">
-                                        <option value="0">NONE</option>
+                                    <select name="role_two"
+                                            class="form-control @error('role_two') is-invalid @enderror">
+                                        <option value="0" selected>NONE</option>
                                         @foreach($roles as $role)
-                                            <option value="{{ $role->id }}" >{{ $role->name }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('role_two')
@@ -61,9 +78,6 @@
                                     </div>
                                     @enderror
                                 </div>
-
-
-
 
 
                                 <!-- Status -->
