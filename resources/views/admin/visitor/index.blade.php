@@ -36,6 +36,8 @@
                                         <th>{{ __('Employee') }}</th>
                                         <th>{{ __('Checkin') }}</th>
 										<!--<th>{{ __('QRCode') }}</th>-->
+                                        <th>{{ __('Status') }}</th>
+
                                         <th style="width: 190px !important;min-width: 190px !important;">{{ __('levels.actions') }}</th>
                                     </tr>
                                 </thead>

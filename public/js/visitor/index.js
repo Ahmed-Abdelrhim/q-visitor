@@ -26,6 +26,7 @@ function load_data(status = '',requests='') {
       {data : 'phone', name : 'phone'},
       {data : 'employee_id', name : 'employee_id'},
       {data : 'date', name : 'date'},
+      {data : 'status', name : 'status'},
       {data : 'action', name : 'action'},
     ],/**/
     "ordering" : false

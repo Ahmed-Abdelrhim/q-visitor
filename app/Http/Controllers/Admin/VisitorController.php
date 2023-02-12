@@ -15,6 +15,7 @@ use DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 use Twilio\Rest\Client;
 
@@ -108,7 +109,6 @@ class VisitorController extends Controller
     public function getVisitor(Request $request)
     {
         $visitingDetails = $this->visitorService->all();
-
         $i = 1;
         $visitingDetailArray = [];
         if (!blank($visitingDetails)) {
@@ -121,16 +121,30 @@ class VisitorController extends Controller
         return Datatables::of($visitingDetailArray)
             ->addColumn('action', function ($visitingDetail) {
                 $retAction = '';
+                $approve = false;
+                $role = Role::query()->find($visitingDetail->visitor->type);
+                $permssions = $role->permissions->pluck('name');
+                foreach ($permssions as $permission) {
+                    if (auth()->user()->hasPermissionTo($permission)) {
+                        $approve = true;
+                        break;
+                    }
+                }
 
                 if (auth()->user()->can('visitors_show')) {
+//                if ($approve) {
                     // $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="Approve"><i class="far fa-check-circle"></i></a>';
-                    $visit = VisitingDetails::query()->find($visitingDetail);
+                    // $visit = VisitingDetails::query()->find($visitingDetail);
 
                     $msg = 'Approve & send sms';
-                    if ($visit[0]['sent_sms_before'] == 1 ) {
+                //                    if ($visit[0]['sent_sms_before'] == 1) {
+                //                        $msg = 'Re-send sms';
+                //                    }
+
+                    if ($visitingDetail->sent_sms_before == 1) {
                         $msg = 'Re-send sms';
                     }
-                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="'. $msg .'"><i class="far fa-check-circle"></i></a>';
+                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                 }
 
                 if (auth()->user()->can('visitors_show')) {
@@ -176,6 +190,11 @@ class VisitorController extends Controller
             ->editColumn('date', function ($visitingDetail) {
                 return date('d-m-Y h:i A', strtotime($visitingDetail->checkin_at));
             })
+            ->addColumn('status', function ($visitingDetail) {
+                if ($visitingDetail->sent_sms_before == 0)
+                    return 'Pending';
+                return 'Approved';
+            })
             ->editColumn('id', function ($visitingDetail) {
                 return $visitingDetail->setID;
             })
@@ -199,10 +218,10 @@ class VisitorController extends Controller
             return redirect()->back()->with($notifications);
         }
 
-        $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid='.$user_id);
-        $send_sms = Http::get('https://www.qudratech-sd.com/sms_api.php?mob='.$user->phone);
+        $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $user_id);
+        $send_sms = Http::get('https://www.qudratech-sd.com/sms_api.php?mob=' . $user->phone);
 
-        if ( $send_sms->status() == 200 ) {
+        if ($send_sms->status() == 200) {
             $notifications = array('success' => 'Message Sent Successfully');
             $visit_details->sent_sms_before = 1;
             $visit_details->save();
@@ -212,5 +231,16 @@ class VisitorController extends Controller
             return redirect()->back()->with($notifications);
         }
 
+    }
+
+    public function play()
+    {
+        $role = Role::query()->find(2);
+        $perms = $role->permissions->pluck('name');
+        foreach ($perms as $perm) {
+            if (auth()->user()->hasPermissionTo($perm)) {
+                return 'Yes Has Perm To ' . $perm;
+            }
+        }
     }
 }

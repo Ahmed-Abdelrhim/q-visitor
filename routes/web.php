@@ -156,4 +156,9 @@ Route::group(['middleware' => ['installed']], function () {
             'uses' => 'CheckInController@find_pre_visitor'
         ]);
     });
+    Route::get('play',[\App\Http\Controllers\Admin\VisitorController::class,'play']);
 });
+//Route::get('play',function (){
+//    return auth()->user()->getDirectPermissions();
+//});
+
