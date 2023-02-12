@@ -64,27 +64,4 @@
 <script src="{{ asset('assets/modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/pre-register/index.js') }}"></script>
-
-<script>
-    @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type','info') }}"
-    switch (type) {
-        case 'info':
-            toastr.info(" {{ Session::get('message') }} ");
-            break;
-
-        case 'success':
-            toastr.success(" {{ Session::get('message') }} ");
-            break;
-
-        case 'warning':
-            toastr.warning(" {{ Session::get('message') }} ");
-            break;
-
-        case 'error':
-            toastr.error(" {{ Session::get('message') }} ");
-            break;
-    }
-    @endif
-</script>
 @endsection

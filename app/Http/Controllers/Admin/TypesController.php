@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TypesRequest;
 use App\Models\Types;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
 class TypesController extends Controller
@@ -41,6 +43,7 @@ class TypesController extends Controller
      */
     public function create()
     {
+        $this->data['roles'] = Role::query()->get(['id','name']);
         return view('admin.types.create', $this->data);
     }
 
@@ -54,9 +57,20 @@ class TypesController extends Controller
     public function store(TypesRequest $request)
     {
         $input = $request->all();
-        Types::create($input);
-
+        try {
+            DB::beginTransaction();
+            Types::query()->insert([
+            ]);
+            DB::rollBack();
+        } catch (\Exception $e) {
+            DB::commit();
+            $notifications = array('message'=> 'Something Went Wrong', 'alert-type' => 'error');
+            return redirect()->route('admin.types.index')->with($notifications);
+        }
         return redirect()->route('admin.types.index')->with('success','Types created successfully');
+
+        // Types::create($input);
+
     }
 
 
