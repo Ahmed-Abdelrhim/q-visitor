@@ -2,10 +2,10 @@
 
 @section('main-content')
 
-  <section class="section">
+    <section class="section">
         <div class="section-header">
             <h1>{{ __('Types') }}</h1>
-          <!--  {{ Breadcrumbs::render('types') }}-->
+            <!--  {{ Breadcrumbs::render('types') }}-->
         </div>
 
         <div class="section-body">
@@ -14,20 +14,25 @@
                     <div class="card">
                         @can('types_create')
                             <div class="card-header">
-                                <a href="{{ route('admin.types.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> {{ __('Add Types') }}</a>
+                                <a href="{{ route('admin.types.create') }}"
+                                   class="btn btn-icon icon-left btn-primary"><i
+                                            class="fas fa-plus"></i> {{ __('Add Types') }}</a>
                             </div>
                         @endcan
                         <div class="card-body">
 
                             <div class="table-responsive">
-                                <table class="table table-striped" id="maintable" data-url="{{ route('admin.types.get-types') }}" data-status="{{ \App\Enums\Status::ACTIVE }}" data-hidecolumn="{{ auth()->user()->can('types_edit') || auth()->user()->can('types_delete') }}">
+                                <table class="table table-striped" id="maintable"
+                                       data-url="{{ route('admin.types.get-types') }}"
+                                       data-status="{{ \App\Enums\Status::ACTIVE }}"
+                                       data-hidecolumn="{{ auth()->user()->can('types_edit') || auth()->user()->can('types_delete') }}">
                                     <thead>
-                                        <tr>
-                                            <th>{{ __('levels.id') }}</th>
-                                            <th>{{ __('levels.name') }}</th>
-                                            <th>{{ __('levels.status') }}</th>
-                                            <th>{{ __('levels.actions') }}</th>
-                                        </tr>
+                                    <tr>
+                                        <th>{{ __('levels.id') }}</th>
+                                        <th>{{ __('levels.name') }}</th>
+                                        <th>{{ __('levels.status') }}</th>
+                                        <th>{{ __('levels.actions') }}</th>
+                                    </tr>
                                     </thead>
                                 </table>
                             </div>

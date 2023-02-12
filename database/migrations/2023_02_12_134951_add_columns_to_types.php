@@ -33,5 +33,5 @@ class AddColumnsToTypes extends Migration
     }
 }
 // Type 1   5
-// Type 1   5
+// Delivery   5
 // visit   10
