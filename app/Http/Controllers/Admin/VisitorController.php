@@ -124,12 +124,12 @@ class VisitorController extends Controller
                 $approve = false;
                 $role = Role::query()->find($visitingDetail->visitor->type);
                 $permssions = $role->permissions->pluck('name');
-                foreach ($permssions as $permission) {
-                    if (auth()->user()->hasPermissionTo($permission)) {
-                        $approve = true;
-                        break;
-                    }
-                }
+//                foreach ($permssions as $permission) {
+//                    if (auth()->user()->hasPermissionTo($permission)) {
+//                        $approve = true;
+//                        break;
+//                    }
+//                }
 
                 if (auth()->user()->can('visitors_show')) {
 //                if ($approve) {
