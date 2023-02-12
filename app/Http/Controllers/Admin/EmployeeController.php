@@ -62,6 +62,8 @@ class EmployeeController extends Controller
 
         $this->data['designations'] = Designation::where('status', Status::ACTIVE)->get();
         $this->data['departments'] = Department::where('status', Status::ACTIVE)->get();
+        $this->data['roles'] = Role::query()->get(['id','name']);
+
 
         return view('admin.employee.create', $this->data);
     }

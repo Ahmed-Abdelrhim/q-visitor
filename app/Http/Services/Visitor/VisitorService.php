@@ -19,7 +19,7 @@ class VisitorService
 
     public function all()
     {
-//        if(auth()->user()->getrole->name == 'Employee') {
+        // if(auth()->user()->getrole->name == 'Employee') {
         if (auth()->user()->hasRole('Employee')) {
             return VisitingDetails::query()->where(['employee_id' => auth()->user()->employee->id])->orderBy('id', 'desc')->get();
         } else {

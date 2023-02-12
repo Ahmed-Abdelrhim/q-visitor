@@ -17,7 +17,9 @@ class PreRegisterService
     public function all()
     {
         if(auth()->user()->getrole->name == 'Employee') {
-            return PreRegister::where(['employee_id'=>auth()->user()->employee->id])->orderBy('id', 'desc')->get();
+            return PreRegister::where(['employee_id'=>auth()->user()->employee->id])
+
+                ->orderBy('id', 'desc')->get();
         }else {
             return PreRegister::orderBy('id', 'desc')->get();
         }

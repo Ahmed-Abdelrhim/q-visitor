@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="{{ asset('assets/modules/izitoast/dist/css/iziToast.min.css') }}">
 
 
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+
     @yield('css')
     @stack('css')
 </head>

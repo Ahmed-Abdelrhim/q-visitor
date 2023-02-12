@@ -81,7 +81,10 @@ class EmployeeService
         $input['phone'] = $request->input('phone');
         $input['password'] =  Hash::make($request->input('password'));
         $user = User::create($input);
-        $role = Role::find(2);
+        // $role = Role::find(2);
+
+        $role = Role::query()->find($request->input('role_id'));
+
         $user->assignRole($role->name);
 
         if ($request->file('image')) {

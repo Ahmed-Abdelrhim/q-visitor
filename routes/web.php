@@ -77,6 +77,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'installed','backend
     //pre-registers
     Route::resource('pre-registers', 'PreRegisterController');
     Route::get('get-pre-registers', 'PreRegisterController@getPreRegister')->name('pre-registers.get-pre-registers');
+    Route::get('Approve/Pre-register/{id}', 'PreRegisterController@approvePreRegister')->name('pre-registers.approve');
 
     //visitors
     Route::resource('visitors', 'VisitorController');

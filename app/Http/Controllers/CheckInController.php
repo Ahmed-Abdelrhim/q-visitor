@@ -54,7 +54,6 @@ class CheckInController extends Controller
      */
     public function postCreateStepOne(Request $request)
     {
-
         if ($request->session()->get('is_returned') == false || empty($request->session()->get('is_returned'))) {
             $validatedData = $request->validate([
                 'first_name' => 'required',
