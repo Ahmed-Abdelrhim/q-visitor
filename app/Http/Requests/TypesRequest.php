@@ -26,6 +26,8 @@ class TypesRequest extends FormRequest
         return [
             'name' => 'required|string|max:255|unique:types,name',
             'status' => 'required|numeric',
+            'role_one' => 'required|numeric',
+            'role_two' => 'nullable|numeric'
         ];
     }
 }

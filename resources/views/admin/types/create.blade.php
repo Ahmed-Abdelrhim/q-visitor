@@ -50,6 +50,7 @@
                                 <div class="form-group">
                                     <label>{{ __('Approval Two') }}</label> <span class="text-danger">*</span>
                                     <select name="role_two" class="form-control @error('role_two') is-invalid @enderror">
+                                        <option value="0">NONE</option>
                                         @foreach($roles as $role)
                                             <option value="{{ $role->id }}" >{{ $role->name }}</option>
                                         @endforeach

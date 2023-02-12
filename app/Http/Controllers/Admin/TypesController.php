@@ -6,6 +6,7 @@ use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TypesRequest;
 use App\Models\Types;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -43,31 +44,44 @@ class TypesController extends Controller
      */
     public function create()
     {
-        $this->data['roles'] = Role::query()->get(['id','name']);
+        $this->data['roles'] = Role::query()->get(['id', 'name']);
         return view('admin.types.create', $this->data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(TypesRequest $request)
     {
-        $input = $request->all();
+        // return $request;
+        // $input = $request->all();
+
+        $role_two = null;
+        if (!empty($request->get('role_two')) && $request->get('role_two') != 0) {
+            $role_two = $request->get('role_two');
+        }
+
         try {
             DB::beginTransaction();
             Types::query()->insert([
+                'name' => $request->get('name'),
+                'role_one' => $request->get('role_one'),
+                'role_two' => $role_two,
+                'status' => $request->get('status'),
+                'created_at' => Carbon::now(),
             ]);
-            DB::rollBack();
-        } catch (\Exception $e) {
             DB::commit();
-            $notifications = array('message'=> 'Something Went Wrong', 'alert-type' => 'error');
-            return redirect()->route('admin.types.index')->with($notifications);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $notifications = array('message' => 'Something Went Wrong', 'alert-type' => 'error');
+            return redirect()->back()->with($notifications);
         }
-        return redirect()->route('admin.types.index')->with('success','Types created successfully');
+        $notifications = array('message' => 'Type created successfully', 'alert-type' => 'success');
+        return redirect()->route('admin.types.index')->with($notifications);
 
         // Types::create($input);
 
@@ -77,13 +91,13 @@ class TypesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return void
      */
     public function edit($id)
     {
-        $this->data['types']  = Types::findOrFail($id);
+        $this->data['types'] = Types::findOrFail($id);
         return view('admin.types.edit', $this->data);
 
     }
@@ -91,8 +105,8 @@ class TypesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      *
      * @return void
      */
@@ -109,7 +123,7 @@ class TypesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return void
      */
@@ -124,12 +138,12 @@ class TypesController extends Controller
 
         $designations = Types::orderBy('id', 'desc')->get();
 
-        $i         = 1;
+        $i = 1;
         $designationArray = [];
         if (!blank($designations)) {
             foreach ($designations as $designation) {
-                $designationArray[$i]          = $designation;
-                $designationArray[$i]['name']  = Str::limit($designation->name, 100);
+                $designationArray[$i] = $designation;
+                $designationArray[$i]['name'] = Str::limit($designation->name, 100);
                 $designationArray[$i]['setID'] = $i;
                 $i++;
             }
@@ -138,16 +152,15 @@ class TypesController extends Controller
             ->addColumn('action', function ($designation) {
                 $retAction = '';
 
-                if(auth()->user()->can('types_edit')) {
+                if (auth()->user()->can('types_edit')) {
                     $retAction .= '<a href="' . route('admin.types.edit', $designation) . '" class="btn btn-sm btn-icon float-left btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"><i class="far fa-edit"></i></a>';
                 }
 
-                if(auth()->user()->can('types_delete')) {
+                if (auth()->user()->can('types_delete')) {
                     $retAction .= '<form class="float-left pl-2" action="' . route('admin.types.destroy', $designation) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button></form>';
                 }
                 return $retAction;
             })
-
             ->editColumn('status', function ($designation) {
                 return ($designation->status == 5 ? trans('statuses.' . Status::ACTIVE) : trans('statuses.' . Status::INACTIVE));
             })

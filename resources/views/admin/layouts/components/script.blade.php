@@ -43,19 +43,35 @@
     var type = "{{ Session::get('alert-type','info') }}"
     switch (type) {
         case 'info':
-            toastr.info(" {{ Session::get('message') }} ");
+            iziToast.info({
+                title: 'info',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
             break;
 
         case 'success':
-            toastr.success(" {{ Session::get('message') }} ");
+            iziToast.success({
+                title: 'Success',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
             break;
 
         case 'warning':
-            toastr.warning(" {{ Session::get('message') }} ");
+            iziToast.warning({
+                title: 'warning',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
             break;
 
         case 'error':
-            toastr.error(" {{ Session::get('message') }} ");
+            iziToast.error({
+                title: 'error',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
             break;
     }
     @endif
