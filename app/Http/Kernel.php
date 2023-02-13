@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'backend_permission' => \App\Http\Middleware\IsHasBackendPermission::class,
         'frontend' => \App\Http\Middleware\FrontEnd::class,
+        'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
 
     ];
 }
