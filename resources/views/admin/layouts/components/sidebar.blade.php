@@ -5,7 +5,7 @@
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin.dashboard.index') }}">
-                <?php 
+                <?php
                     if(setting('site_name')) {
                         $sitenames = explode(' ', setting('site_name'));
                         if(count($sitenames) > 1) {
