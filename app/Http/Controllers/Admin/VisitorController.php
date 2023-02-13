@@ -122,8 +122,10 @@ class VisitorController extends Controller
             ->addColumn('action', function ($visitingDetail) {
                 $retAction = '';
                 $approve = false;
-                $role = Role::query()->find($visitingDetail->visitor->type);
-                $permssions = $role->permissions->pluck('name');
+                // $type = Types::query()->find($visitingDetail->visitor->type);
+//                $role = Role::query()->find($type->role_one);
+                // $permssions = $role->permissions->pluck('name');
+
 //                foreach ($permssions as $permission) {
 //                    if (auth()->user()->hasPermissionTo($permission)) {
 //                        $approve = true;
@@ -136,11 +138,10 @@ class VisitorController extends Controller
                     // $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="Approve"><i class="far fa-check-circle"></i></a>';
                     // $visit = VisitingDetails::query()->find($visitingDetail);
 
+                    // if ($visit[0]['sent_sms_before'] == 1) {
+                    // $msg = 'Re-send sms';
+                    // }
                     $msg = 'Approve & send sms';
-                //                    if ($visit[0]['sent_sms_before'] == 1) {
-                //                        $msg = 'Re-send sms';
-                //                    }
-
                     if ($visitingDetail->sent_sms_before == 1) {
                         $msg = 'Re-send sms';
                     }
@@ -161,6 +162,7 @@ class VisitorController extends Controller
                 }
 
                 return $retAction;
+                // return $visitingDetail->visitor->type;
             })
             ->editColumn('name', function ($visitingDetail) {
                 return Str::limit($visitingDetail->visitor->name, 50);
@@ -235,12 +237,21 @@ class VisitorController extends Controller
 
     public function play()
     {
-        $role = Role::query()->find(2);
-        $perms = $role->permissions->pluck('name');
-        foreach ($perms as $perm) {
-            if (auth()->user()->hasPermissionTo($perm)) {
-                return 'Yes Has Perm To ' . $perm;
-            }
-        }
+        //        $role = Role::query()->find(2);
+        //        $perms = $role->permissions->pluck('name');
+        //        foreach ($perms as $perm) {
+        //            if (auth()->user()->hasPermissionTo($perm)) {
+        //                return 'Yes Has Perm To ' . $perm;
+        //            }
+        //        }
+
+        //        $visitors = Visitor::query()->get();
+        //        foreach ($visitors as $visitor) {
+        //            $visitor->type = 10;
+        //            $visitor->save();
+        //        }
+        //
+        return 'Now Doing NoThing';
+
     }
 }
