@@ -259,6 +259,8 @@ class VisitorController extends Controller
         //            $visitor->save();
         //        }
 
+        return auth()->user()->employee->id;
+
 
         $email = 'aabdelrhim974@gmail.com';
         $emails = explode('@', $email);
