@@ -9,12 +9,15 @@ class PathGeneratorFactory
 {
     public static function create(Media $media): PathGenerator
     {
-        $pathGeneratorClass = self::getPathGeneratorClass($media);
+        // $pathGeneratorClass = self::getPathGeneratorClass($media);
+        $pathGeneratorClass = config('media-library.path_generator');
+
 
         static::guardAgainstInvalidPathGenerator($pathGeneratorClass);
 
         return app($pathGeneratorClass);
     }
+
 
     protected static function guardAgainstInvalidPathGenerator(string $pathGeneratorClass): void
     {

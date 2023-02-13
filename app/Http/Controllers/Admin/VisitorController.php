@@ -170,109 +170,102 @@ class VisitorController extends Controller
                 return $retAction;
                 // return $visitingDetail->visitor->type;
             })
-->editColumn('name', function ($visitingDetail)
-{
-    return Str::limit($visitingDetail->visitor->name, 50);
-})
-->editColumn('qrcode', function ($visitingDetail)
-{
-    return $visitingDetail->qrcode;
-})
-->addColumn('image', function ($visitingDetail)
-{
-    if (str_contains($visitingDetail->visitor->photo, 'data:image')) {
-        return '<figure class="avatar mr-2"><img src="' . $visitingDetail->visitor->photo . '" alt=""></figure>';
-    } else {
-        return '<figure class="avatar mr-2"><img src="https://www.qudratech-eg.net/visitorpass/public/' . $visitingDetail->visitor->photo . '" alt=""></figure>';
-    }
-})
-->editColumn('visitor_id', function ($visitingDetail)
-{
-    return $visitingDetail->reg_no;
-})
-->editColumn('email', function ($visitingDetail)
-{
-    return Str::limit($visitingDetail->visitor->email, 50);
-})
-->editColumn('phone', function ($visitingDetail)
-{
-    return Str::limit($visitingDetail->visitor->phone, 50);
-})
-->editColumn('employee_id', function ($visitingDetail)
-{
-    return $visitingDetail->employee->user->name;
-})
-->editColumn('date', function ($visitingDetail)
-{
-    return date('d-m-Y h:i A', strtotime($visitingDetail->checkin_at));
-})
-->addColumn('status', function ($visitingDetail)
-{
-    if ($visitingDetail->sent_sms_before == 0)
-        return 'Pending';
-    return 'Approved';
-})
-->editColumn('id', function ($visitingDetail)
-{
-    return $visitingDetail->setID;
-})
-->rawColumns(['name', 'action'])
-->escapeColumns([])
-->make(true);
-var_dump($visitingDetail);
-}
-
-public
-function sendSms($visitingDetail_id)
-{
-    $visit_details = VisitingDetails::query()->find($visitingDetail_id);
-    $user_id = $visit_details->visitor_id;
-    $user = Visitor::query()->find($user_id);
-    if (!$user) {
-        $notifications = array('error' => 'User Was Not Found');
-        return redirect()->back()->with($notifications);
-    }
-    if (empty($user->phone)) {
-        $notifications = array('error' => 'User phone number can not be empty');
-        return redirect()->back()->with($notifications);
+            ->editColumn('name', function ($visitingDetail) {
+                return Str::limit($visitingDetail->visitor->name, 50);
+            })
+            ->editColumn('qrcode', function ($visitingDetail) {
+                return $visitingDetail->qrcode;
+            })
+            ->addColumn('image', function ($visitingDetail) {
+                if (str_contains($visitingDetail->visitor->photo, 'data:image')) {
+                    return '<figure class="avatar mr-2"><img src="' . $visitingDetail->visitor->photo . '" alt=""></figure>';
+                } else {
+                    return '<figure class="avatar mr-2"><img src="https://www.qudratech-eg.net/visitorpass/public/' . $visitingDetail->visitor->photo . '" alt=""></figure>';
+                }
+            })
+            ->editColumn('visitor_id', function ($visitingDetail) {
+                return $visitingDetail->reg_no;
+            })
+            ->editColumn('email', function ($visitingDetail) {
+                return Str::limit($visitingDetail->visitor->email, 50);
+            })
+            ->editColumn('phone', function ($visitingDetail) {
+                return Str::limit($visitingDetail->visitor->phone, 50);
+            })
+            ->editColumn('employee_id', function ($visitingDetail) {
+                return $visitingDetail->employee->user->name;
+            })
+            ->editColumn('date', function ($visitingDetail) {
+                return date('d-m-Y h:i A', strtotime($visitingDetail->checkin_at));
+            })
+            ->addColumn('status', function ($visitingDetail) {
+                if ($visitingDetail->sent_sms_before == 0)
+                    return 'Pending';
+                return 'Approved';
+            })
+            ->editColumn('id', function ($visitingDetail) {
+                return $visitingDetail->setID;
+            })
+            ->rawColumns(['name', 'action'])
+            ->escapeColumns([])
+            ->make(true);
+        var_dump($visitingDetail);
     }
 
-    $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $user_id);
-    $send_sms = Http::get('https://www.qudratech-sd.com/sms_api.php?mob=' . $user->phone);
+    public
+    function sendSms($visitingDetail_id)
+    {
+        $visit_details = VisitingDetails::query()->find($visitingDetail_id);
+        $user_id = $visit_details->visitor_id;
+        $user = Visitor::query()->find($user_id);
+        if (!$user) {
+            $notifications = array('error' => 'User Was Not Found');
+            return redirect()->back()->with($notifications);
+        }
+        if (empty($user->phone)) {
+            $notifications = array('error' => 'User phone number can not be empty');
+            return redirect()->back()->with($notifications);
+        }
 
-    if ($send_sms->status() == 200) {
-        $notifications = array('success' => 'Message Sent Successfully');
-        $visit_details->sent_sms_before = 1;
-        $visit_details->save();
-        return redirect()->back()->with($notifications);
-    } else {
-        $notifications = array('error' => 'Something Went Wrong');
-        return redirect()->back()->with($notifications);
+        $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $user_id);
+        $send_sms = Http::get('https://www.qudratech-sd.com/sms_api.php?mob=' . $user->phone);
+
+        if ($send_sms->status() == 200) {
+            $notifications = array('success' => 'Message Sent Successfully');
+            $visit_details->sent_sms_before = 1;
+            $visit_details->save();
+            return redirect()->back()->with($notifications);
+        } else {
+            $notifications = array('error' => 'Something Went Wrong');
+            return redirect()->back()->with($notifications);
+        }
+
     }
 
-}
+    public
+    function play()
+    {
+        //        $role = Role::query()->find(2);
+        //        $perms = $role->permissions->pluck('name');
+        //        foreach ($perms as $perm) {
+        //            if (auth()->user()->hasPermissionTo($perm)) {
+        //                return 'Yes Has Perm To ' . $perm;
+        //            }
+        //        }
 
-public
-function play()
-{
-    //        $role = Role::query()->find(2);
-    //        $perms = $role->permissions->pluck('name');
-    //        foreach ($perms as $perm) {
-    //            if (auth()->user()->hasPermissionTo($perm)) {
-    //                return 'Yes Has Perm To ' . $perm;
-    //            }
-    //        }
+        //        $visitors = Visitor::query()->get();
+        //        foreach ($visitors as $visitor) {
+        //            $visitor->type = 10;
+        //            $visitor->save();
+        //        }
 
-    //        $visitors = Visitor::query()->get();
-    //        foreach ($visitors as $visitor) {
-    //            $visitor->type = 10;
-    //            $visitor->save();
-    //        }
-    if (auth()->user()->hasRole('Reception'))
-        return 'true';
-    return 'Now Doing NoThing';
 
-}
+        $email = 'aabdelrhim974@gmail.com';
+        $emails = explode('@', $email);
+        return $emails[0] . mt_rand();
+        // return 'Now Doing NoThing';
+
+    }
 }
 
 

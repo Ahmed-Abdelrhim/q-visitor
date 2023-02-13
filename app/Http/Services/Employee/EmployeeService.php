@@ -79,7 +79,7 @@ class EmployeeService
         $input['username'] = $this->username($request->input('email'));
         $input['email'] = $request->input('email');
         $input['phone'] = $request->input('phone');
-        $input['password'] =  Hash::make($request->input('password'));
+        $input['password'] = Hash::make($request->input('password'));
         $user = User::create($input);
         // $role = Role::find(2);
 
@@ -88,10 +88,11 @@ class EmployeeService
         $user->assignRole($role->name);
 
         if ($request->file('image')) {
+//            $media = $user->addMediaFromRequest('image')->toMediaCollection('user');
             $user->addMedia($request->file('image'))->toMediaCollection('user');
         }
-        $result='';
-        if($user) {
+        $result = '';
+        if ($user) {
             $data['first_name'] = $request->input('first_name');
             $data['last_name'] = $request->input('last_name');
             $data['phone'] = $request->input('phone');
@@ -127,9 +128,9 @@ class EmployeeService
         // $input['role'] = $request->input('role');
         $user = User::find($employee->user_id);
         $user->update($input);
-        if ($request->get('role') > 0 && is_numeric($request->get('role')) ) {
+        if ($request->get('role') > 0 && is_numeric($request->get('role'))) {
 
-            DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+            DB::table('model_has_roles')->where('model_id', $user->id)->delete();
 
             $role = Role::find($request->get('role'));
 
@@ -140,7 +141,7 @@ class EmployeeService
             $user->media()->delete();
             $user->addMedia($request->file('image'))->toMediaCollection('user');
         }
-        if($user) {
+        if ($user) {
             $data['first_name'] = $request->input('first_name');
             $data['last_name'] = $request->input('last_name');
             $data['phone'] = $request->input('phone');
@@ -158,28 +159,29 @@ class EmployeeService
         return $employee;
     }
 
-    public function check($id,$request)
+    public function check($id, $request)
     {
 
-        if($request['status'] == 1){
+        if ($request['status'] == 1) {
             $checkin = new Attendance();
-            $checkin->employee_id            = $id;
-            $checkin->status                 = $request['status'];
-            $checkin->checkin_time           = $request['checkin_time'];
-            $checkin->date                   = date('Y-m-d', strtotime($request['date']));
+            $checkin->employee_id = $id;
+            $checkin->status = $request['status'];
+            $checkin->checkin_time = $request['checkin_time'];
+            $checkin->date = date('Y-m-d', strtotime($request['date']));
             $checkin->save();
             return $checkin;
-        }elseif ($request['status'] == 2){
+        } elseif ($request['status'] == 2) {
 
-            $checkout = Attendance::where(['employee_id'=>$id,'date'=>date('Y-m-d')])->first();
-            $checkout->status                   = $request['status'];
-            $checkout->checkout_time            = $request['checkout_time'];
-            $checkout->date                     = date('Y-m-d', strtotime($request['date']));
+            $checkout = Attendance::where(['employee_id' => $id, 'date' => date('Y-m-d')])->first();
+            $checkout->status = $request['status'];
+            $checkout->checkout_time = $request['checkout_time'];
+            $checkout->date = date('Y-m-d', strtotime($request['date']));
             $checkout->save();
             return $checkout;
         }
         return false;
     }
+
     /**
      * @param $id
      * @return mixed
