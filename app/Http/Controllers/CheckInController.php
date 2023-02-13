@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use NotificationChannels\Twilio\TwilioChannel;
+use Spatie\Permission\Models\Role;
 
 class CheckInController extends Controller
 {
@@ -116,27 +117,27 @@ class CheckInController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
-    { 
+    {
         $getVisitor = $request->session()->get('visitor');
-        if ($getVisitor) { 
+        if ($getVisitor) {
             if ($request->has('photo')) {
                 $request->validate([
                     'photo' => 'required'
                 ]);
-/*,
-                    'agreement'     => 'required',*/
+                /*,
+                                    'agreement'     => 'required',*/
                 $encoded_data = $request['photo'];
                 $image = str_replace('data:image/png;base64,', '', $encoded_data);
                 $image = str_replace(' ', '+', $image);
-                $imageName = 'storage/1/'.Str::random(10) . '.' . 'png';
-				$url = public_path($imageName);
+                $imageName = 'storage/1/' . Str::random(10) . '.' . 'png';
+                $url = public_path($imageName);
                 file_put_contents($url, base64_decode($image));
                 sleep(2);
-            } 
-        } else { 
+            }
+        } else {
             redirect()->route('check-in.step-one')->with('error', 'visitor information not found, fill again!');
         }
-		
+
         $visitorReg = DB::table('visiting_details')->orderBy('reg_no', 'desc')->first();
         $date = date('y-m-d');
         $data = substr($date, 0, 2);
@@ -153,6 +154,7 @@ class CheckInController extends Controller
         } else {
             $reg_no = $data2 . $data1 . $data . '01';
         }
+        $reg_no = Str::random(8);
 
         if ($request->session()->get('is_returned') == false || empty($request->session()->get('is_returned'))) {
 
@@ -169,9 +171,14 @@ class CheckInController extends Controller
             $input['creator_type'] = 'App\User';
             $input['editor_type'] = 'App\User';
             $input['editor_id'] = 1;
-			$imageName = str_replace("\\","/",$imageName);
-			$imageName = str_replace("D:/xampp/htdocs/visitorpass/public","",$imageName);
-			$input['photo'] = $imageName ;
+            $input['type'] = 1;
+            $role = Role::query()->where('name','Admin')->first();
+            if ($role) {
+                $input['type'] = $role->id;
+            }
+            $imageName = str_replace("\\", "/", $imageName);
+            $imageName = str_replace("D:/xampp/htdocs/visitorpass/public", "", $imageName);
+            $input['photo'] = $imageName;
             $visitor = Visitor::create($input);
         } else {
             $visitor = Visitor::where('email', $getVisitor['email'])->first();
