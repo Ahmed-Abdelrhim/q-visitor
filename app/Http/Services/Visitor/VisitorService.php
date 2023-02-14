@@ -207,8 +207,13 @@ class VisitorService
             // Using a generic exception
 
         }
-        $data = file_get_contents("https://qudratech-eg.net/mail/tt.php?vid=" . $visiting['visitor_id'] . "&name=" . $input['first_name']);
-        $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
+        try {
+            $data = file_get_contents("https://qudratech-eg.net/mail/tt.php?vid=" . $visiting['visitor_id'] . "&name=" . $input['first_name']);
+            $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
+        } catch (\Exception $e) {
+            $notification = array('message'=> 'message was not sent','alert-type'=>'info');
+            return redirect()->back()->with($notification);
+        }
         return $visitingDetails;
     }
 

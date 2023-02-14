@@ -95,7 +95,9 @@ class VisitorController extends Controller
     public function update(VisitorRequest $request, VisitingDetails $visitor)
     {
         $this->visitorService->update($request, $visitor->id);
+        // $notifications = array('message' => 'The data updated successfully!', 'alert-type' => 'success');
         return redirect()->route('admin.visitors.index')->withSuccess('The data updated successfully!');
+        // return redirect()->route('admin.visitors.index')->with($notifications);
     }
 
     public function destroy($id)
@@ -181,9 +183,9 @@ class VisitorController extends Controller
 //                if (str_contains($visitingDetail->visitor->images, 'data:image')) {
 //                    return '<figure class="avatar mr-2"><img src="' . $visitingDetail->visitor->photo . '" alt=""></figure>';
 //                } else {
-                    // return '<figure class="avatar mr-2"><img src="https://www.qudratech-eg.net/visitorpass/public/' . $visitingDetail->visitor->photo . '" alt=""></figure>';
-                    // return '<figure class="avatar mr-2"><img src="'.$visitingDetail->getMedia('visitor')->first().'" alt=""></figure>';
-                    return $visitingDetail->getFirstMediaUrl('visitor');
+                // return '<figure class="avatar mr-2"><img src="https://www.qudratech-eg.net/visitorpass/public/' . $visitingDetail->visitor->photo . '" alt=""></figure>';
+                return '<figure class="avatar mr-2"><img src="' . $visitingDetail->images . '" alt=""></figure>';
+                // return $visitingDetail->getFirstMediaUrl('visitor');
 //                }
             })
             ->editColumn('visitor_id', function ($visitingDetail) {
@@ -268,7 +270,7 @@ class VisitorController extends Controller
         //            $visitor->save();
         //        }
 
-        return rand(11111111,99999999);
+        return rand(11111111, 99999999);
         // return random();
         return auth()->user()->employee->id;
 
