@@ -59,6 +59,14 @@ class VisitingDetails extends Model implements  HasMedia
         return trans('statuses.' . $this->status);
     }
 
+    public function registerMediaCollections(): void
+    {
+        // TODO: Implement registerMediaCollections() method.
+        $this->addMediaCollection('visitor')
+            ->singleFile();
+
+    }
+
     public function getImagesAttribute()
     {
         if (!empty($this->getFirstMediaUrl('visitor'))) {
