@@ -182,7 +182,8 @@ class VisitorController extends Controller
 //                    return '<figure class="avatar mr-2"><img src="' . $visitingDetail->visitor->photo . '" alt=""></figure>';
 //                } else {
                     // return '<figure class="avatar mr-2"><img src="https://www.qudratech-eg.net/visitorpass/public/' . $visitingDetail->visitor->photo . '" alt=""></figure>';
-                    return '<figure class="avatar mr-2"><img src="'.$visitingDetail->images.'" alt=""></figure>';
+                    // return '<figure class="avatar mr-2"><img src="'.$visitingDetail->getMedia('visitor')->first().'" alt=""></figure>';
+                    return $visitingDetail->getFirstMediaUrl('visitor');
 //                }
             })
             ->editColumn('visitor_id', function ($visitingDetail) {

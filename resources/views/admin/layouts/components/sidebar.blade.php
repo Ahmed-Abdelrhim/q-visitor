@@ -25,6 +25,13 @@
             
             {!! $backendMenus !!}
 
+            <li  class="">
+                <a class="nav-link" href="{{route('admin.OCR.index')}}">
+                    <i class="fas fa-cocktail">
+                        <span>OCR</span>
+                    </i>
+                </a>
+            </li>
         </ul>
     </aside>
 </div>

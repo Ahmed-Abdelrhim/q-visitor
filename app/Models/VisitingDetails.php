@@ -67,3 +67,4 @@ class VisitingDetails extends Model implements  HasMedia
         return asset('assets/img/default/user.png');
     }
 }
+

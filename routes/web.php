@@ -86,6 +86,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('get-visitors', 'VisitorController@getVisitor')->name('visitors.get-visitors');
         Route::get('send-sms/{visitingDetail}', 'VisitorController@sendSms')->name('visitors.send.sms');
 
+        // Ocr Resource Controller···
+        Route::resource('OCR','OcrController');
+
         Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
 
             Route::get('/', 'SettingController@index')->name('index');
