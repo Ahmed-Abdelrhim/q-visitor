@@ -25,13 +25,15 @@
             
             {!! $backendMenus !!}
 
-            <li  class="">
-                <a class="nav-link" href="{{route('admin.OCR.index')}}">
-                    <i class="fas fa-cocktail">
-                        <span>OCR</span>
-                    </i>
-                </a>
-            </li>
+            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('OCR') )
+                <li  class="ocr">
+                    <a class="nav-link" href="{{route('admin.OCR.index')}}">
+                        <i class="fas fa-cocktail">
+                            <span>OCR</span>
+                        </i>
+                    </a>
+                </li>
+            @endif
         </ul>
     </aside>
 </div>

@@ -248,6 +248,12 @@ class VisitorController extends Controller
     public
     function play()
     {
+        if (auth()->user()->hasRole('Admin')) {
+            return 'True';
+        }
+        return 'False';
+
+
         //        $role = Role::query()->find(2);
         //        $perms = $role->permissions->pluck('name');
         //        foreach ($perms as $perm) {
