@@ -55,23 +55,24 @@ class LoginController extends Controller
 
     public function showLoginForm(): Factory|View|Application
     {
+        return view('admin.auth.login');
         // TODO::Check If The Table Activation Code Has Ans Rows
         // activation.code_check .
-        $activation = ActivationCode::query()->count();
-        if ($activation >= 1) {
-            $codeRow = ActivationCode::query()->latest()->first();
-            $current_mac_address = substr(exec('getmac'), 0, 17);
-            $searched_mac_address = str_replace(env('SALT_MAC'), '', $codeRow->mac_address);
-            if (Hash::check($current_mac_address, $searched_mac_address)) {
-                if ($codeRow->checked_before != 1)
-                    return view('activation.code_check');
-                return view('admin.auth.login');
-            }
-
-            return view('errors.404', ['msg' => 'Content Is Blocked']);
-        }
-        $this->insertSomeCodes();
-        return view('activation.code_check');
+        //        $activation = ActivationCode::query()->count();
+        //        if ($activation >= 1) {
+        //            $codeRow = ActivationCode::query()->latest()->first();
+        //            $current_mac_address = substr(exec('getmac'), 0, 17);
+        //            $searched_mac_address = str_replace(env('SALT_MAC'), '', $codeRow->mac_address);
+        //            if (Hash::check($current_mac_address, $searched_mac_address)) {
+        //                if ($codeRow->checked_before != 1)
+        //                    return view('activation.code_check');
+        //                return view('admin.auth.login');
+        //            }
+        //
+        //            return view('errors.404', ['msg' => 'Content Is Blocked']);
+        //        }
+        //        $this->insertSomeCodes();
+        //        return view('activation.code_check');
     }
 
     public function codeActivation(Request $request): Redirector|RedirectResponse|Application
