@@ -64,7 +64,6 @@ class VisitingDetails extends Model implements  HasMedia
         // TODO: Implement registerMediaCollections() method.
         $this->addMediaCollection('visitor')
             ->singleFile();
-
     }
 
     public function getImagesAttribute()

@@ -204,7 +204,7 @@ class VisitorService
         try {
             $visitingDetails->employee->user()->notify(new SendVisitorToEmployee($visitingDetails));
         } catch (\Exception $e) {
-            // Using a generic exception
+            // Using a generic exception·
 
         }
         try {
