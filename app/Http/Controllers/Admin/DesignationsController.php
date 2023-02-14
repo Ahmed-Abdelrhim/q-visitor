@@ -12,7 +12,6 @@ use Yajra\DataTables\DataTables;
 
 class DesignationsController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');

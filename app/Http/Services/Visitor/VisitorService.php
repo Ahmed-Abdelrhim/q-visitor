@@ -93,6 +93,8 @@ class VisitorService
         } else {
             $reg_no = $data2 . $data1 . $data . '01';
         }
+
+        $reg_no = rand(11111111,99999999);
         $input['first_name'] = $request->input('first_name');
         $input['last_name'] = $request->input('last_name');
         $input['email'] = $request->input('email');
@@ -148,8 +150,13 @@ class VisitorService
             $time = date('H:i');
             $vid = $visiting['visitor_id'];
             //$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
-            file_get_contents('https://qudratech-eg.net/mail/tt.php?vid=' . $vid);
-            $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
+            try {
+                file_get_contents('https://qudratech-eg.net/mail/tt.php?vid=' . $vid);
+                $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
+            } catch (\Exception $e) {
+                $notification = array('message'=> 'Visit Created Success , but message was not sent','alert-type'=>'info');
+                return redirect()->back()->with($notification);
+            }
         }
 
 

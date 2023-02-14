@@ -177,11 +177,13 @@ class VisitorController extends Controller
                 return $visitingDetail->qrcode;
             })
             ->addColumn('image', function ($visitingDetail) {
-                if (str_contains($visitingDetail->visitor->photo, 'data:image')) {
-                    return '<figure class="avatar mr-2"><img src="' . $visitingDetail->visitor->photo . '" alt=""></figure>';
-                } else {
-                    return '<figure class="avatar mr-2"><img src="https://www.qudratech-eg.net/visitorpass/public/' . $visitingDetail->visitor->photo . '" alt=""></figure>';
-                }
+                // if (str_contains($visitingDetail->visitor->photo, 'data:image')) {
+//                if (str_contains($visitingDetail->visitor->images, 'data:image')) {
+//                    return '<figure class="avatar mr-2"><img src="' . $visitingDetail->visitor->photo . '" alt=""></figure>';
+//                } else {
+                    // return '<figure class="avatar mr-2"><img src="https://www.qudratech-eg.net/visitorpass/public/' . $visitingDetail->visitor->photo . '" alt=""></figure>';
+                    return '<figure class="avatar mr-2"><img src="'.$visitingDetail->images.'" alt=""></figure>';
+//                }
             })
             ->editColumn('visitor_id', function ($visitingDetail) {
                 return $visitingDetail->reg_no;
@@ -259,6 +261,8 @@ class VisitorController extends Controller
         //            $visitor->save();
         //        }
 
+        return rand(11111111,99999999);
+        // return random();
         return auth()->user()->employee->id;
 
 
