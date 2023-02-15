@@ -1,0 +1,317 @@
+index_model = [
+	[     0,  1,  2,    30, 31, -1, -1, -1, -1 ,-1],
+	[ 10001,  1,  2, 10002,  4,  5,  6, 19, 23 ,-1],
+	[     2, 24, 32,    33, 39, 49, 50, 59, -1 ,-1],
+	[     7, 36, 37,    -1, -1, -1, -1, -1, -1 ,-1],
+	[    12, 13, -1,    -1, -1, -1, -1, -1, -1 ,-1],
+	[    14, 15, 45,    46, 61, 62, -1, -1, -1 ,-1],
+	[    16, 17, -1,    -1, -1, -1, -1, -1, -1 ,-1],
+	[     8,  9, 10,    11, 18, 40, 41, 42, 55 ,-1],
+	[	 20, 21, 22,    29, -1, -1, -1, -1, -1 ,-1],
+	[    25, -1, -1,    -1, -1, -1, -1, -1, -1 ,-1],
+	[    26, 27, 28,    -1, -1, -1, -1, -1, -1 ,-1],
+	[	 34, 35, 38,    51, 52, 53, 54, -1, -1 ,-1],
+	[	 43, 44, 60,    -1, -1, -1, -1, -1, -1 ,-1],
+	[	 47, 48, 56,    57, 58, 63, 64, 65, 66 ,67],
+	[	 68, 69, -1,    -1, -1, -1, -1, -1, -1 ,-1]
+]
+
+classify_model = [
+	[ 0 ],
+	[ 1 ],
+	[ 2 ],
+	[ 3 ],
+	[ 4 ]
+]
+
+ep_model = [
+	[ 0 ]
+]
+
+fu_model = [
+	[ 0 ]
+]
+
+direction_model = [
+	[ 0 ],
+	[ 1 ],
+	[ 2 ],
+	[ 3 ],
+]
+
+NUM_MODEL = 70
+NUM_MODEL_CLASSIFY = 5
+NUM_MODEL_EP = 1
+NUM_MODEL_FU = 1
+ADD_NUM_MODEL = 2
+NUM_MODEL_DIRECTION = 4
+
+NUM_MODEL_CAFFE = 70
+NUM_MODEL_CAFFE_CLASSIFY = 5
+NUM_MODEL_CAFFE_EP = 1
+NUM_MODEL_CAFFE_FU = 1
+NUM_MODEL_CAFFE_DIRECTION = 4
+
+# 所有模型
+model_all-NUM_MODEL-ADD_NUM_MODEL = [
+		0,  1,  2,  3,     4,     5,  6,  7,  8,  9, 
+        10, 11, 12, 13, 10001, 10002, 14, 15, 16, 17, 
+        18, 19, 20, 21,    22,    23, 24, 25, 26, 27,
+        28, 29, 30, 31,    32,    33, 34, 35, 36, 37,
+        38, 39, 40, 41,    42,    43, 44, 45, 46, 47,
+		48, 49, 50, 51,	   52,    53, 54, 55, 56, 57,
+		58, 59, 60, 61,    62,    63, 64, 65, 66, 67,
+		68, 69]
+# 是否补充像素，新的10
+add_pixel-NUM_MODEL-ADD_NUM_MODEL = [
+		0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+        0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+        0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+        0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+        0,   0,   0,   0,   0,	 0,	  0,   0,	0,	 0,
+		0,	 10,   10,   0,	0,	 0,   0,   0,   0,   0,
+		0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
+		0,  0]
+		
+# 是否输出空格
+output_space-NUM_MODEL-ADD_NUM_MODEL = [
+		1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+		1,	 1,   1,   1,	1,	 1,   1,   1,   0,   0,
+		0,   0,   1,   1,   1,   1,   1,   1,   1,   1,
+		1,   1]
+		
+# 模型索引，之所以2维是为了照顾使用多个模型那里
+model_indexto_model-NUM_MODEL-ADD_NUM_MODEL-NUM_MODEL = [
+	[  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  6, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  7, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 10, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 11, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 12, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 13, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  0,  1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[  3,  4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 14, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 15, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 16, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 17, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 18, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 19, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 20, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 21, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 22, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 23, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 24, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 25, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 26, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 27, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 28, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 29, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 30, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 31, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 32, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 33, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 34, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 35, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 36, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 37, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 38, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 39, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 40, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 41, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 42, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 43, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 44, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 45, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 46, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 47, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 48, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 49, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 50, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 51, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 52, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 53, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 54, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 55, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 56, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 57, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 58, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 59, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 60, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 61, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 62, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 63, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 64, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 65, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 66, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 67, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 68, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+	[ 69, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ]
+
+]
+
+# 识别模型名称
+model_name-NUM_MODEL = [ 
+"DLname.bin", "address.bin", "last.bin", "xsz_name_gpu.bin", "xsz_address_gpu.bin",
+"xsz_last_gpu.bin",  "xsz_last_f_gpu.bin", "ynid_new.bin", "yyzz_name_gpu.bin", "yyzz_last_gpu.bin",
+"yyzz_address_gpu.bin", "yyzz_yyfw_gpu.bin", "qchgz_0_gpu.bin", "qchgz_1_gpu.bin", "qcdjz_0_gpu.bin",
+"qcdjz_1_gpu.bin", "bdcz_0_gpu.bin", "bdcz_1_gpu.bin", "yyzz_yyfw_cpu.bin", "xsz_all_gpu.bin",
+"hkb_name_gpu.bin", "hkb_address_gpu.bin", "hkb_last_gpu.bin", "xsz_all_cpu.bin", "sfz_nameaddress_cpu.bin",
+"kd_sjh_cpu.bin", "cb_xmz_cpu.bin", "cb_xmmc_cpu.bin", "cb_gsmc_gpu.bin", "hkb_djrq_gpu.bin",
+"jsz_all_gpu.bin", "jsz_all_cpu.bin", "sfz_last_gpu.bin", "sfz_last_cpu.bin", "yhk_kh_gpu.bin",
+"yhk_rq_gpu.bin", "ynid_id.bin", "ynid_last.bin", "yhk_kh_cpu.bin", "sfz_nameaddress_gpu.bin",
+"yyzz_djrq_cpu.bin", "yyzz_gjz_gpu.bin", "yyzz_all_gpu.bin","ty_xm_gpu.bin","ty_xm_cpu.bin",
+"qcdjz_0_cpu.bin","qcdjz_1_cpu.bin","ty_gpu.bin", "ty_cpu.bin","sfz_all_cpu.bin",
+ "sfz_all_gpu.bin","yhk_name_cpu.bin","yhk_name_gpu.bin","yhk_all_cpu.bin","yhk_all_gpu.bin",
+ "yyzz_all_cpu.bin","sx_gpu.bin","sx_je_gpu.bin","sx_sz_gpu.bin","sfz_all_20211014.bin",
+ "ty_jb.bin", "qcdjz_2_gpu.bin","qcdjz_2_cpu.bin","sx_cpu.bin","yw_cpu.bin",
+ "yw_gpu.bin","ty_inverse_cpu.bin","ty_inverse_gpu.bin","alb_cpu.bin","alb_gpu.bin"]
+# 分类模型名称
+model_name_classify-NUM_MODEL_CLASSIFY = [ "classify_20201109.bin","fcz_classify.bin","classify_20210722_cpu.bin","classify_20210722_gpu.bin","hp_classify_cpu.bin"]
+# 八点模型名称
+model_name_ep-NUM_MODEL_EP = [ "sfz_eightpoint.bin" ]
+model_name_fu-NUM_MODEL_FU = [ "ty_fourpoint.bin" ]
+# 文本方向模型名称
+model_name_direction-NUM_MODEL_DIRECTION = [ "ty_direction_gpu.bin","ty_direction_cpu.bin","yhk_direction_gpu.bin","yhk_direction_cpu.bin"]
+# 第一个表示是否与输入层尺寸一致，不一致按固定尺寸32*280；第二个表示
+same_size_exp-NUM_MODEL = [
+	[ true, false ],[ true, false ],[ true, false ],[ true, false ],[ true, false ],
+	[ true, false ],[ true, false ],[ false, false ],[ true, false ],[ false, false ],
+	[ true, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false],[ false, false],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ],
+	[ false, false ],[ false, false ],[ false, false ],[ false, false ],[ false, false ]
+]
+same_size_classify = [ "true", "true", "true", "true", "true"]
+same_size_direction = [ "true", "true", "true", "true"]
+# 下面三项CPU和GPU配置是不同的，CPU全0，GPU全1
+#[CPU]
+CCPU_GPU-NUM_MODEL_CAFFE = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+CCPU_GPU_CLASSIFY-NUM_MODEL_CAFFE_CLASSIFY = [ 0, 0, 0, 0 , 0]
+CCPU_GPU_EP-NUM_MODEL_CAFFE_EP = [ 0 ]
+CCPU_GPU_FU-NUM_MODEL_CAFFE_FU = [ 0 ]
+CCPU_GPU_DIRECTION-NUM_MODEL_CAFFE_DIRECTION = [ 0, 0, 0 , 0]
+#[GPU]
+GCPU_GPU-NUM_MODEL_CAFFE = [
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+GCPU_GPU_CLASSIFY-NUM_MODEL_CAFFE_CLASSIFY = [ 1, 1, 1, 1, 1]
+GCPU_GPU_EP-NUM_MODEL_CAFFE_EP = [ 1 ]
+GCPU_GPU_FU-NUM_MODEL_CAFFE_FU = [ 1 ]
+GCPU_GPU_DIRECTION-NUM_MODEL_CAFFE_DIRECTION = [ 1, 1, 1, 1]
+
+# 上面三项CPU和GPU配置是不同的，CPU全0，GPU全1
+# 下面的宽度是设定的最大宽度
+MAX_WIDTH-NUM_MODEL_CAFFE = [   
+		0,   0,   0,   1,   1,   1,   1,   256,   1, 256, 
+        416, 640, 640, 640, 640, 640, 640, 640, 512, 416,
+        416, 416, 320, 416, 224, 312, 320, 416, 416, 416,
+        416, 416, 416, 416, 480, 96,  416, 416, 480, 416,
+        320, 256, 512, 320, 320, 640, 640, 1024, 1024, 416,
+		416, 416, 416, 416, 416, 512, 416, 576, 416, 416,
+		512, 416, 416, 416, 416, 416, 512, 512, 640, 640]
+
+# 宽		
+HEIGHT-NUM_MODEL_CAFFE = [   
+		32,  32,  32,  32,  32,  32,  32,  32,  32,  32, 
+        32,  32,  32,  32,  32,  32,  32,  32,  32,  32, 
+        32,  32,  32,  32,  32,  32,  32,  32,  32,  32, 
+        32,  32,  32,  32,  32,  32,  32,  32,  32,  32, 
+        32,  32,  32,  32,  32,  32,  32,  32,  32,  32, 
+		32,  32,  32,  32,  32,  32,  32,  32,  32,  32,
+		32,  32,  32,  32,  32,  32,  32,  32,  32,  32]
+
+# 是否归一化
+b_style-NUM_MODEL_CAFFE =[   
+		1,   1,   1,   1,   1,   1,   1,   0,   0,   1, 
+        0,	 1,   1,   1,   1,   1,   1,   1,   1,	 1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   0,   0,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+		1,   1,   1,   1,   1,   1,   1,   1,	1,   1,
+		1,   1,   1,   1,   1,   1,   1,   1,   1,   1]
+
+b_style_classify-NUM_MODEL_CAFFE_CLASSIFY = [ 1, 1, 1, 1, 1]
+b_style_ep-NUM_MODEL_CAFFE_EP = [ 1 ]
+b_style_fu-NUM_MODEL_CAFFE_FU = [ 1 ]
+b_style_direction-NUM_MODEL_CAFFE_DIRECTION = [ 1, 1, 1, 1]
+
+e_style-NUM_MODEL_CAFFE = [   
+		1,   1,   1,   1,   1,   1,   1,   1,   1,   1, 
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+		1,   1,   1,   1,   1,   1,   1,   1,	1,   1,
+		1,   1,   1,   1,   1,   1,   1,   1,   1,   1]
+
+label_style-NUM_MODEL_CAFFE = [ 
+		1,   1,   1,   1,   1,   1,   1,   1,   0,   1, 
+        0,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+        1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
+		1,   1,   1,   1,   1,   1,   1,   1,	1,   1,
+		1,   1,   1,   1,   1,   1,   1,   1,   1,   1]
+
+channel_num-NUM_MODEL_CAFFE = [
+		3,   3,   3,   3,   3,   3,   3,   3,   3,   3,
+        3,   3,   3,   3,   3,   3,   3,   3,   3,   3,
+        3,   3,   3,   3,   3,   1,   3,   3,   3,   3,
+        3,   3,   3,   3,   3,   3,   3,   3,   3,   3,
+        3,   3,   3,   3,   3,   3,   3,   3,   3,   3,
+		3,   3,   3,   3,   3,   3,   3,   3,	3,   3,
+		3,   3,   3,   3,   3,   3,   3,   3,   3,   3]
+channel_num_classify-NUM_MODEL_CAFFE_CLASSIFY = [ 3, 3, 3, 3, 3]
+channel_num_ep-NUM_MODEL_CAFFE_EP = [ 3 ]
+channel_num_fu-NUM_MODEL_CAFFE_FU = [ 3 ]
+channel_num_direction-NUM_MODEL_CAFFE_DIRECTION = [ 3, 3, 3, 3]
+
+#clf[NUM_MODEL]:
+#    [   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+#        NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+#        NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+#        NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+#        NULL, NULL, NULL, NULL, NULL ]
+#
+#clf_classify[NUM_MODEL_CLASSIFY]: [ NULL ]
+#clf_ep[NUM_MODEL_EP]: [ NULL ]
+#clf_direction[NUM_MODEL_DIRECTION]: [ NULL ]
+
+
+
+
+	
+		
+
