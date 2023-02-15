@@ -121,12 +121,21 @@ class OcrController extends Controller
         return view('admin.ocr.print',['data'=>$data]);
     }
 
-    public function ocrSave(Request $request)
+    public function ocrSave()
     {
         $gender = 10;
-        if ($request->gender == 'M') {
-            $gender = 5;
-        }
+                if ($request->gender == 'M') {
+                    $gender = 5;
+                }
+
+                if ($request->add == 'N') {
+                    unlink(storage_path('app/public/' . 'plate.txt'));
+                    $fh = fopen(storage_path('app/public/' . 'plate.txt'), 'w');
+                    fclose($fh);
+                } else {
+                    $myfile = fopen(storage_path('app/public/' . 'plate.txt'), "w");
+                    fwrite($myfile, $request->plate_no);
+                }
 
     }
 }
