@@ -1,14 +1,27 @@
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/main.js"></script>
+{{--<script src="js/jquery.min.js"></script>--}}
+<script src="{{asset('js/ocr_scripts/jquery.min.js')}}"></script>
+
+{{--<script src="js/popper.js"></script>--}}
+<script src="{{asset('js/ocr_scripts/popper.js')}}"></script>
+
+{{--<script src="js/bootstrap.min.js"></script>--}}
+<script src="{{asset('js/ocr_scripts/bootstrap.min.js')}}"></script>
+
+{{--<script src="js/jquery.validate.min.js"></script>--}}
+<script src="{{asset('js/ocr_scripts/jquery.validate.min.js')}}"></script>
+
+{{--<script src="js/main.js"></script>--}}
+<script src="{{asset('js/ocr_scripts/main.js')}}"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script type="text/javascript" src="js/jquery.redirect.js"></script>
+{{--<script type="text/javascript" src="js/jquery.redirect.js"></script>--}}
+<script type="text/javascript" src="{{asset('js/ocr_scripts/jquery.redirect.js')}}"></script>
+
 <script>
-    $().ready(function () {
+    // import * as url from "url";
+
+    $(document).ready(function () {
         /*flatpickr("#v2time", {
             enableTime: true,
             noCalendar: true,
@@ -22,14 +35,18 @@
             defaultDate: "today"
         });*/
         //$('#vdate').datepicker();
-        $('.view').click(function () {
-
-            $.redirect("view.php", {}, "POST", null, null, true);
-
-        });
+        // $('.view').click(function () {
+        //
+        //     $.redirect("view.php", {}, "POST", null, null, true);
+        //
+        // });
 
         $('.new_page').click(function () {
-            $.post("clear.php", {}, function (data) {
+            // $.post("clear.php", {}, function (data) {
+            //     location.reload();
+            // });
+
+            $.get('{{route('admin.ocr.clear')}}', {}, function (data) {
                 location.reload();
             });
         });
@@ -74,10 +91,14 @@
         });
 
         $('.get_plate').click(function () {
-            $.post("max.php", {}, function (data) {
+            $.get( '{{route('admin.get.last.car.plate')}}' , {}, function (data) {
+                // console.log(data);
                 location.reload();
             });
+
         });
+
+
 
     });
 </script>

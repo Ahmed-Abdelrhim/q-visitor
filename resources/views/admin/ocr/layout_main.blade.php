@@ -8,23 +8,43 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-{{--    <link rel="stylesheet" href="css/style.css">--}}
+    {{--    <link rel="stylesheet" href="css/style.css">--}}
     <link rel="stylesheet" href="{{asset('css/ocr_styles/style.css')}}">
 
     @include('admin.ocr.index_style')
 
 </head>
 @include('admin.ocr.script')
+{{--< ?php--}}
+{{--    --}}
+{{--    --}}
+{{--//if (filesize(asset('storage/plate.txt')) > 0) {--}}
+{{--//if (Illuminate\Support\Facades\Storage::exists(storage_path('plate.txt')) > 0) {--}}
+
+
+{{--if (Illuminate\Support\Facades\Storage::exists( storage_path('app/public/'.'plate.txt') )) {--}}
+{{--    $myfile = fopen(asset('plate.txt'), "r");--}}
+{{--    // $myfile = File::get(storage_path('app/public/' .'plate.txt'), "r")--}}
+{{--    // $plate = File::get($myfile, filesize(storage_path('app/public/'.'plate.txt')))--}}
+{{--    $plate = File::get(filesize(storage_path('app/public/'.'plate.txt')));--}}
+{{--    // File::close($plate)--}}
+{{--} else {--}}
+{{--    $plate = '';--}}
+{{--}--}}
+{{--?>--}}
+
+
+
 <?php
-//if (filesize(asset('storage/plate.txt')) > 0) {
-if (Illuminate\Support\Facades\Storage::exists(storage_path('plate.txt')) > 0) {
-    $myfile = fopen(asset('plate.txt'), "r");
-    $plate = fread($myfile, filesize(asset('plate.txt')));
+if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
+    $myfile = fopen(storage_path('app/public/' . 'plate.txt'), "r");
+    $plate = fread($myfile, filesize(storage_path('app/public/' . 'plate.txt')));
     fclose($myfile);
 } else {
     $plate = '';
 }
 ?>
+
 <body>
 
 <section class="ftco-section">
@@ -214,7 +234,11 @@ if (Illuminate\Support\Facades\Storage::exists(storage_path('plate.txt')) > 0) {
                                         <input type="button" value="Scan" class="btn btn-danger scan"
                                                onclick="connect();">
                                         <input type="button" value="Save Data" class="btn btn-success save">
-                                        <input type="button" value="View Visitors" class="btn btn-success view">
+                                        {{--                                        <input type="button" value="View Visitors" class="btn btn-success view"--}}
+                                        {{--                                        onclick="{{route('admin.visitors.index')}};">--}}
+                                        <a type="button" class="btn btn-success view" href="{{route('admin.visitors.index')}}">
+                                            View Visitors
+                                        </a>
                                         <div class="submitting"></div>
                                     </div>
                                 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\OcrController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -89,6 +90,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         // Ocr Resource Controller···
         Route::group(['middleware' => ['role_or_permission:Admin|OCR']], function () {
             Route::resource('OCR','OcrController');
+            Route::get('get-last-car-plate',[OcrController::class,'getLastCarPlate'])->name('get.last.car.plate');
+            Route::get('ocr-clear',[OcrController::class,'ocrClear'])->name('ocr.clear');
         });
         Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
 
