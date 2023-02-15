@@ -92,6 +92,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
             Route::resource('OCR','OcrController');
             Route::get('get-last-car-plate',[OcrController::class,'getLastCarPlate'])->name('get.last.car.plate');
             Route::get('ocr-clear',[OcrController::class,'ocrClear'])->name('ocr.clear');
+            Route::get('ocr-indexxarr',[OcrController::class,'ocrIndexxar'])->name('ocr.indexxar');
         });
         Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
 

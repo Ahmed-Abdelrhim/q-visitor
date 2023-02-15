@@ -104,4 +104,9 @@ class OcrController extends Controller
         $fh = fopen(storage_path('app/public/' . 'plate.txt'), 'w');
         fclose($fh);
     }
+
+    public function ocrIndexxar()
+    {
+        return view('admin.ocr.indexxar');
+    }
 }

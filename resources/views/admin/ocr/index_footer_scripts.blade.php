@@ -42,10 +42,6 @@
         // });
 
         $('.new_page').click(function () {
-            // $.post("clear.php", {}, function (data) {
-            //     location.reload();
-            // });
-
             $.get('{{route('admin.ocr.clear')}}', {}, function (data) {
                 location.reload();
             });
@@ -83,7 +79,7 @@
                 plate_no: plate_no,
                 add: add
             }, function (data) {
-                wnd = window.open("http://localhost/form/print.php?id=" + data, '_blank');
+                wnd = window.open("http://localhost/visitorpass/print.php?id=" + data, '_blank');
                 wnd.print();
                 location.reload();
 
