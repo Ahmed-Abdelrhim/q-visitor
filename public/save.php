@@ -1,45 +1,4 @@
 <?php
-
-exec("tasklist 2>NUL", $task_list);
-$serv1 = false;
-$serv2 = false;
-//print_r($task_list);
-foreach ($task_list as $a) {
-    $str = explode(" ", $a);
-    if ($str[0] == "SinosecuRecog.exe") {
-        $serv1 = true;
-    }
-    if ($str[0] == "SinosecuCtl.exe") {
-        $serv2 = true;
-    }
-}
-
-if ($serv1 == false) {
-    exec("SinosecuRecog.exe");
-}
-if ($serv2 == false) {
-    exec("SinosecuCtl.exe");
-}
-//die();
-//$task_list = array();$services = 0;
-//exec("tasklist 2>NUL", $task_list);
-//print_r($task_list);
-/*foreach ($task_list as $url) {
-	if($url != ''){
-		$str = explode(" ",$url);
-		if ($str[0] == 'SinosecuRecog.exe' ) {
-			$services = ($services + 1);
-		}
-		if ($str[0] == 'SinosecuCtl.exe' ) {
-			$services = ($services + 1);
-		}
-    }
-}
-if($services < 2){
-	exec("SinosecuRecog.exe");
-	exec("SinosecuCtl.exe");
-
-}*/
 $servername = "localhost";
 $username = "root";
 $password = '';

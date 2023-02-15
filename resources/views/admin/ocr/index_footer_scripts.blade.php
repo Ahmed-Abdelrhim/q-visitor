@@ -67,7 +67,8 @@
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
             // $.post("save.php", {
-            $.post( '{{storage_path('app/public' . '/' .'save.php')}}', {
+            // $.post( '{{storage_path('app/public' . '/' .'save.php')}}', {
+            $.get( '{{route('admin.ocr.save')}}', {
                 name: name,
                 gender: gender,
                 address: full_address,
@@ -80,9 +81,10 @@
                 plate_no: plate_no,
                 add: add
             }, function (data) {
-                wnd = window.open("http://localhost/visitorpass/ocr-print?id=" + data, '_blank');
-                wnd.print();
-                location.reload();
+                console.log(data);
+                    // wnd = window.open("http://localhost/visitorpass/ocr-print?id=" + data, '_blank');
+                    // wnd.print();
+                    // location.reload();
 
             });
         });
