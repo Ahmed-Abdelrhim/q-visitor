@@ -25,6 +25,7 @@
             var readyState = new Array("on connection", "Connection established",
                 "Closing connection", "Close connection");
             var host = "ws://127.0.0.1:90/echo";
+            // var host = "ws://127.0.0.1:8000/echo";
 
             websocket = new WebSocket(host);
             console.log('New websocket', websocket);

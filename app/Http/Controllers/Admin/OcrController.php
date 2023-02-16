@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Request;
 
 class OcrController extends Controller
 {
+    public $new_request;
+
     public function index()
     {
         $this->linker();
@@ -116,26 +118,38 @@ class OcrController extends Controller
     {
         $data = VisitingDetails::query()
             ->with('visitor')
-            ->where('visitor_id',$id)
+            ->where('visitor_id', $id)
             ->first();
-        return view('admin.ocr.print',['data'=>$data]);
+        return view('admin.ocr.print', ['data' => $data]);
     }
 
-    public function ocrSave()
+    public function ocrSave(Request $request)
     {
-        $gender = 10;
-                if ($request->gender == 'M') {
-                    $gender = 5;
-                }
+        $name = $_GET['name'];
 
-                if ($request->add == 'N') {
-                    unlink(storage_path('app/public/' . 'plate.txt'));
-                    $fh = fopen(storage_path('app/public/' . 'plate.txt'), 'w');
-                    fclose($fh);
-                } else {
-                    $myfile = fopen(storage_path('app/public/' . 'plate.txt'), "w");
-                    fwrite($myfile, $request->plate_no);
-                }
+        return response()->json(['data' => $name]);
 
+        // return response()->json(['data' => 'Not A Ajax Request']);
+
+        //        if ($request->gender == 'M') $gender = '5'; else $gender = '10';
+        //
+        //        if ($request->add == 'N') {
+        //            unlink(storage_path('app/public/' . 'plate.txt'));
+        //            $fh = fopen(storage_path('app/public/' . 'plate.txt'), 'w');
+        //            fclose($fh);
+        //        } else {
+        //            $myFile = fopen(storage_path('app/public/' . 'plate.txt'), "w");
+        //            fwrite($myFile, $request->plate_no);
+        //        }
+
+
+        // return response()->json(['data' =>$request]);
+    }
+
+    public function playy()
+    {
+//        if (empty($this->new_request))
+//            return 'Empty';
+        return $this->new_request;
     }
 }

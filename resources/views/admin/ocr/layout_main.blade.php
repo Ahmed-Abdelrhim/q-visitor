@@ -88,6 +88,7 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
                         </div>
                         <div class="col-md-12 d-flex align-items-stretch">
                             <div class="info-wrap w-100 p-lg-5 p-4 img">
+                                {{csrf_field()}}
 
 
                                 <div class="dbox w-25 d-flex align-items-start">
@@ -216,8 +217,8 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
                                         <input type="button" value="Scan" class="btn btn-danger scan"
                                                onclick="connect();">
                                         <input type="button" value="Save Data" class="btn btn-success save">
-                                        {{--                                        <input type="button" value="View Visitors" class="btn btn-success view"--}}
-                                        {{--                                        onclick="{{route('admin.visitors.index')}};">--}}
+                                        {{-- <input type="button" value="View Visitors" class="btn btn-success view"--}}
+                                        {{-- onclick="{{route('admin.visitors.index')}};">--}}
                                         <a type="button" class="btn btn-success view" href="{{route('admin.visitors.index')}}">
                                             View Visitors
                                         </a>

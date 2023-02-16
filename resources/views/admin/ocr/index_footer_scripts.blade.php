@@ -48,7 +48,12 @@
         });
         $('.save').prop('disabled', true);
 
+
+
+
+
         $('.save').click(function () {
+            $(this).serialize();
             cnf = confirm("Add another Person ID?");
             if (cnf == true) add = 'Y'; else add = 'N';
             $(this).prop('disabled', true);
@@ -66,27 +71,89 @@
             perpic = $('.perpic').text();
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
-            // $.post("save.php", {
-            // $.post( '{{storage_path('app/public' . '/' .'save.php')}}', {
-            $.get( '{{route('admin.ocr.save')}}', {
-                name: name,
-                gender: gender,
-                address: full_address,
-                nat_id: nat_id,
-                checkin_date: checkin_date,
-                checkin_time: checkin_time,
-                images: images,
-                perpic: perpic,
-                exdate: exdate,
-                plate_no: plate_no,
-                add: add
-            }, function (data) {
-                console.log(data);
+
+            __token = $('input[name="_token"]').val();
+
+            // var requestData = JSON.stringify([
+            //     name,gender,nat_id,address2,full_address,checkin_date,checkin_time,images,perpic,exdate,plate_no,
+            // ]);
+
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                enctype: 'multipart/form-data',
+                url: "{{route('admin.ocr.save')}}",
+                // dataType: 'JSON',
+                // processData: false,
+                // contentType: false,
+                // cache: false,
+                data: {
+                    '__token' : __token,
+                    // 'name': JSON.stringify(name),
+                    'name': name,
+                    // 'gender': gender,
+                    // 'address': full_address,
+                    // 'nat_id': nat_id,
+                    // 'checkin_date': checkin_date,
+                    // 'checkin_time': checkin_time,
+                    // 'images': images,
+                    // 'perpic': perpic,
+                    // 'exdate': exdate,
+                    // 'plate_no': plate_no,
+                    // 'add': add,
+                },
+
+                success: function (data) {
+                    console.log(data);
                     // wnd = window.open("http://localhost/visitorpass/ocr-print?id=" + data, '_blank');
                     // wnd.print();
                     // location.reload();
+                }
+                , error : function (reject) {
+                    console.log('error ');
+                    // var response = $.parseJSON(reject.responseText);
+                    // $.each(response.errors , function(key , value) {
+                    //     $('#'+key+'_error').text(value[0]);
+                    // })
+                },
 
             });
+
+
+
+
+            // $.post("save.php", {
+            // $.post( '{{storage_path('app/public' . '/' .'save.php')}}', {
+            {{--$.get( '{{route('admin.ocr.save')}}', {--}}
+            {{--    name: name,--}}
+            {{--    gender: gender,--}}
+            {{--    address: full_address,--}}
+            {{--    nat_id: nat_id,--}}
+            {{--    checkin_date: checkin_date,--}}
+            {{--    checkin_time: checkin_time,--}}
+            {{--    images: images,--}}
+            {{--    perpic: perpic,--}}
+            {{--    exdate: exdate,--}}
+            {{--    plate_no: plate_no,--}}
+            {{--    add: add--}}
+            {{--}, function (data) {--}}
+            {{--    console.log(data);--}}
+            {{--        wnd = window.open("http://localhost/visitorpass/ocr-print?id=" + data, '_blank');--}}
+            {{--        wnd.print();--}}
+            {{--        location.reload();--}}
+
+            {{--});--}}
+
+
+
+
+
         });
 
         $('.get_plate').click(function () {

@@ -168,6 +168,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
             ]);
         });
         Route::get('play', [\App\Http\Controllers\Admin\VisitorController::class, 'play']);
+        Route::get('playy', [OcrController::class, 'playy']);
     });
 //Route::get('play',function (){
 //    return auth()->user()->getDirectPermissions();
