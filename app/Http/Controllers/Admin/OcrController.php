@@ -128,10 +128,11 @@ class OcrController extends Controller
         $data ='false';
         if (isset($_POST['images'])) {
             $data = 'true';
+            $images = explode("||", $_POST['images']);
         }
         // $images = explode("||", $_GET['images']);
-        return response()->json(['data' => $data]);
-        $name = explode(" ", $_GET['name']);
+        return response()->json(['data' => $images]);
+
 
         // $name = null;
         //        if (isset($_GET['name'])) {
