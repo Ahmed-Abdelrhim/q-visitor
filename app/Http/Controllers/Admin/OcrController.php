@@ -125,10 +125,18 @@ class OcrController extends Controller
 
     public function ocrSave()
     {
-        $name = null;
-        if (isset($_GET['name'])) {
-            $name = $_GET['name'];
+        $data ='false';
+        if (isset($_POST['images'])) {
+            $data = 'true';
         }
+        // $images = explode("||", $_GET['images']);
+        return response()->json(['data' => $data]);
+        $name = explode(" ", $_GET['name']);
+
+        // $name = null;
+        //        if (isset($_GET['name'])) {
+        //            $name = $_GET['name'];
+        //        }
 
         $gender = null;
         if (isset($_GET['gender'])) {
@@ -163,20 +171,20 @@ class OcrController extends Controller
         }
 
 
-        $images = null;
-        if (isset($_GET['images'])) {
-            $images = explode("||", $_GET['images']);
-
-            // TODO:: save images
-
-            //            foreach ($images as $img) {
-            //                $img = str_replace("data:image/jpeg;base64,", "", $img);
-            //                if ($img != '' or $img != ' ') {
-            //                    file_put_contents('images/' . $nat_id . '-' . $counter . '.jpg', base64_decode($img));
-            //                    $counter++;
-            //                }
-            //            }
-        }
+        // $images = explode("||", $_GET['images']);
+        //                if (isset($_GET['images'])) {
+        //                    $images = explode("||", $_GET['images']);
+        //
+        //                    // TODO:: save images
+        //
+        //                    //            foreach ($images as $img) {
+        //                    //                $img = str_replace("data:image/jpeg;base64,", "", $img);
+        //                    //                if ($img != '' or $img != ' ') {
+        //                    //                    file_put_contents('images/' . $nat_id . '-' . $counter . '.jpg', base64_decode($img));
+        //                    //                    $counter++;
+        //                    //                }
+        //                    //            }
+        //                }
 
         $perpic = null;
         if (isset($_GET['perpic'])) {
@@ -197,7 +205,7 @@ class OcrController extends Controller
         if (isset($_GET['add'])) {
             $add = $_GET['add'];
         }
-        return response()->json(['data' => $add]);
+        return response()->json(['data' => $name]);
 
 
         // $name = explode(" ", $_GET['name']);

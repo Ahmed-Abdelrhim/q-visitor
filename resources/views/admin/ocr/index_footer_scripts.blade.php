@@ -82,71 +82,77 @@
                 }
             });
 
-            $.ajax({
-                type: 'GET',
-                enctype: 'multipart/form-data',
-                url: "{{route('admin.ocr.save')}}",
-                // dataType: 'JSON',
-                // processData: false,
-                // contentType: false,
-                // cache: false,
-                data: {
-                    '__token': __token,
-                    // 'name': JSON.stringify(name),
-                    'name': name,
-                    'gender': gender,
-                    'address': full_address,
-                    'nat_id': nat_id,
-                    'checkin_date': checkin_date,
-                    'checkin_time': checkin_time,
-                    'images': images,
-                    'perpic': perpic,
-                    'exdate': exdate,
-                    'plate_no': plate_no,
-                    'add': add,
-                },
+            // if ($('#images')[0].files.length > 0) {
+            //     for (var i = 0; i < $('#images')[0].files.length; i++)
+            //         $('#images')[0].append('file[]', $('#images')[0].files[i]);
+            // }
 
-                success: function (data) {
-                    console.log(data);
-                    // wnd = window.open("http://localhost/visitorpass/ocr-print?id=" + data, '_blank');
-                    // wnd.print();
-                    // location.reload();
-                }
-                , error: function (reject) {
-                    console.log(reject);
-                    // var response = $.parseJSON(reject.responseText);
-                    // $.each(response.errors , function(key , value) {
-                    //     $('#'+key+'_error').text(value[0]);
-                    // })
-                },
+            {{--$.ajax({--}}
+            {{--    type: 'GET',--}}
+            {{--    enctype: 'multipart/form-data',--}}
+            {{--    url: "{{route('admin.ocr.save')}}",--}}
+            {{--    // dataType: 'JSON',--}}
+            {{--    // processData: false,--}}
+            {{--    // contentType: false,--}}
+            {{--    // cache: false,--}}
 
-            });
+            {{--    async: false,--}}
+            {{--    data: {--}}
+            {{--        // '__token': __token,--}}
+            {{--        // 'name': JSON.stringify(name),--}}
+            {{--        // 'name': name,--}}
+            {{--        // 'gender': gender,--}}
+            {{--        // 'address': full_address,--}}
+            {{--        // 'nat_id': nat_id,--}}
+            {{--        // 'checkin_date': checkin_date,--}}
+            {{--        // 'checkin_time': checkin_time,--}}
+            {{--        // 'images': JSON.stringify(images),--}}
+            {{--        'images': images,--}}
+            {{--        // 'perpic': perpic,--}}
+            {{--        // 'exdate': exdate,--}}
+            {{--        // 'plate_no': plate_no,--}}
+            {{--        // 'add': add,--}}
+            {{--    },--}}
 
-
-            // $.post("save.php", {
-            // $.post( '{{storage_path('app/public' . '/' .'save.php')}}', {
-            {{--$.get( '{{route('admin.ocr.save')}}', {--}}
-            {{--    name: name,--}}
-            {{--    gender: gender,--}}
-            {{--    address: full_address,--}}
-            {{--    nat_id: nat_id,--}}
-            {{--    checkin_date: checkin_date,--}}
-            {{--    checkin_time: checkin_time,--}}
-            {{--    images: images,--}}
-            {{--    perpic: perpic,--}}
-            {{--    exdate: exdate,--}}
-            {{--    plate_no: plate_no,--}}
-            {{--    add: add--}}
-            {{--}, function (data) {--}}
-            {{--    console.log(data);--}}
-            {{--        wnd = window.open("http://localhost/visitorpass/ocr-print?id=" + data, '_blank');--}}
-            {{--        wnd.print();--}}
-            {{--        location.reload();--}}
+            {{--    success: function (data) {--}}
+            {{--        console.log(data);--}}
+            {{--        // wnd = window.open("http://localhost/visitorpass/ocr-print?id=" + data, '_blank');--}}
+            {{--        // wnd.print();--}}
+            {{--        // location.reload();--}}
+            {{--    }--}}
+            {{--    , error: function (reject) {--}}
+            {{--        console.log(reject);--}}
+            {{--        // var response = $.parseJSON(reject.responseText);--}}
+            {{--        // $.each(response.errors , function(key , value) {--}}
+            {{--        //     $('#'+key+'_error').text(value[0]);--}}
+            {{--        // })--}}
+            {{--    },--}}
 
             {{--});--}}
 
 
+            // $.post("save.php", {
+            // $.post( '{ {storage_path('app/public' . '/' .'save.php')}}', {
+            $.post('{{route('admin.ocr.save')}}', {
+                __token: __token,
+                name: name,
+                gender: gender,
+                address: full_address,
+                nat_id: nat_id,
+                checkin_date: checkin_date,
+                checkin_time: checkin_time,
+                images: images,
+                perpic: perpic,
+                exdate: exdate,
+                plate_no: plate_no,
+                add: add
+            }, function (data) {
+                console.log(data);
+                // wnd = window.open("http://localhost/visitorpass/ocr-print?id=" + data, '_blank');
+                // wnd.print();
+                // location.reload();
 
+            });
 
 
         });
