@@ -212,10 +212,9 @@ class OcrController extends Controller
         list(, $data) = explode(',', $data);
         $data = base64_decode($data);
         $this->new_request = $data;
-        // TODO:: upload per images here
-        // file_put_contents(storage_path('per_images/') . $reg_no . '.png', $data);
-        // Storage::disk('public')->putFileAs('per_images/' . $reg_no . '.png', '' , '');
 
+        // TODO:: add this image to visiting details folder path
+        // $visitingDetails->addMedia($image)->toMediaCollection('visitor');
         file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '.png'), $data);
         //        try {
         //
