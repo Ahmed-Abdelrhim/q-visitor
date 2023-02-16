@@ -8,6 +8,7 @@ use App\Models\Visitor;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\File;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -203,19 +204,30 @@ class OcrController extends Controller
         $visitingDetail = VisitingDetails::query()->max('reg_no');
         $reg_no = $visitingDetail + 1;
 
+        // TODO : works till here
+        // return response()->json(['data' => 'done']);
 
         $data = $perpic;
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);
         $data = base64_decode($data);
+        $this->new_request = $data;
         // TODO:: upload per images here
-        file_put_contents(storage_path('per_images/') . $reg_no . '.png', $data);
+        // file_put_contents(storage_path('per_images/') . $reg_no . '.png', $data);
         // Storage::disk('public')->putFileAs('per_images/' . $reg_no . '.png', '' , '');
+
+        file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '.png'), $data);
+        //        try {
+        //
+        //            // Storage::putFileAs( 'per_images',new File($data) , $reg_no . '.png');
+        //        } catch (\Exception $e) {
+        //            return response()->json(['data' => $e]);
+        //        }
 
         try {
             DB::beginTransaction();
             $visitor = Visitor::query()->insert([
-                'first_name' =>$name[0],
+                'first_name' => $name[0],
                 'last_name' => $last_name,
                 'email' => null,
                 'phone' => null,
@@ -236,15 +248,15 @@ class OcrController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            $notifications = array('message' => 'Qrcode was not sent' , 'alert-type' => 'info');
-            return redirect()->route('OCR.index')->with($notifications);
-            // return throwException($e);
+            $notifications = array('message' => 'Qrcode was not sent', 'alert-type' => 'info');
+            // return redirect()->route('OCR.index')->with($notifications);
+            return throwException($e);
         }
 
         try {
             $qrcode = file_get_contents('https://www.qudratech-eg.net/qrcode/index.php?data=' . $name[0] . $reg_no);
         } catch (\Exception $e) {
-            $notifications = array('message' => 'visitor was not created , something went wrong' , 'alert-type' => 'error');
+            $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
         }
 
         if ($visitor) {
@@ -286,7 +298,7 @@ class OcrController extends Controller
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();
-                $notifications = array('message' => 'visit was not created , something went wrong' , 'alert-type' => 'error');
+                $notifications = array('message' => 'visit was not created , something went wrong', 'alert-type' => 'error');
                 return redirect()->route('OCR.index')->with($notifications);
             }
         }
@@ -294,15 +306,19 @@ class OcrController extends Controller
         try {
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
         } catch (\Exception $e) {
-            $notifications = array('message' => 'add image not sent' , 'alert-type' => 'info');
+            $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
         }
 
 
-        return response()->json(['status' => 200 , 'message' => 'Done Successfully']);
+        return response()->json(['status' => 200, 'message' => 'Done Successfully']);
+
+        // VD = 187
+        // visitors = 218
     }
 
     public function playy()
     {
+        return $this->new_request;
         return $visitingDetail = VisitingDetails::query()->max('reg_no');
     }
 }
@@ -347,3 +363,5 @@ class OcrController extends Controller
 
 
 // return response()->json(['data' =>$request]);
+
+
