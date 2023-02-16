@@ -123,11 +123,99 @@ class OcrController extends Controller
         return view('admin.ocr.print', ['data' => $data]);
     }
 
-    public function ocrSave(Request $request)
+    public function ocrSave()
     {
-        $name = $_GET['name'];
+        $name = null;
+        if (isset($_GET['name'])) {
+            $name = $_GET['name'];
+        }
 
-        return response()->json(['data' => $name]);
+        $gender = null;
+        if (isset($_GET['gender'])) {
+            $gender = $_GET['gender'];
+            $gender = 5;
+            if ($gender == 'F') {
+                $gender = 10;
+            }
+        }
+
+
+        $address = null;
+        if (isset($_GET['address'])) {
+            $address = $_GET['address'];
+        }
+
+        $nat_id = null;
+        if (isset($_GET['nat_id'])) {
+            $nat_id = $_GET['nat_id'];
+        }
+
+
+        $checkin_date = null;
+        if (isset($_GET['checkin_date'])) {
+            $checkin_date = $_GET['checkin_date'];
+        }
+
+
+        $checkin_time = null;
+        if (isset($_GET['checkin_time'])) {
+            $checkin_time = $_GET['checkin_time'];
+        }
+
+
+        $images = null;
+        if (isset($_GET['images'])) {
+            $images = explode("||", $_GET['images']);
+
+            // TODO:: save images
+
+            //            foreach ($images as $img) {
+            //                $img = str_replace("data:image/jpeg;base64,", "", $img);
+            //                if ($img != '' or $img != ' ') {
+            //                    file_put_contents('images/' . $nat_id . '-' . $counter . '.jpg', base64_decode($img));
+            //                    $counter++;
+            //                }
+            //            }
+        }
+
+        $perpic = null;
+        if (isset($_GET['perpic'])) {
+            $perpic = $_GET['perpic'];
+        }
+
+        $exdate = null;
+        if (isset($_GET['exdate'])) {
+            $exdate = $_GET['exdate'];
+        }
+
+        $plate_no = null;
+        if (isset($_GET['plate_no'])) {
+            $plate_no = $_GET['plate_no'];
+        }
+
+        $add = null;
+        if (isset($_GET['add'])) {
+            $add = $_GET['add'];
+        }
+        return response()->json(['data' => $add]);
+
+
+        // $name = explode(" ", $_GET['name']);
+        //        $lastname = substr(strstr($_GET['name'], " "), 1);
+        //        if (isset($_GET['gender'])) {
+        //            $gender = $_GET['gender'];
+        //        }
+        //        $address = $_GET['address'];
+        //        $nat_id = $_GET['nat_id'];
+        //        $perpic = $_GET['perpic'];
+        //        $exdate = $_GET['exdate'];
+        //        $plate_no = $_GET['plate_no'];
+        //        $add = $_GET['add'];
+        //        $images = explode("||", $_GET['images']);
+        //        $max = 0;
+        //        $reg_no = 0;
+        //        $counter = 1;
+
 
         // return response()->json(['data' => 'Not A Ajax Request']);
 

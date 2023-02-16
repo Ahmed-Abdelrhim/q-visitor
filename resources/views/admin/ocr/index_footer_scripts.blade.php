@@ -49,9 +49,6 @@
         $('.save').prop('disabled', true);
 
 
-
-
-
         $('.save').click(function () {
             $(this).serialize();
             cnf = confirm("Add another Person ID?");
@@ -94,19 +91,19 @@
                 // contentType: false,
                 // cache: false,
                 data: {
-                    '__token' : __token,
+                    '__token': __token,
                     // 'name': JSON.stringify(name),
                     'name': name,
-                    // 'gender': gender,
-                    // 'address': full_address,
-                    // 'nat_id': nat_id,
-                    // 'checkin_date': checkin_date,
-                    // 'checkin_time': checkin_time,
-                    // 'images': images,
-                    // 'perpic': perpic,
-                    // 'exdate': exdate,
-                    // 'plate_no': plate_no,
-                    // 'add': add,
+                    'gender': gender,
+                    'address': full_address,
+                    'nat_id': nat_id,
+                    'checkin_date': checkin_date,
+                    'checkin_time': checkin_time,
+                    'images': images,
+                    'perpic': perpic,
+                    'exdate': exdate,
+                    'plate_no': plate_no,
+                    'add': add,
                 },
 
                 success: function (data) {
@@ -115,8 +112,8 @@
                     // wnd.print();
                     // location.reload();
                 }
-                , error : function (reject) {
-                    console.log('error ');
+                , error: function (reject) {
+                    console.log(reject);
                     // var response = $.parseJSON(reject.responseText);
                     // $.each(response.errors , function(key , value) {
                     //     $('#'+key+'_error').text(value[0]);
@@ -124,8 +121,6 @@
                 },
 
             });
-
-
 
 
             // $.post("save.php", {
@@ -157,13 +152,12 @@
         });
 
         $('.get_plate').click(function () {
-            $.get( '{{route('admin.get.last.car.plate')}}' , {}, function (data) {
+            $.get('{{route('admin.get.last.car.plate')}}', {}, function (data) {
                 // console.log(data);
                 location.reload();
             });
 
         });
-
 
 
     });
