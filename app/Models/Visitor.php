@@ -63,6 +63,7 @@ class Visitor extends Model implements  HasMedia
     {
         return trans('genders.' . $this->gender);
     }
+
     public function getImagesAttribute()
     {
         if (!empty($this->getFirstMediaUrl('visitor'))) {
