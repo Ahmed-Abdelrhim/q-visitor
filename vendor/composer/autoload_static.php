@@ -753,6 +753,7 @@ class ComposerStaticInit720a1b4ff47f0b6b11d0ab01a08d2b72
         'App\\Http\\Controllers\\Admin\\DepartmentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DepartmentsController.php',
         'App\\Http\\Controllers\\Admin\\DesignationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DesignationsController.php',
         'App\\Http\\Controllers\\Admin\\EmployeeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/EmployeeController.php',
+        'App\\Http\\Controllers\\Admin\\OcrController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/OcrController.php',
         'App\\Http\\Controllers\\Admin\\PreRegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PreRegisterController.php',
         'App\\Http\\Controllers\\Admin\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProfileController.php',
         'App\\Http\\Controllers\\Admin\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RoleController.php',

@@ -33,6 +33,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\DepartmentsController' => $baseDir . '/app/Http/Controllers/Admin/DepartmentsController.php',
     'App\\Http\\Controllers\\Admin\\DesignationsController' => $baseDir . '/app/Http/Controllers/Admin/DesignationsController.php',
     'App\\Http\\Controllers\\Admin\\EmployeeController' => $baseDir . '/app/Http/Controllers/Admin/EmployeeController.php',
+    'App\\Http\\Controllers\\Admin\\OcrController' => $baseDir . '/app/Http/Controllers/Admin/OcrController.php',
     'App\\Http\\Controllers\\Admin\\PreRegisterController' => $baseDir . '/app/Http/Controllers/Admin/PreRegisterController.php',
     'App\\Http\\Controllers\\Admin\\ProfileController' => $baseDir . '/app/Http/Controllers/Admin/ProfileController.php',
     'App\\Http\\Controllers\\Admin\\RoleController' => $baseDir . '/app/Http/Controllers/Admin/RoleController.php',

@@ -14,7 +14,7 @@ class AddExpirydateToVisitingDetails extends Migration
     public function up()
     {
         Schema::table('visiting_details', function (Blueprint $table) {
-            $table->date('expiry_date')->nullable();
+            $table->dateTime('expiry_date')->nullable();
         });
     }
 
