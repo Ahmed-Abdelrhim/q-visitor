@@ -23,12 +23,12 @@ class OcrController extends Controller
     {
         $this->linker();
 
-//        if (filesize( storage_path('app/public/'.'plate.txt') > 0 )) {
-//        $plate = File::get(filesize(storage_path('app/public/'.'plate.txt')));
-//        }
-//        else {
-//            $plate = '';
-//        }
+        //        if (filesize( storage_path('app/public/'.'plate.txt') > 0 )) {
+        //        $plate = File::get(filesize(storage_path('app/public/'.'plate.txt')));
+        //        }
+        //        else {
+        //            $plate = '';
+        //        }
 
 
         return view('admin.ocr.layout_main');
@@ -170,7 +170,8 @@ class OcrController extends Controller
         }
 
         if (isset($_POST['images'])) {
-            $images = explode("||", $_POST['images']);
+            $images = $_POST['images'];
+            //  $images = explode("||", $_POST['images']);
             // TODO:: save images
             //            foreach ($images as $counter => $img) {
             //                $img = str_replace("data:image/jpeg;base64,", "", $img);
@@ -201,21 +202,21 @@ class OcrController extends Controller
             $add = $_POST['add'];
         }
 
+
         $visitingDetail = VisitingDetails::query()->max('reg_no');
         $reg_no = $visitingDetail + 1;
 
         // TODO : works till here
         // return response()->json(['data' => 'done']);
 
-        $data = $perpic;
-        list($type, $data) = explode(';', $data);
-        list(, $data) = explode(',', $data);
-        $data = base64_decode($data);
-        $this->new_request = $data;
 
-        // TODO:: add this image to visiting details folder path
-        // $visitingDetails->addMedia($image)->toMediaCollection('visitor');
-        file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '.png'), $data);
+        $data = $perpic;
+        //        list($type, $data) = explode(';', $data);
+        //        list(, $data) = explode(',', $data);
+        //
+        //        $data = base64_decode($data);
+        // $this->new_request = $data;
+
         //        try {
         //
         //            // Storage::putFileAs( 'per_images',new File($data) , $reg_no . '.png');
@@ -223,13 +224,14 @@ class OcrController extends Controller
         //            return response()->json(['data' => $e]);
         //        }
 
+
         try {
             DB::beginTransaction();
             $visitor = Visitor::query()->insert([
                 'first_name' => $name[0],
                 'last_name' => $last_name,
-                'email' => null,
-                'phone' => null,
+                'email' => 'visit@example.com',
+                'phone' => '+15555555555',
                 'gender' => $gender,
                 'address' => $address,
                 'national_identification_no' => $nat_id,
@@ -258,6 +260,9 @@ class OcrController extends Controller
             $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
         }
 
+        return response()->json(['status' => 'Visitor ID =>'.$visitor->id . ' reg No => ' . $reg_no . ' Plate No => ' . $plate_no]);
+
+
         if ($visitor) {
             try {
                 DB::beginTransaction();
@@ -266,7 +271,7 @@ class OcrController extends Controller
                     'purpose' => 'زيارة',
                     'company_name' => NULL,
                     'company_employee_id' => NULL,
-                    'checkin_at' => Carbon::now(),
+                    'checkin_at' => NuLL,
                     'checkout_at' => NULL,
                     'status' => 5,
                     'user_id' => 3,
@@ -278,21 +283,26 @@ class OcrController extends Controller
                     'editor_id' => 1,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
-                    'qrcode' => $qrcode,
-                    'expiry_date' => $exdate,
+                    // 'qrcode' => '$qrcode',
+                    'expiry_date' => NULL,
                     'plate_no' => $plate_no,
                 ]);
 
-                if ($visiting_details) {
-                    foreach ($images as $counter => $img) {
-                        $img = str_replace("data:image/jpeg;base64,", "", $img);
-                        if ($img != '' or $img != ' ') {
-                            // file_put_contents('images/' . $nat_id . '-' . $counter . '.jpg', base64_decode($img));
-                            $visiting_details->addMedia($img)->toMediaCollection('visitor');
-                            // $counter++;
-                        }
-                    }
-                }
+//                if ($visiting_details) {
+//                    foreach ($images as $counter => $img) {
+//                        // $img = str_replace("data:image/jpeg;base64,", "", $img);
+//                        //if ($img != '' or $img != ' ') {
+//                        // file_put_contents('images/' . $nat_id . '-' . $counter . '.jpg', base64_decode($img));
+//                        $visiting_details->addMedia($img)->toMediaCollection('visitor');
+//                        // $counter++;
+//                        // }
+//                    }
+//
+//                    // TODO:: add this image to visiting details folder path
+//                    // $visitingDetails->addMedia($image)->toMediaCollection('visitor');
+//                    // file_put_contents(storage_path('app/public' . '/' . '`per_images`/' . $reg_no . '.png'), $data);
+//
+//                }
 
                 DB::commit();
             } catch (\Exception $e) {
@@ -301,6 +311,9 @@ class OcrController extends Controller
                 return redirect()->route('OCR.index')->with($notifications);
             }
         }
+
+        return response()->json(['status' => 'done']);
+
 
         try {
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
@@ -317,8 +330,32 @@ class OcrController extends Controller
 
     public function playy()
     {
-        return $this->new_request;
-        return $visitingDetail = VisitingDetails::query()->max('reg_no');
+        $visitor = Visitor::query()->latest()->first();
+        $plate_no = 'ل ق أ 284';
+        $reg_no = 28904249 +1;
+        $visiting_details = VisitingDetails::query()->create([
+            'reg_no' => $reg_no,
+            'purpose' => 'زيارة',
+            'company_name' => NULL,
+            'company_employee_id' => NULL,
+            'checkin_at' => NuLL,
+            'checkout_at' => NULL,
+            'status' => 5,
+            'user_id' => 3,
+            'employee_id' => 3,
+            'visitor_id' => $visitor->id,
+            'creator_type' => 'App\Scan',
+            'creator_id' => 1,
+            'editor_type' => 'App\Scan',
+            'editor_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            // 'qrcode' => '$qrcode',
+            'expiry_date' => NULL,
+            'plate_no' => $plate_no,
+        ]);
+
+        return $visitor->id;
     }
 }
 

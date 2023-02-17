@@ -216,7 +216,7 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
                                         <input type="button" value="New Scan" class="btn btn-danger new_page">
                                         <input type="button" value="Scan" class="btn btn-danger scan"
                                                onclick="connect();">
-                                        <input type="button" value="Save Data" class="btn btn-success save">
+                                        <input type="button" value="Save Data" class="btn btn-success save" >
                                         {{-- <input type="button" value="View Visitors" class="btn btn-success view"--}}
                                         {{-- onclick="{{route('admin.visitors.index')}};">--}}
                                         <a type="button" class="btn btn-success view" href="{{route('admin.visitors.index')}}">

@@ -11,7 +11,8 @@
                 <div class="col-12 col-md-12 col-lg-5">
                     <div class="card profile-widget">
                         <div class="profile-widget-header">
-                            <img alt="image" src="{{ $user->images }}" class="rounded-circle profile-picture">
+                            <img alt="image" src="{{$user->images}}" class="rounded-circle profile-picture">
+{{--                            <img alt="image" src="{{asset('storage/45/my-pic-2-(2).jpeg')}}" class="rounded-circle profile-picture">--}}
                         </div>
                         <div class="profile-widget-description">
                             <div class="profile-widget-name">

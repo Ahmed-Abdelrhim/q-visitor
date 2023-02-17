@@ -6,6 +6,7 @@ use App\Models\Employee;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Shipu\Watchable\Traits\HasModelEvents;
+
 //use Spatie\MediaLibrary\HasMedia\HasMedia;
 //use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\Permission\Models\Role;
@@ -74,14 +75,19 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     }
 
 
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('user')
+            ->singleFile();
+    }
+
     public function getImagesAttribute()
     {
         if (!empty($this->getFirstMediaUrl('user'))) {
-            return asset($this->getFirstMediaUrl('user'));
+            return $this->getFirstMediaUrl('user');
         }
         return asset('assets/img/default/user.png');
     }
-
 
 
     public function routeNotificationForTwilio()
@@ -92,7 +98,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     /**
      * Route notifications for the FCM channel.
      *
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param \Illuminate\Notifications\Notification $notification
      * @return string
      */
     public function routeNotificationForFcm($notification)
