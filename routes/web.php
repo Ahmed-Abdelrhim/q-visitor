@@ -88,7 +88,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('send-sms/{visitingDetail}', 'VisitorController@sendSms')->name('visitors.send.sms');
 
         // Ocr Resource Controller···
-        Route::group(['middleware' => ['role_or_permission:Admin|OCR']], function () {
+        Route::group(['middleware' => ['role_or_permission:Admin,ocr|ocr_create']], function () {
             Route::resource('OCR','OcrController');
             Route::get('get-last-car-plate',[OcrController::class,'getLastCarPlate'])->name('get.last.car.plate');
             Route::get('ocr-clear',[OcrController::class,'ocrClear'])->name('ocr.clear');
