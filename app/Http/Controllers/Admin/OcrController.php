@@ -300,26 +300,36 @@ class OcrController extends Controller
             }
         }
 
-        if ($visiting_details) {
-            foreach ($images as $counter => $img) {
-                // $img = str_replace("data:image/jpeg;base64,", "", $img);
-                //if ($img != '' or $img != ' ') {
-                // file_put_contents('images/' . $nat_id . '-' . $counter . '.jpg', base64_decode($img));
-                $visiting_details->addMedia($img)->toMediaCollection('visitor');
-                // $counter++;
-                // }
-            }
+        try {
+            if ($visiting_details) {
+                foreach ($images as $counter => $img) {
+                    // $img = str_replace("data:image/jpeg;base64,", "", $img);
+                    //if ($img != '' or $img != ' ') {
+                    file_put_contents('images/' . $nat_id . '-' . $counter . '.jpg', base64_decode($img));
+                    // $visiting_details->addMedia($img)->toMediaCollection('visitor');
+                    // $counter++;
+                    // }
+                }
 
-            try {
                 $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
-            } catch (\Exception $e) {
-                $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
             }
+        } catch
+        (\Exception $e) {
+            $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
         }
+        return response()->json(['status' => 200, 'message' => 'Done Successfully']);
+
+        //            try {
+        //                $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
+        //            } catch (\Exception $e) {
+        //                $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
+        //            }
+        //        }
         // return response()->json(['status' => 'done']);
 
-        return response()->json(['status' => 200, 'message' => 'Done Successfully']);
+        // return response()->json(['status' => 200, 'message' => 'Done Successfully']);
     }
+
 
 
     // VD = 190
