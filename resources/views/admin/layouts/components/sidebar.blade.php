@@ -25,7 +25,7 @@
             
             {!! $backendMenus !!}
 
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('OCR') )
+            @if(auth()->user()->hasRole('Admin') ||auth()->user()->hasRole('ocr')|| auth()->user()->hasPermissionTo('ocr_create') )
                 <li  class="ocr">
                     <a class="nav-link" href="{{route('admin.OCR.index')}}">
                         <i class="fas fa-cocktail">
