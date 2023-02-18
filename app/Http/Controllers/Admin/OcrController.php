@@ -260,8 +260,9 @@ class OcrController extends Controller
             $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
         }
 
-        return response()->json(['status' => 'Visitor ID =>'.$visitor->id . ' reg No => ' . $reg_no . ' Plate No => ' . $plate_no]);
-
+        // return response()->json(['status' => 'Visitor ID =>'.$visitor->id . ' reg No => ' . $reg_no . ' Plate No => ' . $plate_no]);
+        $visitor = Visitor::query()->latest()->first();
+        /// return response()->json(['status' => $visitor->id]);
 
         if ($visitor) {
             try {
@@ -287,52 +288,48 @@ class OcrController extends Controller
                     'expiry_date' => NULL,
                     'plate_no' => $plate_no,
                 ]);
-
-//                if ($visiting_details) {
-//                    foreach ($images as $counter => $img) {
-//                        // $img = str_replace("data:image/jpeg;base64,", "", $img);
-//                        //if ($img != '' or $img != ' ') {
-//                        // file_put_contents('images/' . $nat_id . '-' . $counter . '.jpg', base64_decode($img));
-//                        $visiting_details->addMedia($img)->toMediaCollection('visitor');
-//                        // $counter++;
-//                        // }
-//                    }
-//
-//                    // TODO:: add this image to visiting details folder path
-//                    // $visitingDetails->addMedia($image)->toMediaCollection('visitor');
-//                    // file_put_contents(storage_path('app/public' . '/' . '`per_images`/' . $reg_no . '.png'), $data);
-//
-//                }
-
+                // TODO:: add this image to visiting details folder path
+                // $visitingDetails->addMedia($image)->toMediaCollection('visitor');
+                // file_put_contents(storage_path('app/public' . '/' . '`per_images`/' . $reg_no . '.png'), $data);
                 DB::commit();
-            } catch (\Exception $e) {
+            } catch
+            (\Exception $e) {
                 DB::rollBack();
                 $notifications = array('message' => 'visit was not created , something went wrong', 'alert-type' => 'error');
                 return redirect()->route('OCR.index')->with($notifications);
             }
         }
 
-        return response()->json(['status' => 'done']);
+        if ($visiting_details) {
+            foreach ($images as $counter => $img) {
+                // $img = str_replace("data:image/jpeg;base64,", "", $img);
+                //if ($img != '' or $img != ' ') {
+                // file_put_contents('images/' . $nat_id . '-' . $counter . '.jpg', base64_decode($img));
+                $visiting_details->addMedia($img)->toMediaCollection('visitor');
+                // $counter++;
+                // }
+            }
 
-
-        try {
-            $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
-        } catch (\Exception $e) {
-            $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
+            try {
+                $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
+            } catch (\Exception $e) {
+                $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
+            }
         }
-
+        // return response()->json(['status' => 'done']);
 
         return response()->json(['status' => 200, 'message' => 'Done Successfully']);
-
-        // VD = 187
-        // visitors = 218
     }
+
+
+    // VD = 190
+    // visitors = 218
 
     public function playy()
     {
         $visitor = Visitor::query()->latest()->first();
         $plate_no = 'ل ق أ 284';
-        $reg_no = 28904249 +1;
+        $reg_no = 28904249 + 1;
         $visiting_details = VisitingDetails::query()->create([
             'reg_no' => $reg_no,
             'purpose' => 'زيارة',
