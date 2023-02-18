@@ -12,6 +12,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use function PHPUnit\Framework\throwException;
 
@@ -101,8 +102,8 @@ class OcrController extends Controller
         $carPlateNumber = VisitingDetails::query()->latest()->first();
 
         $myFile = fopen(storage_path('app/public/' . 'plate.txt'), "w");
-        fwrite($myFile, $carPlateNumber->reg_no);
-        return $carPlateNumber->reg_no;
+        fwrite($myFile, $carPlateNumber->plate_no);
+        return $carPlateNumber->plate_no;
     }
 
     public function ocrClear()
@@ -131,6 +132,7 @@ class OcrController extends Controller
     {
         $name = null;
         $last_name = null;
+        $notifications = array('message' => 'Success', 'alert-type' => 'success');
         if (isset($_POST['name'])) {
             $name = explode(" ", $_POST['name']);
             $last_name = substr(strstr($_POST['name'], " "), 1);
@@ -317,7 +319,9 @@ class OcrController extends Controller
         (\Exception $e) {
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
         }
+        $session = Session::flash('message' , 'success');
         return response()->json(['status' => 200, 'message' => 'Done Successfully']);
+        // return redirect()->route('OCR.index')->with($notifications);
 
         //            try {
         //                $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);

@@ -8,6 +8,8 @@
 
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/modules/izitoast/dist/css/iziToast.min.css') }}">
+
 
     {{--    <link rel="stylesheet" href="css/style.css">--}}
     <link rel="stylesheet" href="{{asset('css/ocr_styles/style.css')}}">
@@ -32,7 +34,8 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
 <section class="ftco-section">
 
     <div class="container">
-        <div class="row justify-content-right" style="direction:rtl"><a href="{{route('admin.ocr.indexxar')}}">عربى</a>|<a>English</a></div>
+        <div class="row justify-content-right" style="direction:rtl"><a href="{{route('admin.ocr.indexxar')}}">عربى</a>|<a>English</a>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5" style="margin-bottom:0px !important">
                 <h2 class="heading-section">Passport Scanner</h2>
@@ -216,10 +219,11 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
                                         <input type="button" value="New Scan" class="btn btn-danger new_page">
                                         <input type="button" value="Scan" class="btn btn-danger scan"
                                                onclick="connect();">
-                                        <input type="button" value="Save Data" class="btn btn-success save" >
+                                        <input type="button" value="Save Data" class="btn btn-success save">
                                         {{-- <input type="button" value="View Visitors" class="btn btn-success view"--}}
                                         {{-- onclick="{{route('admin.visitors.index')}};">--}}
-                                        <a type="button" class="btn btn-success view" href="{{route('admin.visitors.index')}}">
+                                        <a type="button" class="btn btn-success view"
+                                           href="{{route('admin.visitors.index')}}">
                                             View Visitors
                                         </a>
                                         <div class="submitting"></div>
@@ -239,6 +243,46 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
 
 
 {{--@yield('content')--}}
+<script src="{{ asset('assets/modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+<script>
+    @if(Session::has('message'))
+        var type = "{{ Session::get('alert-type','info') }}"
+    switch (type) {
+        case 'info':
+            iziToast.info({
+                title: 'info',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
+            break;
+
+        case 'success':
+            iziToast.success({
+                title: 'Success',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
+            break;
+
+        case 'warning':
+            iziToast.warning({
+                title: 'warning',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
+            break;
+
+        case 'error':
+            iziToast.error({
+                title: 'error',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
+            break;
+    }
+
+    @endif
+</script>
 @include('admin.ocr.index_footer_scripts')
 </body>
 </html>
