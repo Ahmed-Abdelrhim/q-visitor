@@ -74,22 +74,6 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         return $this->first_name . ' ' . $this->last_name;
     }
 
-
-    public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('user')
-            ->singleFile();
-    }
-
-    public function getImagesAttribute()
-    {
-        if (!empty($this->getFirstMediaUrl('user'))) {
-            return $this->getFirstMediaUrl('user');
-        }
-        return asset('assets/img/default/user.png');
-    }
-
-
     public function routeNotificationForTwilio()
     {
         return $this->phone;
@@ -125,4 +109,20 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     {
         return trans('statuses.' . $this->status);
     }
+
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('user')
+            ->singleFile();
+    }
+
+    public function getImagesAttribute()
+    {
+        if (!empty($this->getFirstMediaUrl('user'))) {
+            return $this->getFirstMediaUrl('user');
+        }
+        return asset('assets/img/default/user.png');
+    }
+
 }
