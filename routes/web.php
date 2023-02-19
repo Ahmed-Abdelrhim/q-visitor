@@ -170,7 +170,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
             ]);
         });
         Route::get('change_locale/{iso}',[HomeController::class,'changeLocaleLanguage'])->name('change_locale');
-        Route::get('play', [\App\Http\Controllers\Admin\VisitorController::class, 'play']);
+        Route::get('Play', [\App\Http\Controllers\Admin\VisitorController::class, 'play']);
         Route::get('playy', [OcrController::class, 'playy']);
     });
 //Route::get('play',function (){

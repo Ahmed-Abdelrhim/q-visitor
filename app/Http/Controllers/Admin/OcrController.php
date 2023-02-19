@@ -314,28 +314,30 @@ class OcrController extends Controller
 
     public function playy()
     {
-        // return 'Current Language => '.app()->getLocale();
-        $languages = Languages::query()
-            ->select('iso')
-            ->where('active', true)
-            ->get();
-        foreach ($languages as $lang) {
-            if (app()->getLocale() != $lang->iso) {
-                return $lang->iso;
-            }
-
-        }
+        return 'Current Language => '.app()->getLocale();
+        //        $languages = Languages::query()
+        //            ->select('iso')
+        //            ->where('active', true)
+        //            ->get();
+        //        foreach ($languages as $lang) {
+        //            if (app()->getLocale() != $lang->iso) {
+        //                return $lang->iso;
+        //            }
+        //
+        //        }
         //        return $languages->iso;
-        return app()->getLocale();
-        $languages = ['ar','en'];
-        foreach ($languages as $key => $lang) {
-            $lang = Languages::query()->insert([
-                'iso' => $lang,
-                'active' => 1,
-                'created_at' => Carbon::now(),
-            ]);
-        }
-        return 'Done';
+        //        return app()->getLocale();
+        //        $languages = ['ar','en'];
+        //        foreach ($languages as $key => $lang) {
+        //            $lang = Languages::query()->insert([
+        //                'iso' => $lang,
+        //                'active' => 1,
+        //                'created_at' => Carbon::now(),
+        //            ]);
+        //        }
+        //        return 'Done';
+
+
     //        $visitor = Visitor::query()->latest()->first();
     //        $plate_no = 'ل ق أ 284';
     //        $reg_no = 28904249 + 1;

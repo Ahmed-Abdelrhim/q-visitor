@@ -6,6 +6,7 @@ use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VisitorRequest;
 use App\Models\Employee;
+use App\Models\Languages;
 use App\Models\Types;
 use App\Models\VisitingDetails;
 use App\Http\Services\Visitor\VisitorService;
@@ -13,6 +14,7 @@ use App\Models\Visitor;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
@@ -245,12 +247,12 @@ class VisitorController extends Controller
     }
 
     public
-    function play()
+    function play(string $locale)
     {
-        if (auth()->user()->hasRole('Admin')) {
-            return 'True';
-        }
-        return 'False';
+        //        if (auth()->user()->hasRole('Admin')) {
+        //            return 'True';
+        //        }
+        //        return 'False';
 
 
         //        $role = Role::query()->find(2);
@@ -269,12 +271,12 @@ class VisitorController extends Controller
 
         return rand(11111111, 99999999);
         // return random();
-        return auth()->user()->employee->id;
+       // return auth()->user()->employee->id;
 
 
-        $email = 'aabdelrhim974@gmail.com';
-        $emails = explode('@', $email);
-        return $emails[0] . mt_rand();
+            //        $email = 'aabdelrhim974@gmail.com';
+            //        $emails = explode('@', $email);
+            //        return $emails[0] . mt_rand();
         // return 'Now Doing NoThing';
 
     }

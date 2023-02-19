@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->only('index');
     }
 
     /**
@@ -28,17 +28,16 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function changeLocaleLanguage(string $iso)
+    public function changeLocaleLanguage(string $locale)
     {
-        $lang = Languages::query()->where('iso',$iso)->first();
+        $lang = Languages::query()->where('iso', '=', $locale)->first();
+
         if ($lang) {
-            if (session()->has('locale')){
-                $locale = Session::get('locale');
-                $notifications = array('message' =>'language was changed','alert-type'=>'success');
-                return redirect()->back()->with($notifications);
-            }
+            $locale = session()->put('locale', $locale);
+            $notifications = array('message' => 'language was changed', 'alert-type' => 'success');
+            return redirect()->back()->with($notifications);
         }
-        $notifications = array('message' =>'language was not found','alert-type'=>'info');
+        $notifications = array('message' => 'language was not found', 'alert-type' => 'info');
         return redirect()->back()->with($notifications);
     }
 }

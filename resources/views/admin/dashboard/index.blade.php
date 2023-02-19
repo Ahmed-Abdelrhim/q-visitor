@@ -4,7 +4,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Dashboard') }}</h1>
+            <h1>{{ __('files.Dashboard') }}</h1>
             {{ Breadcrumbs::render('dashboard') }}
         </div>
         @if(auth()->user()->getrole->name == 'Employee')
@@ -16,7 +16,7 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>{{ __('Total Visitors') }}</h4>
+                            <h4>{{ __('files.Total Visitors') }}</h4>
                         </div>
                         <div class="card-body">
                             {{$totalVisitor}}
@@ -65,7 +65,7 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>{{ __('Total Visitors') }}</h4>
+                                <h4>{{ __('files.Total Visitors') }}</h4>
                             </div>
                             <div class="card-body">
                                 {{$totalVisitor}}
@@ -80,7 +80,7 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>{{ __('Total Pre Registers') }}</h4>
+                                <h4>{{ __('files.Total Pre Registers') }}</h4>
                             </div>
                             <div class="card-body">
                                 {{$totalPrerigister}}
@@ -95,18 +95,18 @@
             <div class="col-md-9">
                 <div class="card" style="border-radius: 15px; !important">
                     <div class="card-header">
-                        <h4 class="visitors">{{ __('Visitors') }} <span class="badge badge-primary">{{$totalVisitor}}</span></h4>
+                        <h4 class="visitors">{{ __('files.Visitors') }} <span class="badge badge-primary">{{$totalVisitor}}</span></h4>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive table-invoice">
                             <table class="table table-striped">
                                 <tr>
-                                    <th>{{ __('Name') }}</th>
-                                    <th>{{ __('Email') }}</th>
-                                    <th>{{ __('Visitor ID') }}</th>
-                                    <th>{{ __('Employee') }}</th>
-                                    <th>{{ __('Checkin') }}</th>
-                                    <th>{{ __('Action') }}</th>
+                                    <th>{{ __('files.Name') }}</th>
+                                    <th>{{ __('files.Email') }}</th>
+                                    <th>{{ __('files.Visitor ID') }}</th>
+                                    <th>{{ __('files.Employee') }}</th>
+                                    <th>{{ __('files.Checkin') }}</th>
+                                    <th>{{ __('files.Action') }}</th>
                                 </tr>
                                     @if(!blank($visitors))
                                         @foreach($visitors as $visitor)
