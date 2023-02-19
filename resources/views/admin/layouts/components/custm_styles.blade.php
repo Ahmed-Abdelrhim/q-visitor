@@ -61,4 +61,25 @@
    table th, table td{
     color: #34395e !important;
    }
+   table td a{
+    box-shadow: 0 2px 6px #24ba64 !important;
+    background-color: #24ba64 !important;
+    border-color: #24ba64 !important;
+   }
+   /* table td a:hover{
+    box-shadow: 0 2px 6px #24ba64 !important;
+    background-color: #24ba64 !important;
+    border-color: #24ba64 !important;
+   } */
+   .btn-primary:active, .btn-primary:hover{
+    box-shadow: 0 2px 6px #69ef87 !important;
+    background-color: #69ef87 !important;
+    border-color: #69ef87 !important;
+   }
+   .bg-maroon-light{
+    background-color: #353b99 !important;
+   }
+   .card-statistic-1{
+    border-radius: 10px;
+   }
 </style>
