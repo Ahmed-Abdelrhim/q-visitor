@@ -2,7 +2,7 @@
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <!-- <a href="{{ route('admin.dashboard.index') }}">{{ setting('site_name') }}</a> -->
-            <img  src="{{asset('Q-visitor.png')}}" alt="not-found" />
+            <img  src="{{asset('Q-visitor.png')}}" alt="not-found" class="logo" />
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin.dashboard.index') }}">
