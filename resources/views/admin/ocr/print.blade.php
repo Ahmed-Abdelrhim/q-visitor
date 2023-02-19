@@ -38,7 +38,7 @@
                             {{--                             @endif-->--}}
 
                             {{--  <img src="<?php echo 'per_images/' . $reg_no . '.png'; ?>" alt=""--}}
-                            <img src="{{asset('per_images/'.$reg_no.'.png') }} " alt="not-found"
+                            <img src="{{asset('storage/per_images/'.$data->reg_no.'.png') }} " alt="not-found"
                                  style="clip-path: circle();width:50%">
                         </div>
                         <h2>{{$data->first_name . $data->last_name}} </h2>

@@ -121,10 +121,12 @@ class OcrController extends Controller
 
     public function ocrPrint($id = null)
     {
+        $id = $_GET['id'];
         $data = VisitingDetails::query()
             ->with('visitor')
             ->where('visitor_id', $id)
             ->first();
+        return $data;
         return view('admin.ocr.print', ['data' => $data]);
     }
 
@@ -208,24 +210,10 @@ class OcrController extends Controller
         $visitingDetail = VisitingDetails::query()->max('reg_no');
         $reg_no = $visitingDetail + 1;
 
-        // TODO : works till here
-        // return response()->json(['data' => 'done']);
-
-
         $data = $perpic;
-        //        list($type, $data) = explode(';', $data);
-        //        list(, $data) = explode(',', $data);
-        //
-        //        $data = base64_decode($data);
-        // $this->new_request = $data;
-
-        //        try {
-        //
-        //            // Storage::putFileAs( 'per_images',new File($data) , $reg_no . '.png');
-        //        } catch (\Exception $e) {
-        //            return response()->json(['data' => $e]);
-        //        }
-
+        list($type, $data) = explode(';', $data);
+        list(, $data) = explode(',', $data);
+        $data = base64_decode($data);
 
         try {
             DB::beginTransaction();
@@ -292,7 +280,7 @@ class OcrController extends Controller
                 ]);
                 // TODO:: add this image to visiting details folder path
                 // $visitingDetails->addMedia($image)->toMediaCollection('visitor');
-                // file_put_contents(storage_path('app/public' . '/' . '`per_images`/' . $reg_no . '.png'), $data);
+                file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '.png'), $data);
                 DB::commit();
             } catch
             (\Exception $e) {
@@ -307,7 +295,7 @@ class OcrController extends Controller
                 foreach ($images as $counter => $img) {
                     // $img = str_replace("data:image/jpeg;base64,", "", $img);
                     //if ($img != '' or $img != ' ') {
-                    file_put_contents('images/' . $nat_id . '-' . $counter . '.jpg', base64_decode($img));
+                    file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . $counter . '.jpg'), base64_decode($img));
                     // $visiting_details->addMedia($img)->toMediaCollection('visitor');
                     // $counter++;
                     // }
@@ -319,8 +307,8 @@ class OcrController extends Controller
         (\Exception $e) {
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
         }
-        $session = Session::flash('message' , 'success');
-        return response()->json(['status' => 200, 'message' => 'Done Successfully']);
+        $session = Session::flash('message', 'success');
+        return response()->json(['data' => $visitor->id]);
     }
 
     public function playy()

@@ -110,9 +110,10 @@
                 add: add
             }, function (data) {
                 console.log(data);
-                // wnd = window.open("http://localhost/visitorpass/ocr-print?id=" + data, '_blank');
-                // wnd.print();
-                // location.reload();
+                // wnd = window.open("http://localhost/visitorpass/admin/ocr-print?id=" + data, '_blank');
+                wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
+                wnd.print();
+                location.reload();
 
             });
 

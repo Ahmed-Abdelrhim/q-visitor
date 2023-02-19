@@ -94,7 +94,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
             Route::get('get-last-car-plate',[OcrController::class,'getLastCarPlate'])->name('get.last.car.plate');
             Route::get('ocr-clear',[OcrController::class,'ocrClear'])->name('ocr.clear');
             Route::get('ocr-indexxarr',[OcrController::class,'ocrIndexxar'])->name('ocr.indexxar');
-            Route::get('ocr-print/{?id}',[OcrController::class,'ocrPrint'])->name('ocr.print');
+            Route::get('ocr-print/{id?}',[OcrController::class,'ocrPrint'])->name('ocr.print');
             Route::post('ocr-save',[OcrController::class,'ocrSave'])->name('ocr.save');
         });
         Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
