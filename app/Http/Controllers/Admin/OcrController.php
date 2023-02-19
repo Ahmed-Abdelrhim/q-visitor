@@ -250,10 +250,7 @@ class OcrController extends Controller
             $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
         }
 
-        // return response()->json(['status' => 'Visitor ID =>'.$visitor->id . ' reg No => ' . $reg_no . ' Plate No => ' . $plate_no]);
         $visitor = Visitor::query()->latest()->first();
-        // return response()->json(['status' => $visitor->id]);
-
         if ($visitor) {
             try {
                 DB::beginTransaction();
@@ -295,7 +292,7 @@ class OcrController extends Controller
                 foreach ($images as $counter => $img) {
                     $img = str_replace("data:image/jpeg;base64,", "", $img);
                     if ($img != '' or $img != ' ') {
-                        file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . $counter . '.jpg'), base64_decode($img));
+                        file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . ($counter+1) . '.jpg'), base64_decode($img));
                         // $visiting_details->addMedia($img)->toMediaCollection('visitor');
                         // $counter++;
                     }
