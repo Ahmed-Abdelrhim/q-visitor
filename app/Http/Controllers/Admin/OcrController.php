@@ -126,7 +126,7 @@ class OcrController extends Controller
             ->with('visitor')
             ->where('visitor_id', $id)
             ->first();
-         // return $data;
+        // return $data;
         return view('admin.ocr.print', ['data' => $data]);
     }
 
@@ -247,6 +247,7 @@ class OcrController extends Controller
         try {
             $qrcode = file_get_contents('https://www.qudratech-eg.net/qrcode/index.php?data=' . $name[0] . $reg_no);
         } catch (\Exception $e) {
+            $qrcode = NULL;
             $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
         }
 
@@ -271,7 +272,7 @@ class OcrController extends Controller
                     'editor_id' => 1,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
-                    // 'qrcode' => '$qrcode',
+                    'qrcode' => '$qrcode',
                     'expiry_date' => NULL,
                     'plate_no' => $plate_no,
                 ]);
@@ -292,7 +293,7 @@ class OcrController extends Controller
                 foreach ($images as $counter => $img) {
                     $img = str_replace("data:image/jpeg;base64,", "", $img);
                     if ($img != '' or $img != ' ') {
-                        file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . ($counter+1) . '.jpg'), base64_decode($img));
+                        file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
                         // $visiting_details->addMedia($img)->toMediaCollection('visitor');
                         // $counter++;
                     }

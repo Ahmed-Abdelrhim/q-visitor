@@ -190,3 +190,5 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 // git config --global user.email "aya2donia25@gmail.com"
 //  git config --global user.name "aya25donia"
+
+// http://127.0.0.1:8000
