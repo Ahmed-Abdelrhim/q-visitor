@@ -186,3 +186,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 // git add .
 // git commit -m "aya update"
 // git push
+
+
+// git config --global user.email "aya2donia25@gmail.com"
+//  git config --global user.name "aya25donia"
