@@ -35,6 +35,7 @@ class Kernel extends HttpKernel
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\LocaleLanguage::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -69,6 +70,7 @@ class Kernel extends HttpKernel
         'backend_permission' => \App\Http\Middleware\IsHasBackendPermission::class,
         'frontend' => \App\Http\Middleware\FrontEnd::class,
         'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
+        'locale' =>  \App\Http\Middleware\LocaleLanguage::class,
 
     ];
 }

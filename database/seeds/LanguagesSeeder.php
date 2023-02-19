@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Languages;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class LanguagesSeeder extends Seeder
 {
@@ -13,6 +15,13 @@ class LanguagesSeeder extends Seeder
      */
     public function run()
     {
-
+        $languages = ['ar','en'];
+        foreach ($languages as $key => $lang) {
+            $lang = Languages::query()->insert([
+                'iso' => $lang,
+                'active' => 1,
+                'created_at' => Carbon::now(),
+            ]);
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Languages;
 use App\Models\VisitingDetails;
 use App\Models\Visitor;
 use Illuminate\Contracts\Foundation\Application;
@@ -313,32 +314,54 @@ class OcrController extends Controller
 
     public function playy()
     {
-        $visitor = Visitor::query()->latest()->first();
-        $plate_no = 'ل ق أ 284';
-        $reg_no = 28904249 + 1;
-        $visiting_details = VisitingDetails::query()->create([
-            'reg_no' => $reg_no,
-            'purpose' => 'زيارة',
-            'company_name' => NULL,
-            'company_employee_id' => NULL,
-            'checkin_at' => NuLL,
-            'checkout_at' => NULL,
-            'status' => 5,
-            'user_id' => 3,
-            'employee_id' => 3,
-            'visitor_id' => $visitor->id,
-            'creator_type' => 'App\Scan',
-            'creator_id' => 1,
-            'editor_type' => 'App\Scan',
-            'editor_id' => 1,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-            // 'qrcode' => '$qrcode',
-            'expiry_date' => NULL,
-            'plate_no' => $plate_no,
-        ]);
+        // return 'Current Language => '.app()->getLocale();
+        $languages = Languages::query()
+            ->select('iso')
+            ->where('active', true)
+            ->get();
+        foreach ($languages as $lang) {
+            if (app()->getLocale() != $lang->iso) {
+                return $lang->iso;
+            }
 
-        return $visitor->id;
+        }
+        //        return $languages->iso;
+        return app()->getLocale();
+        $languages = ['ar','en'];
+        foreach ($languages as $key => $lang) {
+            $lang = Languages::query()->insert([
+                'iso' => $lang,
+                'active' => 1,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+        return 'Done';
+    //        $visitor = Visitor::query()->latest()->first();
+    //        $plate_no = 'ل ق أ 284';
+    //        $reg_no = 28904249 + 1;
+    //        $visiting_details = VisitingDetails::query()->create([
+    //            'reg_no' => $reg_no,
+    //            'purpose' => 'زيارة',
+    //            'company_name' => NULL,
+    //            'company_employee_id' => NULL,
+    //            'checkin_at' => NuLL,
+    //            'checkout_at' => NULL,
+    //            'status' => 5,
+    //            'user_id' => 3,
+    //            'employee_id' => 3,
+    //            'visitor_id' => $visitor->id,
+    //            'creator_type' => 'App\Scan',
+    //            'creator_id' => 1,
+    //            'editor_type' => 'App\Scan',
+    //            'editor_id' => 1,
+    //            'created_at' => Carbon::now(),
+    //            'updated_at' => Carbon::now(),
+    //            // 'qrcode' => '$qrcode',
+    //            'expiry_date' => NULL,
+    //            'plate_no' => $plate_no,
+    //        ]);
+    //
+    //        return $visitor->id;
     }
 }
 

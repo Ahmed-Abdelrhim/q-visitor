@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\OcrController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -168,6 +169,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
                 'uses' => 'CheckInController@find_pre_visitor'
             ]);
         });
+        Route::get('change_locale/{iso}',[HomeController::class,'changeLocaleLanguage'])->name('change_locale');
         Route::get('play', [\App\Http\Controllers\Admin\VisitorController::class, 'play']);
         Route::get('playy', [OcrController::class, 'playy']);
     });
