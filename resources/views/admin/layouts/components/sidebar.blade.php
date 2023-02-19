@@ -1,7 +1,8 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('admin.dashboard.index') }}">{{ setting('site_name') }}</a>
+            <!-- <a href="{{ route('admin.dashboard.index') }}">{{ setting('site_name') }}</a> -->
+            <img  src="{{asset('Q-visitor.png')}}" alt="not-found" />
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin.dashboard.index') }}">
@@ -28,7 +29,8 @@
             @if(auth()->user()->hasRole('Admin') ||auth()->user()->hasRole('ocr')|| auth()->user()->hasPermissionTo('ocr_create') )
                 <li  class="ocr">
                     <a class="nav-link" href="{{route('admin.OCR.index')}}">
-                        <i class="fas fa-cocktail">
+                        <!-- <i class="fas fa-facebook"> -->
+                        <i class="fa fa-camera"></i>
                             <span>OCR</span>
                         </i>
                     </a>

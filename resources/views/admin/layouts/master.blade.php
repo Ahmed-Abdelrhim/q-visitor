@@ -2,6 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 @include('admin.layouts.components.head')
+@include('admin.layouts.components.custm_styles')
+
 
 <body>
     <div id="app">
