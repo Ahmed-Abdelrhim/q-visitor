@@ -119,14 +119,15 @@ class OcrController extends Controller
         return view('admin.ocr.indexxar');
     }
 
-    public function ocrPrint($id = null)
+    public function ocrPrint()
     {
         $id = $_GET['id'];
+        return $id;
         $data = VisitingDetails::query()
             ->with('visitor')
             ->where('visitor_id', $id)
             ->first();
-        return $data;
+        // return $data;
         return view('admin.ocr.print', ['data' => $data]);
     }
 

@@ -72,7 +72,7 @@ class LoginController extends Controller
         //            return view('errors.404', ['msg' => 'Content Is Blocked']);
         //        }
         //        $this->insertSomeCodes();
-        //        return view('activation.code_check');
+        //        return view('activation.code_check');;
     }
 
     public function codeActivation(Request $request): Redirector|RedirectResponse|Application
