@@ -174,8 +174,8 @@ class OcrController extends Controller
         }
 
         if (isset($_POST['images'])) {
-            $images = $_POST['images'];
-            //  $images = explode("||", $_POST['images']);
+            // $images = $_POST['images'];
+            $images = explode("||", $_POST['images']);
             // TODO:: save images
             //            foreach ($images as $counter => $img) {
             //                $img = str_replace("data:image/jpeg;base64,", "", $img);
@@ -293,12 +293,12 @@ class OcrController extends Controller
         try {
             if ($visiting_details) {
                 foreach ($images as $counter => $img) {
-                    // $img = str_replace("data:image/jpeg;base64,", "", $img);
-                    //if ($img != '' or $img != ' ') {
-                    file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . $counter . '.jpg'), base64_decode($img));
-                    // $visiting_details->addMedia($img)->toMediaCollection('visitor');
-                    // $counter++;
-                    // }
+                    $img = str_replace("data:image/jpeg;base64,", "", $img);
+                    if ($img != '' or $img != ' ') {
+                        file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . $counter . '.jpg'), base64_decode($img));
+                        // $visiting_details->addMedia($img)->toMediaCollection('visitor');
+                        // $counter++;
+                    }
                 }
 
                 $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
