@@ -192,3 +192,6 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 //  git config --global user.name "aya25donia"
 
 // http://127.0.0.1:8000
+
+
+// php artisan storage:link
