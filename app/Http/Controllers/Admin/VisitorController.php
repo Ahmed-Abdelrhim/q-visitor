@@ -56,9 +56,6 @@ class VisitorController extends Controller
 
     public function store(VisitorRequest $request)
     {
-        //        $validator = Validator::make($request->all(),[
-        //            ''
-        //        ]);
         $this->visitorService->make($request);
         return redirect()->route('admin.visitors.index')->withSuccess('The data inserted successfully!');
     }
