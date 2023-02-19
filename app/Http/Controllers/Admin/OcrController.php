@@ -122,12 +122,11 @@ class OcrController extends Controller
     public function ocrPrint()
     {
         $id = $_GET['id'];
-        return $id;
         $data = VisitingDetails::query()
             ->with('visitor')
             ->where('visitor_id', $id)
             ->first();
-        // return $data;
+         // return $data;
         return view('admin.ocr.print', ['data' => $data]);
     }
 
@@ -260,7 +259,7 @@ class OcrController extends Controller
                     'purpose' => 'زيارة',
                     'company_name' => NULL,
                     'company_employee_id' => NULL,
-                    'checkin_at' => NuLL,
+                    'checkin_at' => Carbon::now(),
                     'checkout_at' => NULL,
                     'status' => 5,
                     'user_id' => 3,
