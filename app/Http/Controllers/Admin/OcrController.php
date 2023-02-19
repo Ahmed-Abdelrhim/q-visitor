@@ -305,8 +305,10 @@ class OcrController extends Controller
         (\Exception $e) {
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
         }
-        $session = Session::flash('message', 'success');
-        return response()->json(['data' => $visitor->id]);
+        // $session = Session::flash('message', 'success');
+        // return response()->json(['data' => $visitor->id]);
+        return $visitor->id;
+        // return response()->json(['data' => $visitor->id]);
     }
 
     public function playy()
