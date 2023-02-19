@@ -13,7 +13,7 @@
         @endif
         <li class="dropdown">
             <a href="{{ route('admin.profile') }}" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="{{ auth()->user()->images }}">
+                <img alt="image" src="{{ auth()->user()->images }}" class="rounded-circle">
                 <div class="d-sm-none d-lg-inline-block">{{ __('Hi') }}, {{ auth()->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
