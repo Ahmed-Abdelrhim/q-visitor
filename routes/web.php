@@ -89,7 +89,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         // Ocr Resource Controller···
 //        Route::group(['middleware' => ['role_or_permission:Admin,ocr|ocr_create']], function () {
-        Route::group(['middleware' => ['role:Admin|ocr','permission:ocr_create']], function () {
+        Route::group(['middleware' => ['role:Admin|OCR','permission:ocr_create']], function () {
             Route::resource('OCR','OcrController');
             Route::get('get-last-car-plate',[OcrController::class,'getLastCarPlate'])->name('get.last.car.plate');
             Route::get('ocr-clear',[OcrController::class,'ocrClear'])->name('ocr.clear');

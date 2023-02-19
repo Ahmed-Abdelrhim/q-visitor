@@ -264,7 +264,7 @@ class OcrController extends Controller
 
         // return response()->json(['status' => 'Visitor ID =>'.$visitor->id . ' reg No => ' . $reg_no . ' Plate No => ' . $plate_no]);
         $visitor = Visitor::query()->latest()->first();
-        /// return response()->json(['status' => $visitor->id]);
+        // return response()->json(['status' => $visitor->id]);
 
         if ($visitor) {
             try {
@@ -321,23 +321,7 @@ class OcrController extends Controller
         }
         $session = Session::flash('message' , 'success');
         return response()->json(['status' => 200, 'message' => 'Done Successfully']);
-        // return redirect()->route('OCR.index')->with($notifications);
-
-        //            try {
-        //                $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
-        //            } catch (\Exception $e) {
-        //                $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
-        //            }
-        //        }
-        // return response()->json(['status' => 'done']);
-
-        // return response()->json(['status' => 200, 'message' => 'Done Successfully']);
     }
-
-
-
-    // VD = 190
-    // visitors = 218
 
     public function playy()
     {

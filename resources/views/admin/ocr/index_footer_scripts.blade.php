@@ -48,11 +48,10 @@
         });
 
 
-
         // Just For Playing
 
 
-        // $('.save').prop('disabled', true);
+        $('.save').prop('disabled', true);
 
 
         $('.save').click(function () {
@@ -82,17 +81,17 @@
                 }
             });
 
-            name = 'Ahmed Abdelrhim Ahmed';
-            gender = 'M';
-            address = 'Egypt , cairo';
-            nat_id = '29911100104271';
-            address2 = 'Cairo';
-            checkin_date = {{\Illuminate\Support\Carbon::now()->toDateString()}};
-            checkin_time = {{time()}};
-            plate_no = 'ل ق أ 284 ';
-            full_address = 'Elmassara ,Helwan , Cairo ,Egypt';
-            images = ';,' + '{{asset('storage/45/my-pic-2-(2)') }}' ;
-            prepic = '{{asset('storage/44/my-pic-2')}}';
+            {{--name = 'Ahmed Abdelrhim Ahmed';--}}
+            {{--gender = 'M';--}}
+            {{--address = 'Egypt , cairo';--}}
+            {{--nat_id = '29911100104271';--}}
+            {{--address2 = 'Cairo';--}}
+            {{--checkin_date = {{\Illuminate\Support\Carbon::now()->toDateString()}};--}}
+            {{--checkin_time = {{time()}};--}}
+            {{--plate_no = 'ل ق أ 284 ';--}}
+            {{--full_address = 'Elmassara ,Helwan , Cairo ,Egypt';--}}
+            {{--images = ';,' + '{{asset('storage/45/my-pic-2-(2)') }}' ;--}}
+            {{--prepic = '{{asset('storage/44/my-pic-2')}}';--}}
 
             // $.post("save.php", {
             // $.post( '{ {storage_path('app/public' . '/' .'save.php')}}', {
