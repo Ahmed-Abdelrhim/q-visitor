@@ -93,7 +93,7 @@
 
         <div class="row">
             <div class="col-md-9">
-                <div class="card">
+                <div class="card" style="border-radius: 15px; !important">
                     <div class="card-header">
                         <h4 class="visitors">{{ __('Visitors') }} <span class="badge badge-primary">{{$totalVisitor}}</span></h4>
                     </div>
