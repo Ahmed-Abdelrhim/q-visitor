@@ -5,7 +5,7 @@
             <img src="{{asset('Q-visitor.png')}}" alt="not-found" class="logo"/>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('admin.dashboard.index') }}">
+            <a href="{{ url('admin') }}">
                 <?php
                 if (setting('site_name')) {
                     $sitenames = explode(' ', setting('site_name'));
@@ -100,7 +100,7 @@
                 <li class="pre-register">
                     <a class="nav-link" href="{{route('admin.pre-registers.index')}}">
                         <i class="fas fa-user-friends"></i>
-                        <span>{{__('files.Pre-Register')}}</span>
+                        <span>{{__('files.Visit Reservation')}}</span>
                     </a>
                 </li>
             @endif

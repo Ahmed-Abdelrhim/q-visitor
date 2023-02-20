@@ -79,6 +79,7 @@ return [
 
     // Pre -Register
     'Pre-registers' => 'ما قبل التسجيلات',
+    'Visit Reservation' => 'حجز زيارة',
     'Expected Date' => 'التاريخ المتوقع',
     'Expected Time' => 'الوقت المتوقع',
 

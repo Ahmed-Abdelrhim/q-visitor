@@ -77,6 +77,7 @@ return [
 
     // Pre -Register
     'Pre-registers' => 'Pre-registers',
+    'Visit Reservation' => 'Visit Reservation',
     'Expected Date' => 'Expected Date',
     'Expected Time' => 'Expected Time',
 
