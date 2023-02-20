@@ -4,7 +4,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Administrators') }}</h1>
+            <h1>{{ __('files.Administrators') }}</h1>
             {{ Breadcrumbs::render('administrators/edit') }}
         </div>
 
@@ -18,7 +18,7 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('levels.first_name') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.First Name') }}</label> <span class="text-danger">*</span>
                                         <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name', $user->first_name) }}">
                                         @error('first_name')
                                         <div class="invalid-feedback">
@@ -27,7 +27,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label>{{ __('levels.last_name') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Last Name') }}</label> <span class="text-danger">*</span>
                                         <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" value="{{ old('last_name', $user->last_name) }}">
                                         @error('last_name')
                                         <div class="invalid-feedback">
@@ -39,7 +39,7 @@
 
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('levels.email') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Email') }}</label> <span class="text-danger">*</span>
                                         <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}">
                                         @error('email')
                                         <div class="invalid-feedback">
@@ -48,7 +48,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label>{{ __('levels.phone') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Phone') }}</label> <span class="text-danger">*</span>
                                         <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone', $user->phone) }}">
                                         @error('phone')
                                         <div class="invalid-feedback">
@@ -60,7 +60,7 @@
 
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('levels.username') }}</label>
+                                        <label>{{ __('files.Username') }}</label>
                                         <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username', $user->username) }}">
                                         @error('username')
                                         <div class="invalid-feedback">
@@ -69,7 +69,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label>{{ __('levels.password') }}</label>
+                                        <label>{{ __('files.Password') }}</label>
                                         <input type="text" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}">
                                         @error('password')
                                         <div class="invalid-feedback">
@@ -81,10 +81,10 @@
 
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="customFile">{{ __('levels.image') }}</label>
+                                        <label for="customFile">{{ __('files.Image') }}</label>
                                         <div class="custom-file">
                                             <input name="image" type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFile" onchange="readURL(this);">
-                                            <label class="custom-file-label" for="customFile">{{ __('Choose file') }}</label>
+                                            <label class="custom-file-label" for="customFile">{{ __('files.Choose file') }}</label>
                                         </div>
                                         @if ($errors->has('image'))
                                             <div class="help-block text-danger">
@@ -99,7 +99,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group col">
-                                        <label>{{ __('levels.address') }}</label>
+                                        <label>{{ __('files.Address') }}</label>
                                         <textarea name="address" class="form-control small-textarea-height" id="address" cols="30" rows="10">{{ old('address', $user->address) }}</textarea>
                                         @error('address')
                                         <div class="invalid-feedback">
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-primary mr-1" type="submit">{{ __('Submit') }}</button>
+                                <button class="btn btn-primary mr-1" type="submit">{{ __('files.Submit') }}</button>
                             </div>
                         </div>
                     </form>
