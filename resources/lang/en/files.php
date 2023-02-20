@@ -77,6 +77,7 @@ return [
 
     // Pre -Register
     'Pre-registers' => 'Pre-registers',
+    'Visit Reservation' => 'Visit Reservation',
     'Expected Date' => 'Expected Date',
     'Expected Time' => 'Expected Time',
 
@@ -152,6 +153,23 @@ return [
     'Terms & condition Setting' => 'Terms & condition Setting',
     'Update Front-end Setting' => 'Update Front-end Setting',
     'Choose File' => 'Choose File',
+
+    // Positions
+    'Add Positions' => 'Add Positions',
+
+    // Departments
+    'Add Department' => 'Add Department',
+
+
+    // Profile
+    'Change Password' => 'Change Password',
+    'Password Confirmation' => 'Password Confirmation',
+    'Old Password' => 'Old Password',
+    'Save Password' => 'Save Password',
+
+
+    'Site' => 'Site',
+    'Site' => 'Site',
 
 
     'Site' => 'Site',

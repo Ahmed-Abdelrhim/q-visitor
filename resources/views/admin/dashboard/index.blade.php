@@ -49,7 +49,7 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>{{ __('Total Employees') }}</h4>
+                                <h4>{{ __('files.Total Employees') }}</h4>
                             </div>
                             <div class="card-body">
                                 {{$totalEmployees}}

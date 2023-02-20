@@ -4,7 +4,7 @@
 
   <section class="section">
         <div class="section-header">
-            <h1>{{ __('Positions') }}</h1>
+            <h1>{{ __('files.Positions') }}</h1>
             {{ Breadcrumbs::render('designations') }}
         </div>
 
@@ -14,7 +14,7 @@
                     <div class="card">
                         @can('designations_create')
                             <div class="card-header">
-                                <a href="{{ route('admin.designations.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> {{ __('Add Positions') }}</a>
+                                <a href="{{ route('admin.designations.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> {{ __('files.Add Positions') }}</a>
                             </div>
                         @endcan
                         <div class="card-body">
@@ -23,10 +23,10 @@
                                 <table class="table table-striped" id="maintable" data-url="{{ route('admin.designations.get-designations') }}" data-status="{{ \App\Enums\Status::ACTIVE }}" data-hidecolumn="{{ auth()->user()->can('designations_edit') || auth()->user()->can('designations_delete') }}">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('levels.id') }}</th>
-                                            <th>{{ __('levels.name') }}</th>
-                                            <th>{{ __('levels.status') }}</th>
-                                            <th>{{ __('levels.actions') }}</th>
+                                            <th>{{ __('files.ID') }}</th>
+                                            <th>{{ __('files.Name') }}</th>
+                                            <th>{{ __('files.Status') }}</th>
+                                            <th>{{ __('files.Actions') }}</th>
                                         </tr>
                                     </thead>
                                 </table>

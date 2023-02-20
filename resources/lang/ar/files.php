@@ -63,7 +63,7 @@ return [
     'Add Employee' => 'إضافة موظف',
     'About' => 'حول الموظف' ,
     'Password' => 'الباسورد',
-    'Positions' => 'الوظيفة',
+    'Positions' => 'الوظائف',
     'Department' => 'القسم',
     'Roles' => 'التحكم',
     'choose..' => ' ..إختر',
@@ -79,6 +79,7 @@ return [
 
     // Pre -Register
     'Pre-registers' => 'ما قبل التسجيلات',
+    'Visit Reservation' => 'حجز زيارة',
     'Expected Date' => 'التاريخ المتوقع',
     'Expected Time' => 'الوقت المتوقع',
 
@@ -146,5 +147,17 @@ return [
     'Terms & condition Setting' => 'السياسة والخصوصية',
     'Update Front-end Setting' => 'تجديث الإعدادات',
     'Choose File' => 'إختر ملف',
+
+    // Positions
+    'Add Positions' => 'إضافة وظيفة ',
+
+    // Departments
+    'Add Department' => 'إضافة قسم',
+
+    // Profile
+    'Change Password' => 'تغير الباسورد',
+    'Password Confirmation' => ' تأكيد الباسورد',
+    'Old Password' => ' الباسورد القديم',
+    'Save Password' => 'حفظ الباسورد',
 
 ];
