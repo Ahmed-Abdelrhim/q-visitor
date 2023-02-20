@@ -20,7 +20,7 @@ if (\Illuminate\Support\Facades\Storage::disk('public')->exists('plate.txt')) {
         $myfile = fopen(storage_path('app/public/' . 'plate.txt'), "r");
         $plate = fread($myfile, filesize(storage_path('app/public/' . 'plate.txt')));
         fclose($myfile);
-    }else {
+    } else {
         $plate = '';
     }
 
@@ -223,7 +223,11 @@ if (\Illuminate\Support\Facades\Storage::disk('public')->exists('plate.txt')) {
                                         <input type="button" value="بحث" class="btn btn-danger scan"
                                                onclick="connect();">
                                         <input type="button" value="حفظ البيانات" class="btn btn-success save">
-                                        <input type="button" value="سجل الزيارات" class="btn btn-success view">
+                                        {{-- <input type="button" value="سجل الزيارات" class="btn btn-success view">--}}
+                                        <a type="button" class="btn btn-success view"
+                                           href="{{route('admin.visitors.index')}}">
+                                            سجل الزيارات
+                                        </a>
                                         <div class="submitting"></div>
                                     </div>
                                 </div>
