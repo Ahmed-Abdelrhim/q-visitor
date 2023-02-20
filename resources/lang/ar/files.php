@@ -9,6 +9,8 @@ return [
     'Role' =>'التحكم',
     'Settings' =>'الإعدادات',
     'OCR' =>'OCR',
+    'Visiting Details' => 'الزيارات',
+
 
     'Total Employees' => 'إجمالي عدد الموظفين',
     'Total Visitors' => 'إجمالي عدد الزيارات',
@@ -79,4 +81,10 @@ return [
     'Pre-registers' => 'ما قبل التسجيلات',
     'Expected Date' => 'التاريخ المتوقع',
     'Expected Time' => 'الوقت المتوقع',
+
+
+    // Administrator
+    'Add Administrator' => 'إضاففة أدمن',
+    'Username' => 'أسم المستخدم',
+
 ];

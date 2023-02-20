@@ -4,7 +4,7 @@
   
   <section class="section">
         <div class="section-header">
-            <h1>{{ __('Administrators') }}</h1>
+            <h1>{{ __('files.Administrators') }}</h1>
             {{ Breadcrumbs::render('administrators') }}
         </div>
 
@@ -14,7 +14,8 @@
                     <div class="card">
                         @can('adminusers_create')
                             <div class="card-header">
-                                <a href="{{ route('admin.adminusers.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> {{ __('Add Administrator') }}</a>
+                                <a href="{{ route('admin.adminusers.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i>
+                                    {{ __('files.Add Administrator') }}</a>
                             </div>
                         @endcan
                         <div class="card-body">
@@ -22,12 +23,12 @@
                                 <table class="table table-striped" id="maintable" data-url="{{ route('admin.adminusers.get-adminusers') }}" data-hidecolumn="{{ auth()->user()->can('adminusers_show') || auth()->user()->can('adminusers_edit') || auth()->user()->can('adminusers_delete') }}">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('ID') }}</th>
-                                            <th>{{ __('Image') }}</th>
-                                            <th>{{ __('Name') }}</th>
-                                            <th>{{ __('Email') }}</th>
-                                            <th>{{ __('Phone') }}</th>
-                                            <th>{{ __('Actions') }}</th>
+                                            <th>{{ __('files.ID') }}</th>
+                                            <th>{{ __('files.Image') }}</th>
+                                            <th>{{ __('files.Name') }}</th>
+                                            <th>{{ __('files.Email') }}</th>
+                                            <th>{{ __('files.Phone') }}</th>
+                                            <th>{{ __('files.Actions') }}</th>
                                         </tr>
                                     </thead>
                                 </table>

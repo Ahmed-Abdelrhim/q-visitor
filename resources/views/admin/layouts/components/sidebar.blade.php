@@ -89,7 +89,7 @@
                 <li class="visitors">
                     <a class="nav-link" href="{{route('admin.visitors.index')}}">
                         <i class="fas fa-walking"></i>
-                        <span>{{__('files.Visitors')}}</span>
+                        <span>{{__('files.Visiting Details')}}</span>
                     </a>
                 </li>
             @endif

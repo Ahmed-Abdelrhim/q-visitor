@@ -9,6 +9,7 @@ return [
     'Role' =>'Role',
     'Settings' =>'Settings',
     'OCR' =>'OCR',
+    'Visiting Details' => 'Visiting Details',
 
     'Total Employees' => 'Total Employees',
     'Total Visitors' => 'Total Visitors',
@@ -78,5 +79,13 @@ return [
     'Pre-registers' => 'Pre-registers',
     'Expected Date' => 'Expected Date',
     'Expected Time' => 'Expected Time',
+
+
+    // Administrator
+    'Add Administrator' => 'Add Administrator',
+    'Username' => 'Username',
+    'Username' => 'Username',
+    'Username' => 'Username',
+    'Username' => 'Username',
 
 ];
