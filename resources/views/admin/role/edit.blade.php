@@ -4,7 +4,7 @@
 	
 	<section class="section">
         <div class="section-header">
-            <h1>{{ __('Roles') }}</h1>
+            <h1>{{ __('files.Roles') }}</h1>
             {{ Breadcrumbs::render('role/edit') }}
         </div>
 
@@ -17,8 +17,8 @@
 				    		@method('PUT')
 						    <div class="card-body">
 						        <div class="form-group">
-			                        <label>{{ __('levels.name') }}</label> <span class="text-danger">*</span>
-			                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $role->name) }}">
+			                        <label>{{ __('files.Name') }}</label> <span class="text-danger">*</span>
+			                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" >
 			                        @error('name')
 				                        <div class="invalid-feedback">
 				                          	{{ $message }}
@@ -28,7 +28,7 @@
 						    </div>
 						    
 					        <div class="card-footer">
-		                    	<button class="btn btn-primary mr-1" type="submit">{{ __('Submit') }}</button>
+		                    	<button class="btn btn-primary mr-1" type="submit">{{ __('files.Submit') }}</button>
 		                  	</div>
 		                </form>
 					</div>
