@@ -50,5 +50,10 @@ return [
     'View' => 'View',
     'Approve & send sms' => 'Approve & send sms',
     'Re-send sms' => 'Re-send sms',
+    'Joining Date' => 'Joining Date',
+
+    // Employees
+    'Employees' => 'Employees',
+    'Add Employee' => 'Add Employee',
 
 ];

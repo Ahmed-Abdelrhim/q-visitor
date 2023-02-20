@@ -4,7 +4,7 @@
 
 <section class="section">
     <div class="section-header">
-        <h1>{{ __('Employees') }}</h1>
+        <h1>{{ __('files.Employees') }}</h1>
         {{ Breadcrumbs::render('employees') }}
     </div>
 
@@ -16,7 +16,7 @@
                     @can('employees_create')
                         <div class="card-header">
                             <a href="{{ route('admin.employees.create') }}" class="btn btn-icon icon-left btn-primary"><i
-                                    class="fas fa-plus"></i> {{ __('Add Employee') }}</a>
+                                    class="fas fa-plus"></i> {{ __('files.Add Employee') }}</a>
                         </div>
                     @endcan
 
@@ -27,14 +27,14 @@
                                 data-status="{{ \App\Enums\Status::ACTIVE }}" data-hidecolumn="{{ auth()->user()->can('employees_show') || auth()->user()->can('employees_edit') || auth()->user()->can('employees_delete') }}">
                                 <thead>
                                     <tr>
-                                        <th>{{ __('levels.id') }}</th>
-                                        <th>{{ __('image') }}</th>
-                                        <th>{{ __('levels.name') }}</th>
-                                        <th>{{ __('levels.email') }}</th>
-                                        <th>{{ __('levels.phone') }}</th>
-                                        <th>{{ __('Joining Date') }}</th>
-                                        <th>{{ __('levels.status') }}</th>
-                                        <th>{{ __('levels.actions') }}</th>
+                                        <th>{{ __('files.id') }}</th>
+                                        <th>{{ __('files.Image') }}</th>
+                                        <th>{{ __('files.Name') }}</th>
+                                        <th>{{ __('files.Email') }}</th>
+                                        <th>{{ __('files.Phone') }}</th>
+                                        <th>{{ __('files.Joining Date') }}</th>
+                                        <th>{{ __('files.Status') }}</th>
+                                        <th>{{ __('files.Actions') }}</th>
                                     </tr>
                                 </thead>
                             </table>
