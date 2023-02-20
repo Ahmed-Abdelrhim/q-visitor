@@ -4,7 +4,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Roles') }}</h1>
+            <h1>{{ __('files.Roles') }}</h1>
             {{ Breadcrumbs::render('role/view') }}
         </div>
 
@@ -15,7 +15,7 @@
                         <form action="{{ route('admin.role.save-permission', $role) }}" method="POST">
                             @csrf
                             <div class="card-header">
-                                <h3>{{ __('Permission') }} - <span class="text-danger">( {{ $role->name }} )</span></h3>
+                                <h3>{{ __('files.Permission') }} - <span class="text-danger">( {{ $role->name }} )</span></h3>
                             </div>
 
                             <div class="card-body">
@@ -23,11 +23,11 @@
                                     <thead>
                                     <tr>
                                         <th>{{ __('#') }}</th>
-                                        <th>{{ __('Module Name') }}</th>
-                                        <th>{{ __('Create') }}</th>
-                                        <th>{{ __('Edit') }}</th>
-                                        <th>{{ __('Delete') }}</th>
-                                        <th>{{ __('Show') }}</th>
+                                        <th>{{ __('files.Role') }}</th>
+                                        <th>{{ __('files.Role_Create') }}</th>
+                                        <th>{{ __('files.Role_Edit') }}</th>
+                                        <th>{{ __('files.Role_Delete') }}</th>
+                                        <th>{{ __('files.Role_Show') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -93,7 +93,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <button class="btn btn-primary mr-1" type="submit">{{ __('Submit') }}</button>
+                                <button class="btn btn-primary mr-1" type="submit">{{ __('files.Submit') }}</button>
                             </div>
                         </form>
                     </div>

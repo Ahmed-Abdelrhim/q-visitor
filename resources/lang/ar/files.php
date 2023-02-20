@@ -89,5 +89,12 @@ return [
 
     // Roles
     'Add Role' => 'إضافة تحكم',
+    'Permission' => 'اذن التحكم',
+
+    'Role_Create' => 'إضافة',
+    'Role_Edit' => 'تعديل',
+    'Role_Delete' => 'حذف',
+    'Role_Show' => 'عرض',
+
 
 ];

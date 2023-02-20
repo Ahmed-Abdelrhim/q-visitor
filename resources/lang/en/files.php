@@ -90,5 +90,11 @@ return [
 
     // Roles
     'Add Role' => 'Add Role',
+    'Permission' => 'Permission',
+
+    'Role_Create' => 'Create',
+    'Role_Edit' => 'Edit',
+    'Role_Delete' => 'Delete',
+    'Role_Show' => 'Show',
 
 ];

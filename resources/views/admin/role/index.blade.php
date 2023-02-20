@@ -41,18 +41,21 @@
                                                     @if (auth()->user()->can('role_show') || auth()->user()->can('role_edit') || auth()->user()->can('role_delete'))
                                                         <td>
                                                             @if (auth()->user()->can('role_show'))
-                                                                <a href="{{ route('admin.role.show', $role) }}" class="btn btn-sm btn-icon float-left btn-success" data-toggle="tooltip" data-placement="top" title="Permission"><i class="fas fa-plus"></i></a>
+                                                                <a href="{{ route('admin.role.show', $role) }}" class="btn btn-sm btn-icon float-left btn-success"
+                                                                   data-toggle="tooltip" data-placement="top" title="{{__('files.Permission')}}"><i class="fas fa-plus"></i></a>
                                                             @endif
 
                                                             @if (auth()->user()->can('role_edit'))
-                                                                <a href="{{ route('admin.role.edit', $role) }}" class="btn btn-sm btn-icon float-left btn-primary ml-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="far fa-edit"></i></a>
+                                                                <a href="{{ route('admin.role.edit', $role) }}" class="btn btn-sm btn-icon float-left btn-primary ml-2"
+                                                                   data-toggle="tooltip" data-placement="top" title="{{__('files.Edit')}}"><i class="far fa-edit"></i></a>
                                                             @endif
 
                                                             @if (!in_array($role->id, $notDeleteArray) && auth()->user()->can('role_delete'))
                                                                 <form class="float-left pl-2" action="{{ route('admin.role.destroy', $role) }}" method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                                                    <button class="btn btn-sm btn-icon btn-danger"
+                                                                            data-toggle="tooltip" data-placement="top" title="{{__('files.Delete')}}"><i class="fa fa-trash"></i></button>
                                                                 </form>
                                                             @endif
                                                         </td>
