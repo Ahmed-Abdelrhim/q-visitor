@@ -7,28 +7,6 @@
     </div>
     <ul class="navbar-nav navbar-right">
         @if(setting('front_end_enable_disable') == 1)
-
-            {{--                        <a data-toggle="tooltip" data-placement="bottom" title="Go to Frontend" href="{{ route('/') }}" class="nav-link nav-link-lg beep" target="_blank">--}}
-            {{--                            <i class="fa fa-globe"></i>--}}
-            {{--                        </a>--}}
-
-            {{--            <li class="dropdown">--}}
-            {{--                <button class="nav-link nav-link-lg beep" title="languages" data-placement="bottom">--}}
-            {{--                    <i class="fa fa-globe"></i>--}}
-            {{--                    {{app()->getLocale()}}--}}
-            {{--                </button>--}}
-
-            {{--                <div class="dropdown-menu menue-flags dropdown-menu-right">--}}
-            {{--                    @foreach($languages as $lang)--}}
-            {{--                        @if(app()->getLocale() != $lang->iso)--}}
-            {{--                            <a class="dropdown-item flags" href="{{route('change_locale', $lang->iso )}}">--}}
-            {{--                               <img src="{{asset('united-states.png')}}" class="flag-icon"> {{$lang->iso}}--}}
-            {{--                            </a>--}}
-            {{--                        @endif--}}
-            {{--                    @endforeach--}}
-            {{--                </div>--}}
-            {{--            </li>--}}
-
             <!-- Test Here-->
             <li class="dropdown">
                 <a href="#" data-toggle="dropdown"
@@ -78,23 +56,3 @@
         </li>
     </ul>
 </nav>
-{{--
-
-            <li class="nav-item dropdown text-uppercase">
-                <button class="nav-link nav-link-lg beep" title="languages" data-placement="bottom">
-                    <i class="fa fa-globe"></i>
-                    {{app()->getLocale()}}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 0px">
-                    @foreach($languages as $lang)
-                        @if(app()->getLocale() != $lang->iso)
-                            <a class="dropdown-item" href="{{route('change_locale', $lang->iso )}}">
-                                {{$lang->iso}}
-                            </a>
-                        @endif
-                    @endforeach
-                </div>
-            </li>
-
-            </li>
---}}
