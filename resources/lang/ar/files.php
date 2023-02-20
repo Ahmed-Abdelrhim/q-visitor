@@ -70,8 +70,11 @@ return [
     'Designation' => 'التخصص',
     'Active' => 'مفعل',
     'InActive' => 'غير مفعل',
-    '' => '',
-    '' => '',
+
+
+
+    'Approved & Message Sent Successfully' => 'تمت المواقفة و إرسال الرسالة بنجاح',
+    'Success Transaction' => 'عملية ناجحة',
     '' => '',
     '' => '',
     '' => '',
