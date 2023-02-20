@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\File;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -218,7 +219,8 @@ class OcrController extends Controller
         }
 
         try {
-            $qrcode = file_get_contents('https://www.qudratech-eg.net/qrcode/index.php?data=' . $name[0] . $reg_no);
+            $qrcode = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data='. $name[0] . $reg_no);
+            // $qrcode = file_get_contents('https://www.qudratech-eg.net/qrcode/index.php?data=' . $name[0] . $reg_no);
         } catch (\Exception $e) {
             $qrcode = NULL;
             $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
