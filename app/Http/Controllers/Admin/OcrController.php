@@ -245,7 +245,7 @@ class OcrController extends Controller
                     'editor_id' => 1,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
-                    'qrcode' => '$qrcode',
+                    'qrcode' => $qrcode,
                     'expiry_date' => NULL,
                     'plate_no' => $plate_no,
                 ]);
