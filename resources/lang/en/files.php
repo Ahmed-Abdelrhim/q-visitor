@@ -168,8 +168,8 @@ return [
     'Save Password' => 'Save Password',
 
 
-    'Site' => 'Site',
-    'Site' => 'Site',
+    'Approved & Message Sent Successfully' => 'Approved & Message Sent Successfully',
+    'Success Transaction' => 'Success Transaction',
 
 
     'Site' => 'Site',

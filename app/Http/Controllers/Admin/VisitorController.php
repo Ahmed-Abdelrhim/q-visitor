@@ -236,11 +236,16 @@ data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'">
             return redirect()->back()->with($notifications);
         }
 
-        $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $user_id);
-        $send_sms = Http::get('https://www.qudratech-sd.com/sms_api.php?mob=' . $user->phone);
+        try {
+            $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $user->email);
+            $send_sms = Http::get('https://www.qudratech-sd.com/sms_api.php?mob=' . $user->phone);
+        } catch (\Exception $e) {
+            $notifications = array('error' => 'Something Went Wrong');
+            return redirect()->back()->with($notifications);
+        }
 
         if ($send_sms->status() == 200) {
-            $notifications = array('success' => 'Message Sent Successfully');
+            $notifications = array('success' => __('files.Success Transaction'));
             $visit_details->sent_sms_before = 1;
             $visit_details->save();
             return redirect()->back()->with($notifications);
