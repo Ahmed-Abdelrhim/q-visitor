@@ -251,7 +251,6 @@ class OcrController extends Controller
                 ]);
                 // TODO:: add this image to visiting details folder path
                 // $visitingDetails->addMedia($image)->toMediaCollection('visitor');
-                file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '.png'), $data);
                 DB::commit();
             } catch
             (\Exception $e) {
@@ -263,6 +262,7 @@ class OcrController extends Controller
 
         try {
             if ($visiting_details) {
+                file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '.png'), $data);
                 foreach ($images as $counter => $img) {
                     $img = str_replace("data:image/jpeg;base64,", "", $img);
                     if ($img != '' or $img != ' ') {
