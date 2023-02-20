@@ -155,7 +155,9 @@ return [
 
     // Positions
     'Add Positions' => 'Add Positions',
-    'Site' => 'Site',
+
+    // Departments
+    'Add Department' => 'Add Department',
     'Site' => 'Site',
     'Site' => 'Site',
     'Site' => 'Site',

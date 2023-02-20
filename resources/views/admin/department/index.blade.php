@@ -4,7 +4,7 @@
 
   <section class="section">
         <div class="section-header">
-            <h1>{{ __('Departments') }}</h1>
+            <h1>{{ __('files.Departments') }}</h1>
             {{ Breadcrumbs::render('departments') }}
             <!-- Dashboard / Departments -->
         </div>
@@ -15,7 +15,7 @@
                     <div class="card">
                         @can('departments_create')
                             <div class="card-header">
-                                <a href="{{ route('admin.departments.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> {{ __('Add Department') }}</a>
+                                <a href="{{ route('admin.departments.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> {{ __('files.Add Department') }}</a>
                             </div>
                         @endcan
                         <div class="card-body">
@@ -24,10 +24,10 @@
                                 <table class="table table-striped" id="maintable" data-url="{{ route('admin.departments.get-departments') }}" data-status="{{ \App\Enums\Status::ACTIVE }}" data-hidecolumn="{{ auth()->user()->can('departments_edit') || auth()->user()->can('departments_delete') }}">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('levels.id') }}</th>
-                                            <th>{{ __('levels.name') }}</th>
-                                            <th>{{ __('levels.status') }}</th>
-                                            <th>{{ __('levels.actions') }}</th>
+                                            <th>{{ __('files.ID') }}</th>
+                                            <th>{{ __('files.Name') }}</th>
+                                            <th>{{ __('files.Status') }}</th>
+                                            <th>{{ __('files.Actions') }}</th>
                                         </tr>
                                     </thead>
                                 </table>

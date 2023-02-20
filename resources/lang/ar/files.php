@@ -63,7 +63,7 @@ return [
     'Add Employee' => 'إضافة موظف',
     'About' => 'حول الموظف' ,
     'Password' => 'الباسورد',
-    'Positions' => 'الوظيفة',
+    'Positions' => 'الوظائف',
     'Department' => 'القسم',
     'Roles' => 'التحكم',
     'choose..' => ' ..إختر',
@@ -149,5 +149,8 @@ return [
 
     // Positions
     'Add Positions' => 'إضافة وظيفة ',
+
+    // Departments
+    'Add Department' => 'إضافة قسم',
 
 ];
