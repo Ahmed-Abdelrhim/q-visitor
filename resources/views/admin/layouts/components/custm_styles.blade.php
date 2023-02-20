@@ -110,4 +110,16 @@
     background-color: #353b99 !important;
     border-color: #353b99 !important;
 }
+table td a.accept{
+    box-shadow: 0 2px 6px #e79e28 !important;
+    background-color: #e79e28 !important;
+    border-color: #e79e28 !important;
+    color: #fff;
+   }
+   table td a.accept:hover{
+    box-shadow: 0 2px 6px #e7b059 !important;
+    background-color: #e7b059 !important;
+    border-color: #e7b059 !important;
+    color: #fff;
+   }
 </style>
