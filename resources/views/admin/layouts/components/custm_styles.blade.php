@@ -128,4 +128,14 @@ table td a.accept{
 .setting-legend{
     color: #353b99 !important;
 }
+a.text-danger{
+    color: #353b99 !important;
+    
+}
+a.dropdown-item{
+    font-weight: bold !important;
+}
+a.text-danger:hover{
+    color: #353b99 !important;
+}
 </style>

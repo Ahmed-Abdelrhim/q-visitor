@@ -5,7 +5,7 @@
             <img src="{{asset('Q-visitor.png')}}" alt="not-found" class="logo"/>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('dashboard') }}">
+            <a href="{{ route('admin.dashboard.index') }}">
                 <?php
                 if (setting('site_name')) {
                     $sitenames = explode(' ', setting('site_name'));
@@ -30,7 +30,7 @@
             @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
                 <li class="dashboard">
                     <a class="nav-link" href="{{route('admin.dashboard.index')}}">
-                        <i class="fas fa-laptop"></i>
+                        <i class="fa fa-home"></i>
                         <span>{{__('files.Dashboard')}}</span>
                     </a>
                 </li>
@@ -100,13 +100,8 @@
             @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
                 <li class="pre-register">
                     <a class="nav-link" href="{{route('admin.pre-registers.index')}}">
-<<<<<<< HEAD
                         <i class="fas fa-laptop"></i>
-                        <span>{{__('files.Pre-Register')}}</span>
-=======
-                        <i class="fas fa-user-friends"></i>
                         <span>{{__('files.Visit Reservation')}}</span>
->>>>>>> d078aa0a7671efcbe9e24985c5173eaca35c9113
                     </a>
                 </li>
             @endif
@@ -165,6 +160,7 @@
                     <a class="nav-link" href="{{route('admin.OCR.index')}}">
                         <!-- <i class="fas fa-facebook"> -->
                         <i class="fa fa-camera"></i>
+                        <!-- <i class="fa fa-scanner"></i> -->
                         <span>OCR</span>
                         </i>
                     </a>
