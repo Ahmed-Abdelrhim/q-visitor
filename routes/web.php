@@ -184,9 +184,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 
 
-// git pull  <alerady up to date>
 // git add .
 // git commit -m "aya update"
+// git pull  <already up to date>
 // git push
 
 
