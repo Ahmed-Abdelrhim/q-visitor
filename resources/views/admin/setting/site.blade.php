@@ -74,8 +74,7 @@
                                     <input name="site_logo" type="file"
                                         class="file-upload-input custom-file-input @error('site_logo') is-invalid @enderror"
                                         id="customFile" onchange="readURL(this);">
-                                    <label class="custom-file-label" for="customFile">{{ __('Choose
-                                                                    file') }}</label>
+                                    <label class="custom-file-label" for="customFile">{{ __('files.Choose File') }}</label>
                                 </div>
                                 @error('site_logo')
                                 <div class="invalid-feedback">

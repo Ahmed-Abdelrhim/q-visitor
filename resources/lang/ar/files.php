@@ -136,6 +136,15 @@ return [
     'Email Notifications' => ' إشعارات الإيميل',
     'Update Notification Setting' => 'تحديث إعدادات الإشعارات',
 
+    'Notifications Templates' => 'Notifications Templates',
+    'Invite Templates' => 'Invite Templates',
+    'Update Email & Sms template Setting' => 'تحديث الإعدادات',
 
+    'Front-end-Enable-Disable' => 'مفعل-غير مفعل',
+    'Visitor Agreement' => 'Visitor Agreement',
+    'Welcome Screen Setting' => 'إعدادات الترحيب',
+    'Terms & condition Setting' => 'السياسة والخصوصية',
+    'Update Front-end Setting' => 'تجديث الإعدادات',
+    'Choose File' => 'إختر ملف',
 
 ];

@@ -141,14 +141,19 @@ return [
 
 
 
-    'Site' => 'Site',
-    'Site' => 'Site',
-    'Site' => 'Site',
-    'Site' => 'Site',
-    'Site' => 'Site',
-    'Site' => 'Site',
-    'Site' => 'Site',
-    'Site' => 'Site',
+    'Notifications Templates' => 'Notifications Templates',
+    'Invite Templates' => 'Invite Templates',
+    'Update Email & Sms template Setting' => 'Update Email & Sms template Setting',
+
+
+    'Front-end-Enable-Disable' => 'Front-end-Enable-Disable',
+    'Visitor Agreement' => 'Visitor Agreement',
+    'Welcome Screen Setting' => 'Welcome Screen Setting',
+    'Terms & condition Setting' => 'Terms & condition Setting',
+    'Update Front-end Setting' => 'Update Front-end Setting',
+    'Choose File' => 'Choose File',
+
+
     'Site' => 'Site',
     'Site' => 'Site',
 
