@@ -25,11 +25,7 @@ class RoleController extends BackendController
         $this->middleware(['permission:role_show'])->only('show', 'savePermission');
 
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $this->data['roles'] = Role::all();

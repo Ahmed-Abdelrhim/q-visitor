@@ -4,7 +4,7 @@
   
   <section class="section">
         <div class="section-header">
-            <h1>{{ __('Roles') }}</h1>
+            <h1>{{ __('files.Roles') }}</h1>
             {{ Breadcrumbs::render('roles') }}
         </div>
 
@@ -15,7 +15,7 @@
                         
                         @can('role_create')
                             <div class="card-header">
-                                <a href="{{ route('admin.role.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> {{ __('Add Role') }}</a>
+                                <a href="{{ route('admin.role.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> {{ __('files.Add Role') }}</a>
                             </div>
                         @endcan
 
@@ -24,10 +24,10 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('levels.id') }}</th>
-                                            <th>{{ __('levels.name') }}</th>
+                                            <th>{{ __('files.ID') }}</th>
+                                            <th>{{ __('files.Name') }}</th>
                                             @if (auth()->user()->can('role_show') || auth()->user()->can('role_edit') || auth()->user()->can('role_delete'))
-                                                <th>{{ __('levels.actions') }}</th>
+                                                <th>{{ __('files.Actions') }}</th>
                                             @endif
                                         </tr>
                                     </thead>

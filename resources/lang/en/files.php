@@ -88,4 +88,7 @@ return [
     'Username' => 'Username',
     'Username' => 'Username',
 
+    // Roles
+    'Add Role' => 'Add Role',
+
 ];

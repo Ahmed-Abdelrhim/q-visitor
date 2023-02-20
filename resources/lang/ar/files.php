@@ -84,7 +84,10 @@ return [
 
 
     // Administrator
-    'Add Administrator' => 'إضاففة أدمن',
+    'Add Administrator' => 'إضافة أدمن',
     'Username' => 'أسم المستخدم',
+
+    // Roles
+    'Add Role' => 'إضافة تحكم',
 
 ];
