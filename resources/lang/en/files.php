@@ -159,10 +159,15 @@ return [
 
     // Departments
     'Add Department' => 'Add Department',
-    'Site' => 'Site',
-    'Site' => 'Site',
-    'Site' => 'Site',
-    'Site' => 'Site',
+
+
+    // Profile
+    'Change Password' => 'Change Password',
+    'Password Confirmation' => 'Password Confirmation',
+    'Old Password' => 'Old Password',
+    'Save Password' => 'Save Password',
+
+
     'Site' => 'Site',
     'Site' => 'Site',
 

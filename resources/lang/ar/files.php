@@ -154,4 +154,10 @@ return [
     // Departments
     'Add Department' => 'إضافة قسم',
 
+    // Profile
+    'Change Password' => 'تغير الباسورد',
+    'Password Confirmation' => ' تأكيد الباسورد',
+    'Old Password' => ' الباسورد القديم',
+    'Save Password' => 'حفظ الباسورد',
+
 ];

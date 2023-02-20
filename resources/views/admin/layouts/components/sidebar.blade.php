@@ -5,7 +5,7 @@
             <img src="{{asset('Q-visitor.png')}}" alt="not-found" class="logo"/>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ url('admin') }}">
+            <a href="{{ route('dashboard') }}">
                 <?php
                 if (setting('site_name')) {
                     $sitenames = explode(' ', setting('site_name'));
@@ -29,7 +29,7 @@
             <!-- Start Dashboard -->
             @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
                 <li class="dashboard">
-                    <a class="nav-link" href="{{route('/')}}">
+                    <a class="nav-link" href="{{route('admin.dashboard.index')}}">
                         <i class="fas fa-laptop"></i>
                         <span>{{__('files.Dashboard')}}</span>
                     </a>
