@@ -166,7 +166,7 @@ class EmployeeController extends Controller
             })
             ->editColumn('status', function ($employee) {
                 // return ($employee->status == 5 ? trans('statuses.' . Status::ACTIVE) : trans('statuses.' . Status::INACTIVE));
-                return ($employee->status == 5 ? __('files.Active') : __('files.InActive' ));
+                return ($employee->status == 5 ? 'Active' : 'InActive');
                 // return ($employee->status == );
             })
             ->editColumn('date_of_joining', function ($employee) {

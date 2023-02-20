@@ -65,4 +65,10 @@ return [
     '' => '',
     '' => '',
     '' => '',
+
+
+    // Pre -Register
+    'Pre-registers' => 'ما قبل التسجيلات',
+    'Expected Date' => 'التاريخ المتوقع',
+    'Expected Time' => 'الوقت المتوقع',
 ];

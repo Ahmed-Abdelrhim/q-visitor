@@ -65,4 +65,10 @@ return [
     'InActive' => 'InActive',
     'About' => 'About',
 
+
+    // Pre -Register
+    'Pre-registers' => 'Pre-registers',
+    'Expected Date' => 'Expected Date',
+    'Expected Time' => 'Expected Time',
+
 ];

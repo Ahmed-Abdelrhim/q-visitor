@@ -46,9 +46,9 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-visitor-tab" data-toggle="tab"
                                href="#nav-visitor" role="tab" aria-controls="nav-visitor"
-                               aria-selected="true">Visitors</a>
+                               aria-selected="true">{{__('files.Visitors')}}</a>
                             <a class="nav-item nav-link" id="nav-register-tab" data-toggle="tab" href="#nav-register"
-                               role="tab" aria-controls="nav-register" aria-selected="false">Pre-registers</a>
+                               role="tab" aria-controls="nav-register" aria-selected="false">{{__('files.Pre-registers')}}</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -86,13 +86,13 @@
                                                data-hidecolumn="{{ auth()->user()->can('pre-registers_show') || auth()->user()->can('pre-registers_edit') || auth()->user()->can('pre-registers_delete') }}">
                                             <thead>
                                             <tr>
-                                                <th scope="col">{{ __('levels.id') }}</th>
-                                                <th scope="col">{{ __('levels.name') }}</th>
-                                                <th scope="col">{{ __('levels.email') }}</th>
-                                                <th scope="col">{{ __('levels.phone') }}</th>
-                                                <th scope="col">{{ __('Expected Date') }}</th>
-                                                <th scope="col">{{ __('Expected Time') }}</th>
-                                                <th scope="col">{{ __('levels.actions') }}</th>
+                                                <th scope="col">{{ __('files.ID') }}</th>
+                                                <th scope="col">{{ __('files.Name') }}</th>
+                                                <th scope="col">{{ __('files.Email') }}</th>
+                                                <th scope="col">{{ __('files.Phone') }}</th>
+                                                <th scope="col">{{ __('files.Expected Date') }}</th>
+                                                <th scope="col">{{ __('files.Expected Time') }}</th>
+                                                <th scope="col">{{ __('files.Actions') }}</th>
                                             </tr>
                                             </thead>
                                         </table>
