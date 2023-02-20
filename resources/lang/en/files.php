@@ -153,6 +153,16 @@ return [
     'Update Front-end Setting' => 'Update Front-end Setting',
     'Choose File' => 'Choose File',
 
+    // Positions
+    'Add Positions' => 'Add Positions',
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
+
 
     'Site' => 'Site',
     'Site' => 'Site',

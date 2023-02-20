@@ -4,7 +4,7 @@
 
 	<section class="section">
         <div class="section-header">
-            <h1>{{ __('Positions') }}</h1>
+            <h1>{{ __('files.Positions') }}</h1>
             {{ Breadcrumbs::render('designations/add') }}
         </div>
 
@@ -16,7 +16,7 @@
 				    		@csrf
 						    <div class="card-body">
 						        <div class="form-group">
-			                        <label>{{ __('levels.name') }}</label> <span class="text-danger">*</span>
+			                        <label>{{ __('files.Name') }}</label> <span class="text-danger">*</span>
 			                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
 			                        @error('name')
 				                        <div class="invalid-feedback">
@@ -26,7 +26,7 @@
 			                    </div>
 
 						        <div class="form-group">
-						            <label>{{ __('levels.status') }}</label> <span class="text-danger">*</span>
+						            <label>{{ __('files.Status') }}</label> <span class="text-danger">*</span>
 						            <select name="status" class="form-control @error('status') is-invalid @enderror">
 						            	@foreach(trans('statuses') as $key => $status)
 						                	<option value="{{ $key }}" {{ (old('status') == $key) ? 'selected' : '' }}>{{ $status }}</option>
@@ -41,7 +41,7 @@
 						    </div>
 
 					        <div class="card-footer">
-		                    	<button class="btn btn-primary mr-1" type="submit">{{ __('Submit') }}</button>
+		                    	<button class="btn btn-primary mr-1" type="submit">{{ __('files.Submit') }}</button>
 		                  	</div>
 		                </form>
 					</div>

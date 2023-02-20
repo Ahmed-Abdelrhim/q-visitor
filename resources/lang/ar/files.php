@@ -147,4 +147,7 @@ return [
     'Update Front-end Setting' => 'تجديث الإعدادات',
     'Choose File' => 'إختر ملف',
 
+    // Positions
+    'Add Positions' => 'إضافة وظيفة ',
+
 ];
