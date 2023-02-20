@@ -88,7 +88,8 @@
             @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
                 <li class="visitors">
                     <a class="nav-link" href="{{route('admin.visitors.index')}}">
-                        <i class="fas fa-walking"></i>
+                        <!-- <i class="fas fa-walking"></i> -->
+                        <i class="fa fa-info"></i>
                         <span>{{__('files.Visiting Details')}}</span>
                     </a>
                 </li>
@@ -99,8 +100,13 @@
             @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
                 <li class="pre-register">
                     <a class="nav-link" href="{{route('admin.pre-registers.index')}}">
+<<<<<<< HEAD
+                        <i class="fas fa-laptop"></i>
+                        <span>{{__('files.Pre-Register')}}</span>
+=======
                         <i class="fas fa-user-friends"></i>
                         <span>{{__('files.Visit Reservation')}}</span>
+>>>>>>> d078aa0a7671efcbe9e24985c5173eaca35c9113
                     </a>
                 </li>
             @endif
@@ -134,7 +140,8 @@
             @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
                 <li class="settings">
                     <a class="nav-link" href="{{route('admin.setting.index')}}">
-                        <i class="fa fa-star"></i>
+                        <!-- <i class="fa fa-star"></i> -->
+                        <i class="fa fa-wrench"></i>
                         <span>{{__('files.Settings')}}</span>
                     </a>
                 </li>
