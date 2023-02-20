@@ -35,22 +35,19 @@
                    class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <div class="d-sm-none d-lg-inline-block">
                         <i class="fa fa-globe"></i>
-                        <!-- @if(app()->getLocale() == 'ar')
-                                   <img src="{{asset('egypt.png')}}" class="flag-icon">{{$lang->iso}}
-                                   @else
-                                    <img src="{{asset('united-states.png')}}" class="flag-icon"> {{$lang->iso}}
-
-                                @ednif -->
                     </div>
                 </a>
                 @foreach($languages as $lang)
                     @if(app()->getLocale() != $lang->iso)
                         <div class="dropdown-menu menue-flags dropdown-menu-right " style="width: 20px;">
                             <a href="{{ route('change_locale',$lang->iso) }}" class="dropdown-item flags">
-                                
-
+                                @if(app()->getLocale() == 'ar')
+                                    <img src="{{asset('united-states.png')}}" class="flag-icon"> {{strtoupper($lang->iso)}}
+                                @else
+                                    <img src="{{asset('egypt.png')}}" class="flag-icon">{{strtoupper($lang->iso)}}
+                                @endif
                             </a>
-                           
+
                         </div>
                     @endif
                 @endforeach
