@@ -61,21 +61,7 @@
    table th, table td{
     color: #34395e !important;
    }
-   /* table td a{
-    box-shadow: 0 2px 6px #24ba64 !important;
-    background-color: #24ba64 !important;
-    border-color: #24ba64 !important;
-   } */
-   /* table td a:hover{
-    box-shadow: 0 2px 6px #24ba64 !important;
-    background-color: #24ba64 !important;
-    border-color: #24ba64 !important;
-   } */
-   /* .btn-primary:active, .btn-primary:hover{
-    box-shadow: 0 2px 6px #69ef87 !important;
-    background-color: #69ef87 !important;
-    border-color: #69ef87 !important;
-   } */
+   
    .bg-maroon-light{
     background-color: #353b99 !important;
    }
@@ -83,7 +69,6 @@
     border-radius: 10px;
    }
    .card .card-header h4{
-    /* color: #24ba64 !important; */
     color: #353b99 !important;
    }
    .btn-primary{
@@ -121,5 +106,15 @@ table td a.accept{
     background-color: #e7b059 !important;
     border-color: #e7b059 !important;
     color: #fff;
+   }
+   a.flags{
+    padding: 6px 3px !important;
+   }
+   .menue-flags{
+    padding: 0px 8px !important;
+   }
+   img.flag-icon{
+    margin-right: 5px;
+    width: 30px
    }
 </style>

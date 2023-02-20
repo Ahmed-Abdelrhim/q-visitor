@@ -18,11 +18,11 @@
             {{--                    {{app()->getLocale()}}--}}
             {{--                </button>--}}
 
-            {{--                <div class="dropdown-menu dropdown-menu-right">--}}
+            {{--                <div class="dropdown-menu menue-flags dropdown-menu-right">--}}
             {{--                    @foreach($languages as $lang)--}}
             {{--                        @if(app()->getLocale() != $lang->iso)--}}
-            {{--                            <a class="dropdown-item" href="{{route('change_locale', $lang->iso )}}">--}}
-            {{--                                {{$lang->iso}}--}}
+            {{--                            <a class="dropdown-item flags" href="{{route('change_locale', $lang->iso )}}">--}}
+            {{--                               <img src="{{asset('united-states.png')}}" class="flag-icon"> {{$lang->iso}}--}}
             {{--                            </a>--}}
             {{--                        @endif--}}
             {{--                    @endforeach--}}
@@ -35,15 +35,22 @@
                    class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <div class="d-sm-none d-lg-inline-block">
                         <i class="fa fa-globe"></i>
+                        <!-- @if(app()->getLocale() == 'ar')
+                                   <img src="{{asset('egypt.png')}}" class="flag-icon">{{$lang->iso}}
+                                   @else
+                                    <img src="{{asset('united-states.png')}}" class="flag-icon"> {{$lang->iso}}
+
+                                @ednif -->
                     </div>
                 </a>
                 @foreach($languages as $lang)
                     @if(app()->getLocale() != $lang->iso)
-                        <div class="dropdown-menu dropdown-menu-right " style="width: 20px;">
-                            <a href="{{ route('change_locale',$lang->iso) }}" class="dropdown-item has-icon">
-                                <i class="far fa-userr"></i> {{$lang->iso}}
+                        <div class="dropdown-menu menue-flags dropdown-menu-right " style="width: 20px;">
+                            <a href="{{ route('change_locale',$lang->iso) }}" class="dropdown-item flags">
+                                
+
                             </a>
-                            <div class="dropdown-divider"></div>
+                           
                         </div>
                     @endif
                 @endforeach
