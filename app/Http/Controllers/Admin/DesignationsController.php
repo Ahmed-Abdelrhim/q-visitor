@@ -136,7 +136,10 @@ data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'"><i cla
             })
 
             ->editColumn('status', function ($designation) {
-                return ($designation->status == 5 ? trans('statuses.' . Status::ACTIVE) : trans('statuses.' . Status::INACTIVE));
+                // return ($designation->status == 5 ? trans('statuses.' . Status::ACTIVE) : trans('statuses.' . Status::INACTIVE));
+                if ($designation->status == 5)
+                    return  trans('files.Active');
+                return __('files.InActive');
             })
             ->editColumn('id', function ($designation) {
                 return $designation->setID;
