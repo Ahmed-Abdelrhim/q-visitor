@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/id-card-print.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/id-card-print.css') }}" >
 @endsection
 @section('main-content')
 
