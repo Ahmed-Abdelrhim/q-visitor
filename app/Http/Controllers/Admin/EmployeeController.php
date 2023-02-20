@@ -166,7 +166,7 @@ class EmployeeController extends Controller
             })
             ->editColumn('status', function ($employee) {
                 // return ($employee->status == 5 ? trans('statuses.' . Status::ACTIVE) : trans('statuses.' . Status::INACTIVE));
-                return ($employee->status == 5 ? 'Active' : 'InActive');
+                return ($employee->status == 5 ? __('files.Active') : __('files.InActive'));
                 // return ($employee->status == );
             })
             ->editColumn('date_of_joining', function ($employee) {
@@ -198,16 +198,20 @@ class EmployeeController extends Controller
                 $retAction = '';
 
                 if (auth()->user()->can('pre-registers_show')) {
-                    $retAction .= '<a href="' . route('admin.visitors.show', $visitor) . '" class="btn btn-sm btn-icon mr-2  float-left btn-info" data-toggle="tooltip" data-placement="top" title="View"><i class="far fa-eye"></i></a>';
+                    $retAction .= '<a href="' . route('admin.visitors.show', $visitor) . '" class="btn btn-sm btn-icon mr-2  float-left btn-info" 
+data-toggle="tooltip" data-placement="top" title="View"><i class="far fa-eye"></i></a>';
                 }
 
                 if (auth()->user()->can('pre-registers_edit')) {
-                    $retAction .= '<a href="' . route('admin.visitors.edit', $visitor) . '" class="btn btn-sm btn-icon float-left btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"> <i class="far fa-edit"></i></a>';
+                    $retAction .= '<a href="' . route('admin.visitors.edit', $visitor) . '" class="btn btn-sm btn-icon float-left btn-primary" 
+data-toggle="tooltip" data-placement="top" title="Edit"> <i class="far fa-edit"></i></a>';
                 }
 
 
                 if (auth()->user()->can('pre-registers_delete')) {
-                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitor) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"> <i class="fa fa-trash"></i></button></form>';
+                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitor) . '" method="POST">' .
+                        method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" 
+data-placement="top" title="Delete"> <i class="fa fa-trash"></i></button></form>';
                 }
 
                 return $retAction;

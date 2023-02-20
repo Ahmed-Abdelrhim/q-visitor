@@ -4,6 +4,7 @@
     <title>تسجيل الزوار</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -49,6 +50,11 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
                                                               value="<?php echo $plate ?>"/>
                                     <input type="button" value="أستعاده رقم اللوحه" class="btn btn-success get_plate"
                                            style="height: 35px; padding: 7px 14px;margin-right: 7%">
+
+                                    <a class="btn btn-primary" href="{{route('admin.dashboard.index')}}" style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                        لوحة التحكم
+                                    </a>
+
                                 </div>
                                 <br/>
                                 <div class="row" style="text-align:center">
@@ -83,7 +89,7 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
                         </div>
                         <div class="col-md-12 d-flex align-items-stretch">
                             <div class="info-wrap w-100 p-lg-5 p-4 img">
-
+                                {{csrf_field()}}
 
                                 <div class="dbox w-25 d-flex align-items-start">
                                     <div class="icon d-flex align-items-center justify-content-center">
@@ -225,10 +231,6 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
 <div class="images" style="display:none"></div>
 <div class="perpic" style="display:none"></div>
 
-
-
-@include('admin.ocr.index_footer_scripts')
-
 <style>
     .div2 {
         top: 220px;
@@ -308,7 +310,9 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
         font-size: 18px
     }
 </style>
+@include('admin.ocr.index_footer_scripts')
 
 </body>
+
 </html>
 

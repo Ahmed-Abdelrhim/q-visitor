@@ -27,7 +27,7 @@
                                 data-status="{{ \App\Enums\Status::ACTIVE }}" data-hidecolumn="{{ auth()->user()->can('employees_show') || auth()->user()->can('employees_edit') || auth()->user()->can('employees_delete') }}">
                                 <thead>
                                     <tr>
-                                        <th>{{ __('files.id') }}</th>
+                                        <th>{{ __('files.ID') }}</th>
                                         <th>{{ __('files.Image') }}</th>
                                         <th>{{ __('files.Name') }}</th>
                                         <th>{{ __('files.Email') }}</th>

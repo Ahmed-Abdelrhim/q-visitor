@@ -48,7 +48,7 @@ class DepartmentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -57,19 +57,19 @@ class DepartmentsController extends Controller
         $input = $request->all();
         Department::create($input);
 
-        return redirect()->route('admin.departments.index')->with('success','Departments created successfully');
+        return redirect()->route('admin.departments.index')->with('success', 'Departments created successfully');
     }
 
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $this->data['department']  = Department::findOrFail($id);
+        $this->data['department'] = Department::findOrFail($id);
 
         return view('admin.department.edit', $this->data);
     }
@@ -77,8 +77,8 @@ class DepartmentsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,7 +96,7 @@ class DepartmentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
 
@@ -109,42 +109,42 @@ class DepartmentsController extends Controller
     public function getDepartments(Request $request)
     {
 
-           $departments = Department::orderBy('id', 'desc')->get();
+        $departments = Department::orderBy('id', 'desc')->get();
 
-            $i         = 1;
-            $departmentArray = [];
-            if (!blank($departments)) {
-                foreach ($departments as $department) {
-                    $departmentArray[$i]          = $department;
-                    $departmentArray[$i]['name']  = Str::limit($department->name, 100);
-                    $departmentArray[$i]['setID'] = $i;
-                    $i++;
-                }
+        $i = 1;
+        $departmentArray = [];
+        if (!blank($departments)) {
+            foreach ($departments as $department) {
+                $departmentArray[$i] = $department;
+                $departmentArray[$i]['name'] = Str::limit($department->name, 100);
+                $departmentArray[$i]['setID'] = $i;
+                $i++;
             }
-            return Datatables::of($departmentArray)
-                ->addColumn('action', function ($department) {
-                    $retAction = '';
+        }
+        return Datatables::of($departmentArray)
+            ->addColumn('action', function ($department) {
+                $retAction = '';
 
-                    if(auth()->user()->can('departments_edit')) {
-                        $retAction .= '<a href="' . route('admin.departments.edit', $department) . '" class="btn btn-sm btn-icon float-left btn-primary" 
-data-toggle="tooltip" data-placement="top" title="'.__('files.Edit').'"><i class="far fa-edit"></i></a>';
-                    }
+                if (auth()->user()->can('departments_edit')) {
+                    $retAction .= '<a href="' . route('admin.departments.edit', $department) . '" class="btn btn-sm btn-icon float-left btn-primary" 
+data-toggle="tooltip" data-placement="top" title="' . __('files.Edit') . '"><i class="far fa-edit"></i></a>';
+                }
 
-                    if(auth()->user()->can('departments_delete')) {
-                        $retAction .= '<form class="float-left pl-2" action="' . route('admin.departments.destroy', $department) . '" method="POST">' .
-                            method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" 
-data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'"><i class="fa fa-trash"></i></button></form>';
-                    }
-                    return $retAction;
-                })
-
-                ->editColumn('status', function ($department) {
-                    return ($department->status == 5 ? trans('statuses.' . Status::ACTIVE) : trans('statuses.' . Status::INACTIVE));
-                })
-                ->editColumn('id', function ($department) {
-                    return $department->setID;
-                })
-                ->make(true);
+                if (auth()->user()->can('departments_delete')) {
+                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.departments.destroy', $department) . '" method="POST">' .
+                        method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" 
+data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '"><i class="fa fa-trash"></i></button></form>';
+                }
+                return $retAction;
+            })
+            ->editColumn('status', function ($department) {
+                // return ($department->status == 5 ? trans('statuses.' . Status::ACTIVE) : trans('statuses.' . Status::INACTIVE));
+                return ($department->status == 5 ? __('files.Active') : __('files.InActive') );
+            })
+            ->editColumn('id', function ($department) {
+                return $department->setID;
+            })
+            ->make(true);
 
     }
 

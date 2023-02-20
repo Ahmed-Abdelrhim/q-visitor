@@ -57,6 +57,11 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
                                                               value="<?php echo $plate ?>"/>
                                     <input type="button" value="Last Car plate" class="btn btn-success get_plate"
                                            style="height: 35px; padding: 7px 14px;margin-left: 7%">
+
+                                    <a class="btn btn-primary" href="{{route('admin.dashboard.index')}}" style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                        Dashboard
+                                    </a>
+
                                 </div>
                                 <br/>
                                 <div class="row" style="text-align:center">
@@ -284,8 +289,10 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
     @endif
 </script>
 @include('admin.ocr.index_footer_scripts')
+
 </body>
 </html>
+
 {{--< ?php--}}
 {{--    --}}
 {{--    --}}
