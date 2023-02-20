@@ -152,7 +152,7 @@ class VisitorController extends Controller
                     if ($visitingDetail->sent_sms_before == 1) {
                         $msg = __('files.Re-send sms');
                     }
-                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                 }
 
                 if (auth()->user()->can('visitors_show')) {

@@ -201,11 +201,11 @@ class PreRegisterController extends Controller
                 $retAction = '';
 
                 if (auth()->user()->can('pre-registers_edit')) {
-                    $retAction .= '<a href="' . route('admin.pre-registers.approve', encrypt($pre_register)) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="Approve"><i class="far fa-eye"></i></a>';
+                    $retAction .= '<a href="' . route('admin.pre-registers.approve', encrypt($pre_register)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success" data-toggle="tooltip" data-placement="top" title="Approve"><i class="far fa-check-circle"></i></a>';
                 }
 
                 if (auth()->user()->can('pre-registers_show')) {
-                    $retAction .= '<a href="' . route('admin.pre-registers.show', $pre_register) . '" class="btn btn-sm btn-icon mr-2  float-left btn-info" data-toggle="tooltip" data-placement="top" title="View"><i class="far fa-eye"></i></a>';
+                    $retAction .= '<a href="' . route('admin.pre-registers.show', $pre_register) . '" class="btn btn-sm btn-icon mr-2 show  float-left btn-info" data-toggle="tooltip" data-placement="top" title="View"><i class="far fa-eye"></i></a>';
                 }
 
                 if (auth()->user()->can('pre-registers_edit')) {

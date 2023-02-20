@@ -6,6 +6,7 @@
         <div class="section-header">
             <h1>{{ __('Departments') }}</h1>
             {{ Breadcrumbs::render('departments') }}
+            <!-- Dashboard / Departments -->
         </div>
 
         <div class="section-body">
