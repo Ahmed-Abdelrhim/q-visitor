@@ -2,6 +2,14 @@
 
 return [
     'Dashboard' => 'لوحة التحكم',
+    'Departments' => 'الأقسام',
+    'Profile' =>'الصفحة الشحصية',
+    'Pre-Register' =>'ما قبل التسجيل',
+    'Administrators' => 'الأدمنز',
+    'Role' =>'التحكم',
+    'Settings' =>'الإعدادات',
+    'OCR' =>'OCR',
+
     'Total Employees' => 'إجمالي عدد الموظفين',
     'Total Visitors' => 'إجمالي عدد الزيارات',
     'Total Pre Registers' => 'إجمالي عدد التسجيلات',

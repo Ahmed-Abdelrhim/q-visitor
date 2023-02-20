@@ -2,6 +2,14 @@
 
 return [
     'Dashboard' => 'Dashboard',
+    'Profile' =>'Profile',
+    'Departments' => 'Departments',
+    'Pre-Register' =>'Pre-Register',
+    'Administrators' => 'Administrators',
+    'Role' =>'Role',
+    'Settings' =>'Settings',
+    'OCR' =>'OCR',
+
     'Total Employees' => 'Total Employees',
     'Total Visitors' => 'Total Visitors',
     'Total Pre Registers' => 'Total Pre Registers',

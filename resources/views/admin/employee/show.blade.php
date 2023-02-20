@@ -48,7 +48,8 @@
                                href="#nav-visitor" role="tab" aria-controls="nav-visitor"
                                aria-selected="true">{{__('files.Visitors')}}</a>
                             <a class="nav-item nav-link" id="nav-register-tab" data-toggle="tab" href="#nav-register"
-                               role="tab" aria-controls="nav-register" aria-selected="false">{{__('files.Pre-registers')}}</a>
+                               role="tab" aria-controls="nav-register"
+                               aria-selected="false">{{__('files.Pre-registers')}}</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
