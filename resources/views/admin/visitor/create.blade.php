@@ -11,7 +11,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Visitors') }}</h1>
+            <h1>{{ __('files.Visitors') }}</h1>
             {{ Breadcrumbs::render('visitors/add') }}
         </div>
 
@@ -24,7 +24,7 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="first_name">{{ __('First Name ') }}</label> <span class="text-danger">*</span>
+                                        <label for="first_name">{{ __('files.First Name') }}</label> <span class="text-danger">*</span>
                                         <input id="first_name" type="text" name="first_name" class="form-control {{ $errors->has('first_name') ? " is-invalid " : '' }}" value="{{ old('first_name') }}">
                                         @error('first_name')
                                         <div class="invalid-feedback">
@@ -33,7 +33,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="last_name">{{ __('Last Name') }}</label> <span class="text-danger">*</span>
+                                        <label for="last_name">{{ __('files.Last Name') }}</label> <span class="text-danger">*</span>
                                         <input id="last_name" type="text" name="last_name" class="form-control {{ $errors->has('last_name') ? " is-invalid " : '' }}" value="{{ old('last_name') }}">
                                         @error('last_name')
                                         <div class="invalid-feedback">
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('E-Mail Address') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Email') }}</label> <span class="text-danger">*</span>
                                         <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
                                         @error('email')
                                         <div class="invalid-feedback">
@@ -54,7 +54,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label>{{ __('Phone') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Phone') }}</label> <span class="text-danger">*</span>
                                         <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}">
                                         @error('phone')
                                         <div class="invalid-feedback">
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="gender">{{ __('Gender') }}</label> <span class="text-danger">*</span>
+                                        <label for="gender">{{ __('files.Gender') }}</label> <span class="text-danger">*</span>
                                         <select id="gender" name="gender" class="form-control @error('gender') is-invalid @enderror">
                                             @foreach(trans('genders') as $key => $gender)
                                                 <option value="{{ $key }}" {{ (old('gender') == $key) ? 'selected' : '' }}>{{ $gender }}</option>
@@ -90,7 +90,7 @@
 
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('National Identification No') }}</label>
+                                        <label>{{ __('files.National Identification No') }}</label>
                                         <input type="text" name="national_identification_no" class="form-control @error('national_identification_no') is-invalid @enderror" value="{{ old('national_identification_no') }}">
                                         @error('national_identification_no')
                                         <div class="invalid-feedback">
@@ -99,7 +99,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="employee_id">{{ __('Select Employee') }}</label> <span class="text-danger">*</span>
+                                        <label for="employee_id">{{ __('files.Select Employee') }}</label> <span class="text-danger">*</span>
                                         <select id="employee_id" name="employee_id" class="form-control select2 @error('employee_id') is-invalid @enderror">
                                             @foreach($employees as $key => $employee)
                                                 <option value="{{ $employee->id }}" {{ (old('employee_id') == $employee->id) ? 'selected' : '' }}>{{ $employee->name }} ( {{$employee->department->name}} )</option>
@@ -114,7 +114,7 @@
                                 </div>
 								<div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('From Date') }}</label>
+                                        <label>{{ __('files.From Date') }}</label>
                                         <input type="datetime-local" name="from_date" class="form-control @error('from_date') is-invalid @enderror" value="{{ old('from_date') }}" id="from_date">
                                         @error('from_date')
                                         <div class="invalid-feedback">
@@ -123,7 +123,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label>{{ __('Expiry Date') }}</label>
+                                        <label>{{ __('files.Expiry Date') }}</label>
                                         <input type="datetime-local" name="expiry_date" class="form-control @error('expiry_date') is-invalid @enderror" value="{{ old('expiry_date') }}" id="expiry_date">
                                         @error('expiry_date')
                                         <div class="invalid-feedback">
@@ -135,7 +135,7 @@
 								<div class="form-row">
                                    
                                     <div class="form-group col">
-                                        <label>{{ __('Type') }}</label>
+                                        <label>{{ __('files.Type') }}</label>
                                         <!--<input type="text" name="type" class="form-control @error('type') is-invalid @enderror" value="{{ old('type') }}" id="type">-->
 										<select id="type" name="type" class="form-control select2 @error('type') is-invalid @enderror">
                                             @foreach($types as $key => $type)
@@ -153,7 +153,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="purpose">{{ __('Purpose') }}</label> <span class="text-danger">*</span>
+                                        <label for="purpose">{{ __('files.Purpose') }}</label> <span class="text-danger">*</span>
                                         <textarea name="purpose"
                                                   class="summernote-simple form-control height-textarea @error('purpose')
                                                       is-invalid @enderror"
@@ -167,7 +167,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="address">{{ __('Address') }}</label>
+                                        <label for="address">{{ __('files.Address') }}</label>
                                         <textarea name="address"
                                                   class="summernote-simple form-control height-textarea @error('address')
                                                       is-invalid @enderror"
@@ -183,10 +183,10 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-6">
-                                        <label for="customFile">{{ __('Image') }}</label>
+                                        <label for="customFile">{{ __('files.Image') }}</label>
                                         <div class="custom-file">
                                             <input name="image" type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFile" onchange="readURL(this);">
-                                            <label  class="custom-file-label" for="customFile">{{ __('Choose file') }}</label>
+                                            <label  class="custom-file-label" for="customFile">{{ __('files.Choose file') }}</label>
                                         </div>
                                         @if ($errors->has('image'))
                                             <div class="help-block text-danger">
@@ -200,7 +200,7 @@
                             </div>
 
                             <div class="card-footer ">
-                                <button class="btn btn-primary mr-1" type="submit">{{ __('Submit') }}</button>
+                                <button class="btn btn-primary mr-1" type="submit">{{ __('files.Submit') }}</button>
                             </div>
                         </form>
                     </div>

@@ -148,24 +148,29 @@ class VisitorController extends Controller
 
                 // if (auth()->user()->can('visitors_show')) {
                 if ($approve) {
-                    $msg = 'Approve & send sms';
+                    $msg = __('files.Approve & send sms');
                     if ($visitingDetail->sent_sms_before == 1) {
-                        $msg = 'Re-send sms';
+                        $msg = __('files.Re-send sms');
                     }
                     $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                 }
 
                 if (auth()->user()->can('visitors_show')) {
-                    $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-info" data-toggle="tooltip" data-placement="top" title="View"><i class="far fa-eye"></i></a>';
+                    $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-info" 
+data-toggle="tooltip" data-placement="top" title="'.__('files.View').'"><i class="far fa-eye"></i></a>';
                 }
 
                 if (auth()->user()->can('visitors_edit')) {
-                    $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"> <i class="far fa-edit"></i></a>';
+                    $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary" 
+data-toggle="tooltip" data-placement="top" title="'.__('files.Edit').'">
+ <i class="far fa-edit"></i></a>';
                 }
 
 
                 if (auth()->user()->can('visitors_delete')) {
-                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"> <i class="fa fa-trash"></i></button></form>';
+                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" 
+data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'">
+ <i class="fa fa-trash"></i></button></form>';
                 }
 
                 return $retAction;
@@ -204,8 +209,8 @@ class VisitorController extends Controller
             })
             ->addColumn('status', function ($visitingDetail) {
                 if ($visitingDetail->sent_sms_before == 0)
-                    return 'Pending';
-                return 'Approved';
+                    return __('files.Pending');
+                return __('files.Approved');
             })
             ->editColumn('id', function ($visitingDetail) {
                 return $visitingDetail->setID;
