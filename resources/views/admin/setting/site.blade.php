@@ -12,11 +12,11 @@
                 enctype="multipart/form-data">
                 @csrf
                 <fieldset class="setting-fieldset">
-                    <legend class="setting-legend">{{ __('General Setting') }}</legend>
+                    <legend class="setting-legend">{{ __('files.General Setting') }}</legend>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="site_name">{{ __('levels.site_name') }}</label>
+                                <label for="site_name">{{ __('files.site_name') }}</label>
                                 <span class="text-danger">*</span>
                                 <input name="site_name" id="site_name" type="text"
                                     class="form-control @error('site_name') is-invalid @enderror"
@@ -30,7 +30,7 @@
 
                             <div class="form-group">
                                 <label
-                                    for="site_phone_number">{{ __('Site Phone Number') }}</label>
+                                    for="site_phone_number">{{ __('files.Site Phone Number') }}</label>
                                 <span class="text-danger">*</span>
                                 <input name="site_phone_number" id="site_phone_number" type="text"
 
@@ -45,7 +45,7 @@
 
 
                             <div class="form-group">
-                                <label for="site_footer">{{ __('levels.site_footer') }}</label> <span
+                                <label for="site_footer">{{ __('files.site_footer') }}</label> <span
                                     class="text-danger">*</span>
                                 <input name="site_footer" id="site_footer"
                                     class="form-control @error('site_footer') is-invalid @enderror"
@@ -57,7 +57,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="site_address">{{ __('Site Address') }}</label> <span
+                                <label for="site_address">{{ __('files.Site Address') }}</label> <span
                                     class="text-danger">*</span>
                                 <textarea name="site_address" id="site_address" cols="30" rows="3"
                                           class="form-control small-textarea-height @error('site_address') is-invalid @enderror">{{ old('site_address', setting('site_address')) }}</textarea>
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="customFile">{{ __('levels.site_logo') }}</label>
+                                <label for="customFile">{{ __('files.site_logo') }}</label>
                                 <div class="custom-file">
                                     <input name="site_logo" type="file"
                                         class="file-upload-input custom-file-input @error('site_logo') is-invalid @enderror"
@@ -97,7 +97,7 @@
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="site_email">{{ __('levels.site_email') }}</label> <span
+                                <label for="site_email">{{ __('files.site_email') }}</label> <span
                                     class="text-danger">*</span>
                                 <input name="site_email" id="site_email"
                                     class="form-control @error('site_email') is-invalid @enderror"
@@ -110,7 +110,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="timezone">{{ __('levels.timezone') }}</label> <span
+                                <label for="timezone">{{ __('files.timezone') }}</label> <span
                                     class="text-danger">*</span>
                                 <?php
                                         $className = 'form-control';
@@ -126,7 +126,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="site_description">{{ __('levels.description') }}</label> <span
+                                <label for="site_description">{{ __('files.Description') }}</label> <span
                                     class="text-danger">*</span>
                                 <textarea name="site_description" id="site_description" cols="30" rows="3"
                                     class="form-control small-textarea-height @error('site_description') is-invalid @enderror">{{ old('site_description', setting('site_description')) }}</textarea>
@@ -142,7 +142,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <button class="btn btn-primary">
-                            <span>{{ __('Update Site Setting') }}</span>
+                            <span>{{ __('files.Update Site Setting') }}</span>
                         </button>
                     </div>
                 </div>

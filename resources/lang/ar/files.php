@@ -96,5 +96,41 @@ return [
     'Role_Delete' => 'حذف',
     'Role_Show' => 'عرض',
 
+    'Site Setting' => 'إعدادات الموقع',
+    'SMS Setting' => ' إعدادات الرسائل',
+    'Email Setting' => ' إعدادات الإيميل',
+    'Notification Setting' => ' إعدادات الإشعارات',
+    'Email & Sms template Setting' => '    الإيميل و الرسائل',
+    'Front-end Setting' => ' إعدادات الفرنت اند',
+    'General Setting' => 'الإعدادات الرئيسية',
+    'mail_host' => 'إستضافة الإيميل',
+
+    'mail_username' => 'اسم الميل',
+    'mail_from_name' => 'الميل من',
+    'Enable' => 'مفعل',
+    'Disable' => 'غير مفعل',
+    'mail_port' => 'بورت الميل',
+    'mail_password' => 'باسورد الميل',
+    'mail_from_address' => 'الميل من العنوان',
+    'Update Email Setting' => 'تحديث إعدادات الميل',
+
+
+    'site_name' => ' اسم الموقع',
+    'Site Phone Number' => ' رقم الموقع ',
+    'site_footer' => ' فووتر الموقع',
+    'Site Address' => ' عنوان الموقع',
+    'site_logo' => ' لوجو الموقع',
+    'site_email' => ' إيميل الموقع',
+    'timezone' => ' المنطثة والوقت',
+    'Description' => 'الوصف',
+    'Update Site Setting' => '  تحديث إعدادات الموقع',
+
+
+    'Twilio Auth Token' => 'Twilio Auth Token',
+    'twilio_from' => 'Twilio From',
+    'twilio_account_sid' => 'Twilio Account SID',
+    'Update Sms Setting' => 'تحديث إعدادات الرسائل',
+
+
 
 ];

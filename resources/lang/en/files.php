@@ -97,4 +97,46 @@ return [
     'Role_Delete' => 'Delete',
     'Role_Show' => 'Show',
 
+
+    //Settings
+    'Site Setting' => 'Site Setting',
+    'SMS Setting' => 'SMS Setting',
+    'Email Setting' => 'Email Setting',
+    'Notification Setting' => 'Notification Setting',
+    'Email & Sms template Setting' => 'Email & Sms template Setting',
+    'Front-end Setting' => 'Front-end Setting',
+    'General Setting' => 'General Setting',
+    'mail_host' => 'Mail Host',
+
+    'mail_username' => 'mail_username',
+    'mail_from_name' => 'mail_from_name',
+    'Enable' => 'Enable',
+    'Disable' => 'Disable',
+    'mail_port' => 'Mail Port',
+    'mail_password' => 'Mail Password',
+    'mail_from_address' => 'Mail From Address',
+    'Update Email Setting' => 'Update Email Setting',
+
+
+    'site_name' => 'Site Name',
+    'Site Phone Number' => 'Site Phone Number',
+    'site_footer' => 'Site Footer',
+    'Site Address' => 'Site Address',
+    'site_logo' => 'Site Logo',
+    'site_email' => 'Site Email',
+    'timezone' => 'Timezone',
+    'Description' => 'Description',
+    'Update Site Setting' => 'Update Site Setting',
+
+
+    'Twilio Auth Token' => 'Twilio Auth Token',
+    'twilio_from' => 'Twilio From',
+    'twilio_account_sid' => 'Twilio Account SID',
+    'Update Sms Setting' => 'Update Sms Setting',
+
+
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
+
 ];
