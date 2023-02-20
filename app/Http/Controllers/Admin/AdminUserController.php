@@ -170,7 +170,7 @@ class AdminUserController extends BackendController
                 $retAction = '';
                 if (($user->id == auth()->id()) && (auth()->id() == 1)) {
                     if (auth()->user()->can('adminusers_show')) {
-                        $retAction .= '<a href="' . route('admin.adminusers.show', $user) . '" class="btn btn-sm btn-icon float-left btn-info" 
+                        $retAction .= '<a href="' . route('admin.adminusers.show', $user) . '" class="btn btn-sm btn-icon show float-left btn-info" 
 data-toggle="tooltip" data-placement="top" title="'.__('files.View').'"><i class="far fa-eye"></i></a>';
                     }
 
@@ -180,7 +180,7 @@ data-toggle="tooltip" data-placement="top" title="'.__('files.Edit').'"><i class
                     }
                 } else if (auth()->id() == 1) {
                     if (auth()->user()->can('adminusers_show')) {
-                        $retAction .= '<a href="' . route('admin.adminusers.show', $user) . '" class="btn btn-sm btn-icon float-left btn-info" 
+                        $retAction .= '<a href="' . route('admin.adminusers.show', $user) . '" class="btn btn-sm btn-icon show float-left btn-info" 
 data-toggle="tooltip" data-placement="top" title="'.__('files.View').'"><i class="far fa-eye"></i></a>';
                     }
 
