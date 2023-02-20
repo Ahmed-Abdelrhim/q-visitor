@@ -283,6 +283,11 @@ class OcrController extends Controller
 
     public function playy()
     {
+        if (Storage::disk('public')->exists('plate.txt')) {
+            return 'true';
+        } else {
+            return 'false';
+        }
         return 'Current Language => '.app()->getLocale();
     }
 }

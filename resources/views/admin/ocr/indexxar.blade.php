@@ -15,20 +15,27 @@
 </head>
 @include('admin.ocr.script')
 <?php
-if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
-    $myfile = fopen(storage_path('app/public/' . 'plate.txt'), "r");
-    $plate = fread($myfile, filesize(storage_path('app/public/' . 'plate.txt')));
-    fclose($myfile);
+if (\Illuminate\Support\Facades\Storage::disk('public')->exists('plate.txt')) {
+    if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
+        $myfile = fopen(storage_path('app/public/' . 'plate.txt'), "r");
+        $plate = fread($myfile, filesize(storage_path('app/public/' . 'plate.txt')));
+        fclose($myfile);
+    }else {
+        $plate = '';
+    }
+
 } else {
     $plate = '';
 }
+
 ?>
 
 
 <body>
 <section class="ftco-section">
     <div class="container">
-        <div class="row justify-content-right" style="direction:rtl"><a>عربى</a>|<a href="{{route('admin.OCR.index')}}">English</a></div>
+        <div class="row justify-content-right" style="direction:rtl"><a>عربى</a>|<a href="{{route('admin.OCR.index')}}">English</a>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5" style="margin-bottom:0px !important">
                 <h2 class="heading-section">تسجيل الزيارات</h2>
@@ -51,7 +58,8 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
                                     <input type="button" value="أستعاده رقم اللوحه" class="btn btn-success get_plate"
                                            style="height: 35px; padding: 7px 14px;margin-right: 7%">
 
-                                    <a class="btn btn-primary" href="{{route('admin.dashboard.index')}}" style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                    <a class="btn btn-primary" href="{{route('admin.dashboard.index')}}"
+                                       style="height: 35px; padding: 7px 14px;margin-left: 7%">
                                         لوحة التحكم
                                     </a>
 

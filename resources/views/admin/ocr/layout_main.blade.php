@@ -20,13 +20,18 @@
 @include('admin.ocr.script')
 
 <?php
-if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
-    $myfile = fopen(storage_path('app/public/' . 'plate.txt'), "r");
-    $plate = fread($myfile, filesize(storage_path('app/public/' . 'plate.txt')));
-    fclose($myfile);
+if (\Illuminate\Support\Facades\Storage::disk('public')->exists('plate.txt')) {
+    if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
+        $myfile = fopen(storage_path('app/public/' . 'plate.txt'), "r");
+        $plate = fread($myfile, filesize(storage_path('app/public/' . 'plate.txt')));
+        fclose($myfile);
+    } else {
+        $plate = '';
+    }
 } else {
     $plate = '';
 }
+
 ?>
 
 <body>
@@ -58,7 +63,8 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
                                     <input type="button" value="Last Car plate" class="btn btn-success get_plate"
                                            style="height: 35px; padding: 7px 14px;margin-left: 7%">
 
-                                    <a class="btn btn-primary" href="{{route('admin.dashboard.index')}}" style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                    <a class="btn btn-primary" href="{{route('admin.dashboard.index')}}"
+                                       style="height: 35px; padding: 7px 14px;margin-left: 7%">
                                         Dashboard
                                     </a>
 
@@ -251,7 +257,7 @@ if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
 <script src="{{ asset('assets/modules/izitoast/dist/js/iziToast.min.js') }}"></script>
 <script>
     @if(Session::has('message'))
-        var type = "{{ Session::get('alert-type','info') }}"
+    var type = "{{ Session::get('alert-type','info') }}"
     switch (type) {
         case 'info':
             iziToast.info({
