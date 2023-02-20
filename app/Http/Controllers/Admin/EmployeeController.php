@@ -165,7 +165,9 @@ class EmployeeController extends Controller
                 return Str::limit($employee->user->phone, 50);
             })
             ->editColumn('status', function ($employee) {
-                return ($employee->status == 5 ? trans('statuses.' . Status::ACTIVE) : trans('statuses.' . Status::INACTIVE));
+                // return ($employee->status == 5 ? trans('statuses.' . Status::ACTIVE) : trans('statuses.' . Status::INACTIVE));
+                return ($employee->status == 5 ? __('files.Active') : __('files.InActive' ));
+                // return ($employee->status == );
             })
             ->editColumn('date_of_joining', function ($employee) {
                 return $employee->date_of_joining;

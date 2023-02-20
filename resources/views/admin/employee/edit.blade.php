@@ -11,7 +11,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Employees') }}</h1>
+            <h1>{{ __('files.Employees') }}</h1>
             {{ Breadcrumbs::render('employees/edit') }}
         </div>
 
@@ -25,7 +25,7 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="first_name">{{ __('First Name ') }}</label> <span class="text-danger">*</span>
+                                        <label for="first_name">{{ __('files.First Name') }}</label> <span class="text-danger">*</span>
                                         <input id="first_name" type="text" name="first_name" class="form-control {{ $errors->has('first_name') ? " is-invalid " : '' }}" value="{{ old('first_name',$employee->user->first_name) }}">
                                         @error('first_name')
                                         <div class="invalid-feedback">
@@ -34,7 +34,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="last_name">{{ __('Last Name') }}</label> <span class="text-danger">*</span>
+                                        <label for="last_name">{{ __('files.Last Name') }}</label> <span class="text-danger">*</span>
                                         <input id="last_name" type="text" name="last_name" class="form-control {{ $errors->has('last_name') ? " is-invalid " : '' }}" value="{{ old('last_name',$employee->user->last_name) }}">
                                         @error('last_name')
                                         <div class="invalid-feedback">
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('E-Mail Address') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Email') }}</label> <span class="text-danger">*</span>
                                         <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email',$employee->user->email) }}">
                                         @error('email')
                                         <div class="invalid-feedback">
@@ -55,7 +55,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label>{{ __('Phone') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Phone') }}</label> <span class="text-danger">*</span>
                                         <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone',$employee->user->phone) }}">
                                         @error('phone')
                                         <div class="invalid-feedback">
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('Joining Date') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Joining Date') }}</label> <span class="text-danger">*</span>
                                         <input type="text" autocomplete="off" id="date-picker" name="date_of_joining" class="form-control @error('date_of_joining') is-invalid @enderror" value="{{ old('date_of_joining',$employee->date_of_joining) }}">
                                         @error('date_of_joining')
                                         <div class="invalid-feedback">
@@ -75,7 +75,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="gender">{{ __('Gender') }}</label> <span class="text-danger">*</span>
+                                        <label for="gender">{{ __('files.Gender') }}</label> <span class="text-danger">*</span>
                                         <select id="gender" name="gender" class="form-control @error('gender') is-invalid @enderror">
                                             @foreach(trans('genders') as $key => $gender)
                                                 <option value="{{ $key }}" {{ (old('gender',$employee->gender) == $key) ? 'selected' : '' }}>{{ $gender }}</option>
@@ -90,9 +90,9 @@
 
                                     <!-- Roles -->
                                     <div class="form-group col">
-                                        <label for="gender">{{ __('Roles') }}</label> <span class="text-danger">*</span>
+                                        <label for="gender">{{ __('files.Roles') }}</label> <span class="text-danger">*</span>
                                         <select id="gender" name="role" class="form-control @error('role') is-invalid @enderror">
-                                            <option selected value="0">choose..</option>
+                                            <option selected value="0">{{__('files.choose..')}}</option>
                                             @foreach($roles as $role)
                                                 <option value="{{$role->id}}">{{ $role->name }}</option>
                                             @endforeach
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="department_id">{{ __('Department') }}</label> <span class="text-danger">*</span>
+                                        <label for="department_id">{{ __('files.Department') }}</label> <span class="text-danger">*</span>
                                         <select id="department_id" name="department_id" class="form-control @error('department_id') is-invalid @enderror">
                                             @foreach($departments as $key => $department)
                                                 <option value="{{ $department->id }}" {{ (old('department_id',$employee->department_id) == $department->id) ? 'selected' : '' }}>{{ $department->name }}</option>
@@ -121,7 +121,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="designation_id">{{ __('Positions') }}</label> <span class="text-danger">*</span>
+                                        <label for="designation_id">{{ __('files.Positions') }}</label> <span class="text-danger">*</span>
                                         <select id="designation_id" name="designation_id" class="form-control @error('designation_id') is-invalid @enderror">
                                             @foreach($designations as $key => $designation)
                                                 <option value="{{ $designation->id }}" {{ (old('designation_id',$employee->designation_id) == $designation->id) ? 'selected' : '' }}>{{ $designation->name }}</option>
@@ -137,7 +137,7 @@
 
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="about">{{ __('About') }}</label>
+                                        <label for="about">{{ __('files.About') }}</label>
                                         <textarea name="about"
                                                   class="summernote-simple form-control height-textarea @error('about')
                                                       is-invalid @enderror"
@@ -151,10 +151,10 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="customFile">{{ __('Image') }}</label>
+                                        <label for="customFile">{{ __('files.Image') }}</label>
                                         <div class="custom-file">
                                             <input name="image" type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFile" onchange="readURL(this);">
-                                            <label  class="custom-file-label" for="customFile">{{ __('Choose file') }}</label>
+                                            <label  class="custom-file-label" for="customFile">{{ __('files.Choose file') }}</label>
                                         </div>
                                         @if ($errors->has('image'))
                                             <div class="help-block text-danger">
@@ -171,7 +171,7 @@
                             </div>
 
                             <div class="card-footer ">
-                                <button class="btn btn-primary mr-1" type="submit">{{ __('Update') }}</button>
+                                <button class="btn btn-primary mr-1" type="submit">{{ __('files.Update') }}</button>
                             </div>
                         </form>
                     </div>

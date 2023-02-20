@@ -55,5 +55,14 @@ return [
     // Employees
     'Employees' => 'Employees',
     'Add Employee' => 'Add Employee',
+    'Password' => 'Password',
+    'Positions' => 'Positions',
+    'Department' => 'Department',
+    'Roles' => 'Roles',
+    'choose..' => 'choose..',
+    'Designation' => 'Designation',
+    'Active' => 'Active',
+    'InActive' => 'InActive',
+    'About' => 'About',
 
 ];

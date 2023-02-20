@@ -4,7 +4,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Employees') }}</h1>
+            <h1>{{ __('files.Employees') }}</h1>
             {{ Breadcrumbs::render('employees/show') }}
         </div>
 
@@ -21,21 +21,21 @@
                         </div>
                         <div class="profile-widget-description profile-widget-employee">
                             <dl class="row">
-                                <dt class="col-sm-4">{{ __('Name') }}</dt>
+                                <dt class="col-sm-4">{{ __('files.Name') }}</dt>
                                 <dd class="col-sm-8">{{ $employee->user->name }}</dd>
-                                <dt class="col-sm-4">{{ __('Phone') }}</dt>
+                                <dt class="col-sm-4">{{ __('files.Phone') }}</dt>
                                 <dd class="col-sm-8">{{ $employee->user->phone }}</dd>
-                                <dt class="col-sm-4">{{ __('Email') }}</dt>
+                                <dt class="col-sm-4">{{ __('files.Email') }}</dt>
                                 <dd class="col-sm-8">{{ $employee->user->email }}</dd>
-                                <dt class="col-sm-4">{{ __('Joining Date') }}</dt>
+                                <dt class="col-sm-4">{{ __('files.Joining Date') }}</dt>
                                 <dd class="col-sm-8">{{ $employee->date_of_joining }}</dd>
-                                <dt class="col-sm-4">{{ __('Gender') }}</dt>
+                                <dt class="col-sm-4">{{ __('files.Gender') }}</dt>
                                 <dd class="col-sm-8">{{ $employee->mygender }}</dd>
-                                <dt class="col-sm-4">{{ __('Department') }}</dt>
+                                <dt class="col-sm-4">{{ __('files.Department') }}</dt>
                                 <dd class="col-sm-8">{{ $employee->department->name }}</dd>
-                                <dt class="col-sm-4">{{ __('Designation') }}</dt>
+                                <dt class="col-sm-4">{{ __('files.Designation') }}</dt>
                                 <dd class="col-sm-8">{{ $employee->designation->name }}</dd>
-                                <dt class="col-sm-4">{{ __('Status') }}</dt>
+                                <dt class="col-sm-4">{{ __('files.Status') }}</dt>
                                 <dd class="col-sm-8">{{ $employee->mystatus }}</dd>
                             </dl>
                         </div>
@@ -63,12 +63,12 @@
                                                data-hidecolumn="{{ auth()->user()->can('visitors_show') || auth()->user()->can('visitors_edit') || auth()->user()->can('visitors_delete') }}">
                                             <thead>
                                             <tr>
-                                                <th>{{ __('levels.id') }}</th>
-                                                <th>{{ __('image') }}</th>
-                                                <th>{{ __('levels.name') }}</th>
-                                                <th>{{ __('levels.email') }}</th>
-                                                <th>{{ __('Checkin') }}</th>
-                                                <th>{{ __('levels.actions') }}</th>
+                                                <th>{{ __('files.ID') }}</th>
+                                                <th>{{ __('files.Image') }}</th>
+                                                <th>{{ __('files.Name') }}</th>
+                                                <th>{{ __('files.Email') }}</th>
+                                                <th>{{ __('files.Checkin') }}</th>
+                                                <th>{{ __('files.Actions') }}</th>
                                             </tr>
                                             </thead>
                                         </table>
