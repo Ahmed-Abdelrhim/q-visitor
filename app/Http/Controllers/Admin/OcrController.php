@@ -266,11 +266,7 @@ class OcrController extends Controller
                 foreach ($images as $counter => $img) {
                     $img = str_replace("data:image/jpeg;base64,", "", $img);
                     if ($img != '' or $img != ' ') {
-                        if ($counter == 0) {
-                            $visiting_details->addMedia($img)->toMediaCollection('visitor');
-                        } else {
-                            file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
-                        }
+                        file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
                     }
                 }
 
@@ -287,7 +283,6 @@ class OcrController extends Controller
     {
         return 'Current Language => '.app()->getLocale();
     }
-
 }
 
 
