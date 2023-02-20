@@ -132,5 +132,10 @@ return [
     'Update Sms Setting' => 'تحديث إعدادات الرسائل',
 
 
+    'SMS Notifications' => ' إشعارات الرسائل',
+    'Email Notifications' => ' إشعارات الإيميل',
+    'Update Notification Setting' => 'تحديث إعدادات الإشعارات',
+
+
 
 ];

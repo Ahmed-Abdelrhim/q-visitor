@@ -135,6 +135,19 @@ return [
     'Update Sms Setting' => 'Update Sms Setting',
 
 
+    'SMS Notifications' => 'SMS Notifications',
+    'Email Notifications' => 'Email Notifications',
+    'Update Notification Setting' => 'Update Notification Setting',
+
+
+
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
+    'Site' => 'Site',
     'Site' => 'Site',
     'Site' => 'Site',
     'Site' => 'Site',
