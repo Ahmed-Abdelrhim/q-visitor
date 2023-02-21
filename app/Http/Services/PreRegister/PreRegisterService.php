@@ -121,7 +121,7 @@ class PreRegisterService
         $input['phone'] = $request->input('phone');
         $input['gender'] = $request->input('gender');
         $input['address'] = $request->input('address');
-        $input['employee_id'] = $request->input('employee_id');
+        // $input['employee_id'] = $request->input('employee_id');
         $input['is_pre_register'] = true;
         $input['status'] = Status::ACTIVE;
         $pre_register->visitor->update($input);
