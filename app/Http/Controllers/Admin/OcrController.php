@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 use function PHPUnit\Framework\throwException;
 
 class OcrController extends Controller
@@ -219,7 +220,7 @@ class OcrController extends Controller
         }
 
         try {
-            $qrcode = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data='. $name[0] . $reg_no);
+            $qrcode = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . $name[0] . $reg_no);
             // $qrcode = file_get_contents('https://www.qudratech-eg.net/qrcode/index.php?data=' . $name[0] . $reg_no);
         } catch (\Exception $e) {
             $qrcode = NULL;
@@ -283,13 +284,21 @@ class OcrController extends Controller
 
     public function playy()
     {
-        if (Storage::disk('public')->exists('plate.txt')) {
-            return 'true';
-        } else {
-            return 'false';
-        }
-        return 'Current Language => '.app()->getLocale();
+        if (auth()->user()->hasPermissionTo('dashboard'))
+            return 'Yes He  Has';
+        return 'No He Has Not';
+
+        //        $role = Role::query()->find(3);
+        //        return $role->getAllPermissions();
+        //        if (Storage::disk('public')->exists('plate.txt')) {
+        //            return 'true';
+        //        } else {
+        //            return 'false';
+        //        }
+        //        return 'Current Language => ' . app()->getLocale();
+        //    }
     }
 }
 
 
+// permission_id => 1  , role_id => 3

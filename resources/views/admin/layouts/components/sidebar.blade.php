@@ -27,7 +27,7 @@
             {{--            {!! $backendMenus !!}--}}
 
             <!-- Start Dashboard -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
+            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('dashboard') )
                 <li class="dashboard">
                     <a class="nav-link" href="{{route('admin.dashboard.index')}}">
                         <i class="fa fa-home"></i>
@@ -39,7 +39,7 @@
 
 
             <!-- Start Profile -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
+            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('profile') )
                 <li class="profile">
                     <a class="nav-link" href="{{route('admin.profile')}}">
                         <i class="far fa-user"></i>
@@ -50,7 +50,7 @@
             <!-- End Profile -->
 
             <!-- Start Departments -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
+            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('departments') )
                 <li class="departments">
                     <a class="nav-link" href="{{route('admin.departments.index')}}">
                         <i class="fas fa-building"></i>
