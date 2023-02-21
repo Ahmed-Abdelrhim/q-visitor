@@ -50,7 +50,8 @@
             <!-- End Profile -->
 
             <!-- Start Departments -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('departments') )
+            @if(auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasAnyPermission(['departments','departments_create','departments_edit','departments_delete','departments_show']))
                 <li class="departments">
                     <a class="nav-link" href="{{route('admin.departments.index')}}">
                         <i class="fas fa-building"></i>
@@ -61,8 +62,9 @@
             <!-- End Departments -->
 
 
-            <!-- Start  Positions -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
+            <!-- Start  Positions , designations -->
+            @if(auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasAnyPermission(['designations','designations_create','designations_edit','designations_delete','designations_show']))
                 <li class="positions">
                     <a class="nav-link" href="{{route('admin.designations.index')}}">
                         <i class="fas fa-layer-group"></i>
@@ -73,7 +75,8 @@
             <!-- End Positions -->
 
             <!-- Start  Employees -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
+            @if(auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasAnyPermission(['employees','employees_create','employees_edit','employees_delete','employees_show']))
                 <li class="employees">
                     <a class="nav-link" href="{{route('admin.employees.index')}}">
                         <i class="fas fa-user-secret"></i>
@@ -85,7 +88,8 @@
 
 
             <!-- Start  Visitors -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
+            @if(auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasAnyPermission(['visitors','visitors_create','visitors_edit','visitors_delete','visitors_show']))
                 <li class="visitors">
                     <a class="nav-link" href="{{route('admin.visitors.index')}}">
                         <!-- <i class="fas fa-walking"></i> -->
@@ -97,7 +101,8 @@
             <!-- End Visitors -->
 
             <!-- Start  Pre-Register -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
+            @if(auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasAnyPermission(['pre-registers','pre-registers_create','pre-registers_edit','pre-registers_delete','pre-registers_show']))
                 <li class="pre-register">
                     <a class="nav-link" href="{{route('admin.pre-registers.index')}}">
                         <i class="fas fa-laptop"></i>
@@ -107,8 +112,9 @@
             @endif
             <!-- End  Pre-Register -->
 
-            <!-- Start  Administrators -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
+            <!-- Start  Administrators , adminusers -->
+            @if(auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasAnyPermission(['adminusers','adminusers_create','adminusers_edit','adminusers_delete','adminusers_show']))
                 <li class="administrators">
                     <a class="nav-link" href="{{route('admin.adminusers.index')}}">
                         <i class="fas fa-user-friends"></i>
@@ -120,7 +126,8 @@
 
 
             <!-- Start  Role -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
+            @if(auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasAnyPermission(['role','role_create','role_edit','role_delete','role_show']))
                 <li class="role">
                     <a class="nav-link" href="{{route('admin.role.index')}}">
                         <i class="fa fa-star"></i>
@@ -132,7 +139,7 @@
 
 
             <!-- Start  Settings -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Employee')|| auth()->user()->hasRole('Reception') )
+            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('setting'))
                 <li class="settings">
                     <a class="nav-link" href="{{route('admin.setting.index')}}">
                         <!-- <i class="fa fa-star"></i> -->
@@ -143,26 +150,14 @@
             @endif
             <!-- End  Settings -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-            @if(auth()->user()->hasRole('Admin') ||auth()->user()->hasRole('ocr')|| auth()->user()->hasPermissionTo('ocr_create') )
+            @if(auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasAnyPermission(['ocr','ocr_create','ocr_edit','ocr_show','ocr_delete']))
                 <li class="ocr">
                     <a class="nav-link" href="{{route('admin.OCR.index')}}">
                         <!-- <i class="fas fa-facebook"> -->
                         <i class="fa fa-camera"></i>
                         <!-- <i class="fa fa-scanner"></i> -->
-                        <span>OCR</span>
-                        </i>
+                        <span>{{__('files.OCR')}}</span>
                     </a>
                 </li>
             @endif
