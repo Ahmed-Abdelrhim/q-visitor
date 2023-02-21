@@ -54,11 +54,13 @@
             background-color: #e79e28 !important;
             border-color: #e79e28 !important;
             color: #fff;
+            margin-left: 1% !important;
         }
         .view{
             box-shadow: 0 2px 6px #5c5c5e !important;
             background-color: #5c5c5e !important;
             border-color: #5c5c5e !important;
+            margin-left: 1% !important;
         }
         .view:hover{
             box-shadow: 0 2px 6px #919090 !important;
@@ -68,7 +70,8 @@
         .save{
             box-shadow: 0 2px 6px #353b99 !important;
             background-color: #353b99 !important;
-            border-color: #353b99 !important; 
+            border-color: #353b99 !important;
+            margin-left: 1% !important; 
         }
         .save:hover{
             box-shadow: 0 2px 6px #353b99 !important;
@@ -77,6 +80,13 @@
         }
         .wrapper{
             border-radius: 15px !important;
+        }
+        .form-group{
+            width: 70% !important;
+            margin: auto !important;
+        }
+        .info-wrap .dbox:last-child{
+            padding-left: 0 !important;
         }
     </style>
 
