@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{asset('css/ocr_styles/style.css')}}">
     @include('admin.ocr.index_style')
 
+    
+
 </head>
 @include('admin.ocr.script')
 <?php

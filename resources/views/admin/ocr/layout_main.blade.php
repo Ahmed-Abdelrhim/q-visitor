@@ -15,6 +15,70 @@
     <link rel="stylesheet" href="{{asset('css/ocr_styles/style.css')}}">
 
     @include('admin.ocr.index_style')
+    <style>
+        .contact-wrap{
+            background-color: #24ba64 !important;
+            background-image: linear-gradient(to bottom right, #24ba64, #c6cdc6) !important;
+            border-radius: 15px 15px 0 0!important;
+        }
+        .btn.btn-primary,.btn-success{
+            border-color: #fff!important;
+            color: #fff !important;
+            border: 2px solid #ffffff !important;
+            background: transparent !important;
+        }
+        .btn.btn-primary:hover, .btn-success:hover{
+            background-color:#353b99 !important;
+            border: 2px solid #ffffff !important;
+        }
+        .heading-section{
+            color: #353b99 !important;
+            font-weight: bold !important;
+        }
+        .plate_no{
+            border: 2px solid #FFF !important;
+        }
+        h5{
+            font-weight:bold !important;
+        }
+        .info-wrap .dbox .icon span{
+            color: #353b99 !important;
+        }
+        .new_page{
+            box-shadow: 0 2px 6px #24ba64 !important;
+            background-color: #24ba64 !important;
+            border-color: #24ba64 !important;
+        }
+        .scan{
+            box-shadow: 0 2px 6px #e79e28 !important;
+            background-color: #e79e28 !important;
+            border-color: #e79e28 !important;
+            color: #fff;
+        }
+        .view{
+            box-shadow: 0 2px 6px #5c5c5e !important;
+            background-color: #5c5c5e !important;
+            border-color: #5c5c5e !important;
+        }
+        .view:hover{
+            box-shadow: 0 2px 6px #919090 !important;
+            background-color: #919090 !important;
+            border-color: #919090 !important;
+        }
+        .save{
+            box-shadow: 0 2px 6px #353b99 !important;
+            background-color: #353b99 !important;
+            border-color: #353b99 !important; 
+        }
+        .save:hover{
+            box-shadow: 0 2px 6px #353b99 !important;
+            background-color: #353b99 !important;
+            border-color: #353b99 !important; 
+        }
+        .wrapper{
+            border-radius: 15px !important;
+        }
+    </style>
 
 </head>
 @include('admin.ocr.script')
