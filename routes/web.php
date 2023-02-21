@@ -89,17 +89,18 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('send-sms/{visitingDetail}', 'VisitorController@sendSms')->name('visitors.send.sms');
 
         // Ocr Resource Controller···
-//        Route::group(['middleware' => ['role_or_permission:Admin,ocr|ocr_create']], function () {
-        Route::group(['middleware' => ['role:Admin|OCR','permission:ocr_create']], function () {
-            Route::resource('OCR','OcrController');
-            Route::get('get-last-car-plate',[OcrController::class,'getLastCarPlate'])->name('get.last.car.plate');
-            Route::get('ocr-clear',[OcrController::class,'ocrClear'])->name('ocr.clear');
-            Route::get('ocr-indexxarr',[OcrController::class,'ocrIndexxar'])->name('ocr.indexxar');
-            Route::get('ocr-print/{id?}',[OcrController::class,'ocrPrint'])->name('ocr.print');
-            Route::post('ocr-save',[OcrController::class,'ocrSave'])->name('ocr.save');
-        });
-        Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
+        Route::resource('OCR', 'OcrController');
+        Route::get('get-last-car-plate', [OcrController::class, 'getLastCarPlate'])->name('get.last.car.plate');
+        Route::get('ocr-clear', [OcrController::class, 'ocrClear'])->name('ocr.clear');
+        Route::get('ocr-indexxarr', [OcrController::class, 'ocrIndexxar'])->name('ocr.indexxar');
+        Route::get('ocr-print/{id?}', [OcrController::class, 'ocrPrint'])->name('ocr.print');
+        Route::post('ocr-save', [OcrController::class, 'ocrSave'])->name('ocr.save');
+        // Route::group(['middleware' => ['role_or_permission:Admin,ocr|ocr_create']], function () {
+        // Route::group(['middleware' => ['role:Admin|OCR','permission:ocr|ocr_show|ocr_create|ocr_edit|ocr_delete']], function () {
+        // });
 
+        // Settings Routes···
+        Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
             Route::get('/', 'SettingController@index')->name('index');
             Route::post('/', 'SettingController@siteSettingUpdate')->name('site-update');
             Route::get('sms', 'SettingController@smsSetting')->name('sms');
@@ -169,7 +170,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
                 'uses' => 'CheckInController@find_pre_visitor'
             ]);
         });
-        Route::get('change_locale/{iso}',[HomeController::class,'changeLocaleLanguage'])->name('change_locale');
+        Route::get('change_locale/{iso}', [HomeController::class, 'changeLocaleLanguage'])->name('change_locale');
         Route::get('Play', [\App\Http\Controllers\Admin\VisitorController::class, 'play']);
         Route::get('playy', [OcrController::class, 'playy']);
     });

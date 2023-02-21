@@ -21,12 +21,21 @@ use function PHPUnit\Framework\throwException;
 
 class OcrController extends Controller
 {
-    public $new_request;
-
     public function index()
     {
+        if (!$this->authorizedToView())
+            return view('errors.403');
         $this->linker();
         return view('admin.ocr.layout_main');
+    }
+
+    public function authorizedToView()
+    {
+        if (auth()->user()->hasRole('Admin') || auth()->user()->hasAnyPermission(['ocr', 'ocr_create', 'ocr_edit', 'ocr_delete', 'ocr_show'])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -102,6 +111,8 @@ class OcrController extends Controller
 
     public function ocrIndexxar()
     {
+        if (!$this->authorizedToView())
+            return view('errors.403');
         return view('admin.ocr.indexxar');
     }
 
@@ -284,7 +295,14 @@ class OcrController extends Controller
 
     public function playy()
     {
-        if (auth()->user()->hasPermissionTo('dashboard'))
+        if (auth()->user()->hasRole('Admin') || auth()->user()->hasAnyPermission(['ocr', 'ocr_create', 'ocr_edit', 'ocr_delete', 'ocr_show'])) {
+            return 'have the permission';
+        } else {
+            return 'Dont have the permission';
+        }
+
+
+        if (auth()->user()->hasPermissionTo('ocr'))
             return 'Yes He  Has';
         return 'No He Has Not';
 
