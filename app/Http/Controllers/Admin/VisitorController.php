@@ -137,16 +137,6 @@ class VisitorController extends Controller
                     }
                 }
 
-
-                // $permissions = $role->permissions->pluck('name');
-                //                    foreach ($permissions as $permission) {
-                //                        if (auth()->user()->hasPermissionTo($permission)) {
-                //                            $approve = true;
-                //                            break;
-                //                        }
-                //                    } // endforeach
-
-                // if (auth()->user()->can('visitors_show')) {
                 if ($approve) {
                     $msg = __('files.Approve & send sms');
                     if ($visitingDetail->sent_sms_before == 1) {
@@ -300,3 +290,17 @@ data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'">
 // if ($visit[0]['sent_sms_before'] == 1) {
 // $msg = 'Re-send sms';
 // }
+
+
+
+
+
+// $permissions = $role->permissions->pluck('name');
+//                    foreach ($permissions as $permission) {
+//                        if (auth()->user()->hasPermissionTo($permission)) {
+//                            $approve = true;
+//                            break;
+//                        }
+//                    } // endforeach
+
+// if (auth()->user()->can('visitors_show')) {
