@@ -137,6 +137,18 @@
             @endif
             <!-- End  Role -->
 
+            <!-- Start  Types -->
+            @if(auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasAnyPermission(['types','types_create','types_edit','types_delete','types_show']))
+                <li class="role">
+                    <a class="nav-link" href="{{route('admin.types.index')}}">
+                        <i class="fas fa-layer-group"></i>
+                        <span>{{__('files.Types')}}</span>
+                    </a>
+                </li>
+            @endif
+            <!-- End  Types -->
+
 
             <!-- Start  Settings -->
             @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('setting'))

@@ -50,6 +50,8 @@ return [
     'From Date' =>'From Date',
     'Expiry Date' =>'Expiry Date',
     'Type' => 'Type',
+    'Types' => 'Types',
+
     'TypeApproval' => 'Visit Approve Control',
 
     'Purpose' =>'Purpose',
