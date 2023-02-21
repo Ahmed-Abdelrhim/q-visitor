@@ -4,7 +4,7 @@
 
 <section class="section">
     <div class="section-header">
-        <h1>{{ __('Pre-registers') }}</h1>
+        <h1>{{ __('files.Pre-registers') }}</h1>
         {{ Breadcrumbs::render('pre-registers') }}
     </div>
 
@@ -18,7 +18,7 @@
                     @can('pre-registers_create')
                         <div class="card-header">
                             <a href="{{ route('admin.pre-registers.create') }}" class="btn btn-icon icon-left btn-primary"><i
-                                    class="fas fa-plus"></i> {{ __('Add Pre-register') }}</a>
+                                    class="fas fa-plus"></i> {{ __('files.Add Pre-register') }}</a>
                         </div>
                     @endcan
 
@@ -29,16 +29,16 @@
                                 data-status="{{ \App\Enums\Status::ACTIVE }}" data-hidecolumn="{{ auth()->user()->can('pre-registers_show') || auth()->user()->can('pre-registers_edit') || auth()->user()->can('pre-registers_delete') }}">
                                 <thead>
                                     <tr>
-                                        <th>{{ __('levels.id') }}</th>
-                                        <th>{{ __('levels.name') }}</th>
-                                        <th>{{ __('levels.email') }}</th>
-                                        <th>{{ __('levels.phone') }}</th>
-                                        <th>{{ __('Employee') }}</th>
-                                        <th>{{ __('Expected Date') }}</th>
-                                        <th>{{ __('Expected Time') }}</th>
-                                        <th>{{ __('Exit Date') }}</th>
-                                        <th>{{ __('Exit Time') }}</th>
-                                        <th>{{ __('levels.actions') }}</th>
+                                        <th>{{ __('files.ID') }}</th>
+                                        <th>{{ __('files.Name') }}</th>
+                                        <th>{{ __('files.Email') }}</th>
+                                        <th>{{ __('files.Phone') }}</th>
+                                        <th>{{ __('files.Employee') }}</th>
+                                        <th>{{ __('files.Expected Date') }}</th>
+                                        <th>{{ __('files.Expected Time') }}</th>
+                                        <th>{{ __('files.Exit Date') }}</th>
+                                        <th>{{ __('files.Exit Time') }}</th>
+                                        <th>{{ __('files.Actions') }}</th>
                                     </tr>
                                 </thead>
                             </table>

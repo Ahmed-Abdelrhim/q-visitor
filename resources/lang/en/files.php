@@ -182,5 +182,13 @@ return [
     'Approval Two' => 'Approval Two',
     'Add Types' => 'Add Types',
 
+    'Exit Date' => 'Exit Date',
+    'Exit Time' => 'Exit Time',
+    'Add Pre-register' => 'Add Pre-register',
+    'Comments' => 'Comments',
+    '' => '',
+    '' => '',
+    '' => '',
+
 
 ];
