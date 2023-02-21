@@ -176,7 +176,11 @@ return [
     'Success Transaction' => 'Success Transaction',
 
 
-    'Site' => 'Site',
-    'Site' => 'Site',
+    // Types
+    'Approval Levels' => 'Approval Levels',
+    'Approval One' => 'Approval One',
+    'Approval Two' => 'Approval Two',
+    'Add Types' => 'Add Types',
+
 
 ];

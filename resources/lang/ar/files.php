@@ -165,4 +165,15 @@ return [
     'Old Password' => ' الباسورد القديم',
     'Save Password' => 'حفظ الباسورد',
 
+
+
+    // Types
+    'Approval Levels' => 'عدد الموافقات',
+    'Approval One' => 'الموافقة الأولي',
+    'Approval Two' => 'الموافقة الثانية',
+    'Add Types' => 'إضافة نوع',
+    '' => '',
+    '' => '',
+    '' => '',
+
 ];

@@ -156,11 +156,15 @@ class TypesController extends Controller
                 $retAction = '';
 
                 if (auth()->user()->can('types_edit')) {
-                    $retAction .= '<a href="' . route('admin.types.edit', $designation) . '" class="btn btn-sm btn-icon float-left btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"><i class="far fa-edit"></i></a>';
+                    $retAction .= '<a href="' . route('admin.types.edit', $designation) . '" 
+class="btn btn-sm btn-icon float-left btn-primary" data-toggle="tooltip" 
+data-placement="top" title="'.__('files.Edit').'"><i class="far fa-edit"></i></a>';
                 }
 
                 if (auth()->user()->can('types_delete')) {
-                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.types.destroy', $designation) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button></form>';
+                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.types.destroy', $designation) . '" method="POST">' .
+                        method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" 
+data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'"><i class="fa fa-trash"></i></button></form>';
                 }
                 return $retAction;
             })

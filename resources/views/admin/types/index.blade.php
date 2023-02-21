@@ -4,7 +4,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Types') }}</h1>
+            <h1>{{ __('files.Types') }}</h1>
             <!--  {{ Breadcrumbs::render('types') }}-->
         </div>
 
@@ -16,7 +16,7 @@
                             <div class="card-header">
                                 <a href="{{ route('admin.types.create') }}"
                                    class="btn btn-icon icon-left btn-primary"><i
-                                            class="fas fa-plus"></i> {{ __('Add Types') }}</a>
+                                            class="fas fa-plus"></i> {{ __('files.Add Types') }}</a>
                             </div>
                         @endcan
                         <div class="card-body">
@@ -28,10 +28,10 @@
                                        data-hidecolumn="{{ auth()->user()->can('types_edit') || auth()->user()->can('types_delete') }}">
                                     <thead>
                                     <tr>
-                                        <th>{{ __('levels.id') }}</th>
-                                        <th>{{ __('levels.name') }}</th>
-                                        <th>{{ __('levels.status') }}</th>
-                                        <th>{{ __('levels.actions') }}</th>
+                                        <th>{{ __('files.ID') }}</th>
+                                        <th>{{ __('files.Name') }}</th>
+                                        <th>{{ __('files.Status') }}</th>
+                                        <th>{{ __('files.Actions') }}</th>
                                     </tr>
                                     </thead>
                                 </table>

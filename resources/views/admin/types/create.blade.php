@@ -4,7 +4,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Types') }}</h1>
+            <h1>{{ __('files.Types') }}</h1>
             {{ Breadcrumbs::render('types/add') }}
         </div>
 
@@ -18,7 +18,7 @@
 
                                 <!-- Name -->
                                 <div class="form-group">
-                                    <label>{{ __('levels.name') }}</label> <span class="text-danger">*</span>
+                                    <label>{{ __('files.Name') }}</label> <span class="text-danger">*</span>
                                     <input type="text" name="name"
                                            class="form-control @error('name') is-invalid @enderror"
                                            value="{{ old('name') }}">
@@ -31,7 +31,7 @@
 
                                 <!-- Level -->
                                 <div class="form-group">
-                                    <label>{{ __('Approval Levels') }}</label> <span class="text-danger">*</span>
+                                    <label>{{ __('files.Approval Levels') }}</label> <span class="text-danger">*</span>
                                     <select name="level" class="form-control @error('level') is-invalid @enderror">
                                         <option value="0">0</option>
                                         <option value="1" selected>1</option>
@@ -48,7 +48,7 @@
                                 <!-- Approval One -->
                                 @if(isset($roles) && count($roles) > 0)
                                     <div class="form-group">
-                                        <label>{{ __('Approval One') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Approval One') }}</label> <span class="text-danger">*</span>
                                         <select name="role_one"
                                                 class="form-control @error('role_one') is-invalid @enderror">
                                             @foreach($roles as $role)
@@ -65,7 +65,7 @@
 
                                     <!-- Approval Two -->
                                     <div class="form-group">
-                                        <label>{{ __('Approval Two') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Approval Two') }}</label> <span class="text-danger">*</span>
                                         <select name="role_two"
                                                 class="form-control @error('role_two') is-invalid @enderror">
                                             <option value="0" selected>NONE</option>
@@ -84,7 +84,7 @@
 
                                 <!-- Status -->
                                 <div class="form-group">
-                                    <label>{{ __('levels.status') }}</label> <span class="text-danger">*</span>
+                                    <label>{{ __('files.Status') }}</label> <span class="text-danger">*</span>
                                     <select name="status" class="form-control @error('status') is-invalid @enderror">
                                         @foreach(trans('statuses') as $key => $status)
                                             <option value="{{ $key }}" {{ (old('status') == $key) ? 'selected' : '' }}>{{ $status }}</option>
@@ -99,7 +99,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <button class="btn btn-primary mr-1" type="submit">{{ __('Submit') }}</button>
+                                <button class="btn btn-primary mr-1" type="submit">{{ __('files.Submit') }}</button>
                             </div>
                         </form>
                     </div>
