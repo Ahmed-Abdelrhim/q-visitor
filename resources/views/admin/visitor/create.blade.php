@@ -135,7 +135,7 @@
 								<div class="form-row">
                                    
                                     <div class="form-group col">
-                                        <label>{{ __('files.Type') }}</label>
+                                        <label>{{ __('files.TypeApproval') }}</label>
                                         <!--<input type="text" name="type" class="form-control @error('type') is-invalid @enderror" value="{{ old('type') }}" id="type">-->
 										<select id="type" name="type" class="form-control select2 @error('type') is-invalid @enderror">
                                             @foreach($types as $key => $type)

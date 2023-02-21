@@ -47,6 +47,7 @@ return [
     'From Date' =>'تاريخ البدأ',
     'Expiry Date' =>'تاريخ الإنتهائ',
     'Type' => 'التحكم',
+    'TypeApproval' => 'التحكم للموافقة علي الزيارة',
     'Purpose' =>'غرض الزيارة',
     'Address' =>'العنوان',
     'Choose file' => 'إختر ملف',
