@@ -2462,6 +2462,16 @@ pre {
   z-index: 880;
   left: 0; }
 
+.main-sidebar-rtl {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #fff;
+  z-index: 880;
+  right: 0; }
+
 .main-sidebar,
 .navbar,
 .main-content,
@@ -2855,6 +2865,13 @@ body.layout-3 .main-footer {
   width: 100%;
   position: relative; }
 
+.main-content-rtl {
+  padding-left: 30px;
+  padding-right: 280px;
+  padding-top: 80px;
+  width: 100%;
+  position: relative; }
+
 .main-footer {
   padding: 20px 30px 20px 280px;
   margin-top: 40px;
@@ -2911,7 +2928,8 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
   .main-sidebar {
     position: fixed !important;
     margin-top: 0 !important;
-    z-index: 891; }
+    z-index: 891;
+  }
   body.layout-2 .main-wrapper,
   body.layout-3 .main-wrapper {
     width: 100%;

@@ -1,4 +1,4 @@
-<div class="main-sidebar">
+<div class="main-sidebar @if(app()->getLocale()== 'ar') direction @endif">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <!-- <a href="{{ route('admin.dashboard.index') }}">{{ setting('site_name') }}</a> -->

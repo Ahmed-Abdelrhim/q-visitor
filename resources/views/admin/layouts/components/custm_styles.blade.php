@@ -1,4 +1,8 @@
 <style>
+
+    .direction {
+        direction: rtl !important;
+    }
     img.logo{
         max-width: 50% !important;
     padding-bottom: 43%;
