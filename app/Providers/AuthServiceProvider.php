@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+
+use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +27,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('authorizedToViewOcr',function(User $user){
+            if ($user->hasRole('Admin') || $user->hasAnyPermission(['ocr','ocr_create','ocr_edit','ocr_delete','ocr_show'])) {
+                return true;
+            }
+            return false;
+        });
     }
 }

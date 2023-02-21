@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\File;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
@@ -23,19 +24,16 @@ class OcrController extends Controller
 {
     public function index()
     {
-        if (!$this->authorizedToView())
-            return view('errors.403');
+        $this->authorizedToView();
         $this->linker();
         return view('admin.ocr.layout_main');
     }
 
     public function authorizedToView()
     {
-        if (auth()->user()->hasRole('Admin') || auth()->user()->hasAnyPermission(['ocr', 'ocr_create', 'ocr_edit', 'ocr_delete', 'ocr_show'])) {
-            return true;
-        } else {
-            return false;
-        }
+        if (!Gate::allows('authorizedToViewOcr'))
+            abort(403);
+        return true;
     }
 
 
@@ -111,8 +109,7 @@ class OcrController extends Controller
 
     public function ocrIndexxar()
     {
-        if (!$this->authorizedToView())
-            return view('errors.403');
+        $this->authorizedToView();
         return view('admin.ocr.indexxar');
     }
 
