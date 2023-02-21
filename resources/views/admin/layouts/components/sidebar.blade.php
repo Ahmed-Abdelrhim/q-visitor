@@ -157,7 +157,7 @@
                         <!-- <i class="fas fa-facebook"> -->
                         <i class="fa fa-camera"></i>
                         <!-- <i class="fa fa-scanner"></i> -->
-                        <span>OCR</span>
+                        <span>{{__('files.OCR')}}</span>
                     </a>
                 </li>
             @endif

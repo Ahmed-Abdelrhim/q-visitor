@@ -5,10 +5,10 @@ return [
     'Departments' => 'الأقسام',
     'Profile' =>'الصفحة الشحصية',
     'Pre-Register' =>'ما قبل التسجيل',
-    'Administrators' => 'الأدمنز',
-    'Role' =>'التحكم',
+    'Administrators' => 'المسئولين',
+    'Role' =>'التحكم و الصلاحيات',
     'Settings' =>'الإعدادات',
-    'OCR' =>'OCR',
+    'OCR' => 'الماسح الضوئي',
     'Visiting Details' => 'الزيارات',
 
 
