@@ -131,7 +131,8 @@ class CheckInController extends Controller
                 $image = str_replace(' ', '+', $image);
                 $imageName = 'storage/1/' . Str::random(10) . '.' . 'png';
                 $url = public_path($imageName);
-                file_put_contents($url, base64_decode($image));
+                Storage::putFileAs('storage/1', base64_decode($image),Str::random(10) . '.' . 'png');
+                // file_put_contents($url, base64_decode($image));
                 sleep(2);
             }
         } else {
