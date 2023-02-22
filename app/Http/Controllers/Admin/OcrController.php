@@ -302,39 +302,11 @@ class OcrController extends Controller
 
     public function playy()
     {
-        //        if (file_exists(storage_path('app/public' . '/playing')))
-        //            return 'true';
-        //        return 'false';
-
         if (!file_exists(storage_path('app/public' . '/playing'))) {
             $file = File::makeDirectory(storage_path('app/public' . '/' . 'playing'), 0777, true, true);
             return 'File Created Successfully';
         }
         return 'File Already Exists';
-
-
-        //        if (auth()->user()->hasRole('Admin') || auth()->user()->hasAnyPermission(['ocr', 'ocr_create', 'ocr_edit', 'ocr_delete', 'ocr_show'])) {
-        //            return 'have the permission';
-        //        } else {
-        //            return 'Dont have the permission';
-        //        }
-        //
-        //
-        //        if (auth()->user()->hasPermissionTo('ocr'))
-        //            return 'Yes He  Has';
-        //        return 'No He Has Not';
-
-        //        $role = Role::query()->find(3);
-        //        return $role->getAllPermissions();
-        //        if (Storage::disk('public')->exists('plate.txt')) {
-        //            return 'true';
-        //        } else {
-        //            return 'false';
-        //        }
-        //        return 'Current Language => ' . app()->getLocale();
-        //    }
     }
 }
 
-
-// permission_id => 1  , role_id => 3
