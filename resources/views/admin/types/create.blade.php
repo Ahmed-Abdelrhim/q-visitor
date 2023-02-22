@@ -43,6 +43,7 @@
                                     </div>
                                     @enderror
                                 </div>
+                                <!-- End Level -->
 
 
                                 <!-- Approval One -->
@@ -61,6 +62,7 @@
                                         </div>
                                         @enderror
                                     </div>
+                                    <!-- End Approval One  -->
 
 
                                     <!-- Approval Two -->
@@ -80,6 +82,7 @@
                                         @enderror
                                     </div>
                                 @endif
+                                <!-- End  Approval Two  -->
 
 
                                 <!-- Status -->

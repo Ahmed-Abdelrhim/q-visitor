@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TypesRequest;
 use App\Models\Types;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -30,36 +34,21 @@ class TypesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(): Factory|\Illuminate\View\View
     {
         return view('admin.types.index', $this->data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(): Factory|View|Application
     {
         $this->data['roles'] = Role::query()->get(['id', 'name']);
         return view('admin.types.create', $this->data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(TypesRequest $request)
+    public function store(TypesRequest $request): RedirectResponse
     {
-        // return $request;
-        // $input = $request->all();
-
         $role_two = null;
         if (!empty($request->get('role_two')) && $request->get('role_two') != 0) {
             $role_two = $request->get('role_two');
@@ -90,56 +79,34 @@ class TypesController extends Controller
 
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return void
-     */
-    public function edit($id)
+    public function edit($id): Factory|View|Application
     {
-        $this->data['types'] = Types::findOrFail($id);
+        $this->data['types'] = Types::query()->findOrFail($id);
+        $this->data['roles'] = Role::query()->get(['id', 'name']);
         return view('admin.types.edit', $this->data);
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     *
-     * @return void
-     */
+
     public function update(Request $request, $id)
     {
-
         $this->validate($request, ['name' => 'required|string|max:255|unique:types,name,' . $id]);
         $input = $request->all();
-        $designation = Types::findOrFail($id);
+        $designation = Types::query()->findOrFail($id);
         $designation->update($input);
         return redirect(route('admin.types.index'))->withSuccess('The Data Updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return void
-     */
     public function destroy($id)
     {
-        Types::findOrFail($id)->delete();
+        Types::query()->findOrFail($id)->delete();
         return redirect(route('admin.types.index'))->withSuccess('The Data Deleted Successfully');
     }
 
     public function getTypes(Request $request)
     {
 
-        $designations = Types::orderBy('id', 'desc')->get();
+        $designations = Types::query()->orderBy('id', 'desc')->get();
 
         $i = 1;
         $designationArray = [];
