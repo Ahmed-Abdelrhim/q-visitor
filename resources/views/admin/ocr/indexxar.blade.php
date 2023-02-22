@@ -97,18 +97,38 @@
 </head>
 @include('admin.ocr.script')
 <?php
-if (\Illuminate\Support\Facades\Storage::disk('public')->exists('plate.txt')) {
-    if (filesize(storage_path('app/public/' . 'plate.txt')) > 0) {
-        $myfile = fopen(storage_path('app/public/' . 'plate.txt'), "r");
-        $plate = fread($myfile, filesize(storage_path('app/public/' . 'plate.txt')));
-        fclose($myfile);
+
+
+if (!file_exists( storage_path('app/public' .'/plate.txt') )) {
+    // TODO File Does Not Exist
+    $file = \Illuminate\Support\Facades\Storage::disk('public')->put('plate.txt','');
+    $plate = '';
+} else {
+    // TODO File Already Exists
+    if (filesize(storage_path('app/public' . '/plate.txt')) > 0) {
+        $myFile = fopen(storage_path('app/public' . '/plate.txt'), "r");
+        $plate = fread($myFile, filesize(storage_path('app/public' . '/plate.txt')));
+        fclose($myFile);
     } else {
         $plate = '';
     }
 
-} else {
-    $plate = '';
 }
+
+
+
+//if (file_exists( storage_path('app/public' .'/plate.txt') )) {
+//    if (filesize(storage_path('app/public' . '/plate.txt')) > 0) {
+//        $myfile = fopen(storage_path('app/public' . '/plate.txt'), "r");
+//        $plate = fread($myfile, filesize(storage_path('app/public' . '/plate.txt')));
+//        fclose($myfile);
+//    } else {
+//        $plate = '';
+//    }
+//
+//} else {
+//    $plate = '';
+//}
 
 ?>
 

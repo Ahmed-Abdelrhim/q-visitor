@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\LoginController;
 Route::group(['middleware' => 'prevent-back-history'], function () {
 
 
-//Route::get('code',[LoginController::class,'insertSomeCodes']);
+    //Route::get('code',[LoginController::class,'insertSomeCodes']);
     Route::get('Code/Activation/Page', [LoginController::class, 'showCodeActivationPage'])->name('code.activation.page');
     Route::get('session', [LoginController::class, 'session'])->name('session');
     Route::post('authenticated/user/logout', [LoginController::class, 'logout'])->name('auth.logout');
@@ -42,8 +42,6 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
     Route::group(['prefix' => 'admin', 'middleware' => ['installed'], 'namespace' => 'Admin', 'as' => 'admin.'], function () {
         Route::get('login', 'Auth\LoginController@showLoginForm')->name('show.login.form');
         Route::post('Code/Activation', [LoginController::class, 'codeActivation'])->name('code.activation');
-
-
     });
 
 
@@ -114,8 +112,6 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
             Route::get('homepage', 'SettingController@homepageSetting')->name('homepage');
             Route::post('homepage', 'SettingController@homepageSettingUpdate')->name('homepage-update');
         });
-
-
     });
 
 
@@ -174,9 +170,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('Play', [\App\Http\Controllers\Admin\VisitorController::class, 'play']);
         Route::get('playy', [OcrController::class, 'playy']);
     });
-//Route::get('play',function (){
-//    return auth()->user()->getDirectPermissions();
-//});
+    //Route::get('play',function (){
+    //    return auth()->user()->getDirectPermissions();
+    //});
 
 });
 
@@ -198,3 +194,6 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 
 // php artisan storage:link
+
+//Arc Dark 
+//Atom one dark

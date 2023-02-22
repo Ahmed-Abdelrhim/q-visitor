@@ -9,7 +9,7 @@ use App\Models\Visitor;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -292,16 +292,27 @@ class OcrController extends Controller
 
     public function playy()
     {
-        if (auth()->user()->hasRole('Admin') || auth()->user()->hasAnyPermission(['ocr', 'ocr_create', 'ocr_edit', 'ocr_delete', 'ocr_show'])) {
-            return 'have the permission';
-        } else {
-            return 'Dont have the permission';
+        //        if (file_exists(storage_path('app/public' . '/playing')))
+        //            return 'true';
+        //        return 'false';
+
+        if (!file_exists(storage_path('app/public' . '/playing'))) {
+            $file = File::makeDirectory(storage_path('app/public' . '/' . 'playing'), 0777, true, true);
+            return 'File Created Successfully';
         }
+        return 'File Already Exists';
 
 
-        if (auth()->user()->hasPermissionTo('ocr'))
-            return 'Yes He  Has';
-        return 'No He Has Not';
+        //        if (auth()->user()->hasRole('Admin') || auth()->user()->hasAnyPermission(['ocr', 'ocr_create', 'ocr_edit', 'ocr_delete', 'ocr_show'])) {
+        //            return 'have the permission';
+        //        } else {
+        //            return 'Dont have the permission';
+        //        }
+        //
+        //
+        //        if (auth()->user()->hasPermissionTo('ocr'))
+        //            return 'Yes He  Has';
+        //        return 'No He Has Not';
 
         //        $role = Role::query()->find(3);
         //        return $role->getAllPermissions();

@@ -129,6 +129,10 @@ class CheckInController extends Controller
                 $encoded_data = $request['photo'];
                 $image = str_replace('data:image/png;base64,', '', $encoded_data);
                 $image = str_replace(' ', '+', $image);
+                if(!file_exists(storage_path('app/public' . '/1'))) {
+                    $path = storage_path('app/public'.'/1');
+                    $file = File::makeDirectory($path,0777,true,true);
+                }
                 $imageName = 'storage/1/'.Str::random(10) . '.' . 'png';
 				$url = public_path($imageName);
                 file_put_contents($url, base64_decode($image));
