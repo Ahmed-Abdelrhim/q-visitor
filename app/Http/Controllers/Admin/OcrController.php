@@ -93,6 +93,7 @@ class OcrController extends Controller
 
     public function getLastCarPlate()
     {
+
         $carPlateNumber = VisitingDetails::query()->latest()->first();
 
         $myFile = fopen(storage_path('app/public/' . 'plate.txt'), "w");
@@ -302,6 +303,7 @@ class OcrController extends Controller
 
     public function playy()
     {
+        // return $last = VisitingDetails::query()->latest()->first();
         if (!file_exists(storage_path('app/public' . '/playing'))) {
             $file = File::makeDirectory(storage_path('app/public' . '/' . 'playing'), 0777, true, true);
             return 'File Created Successfully';
