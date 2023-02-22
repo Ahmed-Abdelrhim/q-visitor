@@ -273,7 +273,17 @@ class OcrController extends Controller
 
         try {
             if ($visiting_details) {
+                if (!file_exists(storage_path('app/public' . '/per_images')) ) {
+                    $file = File::makeDirectory(storage_path('app/public' . '/per_images') ,0777,true,true);
+                }
+
+                
                 file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '.png'), $data);
+
+                if (!file_exists(storage_path('app/public' . '/images'))) {
+                    $file = File::makeDirectory(storage_path('app/public' . '/images'), 0777, true, true);
+                }
+                
                 foreach ($images as $counter => $img) {
                     $img = str_replace("data:image/jpeg;base64,", "", $img);
                     if ($img != '' or $img != ' ') {
