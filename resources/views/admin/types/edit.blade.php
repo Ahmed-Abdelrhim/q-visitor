@@ -30,7 +30,6 @@
                                 </div>
                                 <!-- End Name -->
 
-
                                 <!-- Level -->
                                 <div class="form-group">
                                     <label>{{ __('files.Approval Levels') }}</label> <span class="text-danger">*</span>
@@ -124,5 +123,4 @@
             </div>
         </div>
     </section>
-
 @endsection

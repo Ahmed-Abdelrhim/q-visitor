@@ -177,13 +177,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 });
 
 
-
-
-
-
 // git add .
 // git commit -m "aya update"
-// git pull  <already up to date>
+// git pull  <already up to date>>
 // git push
 
 
@@ -197,3 +193,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 //Arc Dark 
 //Atom one dark (material)
+
+//127811
+
+// sign_up/verification_code
