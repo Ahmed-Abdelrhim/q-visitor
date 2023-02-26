@@ -4407,3 +4407,9 @@ float: right !important;
 .breadcrumb-flex-direction {
     flex-direction: row-reverse !important;
 }
+.form-group>label, .text-danger{
+    float:right !important;
+}
+.card>.list-group:first-child .list-group-item:first-child, .list-group-flush .list-group-item{
+    text-align: right !important;
+}
