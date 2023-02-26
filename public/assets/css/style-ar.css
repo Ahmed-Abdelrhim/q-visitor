@@ -4116,6 +4116,7 @@ body.layout-3 .main-footer {
 .main-sidebar .sidebar-menu li a span {
     margin-top: 3px;
     width: 100%;
+    text-align: right !important;
 }
 
 .main-sidebar .sidebar-menu li a:hover {
