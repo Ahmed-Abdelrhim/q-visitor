@@ -10,13 +10,17 @@
 
         <div class="section-body">
             <div class="row">
+                                @if(app()->getLocale() == 'ar')
+                    <div class="col-md-6"></div>
+
+                @endif
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card">
                         <form action="{{ route('admin.role.store') }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>{{ __('levels.name') }}</label> <span class="text-danger">*</span>
+                                    <label>{{ __('files.Name') }}</label> <span class="text-danger">*</span>
                                     <input type="text" name="name"
                                            class="form-control @error('name') is-invalid @enderror"
                                            value="{{ old('name') }}">
@@ -29,7 +33,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <button class="btn btn-primary mr-1" type="submit">{{ __('Submit') }}</button>
+                                <button class="btn btn-primary mr-1" type="submit">{{ __('files.Submit') }}</button>
                             </div>
                         </form>
                     </div>

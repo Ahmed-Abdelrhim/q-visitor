@@ -10,7 +10,10 @@
 
         <div class="section-body">
         	<div class="row">
-	   			<div class="col-12 col-md-6 col-lg-6">
+                @if(app()->getLocale() == 'ar')
+                    <div class="col-md-6"></div>
+
+                @endif	   			<div class="col-12 col-md-6 col-lg-6">
 				    <div class="card">
 				    	<form action="{{ route('admin.departments.update', $department) }}" method="POST">
 				    		@csrf
