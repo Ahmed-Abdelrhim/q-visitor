@@ -15,7 +15,8 @@
                         <form action="{{ route('admin.role.save-permission', $role) }}" method="POST">
                             @csrf
                             <div class="card-header">
-                                <h3>{{ __('files.Permission') }} - <span class="text-danger">( {{ $role->name }} )</span></h3>
+                                <h3>{{ __('files.Permission') }} - <span
+                                            class="text-danger">( {{ $role->name }} )</span></h3>
                             </div>
 
                             <div class="card-body">
@@ -131,8 +132,9 @@
 
         function processCheck(event) {
             var mainmodule = $(event).attr('id');
+            // console.log(mainmodule);
 
-            console.log(mainmodule);
+            // console.log($('#' + mainmodule));
 
             var mainidCreate = mainmodule + "_create";
             var mainidEdit = mainmodule + "_edit";

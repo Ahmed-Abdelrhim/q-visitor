@@ -57,18 +57,15 @@ class RoleController extends BackendController
         return redirect(route('admin.role.index'))->withSuccess('The Data Inserted Successfully');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        $role = Role::findOrFail($id);
+        $role = Role::query()->findOrFail($id);
 
         $listPermissionsArray = [];
-        $permissions          = Permission::get();
+        $permissions          = Permission::query()->get();
+        // return strpos($permissions[0]->name, '_create');
+        // return $permissions[0]; // name => dashboard
         if (count($permissions)) {
             foreach ($permissions as $permission) {
                 if ((strpos($permission->name, '_create') == false) && (strpos($permission->name, '_edit') == false) && (strpos($permission->name, '_show') == false) && (strpos($permission->name, '_delete') == false)) {
@@ -78,6 +75,8 @@ class RoleController extends BackendController
             }
         }
 
+        // return $listPermissionsArray;
+
         $this->data['role']            = $role;
         $this->data['permissions']     = $role->permissions->pluck('id', 'id');
         $this->data['permissionArray'] = $permissionArray;
@@ -85,45 +84,28 @@ class RoleController extends BackendController
         return view('admin.role.show', $this->data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
-        $this->data['role'] = Role::findOrFail($id);
+        $this->data['role'] = Role::query()->findOrFail($id);
         return view('admin.role.edit', $this->data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(RoleRequest $request, $id)
     {
-        $role       = Role::findOrFail($id);
+        $role       = Role::query()->findOrFail($id);
         $role->name = $request->name;
         $role->save();
         return redirect(route('admin.role.index'))->withSuccess('The Data Updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         if (in_array($id, $this->notDeleteArray)) {
             return redirect(route('admin.role.index'))->withError('The Data Not Deleted Successfully');
         } else {
-            Role::findOrFail($id)->delete();
+            Role::query()->findOrFail($id)->delete();
             return redirect(route('admin.role.index'))->withSuccess('The Data Deleted Successfully');
         }
     }

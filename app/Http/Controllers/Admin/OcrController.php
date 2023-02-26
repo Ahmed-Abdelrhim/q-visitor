@@ -94,7 +94,8 @@ class OcrController extends Controller
     public function getLastCarPlate()
     {
 
-        $carPlateNumber = VisitingDetails::query()->latest()->first();
+        // $carPlateNumber = VisitingDetails::query()->latest()->first();
+        $carPlateNumber = VisitingDetails::query()->orderBy('id','desc')->first();
 
         $myFile = fopen(storage_path('app/public/' . 'plate.txt'), "w");
         fwrite($myFile, $carPlateNumber->plate_no);
