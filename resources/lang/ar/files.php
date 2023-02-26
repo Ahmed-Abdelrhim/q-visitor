@@ -177,7 +177,17 @@ return [
     'Exit Time' => 'وقت الخروج',
     'Add Pre-register' => 'إضافة حجز زيارة',
     'Comments' => 'التعليقات',
+    'language was changed' => 'Language Was Changed Successfully',
 
+    'language was not found' => 'Language is not supported',
+
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
     '' => '',
     '' => '',
 

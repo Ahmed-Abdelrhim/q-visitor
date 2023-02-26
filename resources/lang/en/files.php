@@ -186,7 +186,12 @@ return [
     'Exit Time' => 'Exit Time',
     'Add Pre-register' => 'Add Pre-register',
     'Comments' => 'Comments',
-    '' => '',
+
+
+
+
+        'language was changed' => 'تم تغير اللغة بنجاح',
+    'language was not found' => 'اللغة غير مدعومة',
     '' => '',
     '' => '',
 

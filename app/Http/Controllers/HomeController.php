@@ -34,10 +34,10 @@ class HomeController extends Controller
 
         if ($lang) {
             $locale = session()->put('locale', $locale);
-            $notifications = array('message' => 'language was changed', 'alert-type' => 'success');
+            $notifications = array('message' => __('files.language was changed'), 'alert-type' => 'success');
             return redirect()->back()->with($notifications);
         }
-        $notifications = array('message' => 'language was not found', 'alert-type' => 'info');
+        $notifications = array('message' => __('files.language was not found'), 'alert-type' => 'info');
         return redirect()->back()->with($notifications);
     }
 }
