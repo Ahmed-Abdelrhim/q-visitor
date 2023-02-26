@@ -111,7 +111,7 @@
         }
 
         .dashboard {
-            margin-left: 50% !important;
+            margin-right: 10% !important;
         }
     </style>
 
@@ -181,8 +181,8 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     <input type="button" value="إستعاده رقم اخر لوحه" class="btn btn-success get_plate"
                                            style="height: 35px; padding: 7px 14px;margin-right: 7%">
 
-                                    <a class="btn btn-primary dashboard" href="{{route('admin.dashboard.index')}}"
-                                       style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                    <a class="btn btn-primary" href="{{route('admin.dashboard.index')}}"
+                                       style="height: 35px; padding: 7px 14px; margin-left: 45% !important;">
                                         لوحة التحكم
                                     </a>
 
@@ -191,7 +191,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 <div class="row" style="text-align:center">
                                     <div class="col-md-3">
                                         <div class="form-group" style="text-align:center;float:right;margin-left:90px">
-                                            <img id="pic" src=""/>
+                                            <img id="pic" src="" alt=""/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -201,12 +201,12 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="ocr_head" src=""/>
+                                            <img id="ocr_head" src="" alt=""/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="chip_head" src=""/>
+                                            <img id="chip_head" src="" alt=""/>
                                         </div>
                                     </div>
 
