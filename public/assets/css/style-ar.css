@@ -854,9 +854,11 @@ select.form-control:not([size]):not([multiple]) {
 .card .card-body,
 .card .card-footer {
     background-color: transparent;
-    padding: 20px 25px;
+    padding: 20px 25px ;
 }
-
+.card .card-header{
+    padding: 20px 0 !important;
+}
 .card .navbar {
     position: static;
 }
@@ -1119,6 +1121,9 @@ select.form-control:not([size]):not([multiple]) {
     font-weight: 700;
     color: #34395e;
     padding-bottom: 0;
+}
+.card.card-statistic-1 .card-body{
+    float: right !important;
 }
 
 .card.card-statistic-1,
@@ -4389,3 +4394,10 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     visibility: visible;
     opacity: 1;
 }
+
+.card-wrap{
+float: right !important;
+}
+/* .form-inline.mr-auto{
+    margin-left: auto !important;
+} */
