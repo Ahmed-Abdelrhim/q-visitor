@@ -4,18 +4,18 @@ return [
     'Dashboard' => 'لوحة التحكم',
     'Departments' => 'الأقسام',
     'Profile' =>'الصفحة الشحصية',
-    'Pre-Register' =>'ما قبل التسجيل',
+    'Pre-Register' =>'زيارة مستقبلية',
     'Administrators' => 'المسئولين',
     'Role' =>'التحكم و الصلاحيات',
     'Settings' =>'الإعدادات',
     'OCR' => 'الماسح الضوئي',
-    'Visiting Details' => 'الزيارات',
+    'Visiting Details' => 'تفاصيل الزيارات',
 
 
     'Total Employees' => 'إجمالي عدد الموظفين',
     'Total Visitors' => 'إجمالي عدد الزيارات',
     'Total Pre Registers' => 'إجمالي عدد التسجيلات',
-    'Visitors' =>'الزوار',
+    'Visitors' =>'تفاصيل الزيارات',
     'Name' => 'الإسم',
     'Email' => 'الإيميل',
     'Visitor ID' => 'رقم التعريفي للزائر',
@@ -34,7 +34,7 @@ return [
     'Status' => 'الحالة',
     'Pending' => 'إنتظار',
     'Approved' => 'موافقة',
-    'Add Visitor' => 'إضافة زائر',
+    'Add Visitor' => 'إضافة تفاصيل زيارة',
 
     // Visitors Add
     'Submit' =>'حفظ',
@@ -83,7 +83,7 @@ return [
 
 
     // Pre -Register
-    'Pre-registers' => 'ما قبل التسجيلات',
+    'Pre-registers' => 'زيارة مستقبلية',
     'Visit Reservation' => 'حجز زيارة',
     'Expected Date' => 'التاريخ المتوقع',
     'Expected Time' => 'الوقت المتوقع',
@@ -175,7 +175,7 @@ return [
 
     'Exit Date' => 'تاريخ الخروج',
     'Exit Time' => 'وقت الخروج',
-    'Add Pre-register' => 'إضافة حجز زيارة',
+    'Add Pre-register' => 'إضافة  زيارة مستقبلية',
     'Comments' => 'التعليقات',
     'language was changed' => 'Language Was Changed Successfully',
 

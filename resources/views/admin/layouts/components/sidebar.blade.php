@@ -106,7 +106,7 @@
                 <li class="pre-register">
                     <a class="nav-link" href="{{route('admin.pre-registers.index')}}">
                         <i class="fas fa-laptop"></i>
-                        <span>{{__('files.Visit Reservation')}}</span>
+                        <span>{{__('files.Pre-Register')}}</span>
                     </a>
                 </li>
             @endif

@@ -4,7 +4,7 @@ return [
     'Dashboard' => 'Dashboard',
     'Profile' =>'Profile',
     'Departments' => 'Departments',
-    'Pre-Register' =>'Pre-Register',
+    'Pre-Register' =>'Future Visit',
     'Administrators' => 'Administrators',
     'Role' =>'Role',
     'Settings' =>'Settings',
@@ -14,7 +14,7 @@ return [
     'Total Employees' => 'Total Employees',
     'Total Visitors' => 'Total Visitors',
     'Total Pre Registers' => 'Total Pre Registers',
-    'Visitors' =>'Visitors',
+    'Visitors' =>'Visit Details',
 
 
     'Name' => 'Name',
@@ -36,7 +36,7 @@ return [
     'Status' => 'Status',
     'Pending' => 'Pending',
     'Approved' => 'Approved',
-    'Add Visitor' => 'Add Visitor',
+    'Add Visitor' => 'Add Visit Details',
 
 
     // Visitors Add
@@ -80,7 +80,7 @@ return [
 
 
     // Pre -Register
-    'Pre-registers' => 'Pre-registers',
+    'Pre-registers' => 'Future Visit',
     'Visit Reservation' => 'Visit Reservation',
     'Expected Date' => 'Expected Date',
     'Expected Time' => 'Expected Time',
@@ -184,7 +184,7 @@ return [
 
     'Exit Date' => 'Exit Date',
     'Exit Time' => 'Exit Time',
-    'Add Pre-register' => 'Add Pre-register',
+    'Add Pre-register' => 'Add Future Visit',
     'Comments' => 'Comments',
 
 
