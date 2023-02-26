@@ -39,7 +39,7 @@
                                                     <td>{{ $role->name}}</td>
                                                     
                                                     @if (auth()->user()->can('role_show') || auth()->user()->can('role_edit') || auth()->user()->can('role_delete'))
-                                                        <td>
+                                                        <td class="td-style">
                                                             @if (auth()->user()->can('role_show'))
                                                                 <a href="{{ route('admin.role.show', $role) }}" class="btn btn-sm btn-icon float-left btn-success"
                                                                    data-toggle="tooltip" data-placement="top" title="{{__('files.Permission')}}"><i class="fas fa-plus"></i></a>

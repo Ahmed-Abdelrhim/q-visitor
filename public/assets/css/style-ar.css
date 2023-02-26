@@ -4431,3 +4431,6 @@ td:has(a:has(>i.fa-eye)) {
 }
  */
 
+.td-style {
+    float: right
+}

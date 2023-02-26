@@ -34,7 +34,7 @@ class LocaleLanguage
         }
 
         else {
-            App::setLocale('en');
+            App::setLocale('ar');
         }
 
 
