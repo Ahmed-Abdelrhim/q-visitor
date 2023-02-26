@@ -1380,6 +1380,7 @@ select.form-control:not([size]):not([multiple]) {
     padding: 0 25px;
     height: 60px;
     vertical-align: middle;
+   
 }
 
 .table:not(.table-sm) thead th {
@@ -4413,3 +4414,20 @@ float: right !important;
 .card>.list-group:first-child .list-group-item:first-child, .list-group-flush .list-group-item{
     text-align: right !important;
 }
+.table{
+    direction: rtl !important;
+}
+
+.table th, .table td{
+    text-align: right !important;
+}
+
+td:has(a:has(>i.fa-eye)) {
+    float: right !important;
+}
+
+/* td:has(> i.fa-eye) {
+    float: right !important;
+}
+ */
+
