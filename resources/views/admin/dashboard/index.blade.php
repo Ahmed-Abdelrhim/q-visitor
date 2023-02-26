@@ -3,7 +3,7 @@
 @section('main-content')
 
     <section class="section">
-        <div class="section-header">
+        <div class="section-header ">
             <h1>{{ __('files.Dashboard') }}</h1>
             {{ Breadcrumbs::render('dashboard') }}
         </div>

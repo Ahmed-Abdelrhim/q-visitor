@@ -3477,6 +3477,7 @@ pre {
     padding: 20px;
     display: flex;
     align-items: center;
+    flex-direction: row-reverse !important;
 }
 
 .section .section-header h1 {
@@ -4402,3 +4403,6 @@ float: right !important;
 /* .form-inline.mr-auto{
     margin-left: auto !important;
 } */
+.breadcrumb-flex-direction {
+    flex-direction: row-reverse !important;
+}
