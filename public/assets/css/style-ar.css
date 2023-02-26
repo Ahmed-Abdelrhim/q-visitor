@@ -904,6 +904,7 @@ select.form-control:not([size]):not([multiple]) {
 
 .card .card-header .btn:not(.note-btn) {
     border-radius: 30px;
+    margin-left: 20px !important;
 }
 
 .card .card-header .btn:hover {
