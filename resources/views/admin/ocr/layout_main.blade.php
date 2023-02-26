@@ -106,6 +106,10 @@
         .info-wrap .dbox:last-child {
             padding-left: 0 !important;
         }
+
+        .dashboard {
+            margin-left: 50% !important;
+        }
     </style>
 
 </head>
@@ -173,7 +177,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                         <input type="button" value="Last Car plate" class="btn btn-success get_plate"
                                             style="height: 35px; padding: 7px 14px;margin-left: 7%">
 
-                                        <a class="btn btn-primary" href="{{ route('admin.dashboard.index') }}"
+                                        <a class="btn btn-primary dashboard" href="{{ route('admin.dashboard.index') }}"
                                             style="height: 35px; padding: 7px 14px;margin-left: 7%">
                                             Dashboard
                                         </a>

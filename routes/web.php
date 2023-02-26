@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\OcrController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -165,6 +166,12 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
                 'as' => 'check-in.find.pre.visitor',
                 'uses' => 'CheckInController@find_pre_visitor'
             ]);
+
+            Route::get('/foo', function () {
+                Artisan::call('storage:link');
+            });
+
+
         });
         Route::get('change_locale/{iso}', [HomeController::class, 'changeLocaleLanguage'])->name('change_locale');
         Route::get('Play', [\App\Http\Controllers\Admin\VisitorController::class, 'play']);
