@@ -10,7 +10,7 @@
 
         <div class="section-body">
             <div class="row">
-                <div class="col-12 col-md-12 col-lg-12">
+                <div class="col-12 col-md-12 col-lg-12 rtl-in-arabic">
                     <form action="{{ route('admin.adminusers.update', $user) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

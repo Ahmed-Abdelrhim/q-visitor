@@ -4528,3 +4528,10 @@ td:has(> button.actions) {
 .card form {
     direction: rtl;
 }
+.rtl-in-arabic form {
+    direction: rtl;
+}
+
+.id-card-in-arabic {
+    direction: rtl;
+}

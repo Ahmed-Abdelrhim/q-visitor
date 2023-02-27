@@ -193,6 +193,12 @@ return [
     'Entrance Time' => 'Entrance Time',
     'Comment' => 'Comment',
     'Entrance Date' => 'Entrance Date',
+    'Print ID card' => 'Print ID card',
+
+
+    'Company' => 'Company',
+    'National Identification' => 'National Identification',
+    'Date' => 'Date',
     '' => '',
     '' => '',
 

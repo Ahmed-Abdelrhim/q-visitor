@@ -45,7 +45,7 @@ return [
     'National Identification No' =>'رقم البطاقة',
     'Select Employee' =>'إختر موظف',
     'From Date' =>'تاريخ البدأ',
-    'Expiry Date' =>'تاريخ الإنتهائ',
+    'Expiry Date' =>'تاريخ الإنتهاء',
     'Type' => 'التحكم',
     'Types' => 'الأنواع',
     'TypeApproval' => 'التحكم للموافقة علي الزيارة',
@@ -184,7 +184,12 @@ return [
     'Entrance Time' => 'وقت الدخول',
     'Comment' => 'التعليق',
     'Entrance Date' => 'تاريخ الدخول',
-    '' => '',
+    'Print ID card' => 'طباعة الكارت التعريفي',
+    'Company' => 'الشركة',
+    'National Identification' => 'رقم الهوية',
+    'Date' => 'التاريخ',
+
+
     '' => '',
     '' => '',
     '' => '',
