@@ -126,13 +126,13 @@ class DepartmentsController extends Controller
                 $retAction = '';
 
                 if (auth()->user()->can('departments_edit')) {
-                    $retAction .= '<a href="' . route('admin.departments.edit', $department) . '" class="btn btn-sm btn-icon float-left btn-primary" 
+                    $retAction .= '<a href="' . route('admin.departments.edit', $department) . '" class="btn btn-sm btn-icon float-left btn-primary actions" 
 data-toggle="tooltip" data-placement="top" title="' . __('files.Edit') . '"><i class="far fa-edit"></i></a>';
                 }
 
                 if (auth()->user()->can('departments_delete')) {
                     $retAction .= '<form class="float-left pl-2" action="' . route('admin.departments.destroy', $department) . '" method="POST">' .
-                        method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" 
+                        method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions" 
 data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '"><i class="fa fa-trash"></i></button></form>';
                 }
                 return $retAction;

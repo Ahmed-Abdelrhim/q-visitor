@@ -1,7 +1,6 @@
 @extends('admin.layouts.master')
 
 @section('main-content')
-
     <section class="section">
         <div class="section-header">
             <h1>{{ __('files.Roles') }}</h1>
@@ -15,8 +14,11 @@
                         <form action="{{ route('admin.role.save-permission', $role) }}" method="POST">
                             @csrf
                             <div class="card-header">
-                                <h3>{{ __('files.Permission') }} - <span
-                                            class="text-danger">( {{ $role->name }} )</span></h3>
+                                    <h3>
+                                        {{ __('files.Permission') }}
+                                        -
+                                        <span style="color:  #fc544b">( {{ $role->name }} )</span>
+                                    </h3>
                             </div>
 
                             <div class="card-body">

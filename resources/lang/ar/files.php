@@ -95,7 +95,7 @@ return [
 
     // Roles
     'Add Role' => 'إضافة تحكم',
-    'Permission' => 'اذن التحكم',
+    'Permission' => 'إذن التحكم',
 
     'Role_Create' => 'إضافة',
     'Role_Edit' => 'تعديل',

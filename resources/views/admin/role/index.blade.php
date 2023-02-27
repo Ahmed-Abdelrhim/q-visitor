@@ -14,7 +14,7 @@
                     <div class="card">
                         
                         @can('role_create')
-                            <div class="card-header">
+                            <div class="card-header ">
                                 <a href="{{ route('admin.role.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> {{ __('files.Add Role') }}</a>
                             </div>
                         @endcan
@@ -39,7 +39,7 @@
                                                     <td>{{ $role->name}}</td>
                                                     
                                                     @if (auth()->user()->can('role_show') || auth()->user()->can('role_edit') || auth()->user()->can('role_delete'))
-                                                        <td class="td-style">
+                                                        <td class="td-style td-actions">
                                                             @if (auth()->user()->can('role_show'))
                                                                 <a href="{{ route('admin.role.show', $role) }}" class="btn btn-sm btn-icon float-left btn-success"
                                                                    data-toggle="tooltip" data-placement="top" title="{{__('files.Permission')}}"><i class="fas fa-plus"></i></a>

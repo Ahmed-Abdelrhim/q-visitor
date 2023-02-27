@@ -204,3 +204,17 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 //127811
 
 // sign_up/verification_code
+
+
+// translation files ar and en
+// style-ar css file
+// Departments => create & edit blade , DepartmentsController
+// DesignationsController (Positions) => create & edit blade , DesignationsController
+// EmployeeController => DesignationsController
+// VisitorController => VisitorController
+// PreRegisterController => PreRegisterController
+// AdminUserController => AdminUserController
+
+
+// Roles => index & create & edit & show blade  , RoleController done
+// Types => index & create & edit blade , TypesController

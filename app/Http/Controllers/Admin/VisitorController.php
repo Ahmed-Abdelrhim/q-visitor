@@ -142,23 +142,23 @@ class VisitorController extends Controller
                     if ($visitingDetail->sent_sms_before == 1) {
                         $msg = __('files.Re-send sms');
                     }
-                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                 }
 
                 if (auth()->user()->can('visitors_show')) {
-                    $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-info" 
+                    $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-info actions" 
 data-toggle="tooltip" data-placement="top" title="'.__('files.View').'"><i class="far fa-eye"></i></a>';
                 }
 
                 if (auth()->user()->can('visitors_edit')) {
-                    $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary" 
+                    $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary actions" 
 data-toggle="tooltip" data-placement="top" title="'.__('files.Edit').'">
  <i class="far fa-edit"></i></a>';
                 }
 
 
                 if (auth()->user()->can('visitors_delete')) {
-                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" 
+                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions" 
 data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'">
  <i class="fa fa-trash"></i></button></form>';
                 }

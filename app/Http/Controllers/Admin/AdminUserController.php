@@ -170,27 +170,27 @@ class AdminUserController extends BackendController
                 $retAction = '';
                 if (($user->id == auth()->id()) && (auth()->id() == 1)) {
                     if (auth()->user()->can('adminusers_show')) {
-                        $retAction .= '<a href="' . route('admin.adminusers.show', $user) . '" class="btn btn-sm btn-icon show float-left btn-info" 
+                        $retAction .= '<a href="' . route('admin.adminusers.show', $user) . '" class="btn btn-sm btn-icon show float-left btn-info actions" 
 data-toggle="tooltip" data-placement="top" title="'.__('files.View').'"><i class="far fa-eye"></i></a>';
                     }
 
                     if (auth()->user()->can('adminusers_edit')) {
-                        $retAction .= '<a href="' . route('admin.adminusers.edit', $user) . '" class="btn btn-sm btn-icon float-left btn-primary ml-2" 
+                        $retAction .= '<a href="' . route('admin.adminusers.edit', $user) . '" class="btn btn-sm btn-icon float-left btn-primary ml-2 actions" 
 data-toggle="tooltip" data-placement="top" title="'.__('files.Edit').'"><i class="far fa-edit"></i></a>';
                     }
                 } else if (auth()->id() == 1) {
                     if (auth()->user()->can('adminusers_show')) {
-                        $retAction .= '<a href="' . route('admin.adminusers.show', $user) . '" class="btn btn-sm btn-icon show float-left btn-info" 
+                        $retAction .= '<a href="' . route('admin.adminusers.show', $user) . '" class="btn btn-sm btn-icon show float-left btn-info actions" 
 data-toggle="tooltip" data-placement="top" title="'.__('files.View').'"><i class="far fa-eye"></i></a>';
                     }
 
                     if (auth()->user()->can('adminusers_edit')) {
-                        $retAction .= '<a href="' . route('admin.adminusers.edit', $user) . '" class="btn btn-sm btn-icon float-left btn-primary ml-2" 
+                        $retAction .= '<a href="' . route('admin.adminusers.edit', $user) . '" class="btn btn-sm btn-icon float-left btn-primary ml-2 actions" 
 data-toggle="tooltip" data-placement="top" title="'.__('files.Edit').'"><i class="far fa-edit"></i></a>';
                     }
 
                     if (auth()->user()->can('adminusers_delete')) {
-                        $retAction .= '<form class="float-left pl-2" action="' . route('admin.adminusers.destroy', $user) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" 
+                        $retAction .= '<form class="float-left pl-2" action="' . route('admin.adminusers.destroy', $user) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions" 
 data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'"><i class="fa fa-trash"></i></button></form>';
                     }
                 } else {
@@ -200,11 +200,11 @@ data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'"><i cla
                         }
                     } else {
                         if (auth()->user()->can('adminusers_show')) {
-                            $retAction .= '<a href="' . route('admin.adminusers.show', $user) . '" class="btn btn-sm btn-icon float-left btn-info" data-toggle="tooltip" data-placement="top" title="View"><i class="far fa-eye"></i></a>';
+                            $retAction .= '<a href="' . route('admin.adminusers.show', $user) . '" class="btn btn-sm btn-icon float-left btn-info actions" data-toggle="tooltip" data-placement="top" title="View"><i class="far fa-eye"></i></a>';
                         }
 
                         if (auth()->user()->can('adminusers_edit')) {
-                            $retAction .= '<a href="' . route('admin.adminusers.edit', $user) . '" class="btn btn-sm btn-icon float-left btn-primary ml-2"><i class="far fa-edit"></i></a>';
+                            $retAction .= '<a href="' . route('admin.adminusers.edit', $user) . '" class="btn btn-sm btn-icon float-left btn-primary ml-2 actions"><i class="far fa-edit"></i></a>';
                         }
                     }
                 }
