@@ -12,7 +12,7 @@
                     <div class="card profile-widget">
                         <div class="profile-widget-header">
                             <img alt="image" src="{{$user->images}}" class="rounded-circle profile-picture">
-{{--                            <img alt="image" src="{{asset('storage/45/my-pic-2-(2).jpeg')}}" class="rounded-circle profile-picture">--}}
+                            {{-- <img alt="image" src="{{asset('storage/45/my-pic-2-(2).jpeg')}}" class="rounded-circle profile-picture"> --}}
                         </div>
                         <div class="profile-widget-description">
                             <div class="profile-widget-name">
@@ -44,30 +44,36 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-md-12 col-12">
-                                        <label for="old_password">{{ __('files.Old Password') }}</label> <span class="text-danger">*</span>
-                                        <input id="old_password" name="old_password"  type="password" class="form-control @error('old_password') is-invalid @enderror">
+                                        <label for="old_password">{{ __('files.Old Password') }}</label> <span
+                                                class="text-danger">*</span>
+                                        <input id="old_password" name="old_password" type="password"
+                                               class="form-control @error('old_password') is-invalid @enderror">
                                         @error('old_password')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12 col-12">
-                                        <label for="password">{{ __('files.Password') }}</label> <span class="text-danger">*</span>
-                                        <input id="password" name="password"  type="password" class="form-control @error('password') is-invalid @enderror"/>
+                                        <label for="password">{{ __('files.Password') }}</label> <span
+                                                class="text-danger">*</span>
+                                        <input id="password" name="password" type="password"
+                                               class="form-control @error('password') is-invalid @enderror"/>
                                         @error('password')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12 col-12">
-                                        <label for="password_confirmation">{{ __('files.Password Confirmation') }}</label> <span class="text-danger">*</span>
-                                        <input id="password_confirmation" name="password_confirmation"  type="password" class="form-control @error('password_confirmation') is-invalid @enderror"/>
+                                        <label for="password_confirmation">{{ __('files.Password Confirmation') }}</label>
+                                        <span class="text-danger">*</span>
+                                        <input id="password_confirmation" name="password_confirmation" type="password"
+                                               class="form-control @error('password_confirmation') is-invalid @enderror"/>
                                         @error('password_confirmation')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                 </div>
@@ -78,8 +84,9 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-12 col-md-12 col-lg-7">
-                    <form action="{{ route('admin.profile.update', $user) }}" method="POST" enctype="multipart/form-data">
+                <div class="col-12 col-md-12 col-lg-7 profile-form">
+                    <form action="{{ route('admin.profile.update', $user) }}" method="POST"
+                          enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card">
@@ -87,20 +94,24 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.First Name') }}</label> <span class="text-danger">*</span>
-                                        <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name', $user->first_name) }}">
+                                        <input type="text" name="first_name"
+                                               class="form-control @error('first_name') is-invalid @enderror"
+                                               value="{{ old('first_name', $user->first_name) }}">
                                         @error('first_name')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                     <div class="form-group col">
                                         <label>{{ __('files.Last Name') }}</label> <span class="text-danger">*</span>
-                                        <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" value="{{ old('last_name', $user->last_name) }}">
+                                        <input type="text" name="last_name"
+                                               class="form-control @error('last_name') is-invalid @enderror"
+                                               value="{{ old('last_name', $user->last_name) }}">
                                         @error('last_name')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                 </div>
@@ -108,20 +119,24 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.Email') }}</label> <span class="text-danger">*</span>
-                                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}">
+                                        <input type="text" name="email"
+                                               class="form-control @error('email') is-invalid @enderror"
+                                               value="{{ old('email', $user->email) }}">
                                         @error('email')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                     <div class="form-group col">
                                         <label>{{ __('files.Phone') }}</label>
-                                        <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone', $user->phone) }}">
+                                        <input type="text" name="phone"
+                                               class="form-control @error('phone') is-invalid @enderror"
+                                               value="{{ old('phone', $user->phone) }}">
                                         @error('phone')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                 </div>
@@ -129,11 +144,13 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.Username') }}</label>
-                                        <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username', $user->username) }}">
+                                        <input type="text" name="username"
+                                               class="form-control @error('username') is-invalid @enderror"
+                                               value="{{ old('username', $user->username) }}">
                                         @error('username')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
 
@@ -143,23 +160,29 @@
                                     <div class="form-group col">
                                         <label for="customFile">{{ __('files.Image') }}</label>
                                         <div class="custom-file">
-                                            <input name="image" type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFile" onchange="readURL(this);">
-                                            <label  class="custom-file-label" for="customFile">{{ __('files.Choose file') }}</label>
+                                            <input name="image" type="file"
+                                                   class="custom-file-input @error('image') is-invalid @enderror"
+                                                   id="customFile" onchange="readURL(this);">
+                                            <label class="custom-file-label"
+                                                   for="customFile">{{ __('files.Choose file') }}</label>
                                         </div>
                                         @if ($errors->has('image'))
                                             <div class="help-block text-danger">
                                                 {{ $errors->first('image') }}
                                             </div>
                                         @endif
-                                        <img class="img-thumbnail image-width mt-4 mb-3" id="previewImage" src="{{ $user->images }}" alt="{{ $user->name }} {{ __('profile image') }}"/>
+                                        <img class="img-thumbnail image-width mt-4 mb-3" id="previewImage"
+                                             src="{{ $user->images }}"
+                                             alt="{{ $user->name }} {{ __('profile image') }}"/>
                                     </div>
                                     <div class="form-group col">
                                         <label>{{ __('files.Address') }}</label>
-                                        <textarea name="address" class="form-control small-textarea-height" id="address" cols="30" rows="10">{{ old('address', $user->address) }}</textarea>
+                                        <textarea name="address" class="form-control small-textarea-height" id="address"
+                                                  cols="30" rows="10">{{ old('address', $user->address) }}</textarea>
                                         @error('address')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                 </div>
