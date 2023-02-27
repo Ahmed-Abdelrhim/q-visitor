@@ -1,43 +1,45 @@
 @extends('admin.layouts.master')
 
 @section('main-content')
-	
-	<section class="section">
+
+    <section class="section">
         <div class="section-header">
             <h1>{{ __('files.Roles') }}</h1>
             {{ Breadcrumbs::render('role/edit') }}
         </div>
 
         <div class="section-body">
-        	<div class="row">
-				                @if(app()->getLocale() == 'ar')
+            <div class="row">
+                @if(app()->getLocale() == 'ar')
                     <div class="col-md-6"></div>
 
                 @endif
-	   			<div class="col-12 col-md-6 col-lg-6">
-				    <div class="card">
-				    	<form action="{{ route('admin.role.update', $role) }}" method="POST">
-				    		@csrf
-				    		@method('PUT')
-						    <div class="card-body">
-						        <div class="form-group">
-			                        <label>{{ __('files.Name') }}</label> <span class="text-danger">*</span>
-			                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" >
-			                        @error('name')
-				                        <div class="invalid-feedback">
-				                          	{{ $message }}
-				                        </div>
-				                    @enderror
-			                    </div>
-						    </div>
-						    
-					        <div class="card-footer">
-		                    	<button class="btn btn-primary mr-1" type="submit">{{ __('files.Submit') }}</button>
-		                  	</div>
-		                </form>
-					</div>
-				</div>
-			</div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card">
+                        <form action="{{ route('admin.role.update', $role) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>{{ __('files.Name') }}</label> <span class="text-danger">*</span>
+                                    <input type="text" name="name"
+                                           class="form-control @error('name') is-invalid @enderror"
+                                    value="{{$role->name}}" >
+                                    @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button class="btn btn-primary mr-1" type="submit">{{ __('files.Submit') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
