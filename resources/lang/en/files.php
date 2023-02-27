@@ -2,19 +2,19 @@
 
 return [
     'Dashboard' => 'Dashboard',
-    'Profile' =>'Profile',
+    'Profile' => 'Profile',
     'Departments' => 'Departments',
-    'Pre-Register' =>'Future Visit',
+    'Pre-Register' => 'Future Visit',
     'Administrators' => 'Administrators',
-    'Role' =>'Role',
-    'Settings' =>'Settings',
-    'OCR' =>'OCR',
+    'Role' => 'Role',
+    'Settings' => 'Settings',
+    'OCR' => 'OCR',
     'Visiting Details' => 'Visiting Details',
 
     'Total Employees' => 'Total Employees',
     'Total Visitors' => 'Total Visitors',
     'Total Pre Registers' => 'Total Pre Registers',
-    'Visitors' =>'Visit Details',
+    'Visitors' => 'Visit Details',
 
 
     'Name' => 'Name',
@@ -40,22 +40,22 @@ return [
 
 
     // Visitors Add
-    'Submit' =>'Submit',
-    'First Name' =>'First Name',
-    'Last Name' =>'Last Name',
-    'Gender' =>'Gender',
-    'Company Name' =>'Company Name',
-    'National Identification No' =>'National Identification No',
-    'Select Employee' =>'Select Employee',
-    'From Date' =>'From Date',
-    'Expiry Date' =>'Expiry Date',
+    'Submit' => 'Submit',
+    'First Name' => 'First Name',
+    'Last Name' => 'Last Name',
+    'Gender' => 'Gender',
+    'Company Name' => 'Company Name',
+    'National Identification No' => 'National Identification No',
+    'Select Employee' => 'Select Employee',
+    'From Date' => 'From Date',
+    'Expiry Date' => 'Expiry Date',
     'Type' => 'Type',
     'Types' => 'Types',
 
     'TypeApproval' => 'Visit Approve Control',
 
-    'Purpose' =>'Purpose',
-    'Address' =>'Address',
+    'Purpose' => 'Purpose',
+    'Address' => 'Address',
     'Choose file' => 'Choose file',
     'Update' => 'Update',
     'Delete' => 'Delete',
@@ -145,7 +145,6 @@ return [
     'Update Notification Setting' => 'Update Notification Setting',
 
 
-
     'Notifications Templates' => 'Notifications Templates',
     'Invite Templates' => 'Invite Templates',
     'Update Email & Sms template Setting' => 'Update Email & Sms template Setting',
@@ -188,10 +187,12 @@ return [
     'Comments' => 'Comments',
 
 
-
-
-        'language was changed' => 'تم تغير اللغة بنجاح',
+    'language was changed' => 'تم تغير اللغة بنجاح',
     'language was not found' => 'اللغة غير مدعومة',
+
+    'Entrance Time' => 'Entrance Time',
+    'Comment' => 'Comment',
+    'Entrance Date' => 'Entrance Date',
     '' => '',
     '' => '',
 

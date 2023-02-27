@@ -181,9 +181,9 @@ return [
 
     'language was not found' => 'Language is not supported',
 
-    '' => '',
-    '' => '',
-    '' => '',
+    'Entrance Time' => 'وقت الدخول',
+    'Comment' => 'التعليق',
+    'Entrance Date' => 'تاريخ الدخول',
     '' => '',
     '' => '',
     '' => '',

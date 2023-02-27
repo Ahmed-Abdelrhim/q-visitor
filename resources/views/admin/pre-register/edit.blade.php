@@ -12,7 +12,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('Pre-registers') }}</h1>
+            <h1>{{ __('files.Pre-registers') }}</h1>
             {{ Breadcrumbs::render('pre-registers/edit') }}
         </div>
 
@@ -27,7 +27,7 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="first_name">{{ __('First Name ') }}</label> <span class="text-danger">*</span>
+                                        <label for="first_name">{{ __('files.First Name') }}</label> <span class="text-danger">*</span>
                                         <input id="first_name" type="text" name="first_name" class="form-control {{ $errors->has('first_name') ? " is-invalid " : '' }}" value="{{ old('first_name',$preregister->visitor->first_name) }}">
                                         @error('first_name')
                                         <div class="invalid-feedback">
@@ -36,7 +36,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="last_name">{{ __('Last Name') }}</label> <span class="text-danger">*</span>
+                                        <label for="last_name">{{ __('files.Last Name') }}</label> <span class="text-danger">*</span>
                                         <input id="last_name" type="text" name="last_name" class="form-control {{ $errors->has('last_name') ? " is-invalid " : '' }}" value="{{ old('last_name',$preregister->visitor->last_name) }}">
                                         @error('last_name')
                                         <div class="invalid-feedback">
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('E-Mail Address') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Email') }}</label> <span class="text-danger">*</span>
                                         <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email',$preregister->visitor->email) }}">
                                         @error('email')
                                         <div class="invalid-feedback">
@@ -57,7 +57,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label>{{ __('Phone') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Phone') }}</label> <span class="text-danger">*</span>
                                         <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone',$preregister->visitor->phone) }}">
                                         @error('phone')
                                         <div class="invalid-feedback">
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="gender">{{ __('Gender') }}</label> <span class="text-danger">*</span>
+                                        <label for="gender">{{ __('files.Gender') }}</label> <span class="text-danger">*</span>
                                         <select id="gender" name="gender" class="form-control @error('gender') is-invalid @enderror">
                                             @foreach(trans('genders') as $key => $gender)
                                                 <option value="{{ $key }}" {{ (old('gender',$preregister->visitor->gender) == $key) ? 'selected' : '' }}>{{ $gender }}</option>
@@ -81,7 +81,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="employee_id">{{ __('Select Employee') }}</label> <span class="text-danger">*</span>
+                                        <label for="employee_id">{{ __('files.Select Employee') }}</label> <span class="text-danger">*</span>
                                         <select id="employee_id" name="employee_id" class="form-control select2 @error('employee_id') is-invalid @enderror">
                                             @foreach($employees as $key => $employee)
                                                 <option value="{{ $employee->id }}" {{ (old('employee_id',$preregister->employee_id) == $employee->id) ? 'selected' : '' }}>{{ $employee->name }} ( {{$employee->department->name}} )</option>
@@ -97,7 +97,7 @@
 
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('Expected Date') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Expected Date') }}</label> <span class="text-danger">*</span>
                                         <input type="text" autocomplete="off" id="date-picker" name="expected_date" class="form-control @error('expected_date') is-invalid @enderror" value="{{ old('expected_date',$preregister->expected_date) }}">
                                         @error('expected_date')
                                         <div class="invalid-feedback">
@@ -106,7 +106,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="expected_time">{{ __('Expected Time') }}</label> <span class="text-danger">*</span>
+                                        <label for="expected_time">{{ __('files.Expected Time') }}</label> <span class="text-danger">*</span>
                                         <input id="expected_time" type="text" name="expected_time"
                                                class="form-control  timepicker @error('expected_time') is-invalid @enderror"
                                                value="{{ old('expected_time',date('h:i A', strtotime($preregister->expected_time))) }}">
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('Exit Date') }}</label> <span class="text-danger">*</span>
+                                        <label>{{ __('files.Exit Date') }}</label> <span class="text-danger">*</span>
                                         <input type="text" autocomplete="off" id="date-picker" name="exit_date" class="form-control @error('exit_date') is-invalid @enderror" value="{{ old('exit_date',$preregister->expected_date) }}">
                                         @error('exit_date')
                                         <div class="invalid-feedback">
@@ -128,7 +128,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="exit_time">{{ __('Exit Time') }}</label> <span class="text-danger">*</span>
+                                        <label for="exit_time">{{ __('files.Exit Time') }}</label> <span class="text-danger">*</span>
                                         <input id="exit_time" type="text" name="exit_time"
                                                class="form-control  timepicker @error('exit_time') is-invalid @enderror"
                                                value="{{ old('exit_time',date('h:i A', strtotime($preregister->exit_time))) }}">
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="comment">{{ __('Comment') }}</label>
+                                        <label for="comment">{{ __('files.Comment') }}</label>
                                         <textarea name="comment"
                                                   class="summernote-simple form-control height-textarea @error('comment')
                                                       is-invalid @enderror"
@@ -155,7 +155,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="address">{{ __('Address') }}</label>
+                                        <label for="address">{{ __('files.Address') }}</label>
                                         <textarea name="address"
                                                   class="summernote-simple form-control height-textarea @error('address')
                                                       is-invalid @enderror"
@@ -173,7 +173,7 @@
                             </div>
 
                             <div class="card-footer ">
-                                <button class="btn btn-primary mr-1" type="submit">{{ __('Update') }}</button>
+                                <button class="btn btn-primary mr-1" type="submit">{{ __('files.Update') }}</button>
                             </div>
                         </form>
                     </div>
