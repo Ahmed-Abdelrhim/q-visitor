@@ -198,7 +198,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 // php artisan storage:link
 
-//Arc Dark 
+//Arc Dark
 //Atom one dark (material)
 
 //127811
@@ -221,3 +221,4 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 
 // 106,684.36 MB
+// 3092000@aA
