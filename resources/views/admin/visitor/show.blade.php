@@ -63,67 +63,159 @@
                         <!-- /.box-body -->
                     </div>
                 </div>
+
                 <div class="col-8 col-md-8 col-lg-8 id-card-in-arabic">
                     <div class="card">
                         <div class="card-body">
                             <div class="profile-desc">
                                 <div class="single-profile">
-                                    <p><b>{{ __('files.First Name') }} : </b> {{ $visitingDetails->visitor->first_name}}
+                                    <p><b>{{ __('files.First Name') }} : </b>
+                                        @if(empty($visitingDetails->visitor->first_name))
+                                            ---
+                                        @else
+                                            {{ $visitingDetails->visitor->first_name}}
+                                        @endif
+
                                     </p>
                                 </div>
                                 <div class="single-profile">
-                                    <p><b>{{ __('files.Last Name') }} : </b> {{ $visitingDetails->visitor->last_name}}
+                                    <p><b>{{ __('files.Last Name') }} : </b>
+                                        @if(empty($visitingDetails->visitor->last_name))
+                                            ---
+                                        @else
+                                            {{ $visitingDetails->visitor->last_name}}
+                                        @endif
                                     </p>
                                 </div>
                                 <div class="single-profile">
-                                    <p><b>{{ __('files.Email') }} : </b> {{ $visitingDetails->visitor->email}}</p>
-                                </div>
-                                <div class="single-profile">
-                                    <p><b>{{ __('files.Phone') }} : </b> {{ $visitingDetails->visitor->phone}}</p>
-                                </div>
-                                <div class="single-profile">
-                                    <p><b>{{ __('files.Employee') }} : </b> {{ $visitingDetails->employee->user->name}}
+                                    <p><b>{{ __('files.Email') }} : </b>
+                                        @if(empty($visitingDetails->visitor->email))
+                                            ---
+                                        @else
+                                            {{ $visitingDetails->visitor->email}}
+                                        @endif
+
                                     </p>
                                 </div>
                                 <div class="single-profile">
-                                    <p><b>{{ __('files.Purpose') }} : </b> {{ $visitingDetails->purpose}}</p>
+                                    <p><b>{{ __('files.Phone') }} : </b>
+                                        @if(empty($visitingDetails->visitor->phone))
+                                            ---
+                                        @else
+                                            {{ $visitingDetails->visitor->phone}}
+                                        @endif
+
+                                    </p>
                                 </div>
                                 <div class="single-profile">
-                                    <p><b>{{ __('files.Company') }} : </b> {{ $visitingDetails->company_name}}</p>
+                                    <p><b>{{ __('files.Employee') }} : </b>
+                                        @if(empty($visitingDetails->employee->user->name))
+                                            ---
+                                        @else
+                                            {{ $visitingDetails->employee->user->name}}
+                                        @endif
+
+                                    </p>
+                                </div>
+                                <div class="single-profile">
+                                    <p><b>{{ __('files.Purpose') }} : </b>
+                                        @if(empty($visitingDetails->purpose))
+                                            ---
+                                        @else
+                                            {{ $visitingDetails->purpose}}
+                                        @endif
+
+                                    </p>
+                                </div>
+                                <div class="single-profile">
+                                    <p><b>{{ __('files.Company') }} : </b>
+                                        @if(empty($visitingDetails->company_name))
+                                            ---
+                                        @else
+                                            {{ $visitingDetails->company_name}}
+                                        @endif
+
+                                    </p>
                                 </div>
                                 <div class="single-profile">
                                     <p><b>{{ __('files.National Identification') }}
-                                            : </b> {{ $visitingDetails->national_identification_no}}</p>
+                                            : </b>
+                                        @if(empty($visitingDetails->national_identification_no))
+                                            ---
+                                        @else
+                                            {{ $visitingDetails->national_identification_no}}
+                                        @endif
+                                    </p>
                                 </div>
                                 <div class="single-profile">
                                     <p><b>{{ __('files.Date') }}
-                                            : </b> {{date('d-m-Y', strtotime($visitingDetails->created_at))}}</p>
+                                            : </b>
+                                        @if(empty($visitingDetails->created_at))
+                                            ---
+                                        @else
+                                            {{date('d-m-Y', strtotime($visitingDetails->created_at))}}
+                                        @endif
+                                    </p>
                                 </div>
                                 <div class="single-profile">
                                     <p><b>{{ __('files.Checkin') }}
-                                            : </b> {{date('d-m-Y h:i A', strtotime($visitingDetails->checkin_at))}}</p>
+                                            : </b>
+                                        @if(empty($visitingDetails->checkin_at))
+                                            ---
+                                        @else
+                                            {{date('d-m-Y h:i A', strtotime($visitingDetails->checkin_at))}}
+                                        @endif
+                                    </p>
                                 </div>
                                 @if($visitingDetails->checkout_at)
                                     <div class="single-profile">
                                         <p><b>{{ __('files.Checkout') }}
-                                                : </b> {{date('d-m-Y h:i A', strtotime($visitingDetails->checkout_at))}}
+                                                : </b>
+                                            @if(empty($visitingDetails->checkout_at))
+                                                ---
+                                            @else
+                                                {{date('d-m-Y h:i A', strtotime($visitingDetails->checkout_at))}}
+                                            @endif
+
+
                                         </p>
                                     </div>
                                 @endif
                                 <div class="single-profile">
-                                    <p><b>{{ __('files.Address') }} : </b> {{ $visitingDetails->visitor->address}}</p>
+                                    <p><b>{{ __('files.Address') }} : </b>
+                                        @if(empty($visitingDetails->visitor->address))
+                                            ---
+                                        @else
+                                            {{ $visitingDetails->visitor->address}}
+                                        @endif
+                                    </p>
                                 </div>
                                 <div class="single-profile">
-                                    <p><b>{{ __('files.Status') }} : </b> {{ $visitingDetails->my_status}}</p>
+                                    <p><b>{{ __('files.Status') }} : </b>
+
+                                        @if(empty( $visitingDetails->my_status))
+                                            ---
+                                        @else
+                                            {{  $visitingDetails->my_status}}
+                                        @endif
+
+                                    </p>
                                 </div>
                                 <div class="single-profile">
-                                    <p><b>{{ __('files.QRCode') }}: </b> <a
+                                    <p><b>{{ __('files.QRCode') }} : </b> <a
                                                 href="{{$visitingDetails->qrcode}}">{!! str_replace('https://www.qudratech-eg.net/qrcode/temp/', ' ', $visitingDetails->qrcode) !!}</a>
                                     </p>
                                 </div>
                                 <div class="single-profile">
                                     <p><b>{{ __('files.Expiry Date') }}
-                                            : </b> {{date('d-m-Y h:i A', strtotime($visitingDetails->expiry_date))}}</p>
+                                            : </b>
+                                        @if(empty($visitingDetails->expiry_date))
+                                            ---
+                                        @else
+                                            {{date('d-m-Y h:i A', strtotime($visitingDetails->expiry_date))}}
+                                        @endif
+
+                                    </p>
                                 </div>
                             </div>
                         </div>

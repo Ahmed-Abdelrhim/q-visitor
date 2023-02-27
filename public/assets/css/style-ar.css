@@ -4534,4 +4534,6 @@ td:has(> button.actions) {
 
 .id-card-in-arabic {
     direction: rtl;
+    display: flex;
+    flex-direction: row-reverse;
 }
