@@ -94,7 +94,7 @@
                     <a class="nav-link" href="{{route('admin.visitors.index')}}">
                         <!-- <i class="fas fa-walking"></i> -->
                         <i class="fa fa-info"></i>
-                        <span>{{__('files.Visiting Details')}}</span>
+                        <span>{{__('files.Visit Reservation')}}</span>
                     </a>
                 </li>
             @endif
@@ -106,7 +106,7 @@
                 <li class="pre-register">
                     <a class="nav-link" href="{{route('admin.pre-registers.index')}}">
                         <i class="fas fa-laptop"></i>
-                        <span>{{__('files.Pre-Register')}}</span>
+                        <span>{{__('files.Future Visit')}}</span>
                     </a>
                 </li>
             @endif

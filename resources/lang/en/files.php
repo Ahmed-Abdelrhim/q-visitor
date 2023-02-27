@@ -199,6 +199,14 @@ return [
     'Company' => 'Company',
     'National Identification' => 'National Identification',
     'Date' => 'Date',
+
+    'Future Visit' => 'Future Visit',
+
+
+    'Add Visit Reservation' => 'Add Visit Reservation',
+    'Edit Visit Reservation' => 'Edit Visit Reservation',
+
+    '' => '',
     '' => '',
     '' => '',
 

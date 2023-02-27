@@ -6,7 +6,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('files.Visitors') }}</h1>
+            <h1>{{ __('files.Visit Reservation') }}</h1>
             {{ Breadcrumbs::render('visitors/show') }}
         </div>
 

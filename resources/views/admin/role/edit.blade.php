@@ -1,7 +1,5 @@
 @extends('admin.layouts.master')
-
 @section('main-content')
-
     <section class="section">
         <div class="section-header">
             <h1>{{ __('files.Roles') }}</h1>
@@ -12,7 +10,6 @@
             <div class="row">
                 @if(app()->getLocale() == 'ar')
                     <div class="col-md-6"></div>
-
                 @endif
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card">
@@ -42,5 +39,4 @@
             </div>
         </div>
     </section>
-
 @endsection

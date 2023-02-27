@@ -2,7 +2,7 @@
 @section('main-content')
 <section class="section">
     <div class="section-header">
-        <h1>{{ __('files.Visitors') }}</h1>
+        <h1>{{ __('files.Visit Reservation') }}</h1>
         {{ Breadcrumbs::render('visitors') }}
     </div>
 
@@ -14,7 +14,7 @@
                     @can('visitors_create')
                         <div class="card-header">
                             <a href="{{ route('admin.visitors.create') }}" class="btn btn-icon icon-left btn-primary"><i
-                                    class="fas fa-plus"></i> {{ __('files.Add Visitor') }}</a>
+                                    class="fas fa-plus"></i> {{ __('files.Add Visit Reservation') }}</a>
                         </div>
                     @endcan
 

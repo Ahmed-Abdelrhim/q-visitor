@@ -190,8 +190,10 @@ return [
     'Date' => 'التاريخ',
 
 
-    '' => '',
-    '' => '',
+
+    'Future Visit' => 'زيارة مستقبلية',
+    'Add Visit Reservation' => 'إضافة حجز زيارة ',
+    'Edit Visit Reservation' => 'تعديل  حجز زيارة',
     '' => '',
     '' => '',
     '' => '',
