@@ -64,6 +64,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         //types
         Route::resource('types', 'TypesController');
+        // Route::get('typesForRoles');
         Route::get('get-types', 'TypesController@getTypes')->name('types.get-types');
 
         //departments

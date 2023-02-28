@@ -19,6 +19,7 @@
         </div>
     </div>
     @include('admin.layouts.components.script')
+
 </body>
 </html>
 
