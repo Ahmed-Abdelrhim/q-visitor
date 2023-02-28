@@ -171,6 +171,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
                 Artisan::call('storage:link');
             });
 
+            Route::get('email/check',[\App\Http\Controllers\Admin\VisitorController::class,'checkEmail']);
+
 
         });
         Route::get('change_locale/{iso}', [HomeController::class, 'changeLocaleLanguage'])->name('change_locale');

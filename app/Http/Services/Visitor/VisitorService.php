@@ -20,9 +20,22 @@ class VisitorService
     public function all()
     {
         // if(auth()->user()->getrole->name == 'Employee') {
-        if (auth()->user()->hasRole('Employee')) {
-            return VisitingDetails::query()->where(['employee_id' => auth()->user()->employee->id])->orderBy('id', 'desc')->get();
+
+        //        if (auth()->user()->hasRole('Employee')) {
+        //            return VisitingDetails::query()->where(['employee_id' => auth()->user()->employee->id])->orderBy('id', 'desc')->get();
+        //        } else {
+        //            return VisitingDetails::query()->orderBy('id', 'desc')->get();
+        //        }
+
+        $user = auth()->user();
+        if (!$user->hasRole('Admin')) {
+            // Return Only The VisitingDetails Created By This User Or Edit By The Current User
+            return VisitingDetails::query()
+                ->where('creator_id', $user->id)
+                ->orWhere('editor_id', $user->id)
+                ->get();
         } else {
+            // The User Is Of Type ADMIN So Return All The VisitingDetails
             return VisitingDetails::query()->orderBy('id', 'desc')->get();
         }
     }
@@ -94,7 +107,7 @@ class VisitorService
             $reg_no = $data2 . $data1 . $data . '01';
         }
 
-        $reg_no = rand(11111111,99999999);
+        $reg_no = rand(11111111, 99999999);
         $input['first_name'] = $request->input('first_name');
         $input['last_name'] = $request->input('last_name');
         $input['email'] = $request->input('email');
@@ -113,7 +126,7 @@ class VisitorService
             $visiting['purpose'] = $request->input('purpose');
             $visiting['company_name'] = $request->input('company_name');
             $visiting['employee_id'] = $request->input('employee_id');
-            $visiting['checkin_at'] = $request->input('from_date');//date('y-m-d H:i');
+            $visiting['checkin_at'] = $request->input('from_date');// date('y-m-d H:i');
             $visiting['visitor_id'] = $visitor->id;
             $visiting['status'] = Status::ACTIVE;
             $visiting['user_id'] = $request->input('employee_id');
@@ -124,7 +137,7 @@ class VisitorService
 
             $visiting['expiry_date'] = $request->input('expiry_date');
             $visiting['from_date'] = $request->input('from_date');
-            $visitingDetails = VisitingDetails::create($visiting);
+            $visitingDetails = VisitingDetails::query()->create($visiting);
 
             if ($request->file('image')) {
                 $visitingDetails->addMedia($request->file('image'))->toMediaCollection('visitor');
@@ -154,7 +167,7 @@ class VisitorService
                 file_get_contents('https://qudratech-eg.net/mail/tt.php?vid=' . $vid);
                 $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
             } catch (\Exception $e) {
-                $notification = array('message'=> 'Message was not sent','alert-type'=>'info');
+                $notification = array('message' => 'Message was not sent', 'alert-type' => 'info');
                 return redirect()->back()->with($notification);
             }
         }
@@ -211,7 +224,7 @@ class VisitorService
             $data = file_get_contents("https://qudratech-eg.net/mail/tt.php?vid=" . $visiting['visitor_id'] . "&name=" . $input['first_name']);
             $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
         } catch (\Exception $e) {
-            $notification = array('message'=> 'Message was not sent','alert-type'=>'info');
+            $notification = array('message' => 'Message was not sent', 'alert-type' => 'info');
             return redirect()->back()->with($notification);
         }
         return $visitingDetails;

@@ -58,6 +58,7 @@ class VisitorController extends Controller
 
     public function store(VisitorRequest $request)
     {
+        // return $request;
         $this->visitorService->make($request);
         return redirect()->route('admin.visitors.index')->withSuccess('The data inserted successfully!');
     }
@@ -146,19 +147,19 @@ class VisitorController extends Controller
                 }
 
                 if (auth()->user()->can('visitors_show')) {
-                    $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-info actions" 
+                    $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-info actions"
 data-toggle="tooltip" data-placement="top" title="'.__('files.View').'"><i class="far fa-eye"></i></a>';
                 }
 
                 if (auth()->user()->can('visitors_edit')) {
-                    $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary actions" 
+                    $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary actions"
 data-toggle="tooltip" data-placement="top" title="'.__('files.Edit').'">
  <i class="far fa-edit"></i></a>';
                 }
 
 
                 if (auth()->user()->can('visitors_delete')) {
-                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions" 
+                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions"
 data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'">
  <i class="fa fa-trash"></i></button></form>';
                 }
@@ -226,13 +227,15 @@ data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'">
             return redirect()->back()->with($notifications);
         }
 
-        try {
-            $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $user->email);
-            $send_sms = Http::get('https://www.qudratech-sd.com/sms_api.php?mob=' . $user->phone);
-        } catch (\Exception $e) {
-            $notifications = array('error' => 'Something Went Wrong');
-            return redirect()->back()->with($notifications);
-        }
+//        try {
+            $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $user->id);
+            $send_sms =  Http::get('https://www.qudratech-sd.com/sms_api.php?mob=' . $user->phone);
+//        }
+
+//        catch (\Exception $e) {
+//            $notifications = array('error' => 'Something Went Wrong');
+//            return redirect()->back()->with($notifications);
+//        }
 
         if ($send_sms->status() == 200) {
             $notifications = array('success' => __('files.Success Transaction'));
@@ -249,58 +252,6 @@ data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'">
     public
     function play(string $locale)
     {
-        //        if (auth()->user()->hasRole('Admin')) {
-        //            return 'True';
-        //        }
-        //        return 'False';
-
-
-        //        $role = Role::query()->find(2);
-        //        $perms = $role->permissions->pluck('name');
-        //        foreach ($perms as $perm) {
-        //            if (auth()->user()->hasPermissionTo($perm)) {
-        //                return 'Yes Has Perm To ' . $perm;
-        //            }
-        //        }
-
-        //        $visitors = Visitor::query()->get();
-        //        foreach ($visitors as $visitor) {
-        //            $visitor->type = 10;
-        //            $visitor->save();
-        //        }
-
-        return rand(11111111, 99999999);
-        // return random();
-       // return auth()->user()->employee->id;
-
-
-            //        $email = 'aabdelrhim974@gmail.com';
-            //        $emails = explode('@', $email);
-            //        return $emails[0] . mt_rand();
-        // return 'Now Doing NoThing';
-
+        return auth()->user()->employee();
     }
 }
-
-
-
-// $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2  float-left btn-success" data-toggle="tooltip" data-placement="top" title="Approve"><i class="far fa-check-circle"></i></a>';
-// $visit = VisitingDetails::query()->find($visitingDetail);
-
-// if ($visit[0]['sent_sms_before'] == 1) {
-// $msg = 'Re-send sms';
-// }
-
-
-
-
-
-// $permissions = $role->permissions->pluck('name');
-//                    foreach ($permissions as $permission) {
-//                        if (auth()->user()->hasPermissionTo($permission)) {
-//                            $approve = true;
-//                            break;
-//                        }
-//                    } // endforeach
-
-// if (auth()->user()->can('visitors_show')) {
