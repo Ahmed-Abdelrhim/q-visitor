@@ -205,7 +205,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 //127811
 
-// sign_up/verification_code
+// sign_up / verification_code
 
 
 // translation files ar and en

@@ -33,7 +33,7 @@ class VisitorService
             return VisitingDetails::query()
                 ->where('creator_id', $user->id)
                 ->orWhere('editor_id', $user->id)
-                ->orWhere('employee_id',$user->employee->id)
+                ->orWhere('employee_id', $user->employee->id)
                 ->get();
         } else {
             // The User Is Of Type ADMIN So Return All The VisitingDetails
@@ -47,7 +47,7 @@ class VisitorService
      */
     public function find($id)
     {
-//        if(auth()->user()->getrole->name == 'Employee') {
+        // if(auth()->user()->getrole->name == 'Employee') {
         if (auth()->user()->hasRole('Employee')) {
             return VisitingDetails::query()->where(['id' => $id, 'employee_id' => auth()->user()->employee->id])->first();
         } else {

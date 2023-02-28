@@ -18,10 +18,10 @@ class IsHasBackendPermission
     {
         $permissionRole = [1, 2, 3];
 
-        if (Auth::user() && in_array(Auth::user()->myrole, $permissionRole)) {
-            return $next($request);
-        }
-
-        return redirect('/');
+        //        if (Auth::user() && in_array(Auth::user()->myrole, $permissionRole)) {
+        //            return $next($request);
+        //        }
+        return $next($request);
+        // return redirect('/');
     }
 }
