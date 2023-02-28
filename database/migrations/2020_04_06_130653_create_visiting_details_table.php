@@ -26,7 +26,7 @@ class CreateVisitingDetailsTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('visitor_id');
             $table->string('plate_no',100)->nullable();
-            $table->tinyInteger('approval')->nullable(); // length = 1
+            $table->tinyInteger('approval')->default(0); // length = 1
             $table->auditColumn();
             $table->timestamps();
         });
