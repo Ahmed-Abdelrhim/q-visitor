@@ -148,19 +148,19 @@ class VisitorController extends Controller
 
                 if (auth()->user()->can('visitors_show')) {
                     $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-info actions"
-data-toggle="tooltip" data-placement="top" title="'.__('files.View').'"><i class="far fa-eye"></i></a>';
+data-toggle="tooltip" data-placement="top" title="' . __('files.View') . '"><i class="far fa-eye"></i></a>';
                 }
 
                 if (auth()->user()->can('visitors_edit')) {
                     $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary actions"
-data-toggle="tooltip" data-placement="top" title="'.__('files.Edit').'">
+data-toggle="tooltip" data-placement="top" title="' . __('files.Edit') . '">
  <i class="far fa-edit"></i></a>';
                 }
 
 
                 if (auth()->user()->can('visitors_delete')) {
                     $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions"
-data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'">
+data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '">
  <i class="fa fa-trash"></i></button></form>';
                 }
 
@@ -227,15 +227,13 @@ data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'">
             return redirect()->back()->with($notifications);
         }
 
-//        try {
+        try {
             $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $user->id);
-            $send_sms =  Http::get('https://www.qudratech-sd.com/sms_api.php?mob=' . $user->phone);
-//        }
-
-//        catch (\Exception $e) {
-//            $notifications = array('error' => 'Something Went Wrong');
-//            return redirect()->back()->with($notifications);
-//        }
+            $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $user->phone);
+        } catch (\Exception $e) {
+            $notifications = array('error' => 'Something Went Wrong');
+            return redirect()->back()->with($notifications);
+        }
 
         if ($send_sms->status() == 200) {
             $notifications = array('success' => __('files.Success Transaction'));

@@ -123,12 +123,30 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
-            $('#approval_level').on('change', function () {
+            let value =  $('#approval_level').val();
+            if (value == 1) {
+                $('#role_one').removeAttr('disabled');
+                $('#role_two').attr('disabled' , true);
+            }
 
+            if (value == 2) {
+                $('#role_one').removeAttr('disabled');
+                $('#role_two').removeAttr('disabled');
+            }
+
+            if(value == 0) {
+                $('#role_one').attr('disabled' , true);
+                $('#role_two').attr('disabled' , true);
+            }
+
+
+            $('#approval_level').on('change', function () {
+                console.log('changed');
                 let value = $(this).val();
                 console.log('Value=> ' + value);
                 if (value == 1) {
                     $('#role_one').removeAttr('disabled');
+                    $('#role_two').attr('disabled' , true);
                 }
 
                 if (value == 2) {
@@ -138,7 +156,6 @@
 
                 if(value == 0) {
                     $('#role_one').attr('disabled' , true);
-                    console.log('here');
                     $('#role_two').attr('disabled' , true);
                 }
             });

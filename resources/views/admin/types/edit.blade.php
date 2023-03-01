@@ -37,10 +37,10 @@
                                 <!-- Level -->
                                 <div class="form-group">
                                     <label>{{ __('files.Approval Levels') }}</label> <span class="text-danger">*</span>
-                                    <select name="level" class="form-control @error('level') is-invalid @enderror">
-                                        <option value="0">0</option>
-                                        <option value="1" selected>1</option>
-                                        <option value="2">2</option>
+                                    <select name="level" id="approval_level" class="form-control @error('level') is-invalid @enderror">
+                                        <option value="0" @if($types->level == 0) selected @endif>0</option>
+                                        <option value="1" @if($types->level == 1) selected @endif>1</option>
+                                        <option value="2" @if($types->level == 2) selected @endif>2</option>
                                     </select>
                                     @error('level')
                                     <div class="invalid-feedback">
@@ -55,8 +55,9 @@
                                 @if(isset($roles) && count($roles) > 0)
                                     <div class="form-group">
                                         <label>{{ __('files.Approval One') }}</label> <span class="text-danger">*</span>
-                                        <select name="role_one"
-                                                class="form-control @error('role_one') is-invalid @enderror">
+                                        <select name="role_one" id="role_one"
+                                                class="form-control @error('role_one') is-invalid @enderror" @if(!empty($types->role_two)) @else disabled @endif>
+                                            <option value="0" selected>NONE</option>
                                             @foreach($roles as $role)
                                                 <option value="{{ $role->id }}"
                                                         @if($types->role_one == $role->id) selected @endif>
@@ -76,8 +77,8 @@
                                     <!-- Approval Two -->
                                     <div class="form-group">
                                         <label>{{ __('files.Approval Two') }}</label> <span class="text-danger">*</span>
-                                        <select name="role_two"
-                                                class="form-control @error('role_two') is-invalid @enderror">
+                                        <select name="role_two" id="role_two"
+                                                class="form-control @error('role_two') is-invalid @enderror" @if(!empty($types->role_two)) @else disabled @endif>
                                             @if(!empty($types->role_two))
                                                 <option value="0">NONE</option>
                                             @else
@@ -127,4 +128,48 @@
             </div>
         </div>
     </section>
+@endsection
+
+
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            let value =  $('#approval_level').val();
+            if (value == 1) {
+                $('#role_one').removeAttr('disabled');
+                $('#role_two').attr('disabled' , true);
+            }
+
+            if (value == 2) {
+                $('#role_one').removeAttr('disabled');
+                $('#role_two').removeAttr('disabled');
+            }
+
+            if(value == 0) {
+                $('#role_one').attr('disabled' , true);
+                $('#role_two').attr('disabled' , true);
+            }
+
+
+            $('#approval_level').on('change', function () {
+
+                let value = $(this).val();
+                console.log('Value=> ' + value);
+                if (value == 1) {
+                    $('#role_one').removeAttr('disabled');
+                    $('#role_two').attr('disabled' , true);
+                }
+
+                if (value == 2) {
+                    $('#role_one').removeAttr('disabled');
+                    $('#role_two').removeAttr('disabled');
+                }
+
+                if(value == 0) {
+                    $('#role_one').attr('disabled' , true);
+                    $('#role_two').attr('disabled' , true);
+                }
+            });
+        });
+    </script>
 @endsection

@@ -6,12 +6,12 @@ use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TypesRequest;
 use App\Models\Types;
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
@@ -49,11 +49,14 @@ class TypesController extends Controller
 
     public function store(TypesRequest $request)
     {
+        $role_one = Null;
+        if ($request->has('role_one') && $request->get('role_one') != 0) {
+            $role_one = $request->get('role_one');
+        }
         $role_two = null;
         if (!empty($request->get('role_two')) && $request->get('role_two') != 0) {
             $role_two = $request->get('role_two');
         }
-        return $request;
 
         try {
             DB::beginTransaction();
@@ -66,8 +69,7 @@ class TypesController extends Controller
                 'created_at' => Carbon::now(),
             ]);
             DB::commit();
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             $notifications = array('message' => 'Something Went Wrong', 'alert-type' => 'error');
             return redirect()->back()->with($notifications);
@@ -91,10 +93,28 @@ class TypesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['name' => 'required|string|max:255|unique:types,name,' . $id]);
-        $input = $request->all();
+        $this->validate($request, ['name' => 'required|string|max:255|unique:types,name,' . $id]);;
         $designation = Types::query()->findOrFail($id);
-        $designation->update($input);
+        $role_one = NULL;
+        if ($request->has('role_one')) {
+            $role_one = $request->get('role_one');
+        }
+
+        $role_two = NULL;
+        if ($request->has('role_two')) {
+            $role_two = $request->get('role_two');
+        }
+
+        // $input = $request->all();
+        // $designation->update($input);
+        $designation->update([
+            'name' => $request->get('name'),
+            'status' => $request->get('status'),
+            'level' => $request->get('level'),
+            'role_one' => $role_one,
+            'role_two' => $role_two,
+            'updated_at' => Carbon::now(),
+        ]);
         return redirect(route('admin.types.index'))->withSuccess('The Data Updated Successfully');
     }
 
@@ -126,13 +146,13 @@ class TypesController extends Controller
                 if (auth()->user()->can('types_edit')) {
                     $retAction .= '<a href="' . route('admin.types.edit', $designation) . '"
 class="btn btn-sm btn-icon float-left btn-primary actions" data-toggle="tooltip"
-data-placement="top" title="'.__('files.Edit').'"><i class="far fa-edit"></i></a>';
+data-placement="top" title="' . __('files.Edit') . '"><i class="far fa-edit"></i></a>';
                 }
 
                 if (auth()->user()->can('types_delete')) {
                     $retAction .= '<form class="float-left pl-2" action="' . route('admin.types.destroy', $designation) . '" method="POST">' .
                         method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions"
-data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'"><i class="fa fa-trash"></i></button></form>';
+data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '"><i class="fa fa-trash"></i></button></form>';
                 }
                 return $retAction;
             })
