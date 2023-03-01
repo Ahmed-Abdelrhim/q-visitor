@@ -49,27 +49,18 @@ class VisitorController extends Controller
 
     public function create(Request $request)
     {
-
-        $this->data['employees'] = Employee::where('status', Status::ACTIVE)->get();
-        $this->data['types'] = Types::where('status', Status::ACTIVE)->get();
-
+        $this->data['employees'] = Employee::query()->where('status', Status::ACTIVE)->get();
+        $this->data['types'] = Types::query()->where('status', Status::ACTIVE)->get();
         return view('admin.visitor.create', $this->data);
     }
 
     public function store(VisitorRequest $request)
     {
-        // return $request;
         $this->visitorService->make($request);
         return redirect()->route('admin.visitors.index')->withSuccess('The data inserted successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+
     public function show($id)
     {
         $this->data['visitingDetails'] = $this->visitorService->find($id);

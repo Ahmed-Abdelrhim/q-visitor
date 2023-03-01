@@ -24,6 +24,7 @@ class CreateVisitingDetailsTable extends Migration
             $table->unsignedTinyInteger('status');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('employee_id');
+            $table->unsignedInteger('type_id')->nullable();
             $table->unsignedBigInteger('visitor_id');
             $table->string('plate_no',100)->nullable();
             $table->tinyInteger('approval_status')->default(0); // length = 1

@@ -6,6 +6,7 @@ use App\Enums\Status;
 use App\Http\Requests\VisitorRequest;
 use App\Models\Booking;
 use App\Models\PreRegister;
+use App\Models\Types;
 use App\Models\VisitingDetails;
 use App\Models\Visitor;
 use App\Notifications\SendVisitorToEmployee;
@@ -119,7 +120,7 @@ class VisitorService
         $input['national_identification_no'] = $request->input('national_identification_no');
         $input['is_pre_register'] = false;
         $input['status'] = Status::ACTIVE;
-        $visitor = Visitor::create($input);
+        $visitor = Visitor::query()->create($input);
 
 
         if ($visitor) {
@@ -165,8 +166,19 @@ class VisitorService
             $vid = $visiting['visitor_id'];
             //$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
             try {
-                file_get_contents('https://qudratech-eg.net/mail/tt.php?vid=' . $vid);
-                $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
+                // Check If The Visit Detail Type Level Is 0 Or Not
+                $type_id = $visitingDetails->visitor->type;
+
+                if ($type_id) {
+                    $type = Types::query()->find($type_id);
+                    if ($type) {
+                        if ($type->level == 0) {
+                            $visitingDetails->approval_status == 2;
+                            $visitingDetails->save();
+                        }
+                    }
+                }
+
             } catch (\Exception $e) {
                 $notification = array('message' => 'Message was not sent', 'alert-type' => 'info');
                 return redirect()->back()->with($notification);

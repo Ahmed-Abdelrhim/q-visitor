@@ -103,16 +103,22 @@ class TypesController extends Controller
             $role_two = $request->get('role_two');
         }
 
-        // $input = $request->all();
-        // $designation->update($input);
-        $designation->update([
-            'name' => $request->get('name'),
-            'status' => $request->get('status'),
-            'level' => $request->get('level'),
-            'role_one' => $role_one,
-            'role_two' => $role_two,
-            'updated_at' => Carbon::now(),
-        ]);
+        try {
+            DB::beginTransaction();
+            $designation->update([
+                'name' => $request->get('name'),
+                'status' => $request->get('status'),
+                'level' => $request->get('level'),
+                'role_one' => $role_one,
+                'role_two' => $role_two,
+                'updated_at' => Carbon::now(),
+            ]);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $notification = array('message','Something Went Wrong','alert-type'=>'error');
+            return redirect()->back()->with($notification);
+        }
         return redirect(route('admin.types.index'))->withSuccess('The Data Updated Successfully');
     }
 

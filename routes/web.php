@@ -222,6 +222,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 // Roles => index & create & edit & show blade  , RoleController done
 // Types => index & create & edit blade , TypesController
 
-
-// 106,684.36 MB
-// 3092000@aA
+// ============================================================================================================================================
+// I Need to upload the types···
+// BackEnd Middleware···
+//
+// ============================================================================================================================================
