@@ -78,8 +78,6 @@ class TypesController extends Controller
         $notifications = array('message' => 'Type created successfully', 'alert-type' => 'success');
         return redirect()->route('admin.types.index')->with($notifications);
 
-        // Types::create($input);
-
     }
 
     public function edit($id): Factory|View|Application
