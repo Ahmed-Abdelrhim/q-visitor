@@ -54,6 +54,11 @@ class VisitingDetails extends Model implements  HasMedia
         return $this->hasMany(Attendance::class, 'employee_id');
     }
 
+    public function type()
+    {
+        return $this->belongsTo(Types::class,'type_id');
+    }
+
     public function getMyStatusAttribute()
     {
         return trans('statuses.' . $this->status);

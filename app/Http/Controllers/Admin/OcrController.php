@@ -304,13 +304,15 @@ class OcrController extends Controller
 
     public function playy()
     {
-        return auth()->user()->employee;
-        // return $last = VisitingDetails::query()->latest()->first();
-        if (!file_exists(storage_path('app/public' . '/playing'))) {
-            $file = File::makeDirectory(storage_path('app/public' . '/' . 'playing'), 0777, true, true);
-            return 'File Created Successfully';
-        }
-        return 'File Already Exists';
+        $visit = VisitingDetails::query()->find(147);
+        return $visit->type;
+        //        return auth()->user()->employee;
+        //        // return $last = VisitingDetails::query()->latest()->first();
+        //        if (!file_exists(storage_path('app/public' . '/playing'))) {
+        //            $file = File::makeDirectory(storage_path('app/public' . '/' . 'playing'), 0777, true, true);
+        //            return 'File Created Successfully';
+        //        }
+        //        return 'File Already Exists';
     }
 }
 

@@ -139,6 +139,7 @@ class VisitorService
 
             $visiting['expiry_date'] = $request->input('expiry_date');
             $visiting['from_date'] = $request->input('from_date');
+            $visiting['type_id'] = $request->input('type');
             $visitingDetails = VisitingDetails::query()->create($visiting);
 
             if ($request->file('image')) {
@@ -221,6 +222,7 @@ class VisitorService
             $visiting['qrcode'] = $request->input('qrcode');
             $visiting['expiry_date'] = $request->input('expiry_date');
             $visiting['from_date'] = $request->input('from_date');
+            $visiting['type_id'] = $request->input('type');
             $visitingDetails->update($visiting);
         }
 

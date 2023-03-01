@@ -15,5 +15,10 @@ class Types extends Model
     protected $hidden = ['created_at','updated_at'];
     protected $fakeColumns = [];
 
+    public function visitngDetails()
+    {
+        return $this->hasMany(VisitingDetails::class);
+    }
+
     public $timestamps = false;
 }
