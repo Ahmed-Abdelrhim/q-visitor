@@ -179,10 +179,10 @@
                                         <label for="purpose">{{ __('files.Purpose') }}</label> <span
                                             class="text-danger">*</span>
                                         <textarea name="purpose"
-                                                  class="summernote-simple form-control height-textarea @error('purpose')
+                                                  class="summernote-simple summernote form-control height-textarea @error('purpose')
                                                       is-invalid @enderror"
-                                                  id="purpose">
-                                            {{$visitingDetails->purpose}}
+                                                  id="purpose" type="text">
+                                            {{trim($visitingDetails->purpose)}}
                                         </textarea>
                                         @error('purpose')
                                         <div class="invalid-feedback">
@@ -190,10 +190,11 @@
                                         </div>
                                         @enderror
                                     </div>
+
                                     <div class="form-group col">
                                         <label for="address">{{ __('files.Address') }}</label>
                                         <textarea name="address"
-                                                  class="summernote-simple form-control height-textarea @error('address')
+                                                  class="summernote-simple summernote form-control height-textarea @error('address')
                                                       is-invalid @enderror"
                                                   id="address">
                                             {{ old('address',$visitingDetails->visitor->address) }}
@@ -251,4 +252,15 @@
     <script src="{{ asset('assets/modules/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('js/pre-register/edit.js') }}"></script>
+
+    <script>
+        $('.summernote').summernote({
+            height: 250,
+            callbacks: {
+                onInit: function (c) {
+                    c.editable.html('');
+                }
+            }
+        });
+    </script>
 @endsection

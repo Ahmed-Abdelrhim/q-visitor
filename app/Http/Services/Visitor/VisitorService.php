@@ -117,7 +117,7 @@ class VisitorService
         $input['email'] = $request->input('email');
         $input['phone'] = $request->input('phone');
         $input['gender'] = $request->input('gender');
-        $input['address'] = strip_tags( $request->input('address'));
+        $input['address'] = strip_tags(trim($request->input('address')));
         $input['type'] = $request->input('type');
         $input['national_identification_no'] = $request->input('national_identification_no');
         $input['is_pre_register'] = false;
@@ -127,7 +127,7 @@ class VisitorService
 
         if ($visitor) {
             $visiting['reg_no'] = $reg_no;
-            $visiting['purpose'] = strip_tags($request->input('purpose'));
+            $visiting['purpose'] = strip_tags(trim($request->input('purpose')));
             $visiting['company_name'] = $request->input('company_name');
             $visiting['employee_id'] = $request->input('employee_id');
             $visiting['checkin_at'] = $request->input('from_date');// date('y-m-d H:i');
@@ -201,7 +201,10 @@ class VisitorService
         $input['email'] = $request->input('email');
         $input['phone'] = $request->input('phone');
         $input['gender'] = $request->input('gender');
-        $input['address'] = strip_tags($request->input('address'));
+        $address = strip_tags(trim($request->input('address')));
+        $address = str_replace('&nbsp;','',$address);
+        $input['address'] = $address;
+        // $input['address'] = strip_tags(trim($request->input('address')));
         $input['type'] = $request->input('type');
         $input['national_identification_no'] = $request->input('national_identification_no');
         $input['is_pre_register'] = false;
@@ -209,7 +212,9 @@ class VisitorService
         $visitingDetails->visitor->update($input);
 
         if ($visitingDetails) {
-            $visiting['purpose'] = strip_tags($request->input('purpose'));
+            $purpose = strip_tags(trim($request->input('purpose')));
+            $purpose = str_replace('&nbsp;','',$purpose);
+            $visiting['purpose'] = $purpose;
             $visiting['company_name'] = $request->input('company_name');
             $visiting['employee_id'] = $request->input('employee_id');
             $visiting['visitor_id'] = $visitingDetails->visitor->id;
