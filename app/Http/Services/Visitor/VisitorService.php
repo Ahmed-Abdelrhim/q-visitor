@@ -21,21 +21,14 @@ class VisitorService
 
     public function all()
     {
-        // if(auth()->user()->getrole->name == 'Employee') {
-
-        //        if (auth()->user()->hasRole('Employee')) {
-        //            return VisitingDetails::query()->where(['employee_id' => auth()->user()->employee->id])->orderBy('id', 'desc')->get();
-        //        } else {
-        //            return VisitingDetails::query()->orderBy('id', 'desc')->get();
-        //        }
-
         $user = auth()->user();
-        if (!$user->hasRole('Admin')) {
+        if (!$user->hasRole(1)) {
             // Return Only The VisitingDetails Created By This User Or Edit By The Current User
             return VisitingDetails::query()
                 ->where('creator_id', $user->id)
                 ->orWhere('editor_id', $user->id)
                 ->orWhere('employee_id', $user->employee->id)
+                ->orWhere('user_id',$user->id)
                 ->with('type')
                 ->get();
         } else {
@@ -100,24 +93,31 @@ class VisitorService
         $data1 = substr($date, 3, 2);
         $data2 = substr($date, 6, 8);
 
+        //        if ($visitor) {
+        //            $value = substr($visitor->reg_no, -2);
+        //            if ($value < 1000) {
+        //                $reg_no = $data2 . $data1 . $data . ($value + 1);
+        //            } else {
+        //                $reg_no = $data2 . $data1 . $data . '01';
+        //            }
+        //        } else {
+        //            $reg_no = $data2 . $data1 . $data . '01';
+        //        }
+
         if ($visitor) {
-            $value = substr($visitor->reg_no, -2);
-            if ($value < 1000) {
-                $reg_no = $data2 . $data1 . $data . ($value + 1);
-            } else {
-                $reg_no = $data2 . $data1 . $data . '01';
-            }
+            $reg_no = $visitor->reg_no + 1;
         } else {
-            $reg_no = $data2 . $data1 . $data . '01';
+            $reg_no = rand(11111111, 99999999);
         }
 
-        $reg_no = rand(11111111, 99999999);
+
+
         $input['first_name'] = $request->input('first_name');
         $input['last_name'] = $request->input('last_name');
         $input['email'] = $request->input('email');
         $input['phone'] = $request->input('phone');
         $input['gender'] = $request->input('gender');
-        $input['address'] = $request->input('address');
+        $input['address'] = strip_tags( $request->input('address'));
         $input['type'] = $request->input('type');
         $input['national_identification_no'] = $request->input('national_identification_no');
         $input['is_pre_register'] = false;
@@ -127,7 +127,7 @@ class VisitorService
 
         if ($visitor) {
             $visiting['reg_no'] = $reg_no;
-            $visiting['purpose'] = $request->input('purpose');
+            $visiting['purpose'] = strip_tags($request->input('purpose'));
             $visiting['company_name'] = $request->input('company_name');
             $visiting['employee_id'] = $request->input('employee_id');
             $visiting['checkin_at'] = $request->input('from_date');// date('y-m-d H:i');
@@ -201,7 +201,7 @@ class VisitorService
         $input['email'] = $request->input('email');
         $input['phone'] = $request->input('phone');
         $input['gender'] = $request->input('gender');
-        $input['address'] = $request->input('address');
+        $input['address'] = strip_tags($request->input('address'));
         $input['type'] = $request->input('type');
         $input['national_identification_no'] = $request->input('national_identification_no');
         $input['is_pre_register'] = false;
@@ -209,7 +209,7 @@ class VisitorService
         $visitingDetails->visitor->update($input);
 
         if ($visitingDetails) {
-            $visiting['purpose'] = $request->input('purpose');
+            $visiting['purpose'] = strip_tags($request->input('purpose'));
             $visiting['company_name'] = $request->input('company_name');
             $visiting['employee_id'] = $request->input('employee_id');
             $visiting['visitor_id'] = $visitingDetails->visitor->id;
@@ -266,3 +266,16 @@ class VisitorService
 //                        }
 //                    }
 //                }
+
+
+
+
+
+
+// if(auth()->user()->getrole->name == 'Employee') {
+
+//        if (auth()->user()->hasRole('Employee')) {
+//            return VisitingDetails::query()->where(['employee_id' => auth()->user()->employee->id])->orderBy('id', 'desc')->get();
+//        } else {
+//            return VisitingDetails::query()->orderBy('id', 'desc')->get();
+//        }

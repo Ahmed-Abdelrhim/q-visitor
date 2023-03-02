@@ -160,7 +160,8 @@
                                                     {{--                                                        value="{{ $type->id }}" {{ (old('type',$visitingDetails->type) == $type->id) ? 'selected' : '' }} >{{ $type->name }}--}}
                                                     {{--                                                    </option>--}}
                                                     <option
-                                                        value="{{ $type->id }}" @if($visitingDetails->type_id == $type->id) selected @endif>
+                                                        value="{{ $type->id }}"
+                                                        @if($visitingDetails->type_id == $type->id) selected @endif>
                                                         {{ $type->name }}
                                                     </option>
                                                 @endforeach
@@ -181,7 +182,7 @@
                                                   class="summernote-simple form-control height-textarea @error('purpose')
                                                       is-invalid @enderror"
                                                   id="purpose">
-                                            {{ old('purpose',$visitingDetails->purpose) }}
+                                            {{$visitingDetails->purpose}}
                                         </textarea>
                                         @error('purpose')
                                         <div class="invalid-feedback">
