@@ -86,14 +86,6 @@ class VisitorController extends Controller
 
     public function update(VisitorRequest $request, VisitingDetails $visitor)
     {
-        // $purpose = $request->purpose;
-        //        if (str_contains($purpose , '&nbsp;')) {
-        //            // return strlen($purpose);
-        //            $purpose = str_replace('&nbsp;','',$purpose);
-        //            return $purpose . ' count = ' . strlen($purpose);
-        //        }
-        //        return $request;
-        //        return $request;
         $this->visitorService->update($request, $visitor->id);
         // $notifications = array('message' => 'The data updated successfully!', 'alert-type' => 'success');
         return redirect()->route('admin.visitors.index')->withSuccess('The data updated successfully!');
