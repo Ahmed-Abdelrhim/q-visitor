@@ -230,7 +230,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 // ============================================================================================================================================
 // I Need to upload the types···
 // BackEnd Middleware···
-// Upload the VisitingDetails and Type Models
-// VisitorController create , edit , show and VisitorService
-// Web .php , Translation Files
+// Upload the VisitingDetails and Type Models.
+// VisitorController create , edit , show and VisitorService.
+// Web .php , Translation Files.
 // ============================================================================================================================================
