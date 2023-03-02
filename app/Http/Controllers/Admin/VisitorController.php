@@ -76,6 +76,7 @@ class VisitorController extends Controller
         $this->data['employees'] = Employee::where('status', Status::ACTIVE)->get();
         $this->data['types'] = Types::where('status', Status::ACTIVE)->get();
         $this->data['visitingDetails'] = $this->visitorService->find($id);
+
         if ($this->data['visitingDetails']) {
             return view('admin.visitor.edit', $this->data);
         } else {
@@ -104,6 +105,7 @@ class VisitorController extends Controller
         $visitingDetails = $this->visitorService->all();
         $i = 1;
         $visitingDetailArray = [];
+
         if (!blank($visitingDetails)) {
             foreach ($visitingDetails as $visitingDetail) {
                 $visitingDetailArray[$i] = $visitingDetail;
@@ -111,52 +113,77 @@ class VisitorController extends Controller
                 $i++;
             }
         }
+
         return Datatables::of($visitingDetailArray)
             ->addColumn('action', function ($visitingDetail) {
                 $retAction = '';
                 $approve = false;
+                $status = 'Pending';
 
-                if (auth()->user()->hasRole('Admin')) {
-                    $approve = true;
-                } else {
-                    $type = Types::query()->find($visitingDetail->visitor->type);
-                    if ($type) {
-                        $role = Role::query()->find($type->role_one);
-                        if ($role) {
-                            if (auth()->user()->hasRole($role->name))
-                                $approve = true;
+                // Implement Show Approve Button And The Status
+                if ($visitingDetail->type->level == 0) {
+                    if (auth()->user()->hasRole(1)) {
+                        $msg = __('files.Re-Send Sms');
+                        $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                    }
+                }
+
+                if ($visitingDetail->type->level == 1) {
+                    if (auth()->user()->hasRole(intval($visitingDetail->type->role_one)) || auth()->user()->hasRole(1)) {
+                        if ($visitingDetail->approval_status == 0) {
+                            $msg = 'Approve';
+                            $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        }
+                        if ($visitingDetail->approval_status == 1) {
+                            $msg = __('files.Re-Send Sms');
+                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        }
+                    }
+
+
+                }
+
+                if ($visitingDetail->type->level == 2) {
+                    if ($visitingDetail->approval_status == 0) {
+                        if (auth()->user()->hasRole(intval($visitingDetail->type->role_one)) || auth()->user()->hasRole(1)) {
+                            $msg = __('files.First Approval');
+                            $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        }
+                    }
+                    if ($visitingDetail->approval_status == 1) {
+                        if (auth()->user()->hasRole(intval($visitingDetail->type->role_two)) || auth()->user()->hasRole(1)) {
+                            $msg = __('files.Second Approval');
+                            $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        }
+                    }
+                    if ($visitingDetail->approval_status == 2) {
+                        if (auth()->user()->hasRole(intval($visitingDetail->type->role_two)) || auth()->user()->hasRole(1)) {
+                            $msg = __('files.Re-Send Sms');
+                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
                     }
                 }
 
-                if ($approve) {
-                    $msg = __('files.Approve & send sms');
-                    if ($visitingDetail->sent_sms_before == 1) {
-                        $msg = __('files.Re-send sms');
-                    }
-                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                }
-
                 if (auth()->user()->can('visitors_show')) {
                     $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-info actions"
-data-toggle="tooltip" data-placement="top" title="' . __('files.View') . '"><i class="far fa-eye"></i></a>';
+                                    data-toggle="tooltip" data-placement="top" title="' . __('files.View') . '"><i class="far fa-eye"></i></a>';
                 }
 
                 if (auth()->user()->can('visitors_edit')) {
                     $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary actions"
-data-toggle="tooltip" data-placement="top" title="' . __('files.Edit') . '">
- <i class="far fa-edit"></i></a>';
+                                    data-toggle="tooltip" data-placement="top" title="' . __('files.Edit') . '">
+                                    <i class="far fa-edit"></i></a>';
                 }
 
 
                 if (auth()->user()->can('visitors_delete')) {
                     $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions"
-data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '">
- <i class="fa fa-trash"></i></button></form>';
+                                    data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '">
+                                    <i class="fa fa-trash"></i></button></form>';
                 }
 
                 return $retAction;
-                // return $visitingDetail->visitor->type;
+                // return $visitingDetail->type->level . ' Approval Status ' . $visitingDetail->approval_status;;
             })
             ->editColumn('name', function ($visitingDetail) {
                 return Str::limit($visitingDetail->visitor->name, 50);
@@ -190,9 +217,28 @@ data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '">
                 return date('d-m-Y h:i A', strtotime($visitingDetail->checkin_at));
             })
             ->addColumn('status', function ($visitingDetail) {
-                if ($visitingDetail->sent_sms_before == 0)
-                    return __('files.Pending');
-                return __('files.Approved');
+                if ($visitingDetail->type->level == 0) {
+                    return $status = __('files.Approved');
+                }
+                if ($visitingDetail->type->level == 1) {
+                    if ($visitingDetail->approval_status == 0) {
+                        return $status = __('files.Pending');
+                    }
+                    if ($visitingDetail->approval_status == 1) {
+                        return $status = __('files.Approved');
+                    }
+                }
+                if ($visitingDetail->type->level == 2) {
+                    if ($visitingDetail->approval_status == 0) {
+                        return $status = __('files.Pending');
+                    }
+                    if ($visitingDetail->approval_status == 1) {
+                        return $status = __('files.Waiting Second Approval');
+                    }
+                    if ($visitingDetail->approval_status == 2) {
+                        return $status = __('files.Approved');
+                    }
+                }
             })
             ->editColumn('id', function ($visitingDetail) {
                 return $visitingDetail->setID;
@@ -200,7 +246,7 @@ data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '">
             ->rawColumns(['name', 'action'])
             ->escapeColumns([])
             ->make(true);
-        var_dump($visitingDetail);
+        // var_dump($visitingDetail);
     }
 
     public
@@ -238,9 +284,102 @@ data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '">
 
     }
 
+    public function visitFirstApprove($approval_status)
+    {
+        $approval_status = decrypt($approval_status);
+    }
+
+    public function visitSecondApprove($approval_status)
+    {
+        $approval_status = decrypt($approval_status);
+    }
+
+    public function visitApprove($visit_id)
+    {
+
+        $visit_id = decrypt($visit_id);
+        $visit = VisitingDetails::query()->find($visit_id);
+
+        if (!$visit) {
+            $notifications = array('message' => 'Visit was not found', 'alert-type' => 'error');
+            return redirect()->back()->with($notifications);
+        }
+
+        $approval_status = $visit->approval_status;
+        if ($approval_status == 0) {
+            if ($visit->type->level == 1) {
+                $visit->approval_status = 1;
+                $visit->save();
+                $this->smsFromApproval($visit);
+            }
+            if ($visit->type->level == 2) {
+                $visit->approval_status = 1;
+                $visit->save();
+            }
+        }
+
+        if ($approval_status == 1) {
+            $visit->approval_status = 2;
+            $visit->save();
+            $this->smsFromApproval($visit);
+        }
+
+        $notifications = array('message' => 'Success Transaction', 'alert-type' => 'success');
+        return redirect()->back()->with($notifications);
+
+    }
+
+    public function smsFromApproval($visit)
+    {
+        try {
+            $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $visit->visitor->id);
+            $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $visit->visitor->phone);
+        } catch (\Exception $e) {
+            $notifications = array('message' => 'Visit Approved but Something Went Wrong With Sending Message', 'alert-type' => 'Something Went Wrong');
+            return redirect()->back()->with($notifications);
+        }
+    }
+
     public
     function play(string $locale)
     {
         return auth()->user()->employee();
     }
 }
+
+
+//                if ($approve) {
+//                    $msg = $status;
+//                    if ($visitingDetail->sent_sms_before == 1) {
+//                        $msg = __('files.Re-send sms');
+//                    }
+//                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+//                    $retAction .= '<a href="' . route('admin.visit.approval', $visitingDetail->approval_status) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+//                }
+
+
+//if (auth()->user()->hasRole('Admin')) {
+//    $approve = true;
+//} else {
+//    $type = Types::query()->find($visitingDetail->visitor->type);
+//    if ($type) {
+//        $role = Role::query()->find($type->role_one);
+//        if ($role) {
+//            if (auth()->user()->hasRole($role->name))
+//                $approve = true;
+//        }
+//    }
+//}
+
+
+//                if ($visitingDetail->sent_sms_before == 0)
+//                    return __('files.Pending');
+//                return __('files.Approved');
+
+
+//                if ($visitingDetail->approval_status == 0) {
+//                    return __('files.Pending');
+//                }
+//                if ($visitingDetail->approval_status == 1) {
+//                    return __('files.Waiting For First Approval');
+//                }

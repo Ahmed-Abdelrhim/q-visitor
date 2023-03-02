@@ -194,7 +194,11 @@ return [
     'Future Visit' => 'زيارة مستقبلية',
     'Add Visit Reservation' => 'إضافة حجز زيارة ',
     'Edit Visit Reservation' => 'تعديل  حجز زيارة',
-    '' => '',
+    'First Approval' => 'الموافقة الأولي',
+    'Second Approval' => 'الموافقة الثانية',
+    'Waiting For First Approval' => 'انتظار الموافقة الأولي',
+    'Waiting Second Approval' => 'انتظار الموافقة الثانية',
+    'Re-Send Sms' => 'إعاة إرسال الرسالة',
     '' => '',
     '' => '',
 

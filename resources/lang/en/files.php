@@ -206,8 +206,12 @@ return [
     'Add Visit Reservation' => 'Add Visit Reservation',
     'Edit Visit Reservation' => 'Edit Visit Reservation',
 
-    '' => '',
-    '' => '',
+    'First Approval' => 'First Approval',
+    'Second Approval' => 'Second Approval',
+    'Waiting For First Approval' => 'Waiting For First Approval',
+    'Waiting Second Approval' => 'Waiting Second Approval',
+    'Re-Send Sms' => 'Re-Send Sms',
+
     '' => '',
 
 

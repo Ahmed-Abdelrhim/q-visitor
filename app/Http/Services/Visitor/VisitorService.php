@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Http;
 
 class VisitorService
 {
@@ -35,10 +36,11 @@ class VisitorService
                 ->where('creator_id', $user->id)
                 ->orWhere('editor_id', $user->id)
                 ->orWhere('employee_id', $user->employee->id)
+                ->with('type')
                 ->get();
         } else {
             // The User Is Of Type ADMIN So Return All The VisitingDetails
-            return VisitingDetails::query()->orderBy('id', 'desc')->get();
+            return VisitingDetails::query()->with('type')->orderBy('id', 'desc')->get();
         }
     }
 
@@ -166,29 +168,22 @@ class VisitorService
             $time = date('H:i');
             $vid = $visiting['visitor_id'];
             //$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
-            try {
-                // Check If The Visit Detail Type Level Is 0 Or Not
-                $type_id = $visitingDetails->visitor->type;
 
-                if ($type_id) {
-                    $type = Types::query()->find($type_id);
-                    if ($type) {
-                        if ($type->level == 0) {
-                            $visitingDetails->approval_status == 2;
-                            $visitingDetails->save();
-                        }
-                    }
+            if ($visitingDetails->type->level == 0) {
+                try {
+                    $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $visitingDetails->visitor->id);
+                    $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $visitingDetails->visitor->phone);
+                } catch
+                (\Exception $e) {
+                    $notification = array('message' => 'Message was not sent', 'alert-type' => 'info');
+                    return redirect()->back()->with($notification);
                 }
-
-            } catch (\Exception $e) {
-                $notification = array('message' => 'Message was not sent', 'alert-type' => 'info');
-                return redirect()->back()->with($notification);
             }
+
+
+            return $visitingDetails;
+
         }
-
-
-        return $visitingDetails;
-
     }
 
     /**
@@ -196,7 +191,8 @@ class VisitorService
      * @param VisitorRequest $request
      * @return mixed
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         $visitingDetails = VisitingDetails::findOrFail($id);
 
@@ -249,9 +245,24 @@ class VisitorService
      * @param $id
      * @return mixed
      */
-    public function delete($id)
+    public
+    function delete($id)
     {
         return VisitingDetails::find($id)->delete();
     }
 
+
 }
+
+
+// Check If The Visit Detail Type Level Is 0 Or Not
+// $type_id = $visitingDetails->visitor->type;
+//                if ($type_id) {
+//                    $type = Types::query()->find($type_id);
+//                    if ($type) {
+//                        if ($type->level == 0) {
+//                            $visitingDetails->approval_status == 2;
+//                            $visitingDetails->save();
+//                        }
+//                    }
+//                }

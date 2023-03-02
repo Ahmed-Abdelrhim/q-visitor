@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\OcrController;
+use App\Http\Controllers\Admin\VisitorController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -87,6 +88,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::resource('visitors', 'VisitorController');
         Route::get('get-visitors', 'VisitorController@getVisitor')->name('visitors.get-visitors');
         Route::get('send-sms/{visitingDetail}', 'VisitorController@sendSms')->name('visitors.send.sms');
+        // Route::post('Visit/First/Approve', [VisitorController::class,'visitFirstApprove'])->name('visit.first.approve');
+        // Route::post('Visit/Second/Approve', [VisitorController::class,'visitSecondApprove'])->name('visit.second.approve');
+        Route::get('Visit/Approve/{approval_status}', [VisitorController::class,'visitApprove'])->name('visit.approval');
+
 
         // Ocr Resource Controller···
         Route::resource('OCR', 'OcrController');
@@ -225,5 +230,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 // ============================================================================================================================================
 // I Need to upload the types···
 // BackEnd Middleware···
-//
+// Upload the VisitingDetails and Type Models
+// VisitorController and VisitorService
+// Web .php , Translation Files
 // ============================================================================================================================================

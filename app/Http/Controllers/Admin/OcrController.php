@@ -95,7 +95,7 @@ class OcrController extends Controller
     {
 
         // $carPlateNumber = VisitingDetails::query()->latest()->first();
-        $carPlateNumber = VisitingDetails::query()->orderBy('id','desc')->first();
+        $carPlateNumber = VisitingDetails::query()->orderBy('id', 'desc')->first();
 
         $myFile = fopen(storage_path('app/public/' . 'plate.txt'), "w");
         fwrite($myFile, $carPlateNumber->plate_no);
@@ -275,8 +275,8 @@ class OcrController extends Controller
 
         try {
             if ($visiting_details) {
-                if (!file_exists(storage_path('app/public' . '/per_images')) ) {
-                    $file = File::makeDirectory(storage_path('app/public' . '/per_images') ,0777,true,true);
+                if (!file_exists(storage_path('app/public' . '/per_images'))) {
+                    $file = File::makeDirectory(storage_path('app/public' . '/per_images'), 0777, true, true);
                 }
 
 
@@ -304,15 +304,52 @@ class OcrController extends Controller
 
     public function playy()
     {
-        $visit = VisitingDetails::query()->find(147);
-        return $visit->type;
-        //        return auth()->user()->employee;
-        //        // return $last = VisitingDetails::query()->latest()->first();
-        //        if (!file_exists(storage_path('app/public' . '/playing'))) {
-        //            $file = File::makeDirectory(storage_path('app/public' . '/' . 'playing'), 0777, true, true);
-        //            return 'File Created Successfully';
-        //        }
-        //        return 'File Already Exists';
+        $visits = VisitingDetails::query()->get();
+        $types = [12, 13, 14];
+
+        foreach ($visits as $visit) {
+            // $visit->type_id = $types[array_rand($types)];
+            $visit->type_id = 12;
+            $visit->approval_status = 0;
+            $visit->save();
+        }
+        return 'Done';
     }
 }
 
+
+
+//        $visit = VisitingDetails::query()->with('type')->find(279);
+//        if ($visit->approval_status == 0) {
+//            $status = 'Pending';
+//            if (auth()->user()->hasRole(intval($visit->type->role_one))) {
+//                $visit->approval_status = 1;
+//                $visit->save();
+//                return 'Will Show The First Approve Button';
+//            } else {
+//                return 'Will Not Show The First Approve Button';
+//            }
+//        }
+//        if ($visit->approval_status == 1) {
+//            $status = 'Waiting Fo Second Approval';
+//            if(auth()->user()->hasRole(intval($visit->type->role_two)) ) {
+//                $visit->approval_status = 2;
+//                $visit->save();
+//                return 'Will Show The Second Approve Button';
+//            } else {
+//                return 'Will Not Show The Second Approve Button';
+//            }
+//        }
+//
+//        if ($visit->approval_status == 2) {
+//            $status = 'Approved';
+//            return $status;
+//        }
+
+//        return auth()->user()->employee;
+//        // return $last = VisitingDetails::query()->latest()->first();
+//        if (!file_exists(storage_path('app/public' . '/playing'))) {
+//            $file = File::makeDirectory(storage_path('app/public' . '/' . 'playing'), 0777, true, true);
+//            return 'File Created Successfully';
+//        }
+//        return 'File Already Exists';

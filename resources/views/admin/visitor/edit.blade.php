@@ -19,14 +19,18 @@
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-12">
                     <div class="card">
-                        <form action="{{ route('admin.visitors.update', $visitingDetails) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.visitors.update', $visitingDetails) }}" method="POST"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="first_name">{{ __('files.First Name') }}</label> <span class="text-danger">*</span>
-                                        <input id="first_name" type="text" name="first_name" class="form-control {{ $errors->has('first_name') ? " is-invalid " : '' }}" value="{{ old('first_name',$visitingDetails->visitor->first_name) }}">
+                                        <label for="first_name">{{ __('files.First Name') }}</label> <span
+                                            class="text-danger">*</span>
+                                        <input id="first_name" type="text" name="first_name"
+                                               class="form-control {{ $errors->has('first_name') ? " is-invalid " : '' }}"
+                                               value="{{ old('first_name',$visitingDetails->visitor->first_name) }}">
                                         @error('first_name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -34,8 +38,11 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="last_name">{{ __('files.Last Name') }}</label> <span class="text-danger">*</span>
-                                        <input id="last_name" type="text" name="last_name" class="form-control {{ $errors->has('last_name') ? " is-invalid " : '' }}" value="{{ old('last_name',$visitingDetails->visitor->last_name) }}">
+                                        <label for="last_name">{{ __('files.Last Name') }}</label> <span
+                                            class="text-danger">*</span>
+                                        <input id="last_name" type="text" name="last_name"
+                                               class="form-control {{ $errors->has('last_name') ? " is-invalid " : '' }}"
+                                               value="{{ old('last_name',$visitingDetails->visitor->last_name) }}">
                                         @error('last_name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -47,7 +54,9 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.Email') }}</label> <span class="text-danger">*</span>
-                                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email',$visitingDetails->visitor->email) }}">
+                                        <input type="text" name="email"
+                                               class="form-control @error('email') is-invalid @enderror"
+                                               value="{{ old('email',$visitingDetails->visitor->email) }}">
                                         @error('email')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -56,7 +65,9 @@
                                     </div>
                                     <div class="form-group col">
                                         <label>{{ __('files.Phone') }}</label> <span class="text-danger">*</span>
-                                        <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone',$visitingDetails->visitor->phone) }}">
+                                        <input type="text" name="phone"
+                                               class="form-control @error('phone') is-invalid @enderror"
+                                               value="{{ old('phone',$visitingDetails->visitor->phone) }}">
                                         @error('phone')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -66,10 +77,13 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="gender">{{ __('files.Gender') }}</label> <span class="text-danger">*</span>
-                                        <select id="gender" name="gender" class="form-control @error('gender') is-invalid @enderror">
+                                        <label for="gender">{{ __('files.Gender') }}</label> <span
+                                            class="text-danger">*</span>
+                                        <select id="gender" name="gender"
+                                                class="form-control @error('gender') is-invalid @enderror">
                                             @foreach(trans('genders') as $key => $gender)
-                                                <option value="{{ $key }}" {{ (old('gender',$visitingDetails->visitor->gender) == $key) ? 'selected' : '' }}>{{ $gender }}</option>
+                                                <option
+                                                    value="{{ $key }}" {{ (old('gender',$visitingDetails->visitor->gender) == $key) ? 'selected' : '' }}>{{ $gender }}</option>
                                             @endforeach
                                         </select>
                                         @error('gender')
@@ -80,7 +94,9 @@
                                     </div>
                                     <div class="form-group col">
                                         <label>{{ __('files.Company Name') }}</label>
-                                        <input type="text" name="company_name" class="form-control @error('company_name') is-invalid @enderror" value="{{ old('company_name',$visitingDetails->company_name) }}">
+                                        <input type="text" name="company_name"
+                                               class="form-control @error('company_name') is-invalid @enderror"
+                                               value="{{ old('company_name',$visitingDetails->company_name) }}">
                                         @error('company_name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -92,7 +108,9 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.National Identification No') }}</label>
-                                        <input type="text" name="national_identification_no" class="form-control @error('national_identification_no') is-invalid @enderror" value="{{ old('national_identification_no',$visitingDetails->visitor->national_identification_no) }}">
+                                        <input type="text" name="national_identification_no"
+                                               class="form-control @error('national_identification_no') is-invalid @enderror"
+                                               value="{{ old('national_identification_no',$visitingDetails->visitor->national_identification_no) }}">
                                         @error('national_identification_no')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -100,10 +118,15 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="employee_id">{{ __('files.Select Employee') }}</label> <span class="text-danger">*</span>
-                                        <select id="employee_id" name="employee_id" class="form-control select2 @error('employee_id') is-invalid @enderror">
+                                        <label for="employee_id">{{ __('files.Select Employee') }}</label> <span
+                                            class="text-danger">*</span>
+                                        <select id="employee_id" name="employee_id"
+                                                class="form-control select2 @error('employee_id') is-invalid @enderror">
                                             @foreach($employees as $key => $employee)
-                                                <option value="{{ $employee->id }}" {{ (old('employee_id',$visitingDetails->employee_id) == $employee->id) ? 'selected' : '' }}>{{ $employee->name }} ( {{$employee->department->name}} )</option>
+                                                <option
+                                                    value="{{ $employee->id }}" {{ (old('employee_id',$visitingDetails->employee_id) == $employee->id) ? 'selected' : '' }}>{{ $employee->name }}
+                                                    ( {{$employee->department->name}} )
+                                                </option>
                                             @endforeach
                                         </select>
                                         @error('employee_id')
@@ -113,10 +136,13 @@
                                         @enderror
                                     </div>
                                 </div>
-								<div class="form-row">
+                                <div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.Expiry Date') }}</label>
-                                        <input type="datetime-local" name="expiry_date" class="form-control @error('expiry_date') is-invalid @enderror" value="{{ old('expiry_date',$visitingDetails->visitor->expiry_date) }}" id="expiry_date">
+                                        <input type="datetime-local" name="expiry_date"
+                                               class="form-control @error('expiry_date') is-invalid @enderror"
+                                               value="{{ old('expiry_date',$visitingDetails->visitor->expiry_date) }}"
+                                               id="expiry_date">
                                         @error('expiry_date')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -126,10 +152,19 @@
                                     <div class="form-group col">
                                         <label>{{ __('files.Type') }}</label>
                                         <!--<input type="text" name="type" class="form-control @error('type') is-invalid @enderror" value="{{ old('type') }}" id="type">-->
-										<select id="type" name="type" class="form-control select2 @error('type') is-invalid @enderror">
-                                            @foreach($types as $key => $type)
-                                                <option value="{{ $type->id }}" {{ (old('type',$visitingDetails->type) == $type->id) ? 'selected' : '' }}>{{ $type->name }} </option>
-                                            @endforeach
+                                        <select id="type" name="type"
+                                                class="form-control select2 @error('type') is-invalid @enderror">
+                                            @if(count($types) > 0)
+                                                @foreach($types as $key => $type)
+                                                    {{--                                                    <option--}}
+                                                    {{--                                                        value="{{ $type->id }}" {{ (old('type',$visitingDetails->type) == $type->id) ? 'selected' : '' }} >{{ $type->name }}--}}
+                                                    {{--                                                    </option>--}}
+                                                    <option
+                                                        value="{{ $type->id }}" @if($visitingDetails->type_id == $type->id) selected @endif>
+                                                        {{ $type->name }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                         @error('type')
                                         <div class="invalid-feedback">
@@ -140,11 +175,12 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="purpose">{{ __('files.Purpose') }}</label> <span class="text-danger">*</span>
+                                        <label for="purpose">{{ __('files.Purpose') }}</label> <span
+                                            class="text-danger">*</span>
                                         <textarea name="purpose"
                                                   class="summernote-simple form-control height-textarea @error('purpose')
                                                       is-invalid @enderror"
-                                                  id="purpose" >
+                                                  id="purpose">
                                             {{ old('purpose',$visitingDetails->purpose) }}
                                         </textarea>
                                         @error('purpose')
@@ -158,7 +194,7 @@
                                         <textarea name="address"
                                                   class="summernote-simple form-control height-textarea @error('address')
                                                       is-invalid @enderror"
-                                                  id="address" >
+                                                  id="address">
                                             {{ old('address',$visitingDetails->visitor->address) }}
                                         </textarea>
                                         @error('address')
@@ -172,8 +208,11 @@
                                     <div class="form-group col-6">
                                         <label for="customFile">{{ __('files.Image') }}</label>
                                         <div class="custom-file">
-                                            <input name="image" type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFile" onchange="readURL(this);">
-                                            <label  class="custom-file-label" for="customFile">{{ __('Choose file') }}</label>
+                                            <input name="image" type="file"
+                                                   class="custom-file-input @error('image') is-invalid @enderror"
+                                                   id="customFile" onchange="readURL(this);">
+                                            <label class="custom-file-label"
+                                                   for="customFile">{{ __('Choose file') }}</label>
                                         </div>
                                         @if ($errors->has('image'))
                                             <div class="help-block text-danger">
@@ -181,9 +220,12 @@
                                             </div>
                                         @endif
                                         @if($visitingDetails->getFirstMediaUrl('visitor'))
-                                            <img class="img-thumbnail image-width mt-4 mb-3" id="previewImage" src="{{ asset($visitingDetails->getFirstMediaUrl('visitor')) }}" alt="your image"/>
+                                            <img class="img-thumbnail image-width mt-4 mb-3" id="previewImage"
+                                                 src="{{ asset($visitingDetails->getFirstMediaUrl('visitor')) }}"
+                                                 alt="your image"/>
                                         @else
-                                            <img class="img-thumbnail image-width mt-4 mb-3" id="previewImage" src="{{ asset('assets/img/default/user.png') }}" alt="your image"/>
+                                            <img class="img-thumbnail image-width mt-4 mb-3" id="previewImage"
+                                                 src="{{ asset('assets/img/default/user.png') }}" alt="your image"/>
                                         @endif
                                     </div>
 
