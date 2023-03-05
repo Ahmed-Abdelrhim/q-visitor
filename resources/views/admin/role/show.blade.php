@@ -38,7 +38,7 @@
                                     foreach ($permissionList as $permission) { ?>
                                     <tr>
                                         <td data-title="{{ __('#') }}">
-                                            <input type="checkbox" id="<?=$permission->name?>"
+                                            <input type="checkbox" id="<?=$permission->name?>" style="width: 15px ; height: 15px;"
                                                    name="<?=$permission->name?>" value="<?=$permission->id?>"
                                                    <?= isset($permissions[$permission->id]) ? 'checked' : '' ?> onclick="processCheck(this);"
                                                    class="mainmodule"/>
@@ -50,7 +50,7 @@
                                                 <?php
                                                 $permissionCreate = $permission->name . '_create';
                                             if (isset($permissionArray[$permissionCreate])) { ?>
-                                            <input type="checkbox" id="<?=$permissionCreate?>"
+                                            <input type="checkbox" id="<?=$permissionCreate?>"  style="width: 15px ; height: 15px;"
                                                    name="<?=$permissionCreate?>"
                                                    value="<?=$permissionArray[$permissionCreate]?>" <?= isset($permissions[$permissionArray[$permissionCreate]]) ? 'checked' : '' ?> />
                                             <?php } else {
@@ -61,7 +61,7 @@
                                                 <?php
                                                 $permissionEdit = $permission->name . '_edit';
                                             if (isset($permissionArray[$permissionEdit])) { ?>
-                                            <input type="checkbox" id="<?=$permissionEdit?>" name="<?=$permissionEdit?>"
+                                            <input type="checkbox" id="<?=$permissionEdit?>" name="<?=$permissionEdit?>" style="width: 15px ; height: 15px;"
                                                    value="<?=$permissionArray[$permissionEdit]?>" <?= isset($permissions[$permissionArray[$permissionEdit]]) ? 'checked' : '' ?> />
                                             <?php } else {
                                                 echo "&nbsp;";
@@ -71,7 +71,7 @@
                                                 <?php
                                                 $permissionDelete = $permission->name . '_delete';
                                             if (isset($permissionArray[$permissionDelete])) { ?>
-                                            <input type="checkbox" id="<?=$permissionDelete?>"
+                                            <input type="checkbox" id="<?=$permissionDelete?>" style="width: 15px ; height: 15px;"
                                                    name="<?=$permissionDelete?>"
                                                    value="<?=$permissionArray[$permissionDelete]?>" <?= isset($permissions[$permissionArray[$permissionDelete]]) ? 'checked' : '' ?> />
                                             <?php } else {
@@ -82,7 +82,7 @@
                                                 <?php
                                                 $permissionShow = $permission->name . '_show';
                                             if (isset($permissionArray[$permissionShow])) { ?>
-                                            <input type="checkbox" id="<?=$permissionShow?>" name="<?=$permissionShow?>"
+                                            <input type="checkbox" id="<?=$permissionShow?>" name="<?=$permissionShow?>" style="width: 15px ; height: 15px;"
                                                    value="<?=$permissionArray[$permissionShow]?>" <?= isset($permissions[$permissionArray[$permissionShow]]) ? 'checked' : '' ?> />
                                             <?php } else {
                                                 echo "&nbsp;";
