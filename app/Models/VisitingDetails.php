@@ -54,6 +54,11 @@ class VisitingDetails extends Model implements  HasMedia
         return $this->hasMany(Attendance::class, 'employee_id');
     }
 
+    public function creatorEmployee()
+    {
+        return $this->belongsTo(Employee::class,'creator_employee','id');
+    }
+
     public function type()
     {
         return $this->belongsTo(Types::class,'type_id');

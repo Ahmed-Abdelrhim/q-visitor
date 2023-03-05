@@ -101,6 +101,7 @@ class EmployeeService
             $data['level'] = $request->input('level');
             $data['emp_one'] = $request->input('emp_one');
             $data['emp_two'] = $request->input('emp_two');
+            $data['creator_employee'] = auth()->user()->employee->id;
 
 
             $data['status'] = 5;
@@ -153,6 +154,8 @@ class EmployeeService
 
             $data['about'] = $request->input('about');
             $data['status'] = 5;
+            $data['creator_employee'] = auth()->user()->employee->id;
+
             $employee->update($data);
         }
 

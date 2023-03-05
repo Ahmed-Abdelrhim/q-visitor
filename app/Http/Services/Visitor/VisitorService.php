@@ -28,7 +28,7 @@ class VisitorService
                 ->where('creator_id', $user->id)
                 ->orWhere('editor_id', $user->id)
                 ->orWhere('employee_id', $user->employee->id)
-                ->orWhere('user_id',$user->id)
+                ->orWhere('user_id', $user->id)
                 ->with('type')
                 ->get();
         } else {
@@ -111,7 +111,6 @@ class VisitorService
         }
 
 
-
         $input['first_name'] = $request->input('first_name');
         $input['last_name'] = $request->input('last_name');
         $input['email'] = $request->input('email');
@@ -119,7 +118,7 @@ class VisitorService
         $input['gender'] = $request->input('gender');
         // $input['address'] = strip_tags(trim($request->input('address')));
         $address = strip_tags(trim($request->input('address')));
-        $address = str_replace('&nbsp;','',$address);
+        $address = str_replace('&nbsp;', '', $address);
         $input['address'] = $address;
         $input['type'] = $request->input('type');
         $input['national_identification_no'] = $request->input('national_identification_no');
@@ -130,7 +129,7 @@ class VisitorService
 
         if ($visitor) {
             $purpose = strip_tags(trim($request->input('purpose')));
-            $purpose = str_replace('&nbsp;','',$purpose);
+            $purpose = str_replace('&nbsp;', '', $purpose);
             $visiting['purpose'] = $purpose;
             $visiting['reg_no'] = $reg_no;
             // $visiting['purpose'] = strip_tags(trim($request->input('purpose')));
@@ -142,6 +141,7 @@ class VisitorService
             $visiting['user_id'] = $request->input('employee_id');
             //$visiting['qrcode'] = $request->input('qrcode');
             $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
+
             $data = file_get_contents($url);
             $visiting['qrcode'] = $data;
 
@@ -175,7 +175,8 @@ class VisitorService
             $vid = $visiting['visitor_id'];
             //$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
 
-            if ($visitingDetails->type->level == 0) {
+            // if ($visitingDetails->type->level == 0) {
+            if (auth()->user()->employee->level == 0) {
                 try {
                     $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $visitingDetails->visitor->id);
                     $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $visitingDetails->visitor->phone);
@@ -208,7 +209,7 @@ class VisitorService
         $input['phone'] = $request->input('phone');
         $input['gender'] = $request->input('gender');
         $address = strip_tags(trim($request->input('address')));
-        $address = str_replace('&nbsp;','',$address);
+        $address = str_replace('&nbsp;', '', $address);
         $input['address'] = $address;
         // $input['address'] = strip_tags(trim($request->input('address')));
         $input['type'] = $request->input('type');
@@ -219,7 +220,7 @@ class VisitorService
 
         if ($visitingDetails) {
             $purpose = strip_tags(trim($request->input('purpose')));
-            $purpose = str_replace('&nbsp;','',$purpose);
+            $purpose = str_replace('&nbsp;', '', $purpose);
             $visiting['purpose'] = $purpose;
             $visiting['company_name'] = $request->input('company_name');
             $visiting['employee_id'] = $request->input('employee_id');
@@ -277,10 +278,6 @@ class VisitorService
 //                        }
 //                    }
 //                }
-
-
-
-
 
 
 // if(auth()->user()->getrole->name == 'Employee') {

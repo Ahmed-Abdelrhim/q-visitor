@@ -20,5 +20,7 @@ class Types extends Model
         return $this->hasMany(VisitingDetails::class);
     }
 
+
+
     public $timestamps = false;
 }

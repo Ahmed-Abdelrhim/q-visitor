@@ -305,16 +305,9 @@ class OcrController extends Controller
 
     public function playy()
     {
-        $visits = VisitingDetails::query()->get();
-        $types = [12, 13, 14];
-
-        foreach ($visits as $visit) {
-            // $visit->type_id = $types[array_rand($types)];
-            $visit->type_id = 12;
-            $visit->approval_status = 0;
-            $visit->save();
-        }
-        return 'Done';
+//        return auth()->user()->employee;
+        $visit = VisitingDetails::query()->find(146);
+        return $visit->creatorEmployee;
     }
 }
 

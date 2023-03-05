@@ -23,6 +23,7 @@ class CreateVisitingDetailsTable extends Migration
             $table->dateTime('checkout_at')->nullable();
             $table->unsignedTinyInteger('status');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('creator_employee');
             $table->unsignedBigInteger('employee_id');
             $table->unsignedInteger('type_id')->nullable();
             $table->unsignedBigInteger('visitor_id');
