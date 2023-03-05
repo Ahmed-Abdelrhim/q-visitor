@@ -89,6 +89,82 @@
                                         @enderror
                                     </div>
 
+
+
+                                    <!-- Level -->
+                                    <div class="form-group col">
+                                        <label>{{ __('files.Approval Levels') }}</label> <span class="text-danger">*</span>
+                                        <select name="level" id="approval_level"
+                                                class="form-control @error('level') is-invalid @enderror">
+                                            <option value="0" @if($employee->level == 0) selected @endif>0</option>
+                                            <option value="1" @if($employee->level == 1) selected @endif>1</option>
+                                            <option value="2" @if($employee->level == 2) selected @endif>2</option>
+                                        </select>
+                                        @error('level')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <!-- End Level -->
+
+
+
+
+                                    <!-- Employee One -->
+                                    @if(isset($roles) && count($roles) > 0)
+                                        <div class="form-group col">
+                                            <label>{{ __('files.Employee One') }}</label> <span class="text-danger">*</span>
+                                            <select name="emp_one" id="emp_one"
+                                                    class="form-control @error('emp_one') is-invalid @enderror" disabled>
+                                                @if(empty($emp->emp_one) )
+                                                    <option value="0" selected>NONE</option>
+                                                @endif
+                                                @foreach($employees as $emp)
+                                                    <option value="{{ $emp->id }}"
+                                                    @if(!empty($employee->emp_one) && $employee->emp_one == $emp->id) selected @endif>
+                                                        {{ $emp->first_name }} {{$emp->last_name}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('emp_one')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        <!-- End Employee One  -->
+
+
+                                        <!-- Employee Two -->
+                                        <div class="form-group col">
+                                            <label>{{ __('files.Employee Two') }}</label> <span class="text-danger">*</span>
+                                            <select name="emp_two" id="emp_two"
+                                                    class="form-control @error('emp_two') is-invalid @enderror" disabled>
+                                                @if(empty($employee->emp_two))
+                                                    <option value="0" selected>NONE</option>
+                                                @endif
+                                                @foreach($employees as $emp)
+                                                    <option value="{{ $emp->id }}"
+                                                    @if(!empty($employee->emp_two) && $employee->emp_two == $emp->id) selected @endif>
+                                                        {{ $emp->first_name }} {{$emp->last_name}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('emp_two')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    @endif
+                                    <!-- End  Employee Two  -->
+
+
+
+
+
+
                                     <!-- Roles -->
                                     <div class="form-group col">
                                         <label for="gender">{{ __('files.Roles') }}</label> <span class="text-danger">*</span>
@@ -188,4 +264,48 @@
     <script src="{{ asset('assets/modules/summernote/summernote-bs4.js') }}"></script>
     <script src="{{ asset('assets/modules/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('js/employee/edit.js') }}"></script>
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            let value = $('#approval_level').val();
+            if (value == 1) {
+                $('#emp_one').removeAttr('disabled');
+                $('#emp_two').attr('disabled', true);
+            }
+
+            if (value == 2) {
+                $('#emp_one').removeAttr('disabled');
+                $('#emp_two').removeAttr('disabled');
+            }
+
+            if (value == 0) {
+                $('#emp_one').attr('disabled', true);
+                $('#emp_two').attr('disabled', true);
+            }
+
+
+            $('#approval_level').on('change', function () {
+                console.log('changed');
+                let value = $(this).val();
+                console.log('Value=> ' + value);
+                if (value == 1) {
+                    $('#emp_one').removeAttr('disabled');
+                    $('#emp_two').attr('disabled', true);
+                }
+
+                if (value == 2) {
+                    $('#emp_one').removeAttr('disabled');
+                    $('#emp_two').removeAttr('disabled');
+                }
+
+                if (value == 0) {
+                    $('#emp_one').attr('disabled', true);
+                    $('#emp_two').attr('disabled', true);
+                }
+            });
+        });
+    </script>
 @endsection

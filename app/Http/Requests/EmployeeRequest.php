@@ -30,6 +30,8 @@ class EmployeeRequest extends FormRequest
             'email'                     => 'required|string|max:255|email|unique:users,email',
             // 'password_confirmation'     => 'required',
             // 'password'                  => 'required|same:password_confirmation',
+            'emp_one' => 'nullable|numeric|exists:employees,id',
+            'emp_two' => 'nullable|numeric|exists:employees,id',
             'password'                  => 'required',
             'department_id'             => 'required|numeric',
             'designation_id'            => 'required|numeric',

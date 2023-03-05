@@ -232,4 +232,5 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 // VisitorController create , edit , show and VisitorService.
 // Web .php , Translation Files.
 // CheckInController , DashboardController , dashboard index.blade.php , OcrController
+// DesignationsController
 // ============================================================================================================================================

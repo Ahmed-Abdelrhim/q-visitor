@@ -211,6 +211,16 @@ return [
     'Waiting For First Approval' => 'Waiting For First Approval',
     'Waiting Second Approval' => 'Waiting Second Approval',
     'Re-Send Sms' => 'Re-Send Sms',
+    'Employee One' => 'Employee One',
+    'Employee Two' => 'Employee Two',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
 
     '' => '',
 

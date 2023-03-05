@@ -47,11 +47,6 @@ class EmployeeService
         return $result;
     }
 
-    /**
-     * @param $column
-     * @param $value
-     * @return mixed
-     */
     public function findWhereFirst($column, $value)
     {
         $result = Employee::where($column, $value)->first();
@@ -80,7 +75,7 @@ class EmployeeService
         $input['email'] = $request->input('email');
         $input['phone'] = $request->input('phone');
         $input['password'] = Hash::make($request->input('password'));
-        $user = User::create($input);
+        $user = User::query()->create($input);
         // $role = Role::find(2);
 
         $role = Role::query()->find($request->input('role_id'));
@@ -88,7 +83,7 @@ class EmployeeService
         $user->assignRole($role->name);
 
         if ($request->file('image')) {
-//            $media = $user->addMediaFromRequest('image')->toMediaCollection('user');
+            // $media = $user->addMediaFromRequest('image')->toMediaCollection('user');
             $user->addMedia($request->file('image'))->toMediaCollection('user');
         }
         $result = '';
@@ -102,8 +97,14 @@ class EmployeeService
             $data['designation_id'] = $request->input('designation_id');
             $data['date_of_joining'] = $request->input('date_of_joining');
             $data['about'] = $request->input('about');
+
+            $data['level'] = $request->input('level');
+            $data['emp_one'] = $request->input('emp_one');
+            $data['emp_two'] = $request->input('emp_two');
+
+
             $data['status'] = 5;
-            $result = Employee::create($data);
+            $result = Employee::query()->create($data);
 
 
         }
@@ -111,11 +112,6 @@ class EmployeeService
 
     }
 
-    /**
-     * @param $id
-     * @param EmployeeUpdateRequest $request
-     * @return mixed
-     */
     public function update($id, EmployeeUpdateRequest $request)
     {
         $employee = Employee::find($id);
@@ -126,7 +122,7 @@ class EmployeeService
         $input['email'] = $request->input('email');
         $input['phone'] = $request->input('phone');
         // $input['role'] = $request->input('role');
-        $user = User::find($employee->user_id);
+        $user = User::query()->find($employee->user_id);
         $user->update($input);
         if ($request->get('role') > 0 && is_numeric($request->get('role'))) {
 
@@ -150,6 +146,11 @@ class EmployeeService
             $data['department_id'] = $request->input('department_id');
             $data['designation_id'] = $request->input('designation_id');
             $data['date_of_joining'] = $request->input('date_of_joining');
+
+            $data['level'] = $request->input('level');
+            $data['emp_one'] = $request->input('emp_one');
+            $data['emp_two'] = $request->input('emp_two');
+
             $data['about'] = $request->input('about');
             $data['status'] = 5;
             $employee->update($data);

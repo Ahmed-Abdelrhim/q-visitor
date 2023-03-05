@@ -199,6 +199,9 @@ return [
     'Waiting For First Approval' => 'انتظار الموافقة الأولي',
     'Waiting Second Approval' => 'انتظار الموافقة الثانية',
     'Re-Send Sms' => 'إعاة إرسال الرسالة',
+
+    'Employee One' => 'الموظف الأول',
+    'Employee Two' => 'الموظف الثاني',
     '' => '',
     '' => '',
 

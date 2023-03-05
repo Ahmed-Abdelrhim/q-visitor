@@ -21,6 +21,10 @@ class CreateEmployeesTable extends Migration
             $table->string('nickname')->nullable();
             $table->string('display_name')->nullable();
             $table->unsignedTinyInteger('gender');
+            $table->tinyInteger('level')->default(0);
+            $table->tinyInteger('emp_one')->nullable();
+            $table->tinyInteger('emp_two')->nullable();
+
             $table->string('official_identification_number', 255)->nullable();
             $table->date('date_of_joining');
             $table->unsignedTinyInteger('status');

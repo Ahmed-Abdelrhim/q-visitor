@@ -11,9 +11,15 @@
                     <div class="d-sm-none d-lg-inline-block">{{ __('files.Hi') }}, {{ auth()->user()->name }}</div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="{{ route('admin.profile') }}" class="dropdown-item has-icon">
-                        <i class="far fa-user"></i> {{ __('Profile') }}
-                    </a>
+
+{{--                    @if(auth()->user()->hasPermissionTo('profile'))--}}
+
+                        <a href="{{ route('admin.profile') }}" class="dropdown-item has-icon">
+                            <i class="far fa-user"></i> {{ __('Profile') }}
+                        </a>
+{{--                    @endif--}}
+
+
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"
@@ -111,9 +117,12 @@
                     <div class="d-sm-none d-lg-inline-block">{{ __('files.Hi') }}, {{ auth()->user()->name }}</div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
+
+
                     <a href="{{ route('admin.profile') }}" class="dropdown-item has-icon">
                         <i class="far fa-user"></i> {{ __('Profile') }}
                     </a>
+
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"

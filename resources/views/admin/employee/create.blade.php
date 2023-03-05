@@ -25,7 +25,7 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label for="first_name">{{ __('files.First Name') }}</label> <span
-                                                class="text-danger">*</span>
+                                            class="text-danger">*</span>
                                         <input id="first_name" type="text" name="first_name"
                                                class="form-control {{ $errors->has('first_name') ? " is-invalid " : '' }}"
                                                value="{{ old('first_name') }}">
@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="form-group col">
                                         <label for="last_name">{{ __('files.Last Name') }}</label> <span
-                                                class="text-danger">*</span>
+                                            class="text-danger">*</span>
                                         <input id="last_name" type="text" name="last_name"
                                                class="form-control {{ $errors->has('last_name') ? " is-invalid " : '' }}"
                                                value="{{ old('last_name') }}">
@@ -87,11 +87,12 @@
                                     </div>
                                     <div class="form-group col">
                                         <label for="gender">{{ __('files.Gender') }}</label> <span
-                                                class="text-danger">*</span>
+                                            class="text-danger">*</span>
                                         <select id="gender" name="gender"
                                                 class="form-control @error('gender') is-invalid @enderror">
                                             @foreach(trans('genders') as $key => $gender)
-                                                <option value="{{ $key }}" {{ (old('gender') == $key) ? 'selected' : '' }}>{{ $gender }}</option>
+                                                <option
+                                                    value="{{ $key }}" {{ (old('gender') == $key) ? 'selected' : '' }}>{{ $gender }}</option>
                                             @endforeach
                                         </select>
                                         @error('gender')
@@ -104,14 +105,74 @@
                                 </div>
                                 <div class="form-row">
 
+                                    <!-- Level -->
+                                    <div class="form-group col">
+                                        <label>{{ __('files.Approval Levels') }}</label> <span class="text-danger">*</span>
+                                        <select name="level" id="approval_level"
+                                                class="form-control @error('level') is-invalid @enderror">
+                                            <option value="0" selected>0</option>
+                                            <option value="1" >1</option>
+                                            <option value="2">2</option>
+                                        </select>
+                                        @error('level')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <!-- End Level -->
+
+
+
+
+                                    <!-- Employee One -->
+                                    @if(isset($roles) && count($roles) > 0)
+                                        <div class="form-group col">
+                                            <label>{{ __('files.Employee One') }}</label> <span class="text-danger">*</span>
+                                            <select name="emp_one" id="emp_one"
+                                                    class="form-control @error('emp_one') is-invalid @enderror" disabled>
+                                                <option value="0" selected>NONE</option>
+                                                @foreach($employees as $emp)
+                                                    <option value="{{ $emp->id }}">{{ $emp->first_name }} {{$emp->last_name}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('emp_one')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        <!-- End Employee One  -->
+
+
+                                        <!-- Employee Two -->
+                                        <div class="form-group col">
+                                            <label>{{ __('files.Employee Two') }}</label> <span class="text-danger">*</span>
+                                            <select name="emp_two" id="emp_two"
+                                                    class="form-control @error('emp_two') is-invalid @enderror" disabled>
+                                                <option value="0" selected>NONE</option>
+                                                @foreach($employees as $emp)
+                                                    <option value="{{ $emp->id }}">{{ $emp->first_name }} {{$emp->last_name}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('emp_two')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    @endif
+                                    <!-- End  Employee Two  -->
+
+
                                     <!-- Roles -->
                                     <div class="form-group col">
                                         <label for="department_id">{{ __('files.Roles') }}</label> <span
-                                                class="text-danger">*</span>
+                                            class="text-danger">*</span>
                                         <select id="role_id" name="role_id"
                                                 class="form-control @error('role_id') is-invalid @enderror">
                                             @foreach($roles as $key => $role)
-                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                                <option value="{{ $role->id }}">{{ $role->name }} </option>
                                             @endforeach
                                         </select>
                                         @error('role_id')
@@ -125,11 +186,12 @@
                                     <!-- Department -->
                                     <div class="form-group col">
                                         <label for="department_id">{{ __('files.Department') }}</label> <span
-                                                class="text-danger">*</span>
+                                            class="text-danger">*</span>
                                         <select id="department_id" name="department_id"
                                                 class="form-control @error('department_id') is-invalid @enderror">
                                             @foreach($departments as $key => $department)
-                                                <option value="{{ $department->id }}" {{ (old('department_id') == $department->id) ? 'selected' : '' }}>{{ $department->name }}</option>
+                                                <option
+                                                    value="{{ $department->id }}" {{ (old('department_id') == $department->id) ? 'selected' : '' }}>{{ $department->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('department_id')
@@ -147,11 +209,12 @@
                                     <!-- Positions -->
                                     <div class="form-group col">
                                         <label for="designation_id">{{ __('files.Positions') }}</label> <span
-                                                class="text-danger">*</span>
+                                            class="text-danger">*</span>
                                         <select id="designation_id" name="designation_id"
                                                 class="form-control @error('designation_id') is-invalid @enderror">
                                             @foreach($designations as $key => $designation)
-                                                <option value="{{ $designation->id }}" {{ (old('designation_id') == $designation->id) ? 'selected' : '' }}>{{ $designation->name }}</option>
+                                                <option
+                                                    value="{{ $designation->id }}" {{ (old('designation_id') == $designation->id) ? 'selected' : '' }}>{{ $designation->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('designation_id')
@@ -242,5 +305,47 @@
     <script src="{{ asset('assets/modules/summernote/summernote-bs4.js') }}"></script>
     <script src="{{ asset('assets/modules/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('js/employee/create.js') }}"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            let value = $('#approval_level').val();
+            if (value == 1) {
+                $('#emp_one').removeAttr('disabled');
+                $('#emp_two').attr('disabled', true);
+            }
+
+            if (value == 2) {
+                $('#emp_one').removeAttr('disabled');
+                $('#emp_two').removeAttr('disabled');
+            }
+
+            if (value == 0) {
+                $('#emp_one').attr('disabled', true);
+                $('#emp_two').attr('disabled', true);
+            }
+
+
+            $('#approval_level').on('change', function () {
+                console.log('changed');
+                let value = $(this).val();
+                console.log('Value=> ' + value);
+                if (value == 1) {
+                    $('#emp_one').removeAttr('disabled');
+                    $('#emp_two').attr('disabled', true);
+                }
+
+                if (value == 2) {
+                    $('#emp_one').removeAttr('disabled');
+                    $('#emp_two').removeAttr('disabled');
+                }
+
+                if (value == 0) {
+                    $('#emp_one').attr('disabled', true);
+                    $('#emp_two').attr('disabled', true);
+                }
+            });
+        });
+    </script>
 
 @endsection

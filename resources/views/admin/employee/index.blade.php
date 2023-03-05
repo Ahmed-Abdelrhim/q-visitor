@@ -60,4 +60,5 @@
 <script src="{{ asset('assets/modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/employee/index.js') }}"></script>
+
 @endsection

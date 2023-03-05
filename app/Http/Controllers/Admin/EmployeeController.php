@@ -46,12 +46,6 @@ class EmployeeController extends Controller
         $this->middleware(['permission:employees_show'])->only('show');
     }
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('admin.employee.index', $this->data);
@@ -60,27 +54,24 @@ class EmployeeController extends Controller
     public function create(Request $request)
     {
 
-        $this->data['designations'] = Designation::where('status', Status::ACTIVE)->get();
-        $this->data['departments'] = Department::where('status', Status::ACTIVE)->get();
-        $this->data['roles'] = Role::query()->get(['id', 'name']);
+        $this->data['designations'] = Designation::query()->where('status', Status::ACTIVE)->get();
+        $this->data['departments'] = Department::query()->where('status', Status::ACTIVE)->get();
 
+        $employees = Employee::query()->get(['id','first_name','last_name']);
+
+        $this->data['roles'] = Role::query()->get(['id','name']);
+        $this->data['employees'] = $employees;
 
         return view('admin.employee.create', $this->data);
     }
 
     public function store(EmployeeRequest $request)
     {
+        // return $request;
         $this->employeeService->make($request);
         return redirect()->route('admin.employees.index')->withSuccess('The data inserted successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return void
-     */
     public function show($id)
     {
         $this->data['employee'] = $this->employeeService->find($id);
@@ -90,8 +81,12 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $this->data['employee'] = $this->employeeService->find($id);
-        $this->data['designations'] = Designation::where('status', Status::ACTIVE)->get();
-        $this->data['departments'] = Department::where('status', Status::ACTIVE)->get();
+        $this->data['designations'] = Designation::query()->where('status', Status::ACTIVE)->get();
+        $this->data['departments'] = Department::query()->where('status', Status::ACTIVE)->get();
+
+        $employees = Employee::query()->get(['id','first_name','last_name']);
+        $this->data['employees'] = $employees;
+
         $this->data['roles'] = Role::query()->get();
         return view('admin.employee.edit', $this->data);
     }
@@ -198,19 +193,19 @@ class EmployeeController extends Controller
                 $retAction = '';
 
                 if (auth()->user()->can('pre-registers_show')) {
-                    $retAction .= '<a href="' . route('admin.visitors.show', $visitor) . '" class="btn btn-sm btn-icon mr-2  float-left btn-info" 
+                    $retAction .= '<a href="' . route('admin.visitors.show', $visitor) . '" class="btn btn-sm btn-icon mr-2  float-left btn-info"
 data-toggle="tooltip" data-placement="top" title="View"><i class="far fa-eye"></i></a>';
                 }
 
                 if (auth()->user()->can('pre-registers_edit')) {
-                    $retAction .= '<a href="' . route('admin.visitors.edit', $visitor) . '" class="btn btn-sm btn-icon float-left btn-primary" 
+                    $retAction .= '<a href="' . route('admin.visitors.edit', $visitor) . '" class="btn btn-sm btn-icon float-left btn-primary"
 data-toggle="tooltip" data-placement="top" title="Edit"> <i class="far fa-edit"></i></a>';
                 }
 
 
                 if (auth()->user()->can('pre-registers_delete')) {
                     $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitor) . '" method="POST">' .
-                        method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip" 
+                        method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger" data-toggle="tooltip"
 data-placement="top" title="Delete"> <i class="fa fa-trash"></i></button></form>';
                 }
 

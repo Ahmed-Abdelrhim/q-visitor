@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DesignationsRequest;
 use App\Models\Designation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 
@@ -43,17 +45,26 @@ class DesignationsController extends Controller
         return view('admin.designation.create', $this->data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
+
     public function store(DesignationsRequest $request)
     {
-        $input = $request->all();
-        Designation::create($input);
+        //        $input = $request->all();
+        //        Designation::query()->create($input);
+
+//        try {
+//            DB::beginTransaction();
+            Designation::query()->create([
+                'name' => $request->get('name'),
+                'status' => $request->get('status'),
+                'created_at' => Carbon::now(),
+            ]);
+//            DB::commit();
+//        }
+//        catch (\Exception $e) {
+//            DB::rollBack();
+//            $notifications = array('message'=>'Something Went Wrong , Try Again Later','alert-type'=>'error');
+//            return redirect()->back()->with($notifications);
+//        }
 
         return redirect()->route('admin.designations.index')->with('success','Designations created successfully');
     }
@@ -124,12 +135,12 @@ class DesignationsController extends Controller
                 $retAction = '';
 
                 if(auth()->user()->can('designations_edit')) {
-                    $retAction .= '<a href="' . route('admin.designations.edit', $designation) . '" class="btn btn-sm btn-icon float-left btn-primary actions" 
+                    $retAction .= '<a href="' . route('admin.designations.edit', $designation) . '" class="btn btn-sm btn-icon float-left btn-primary actions"
 data-toggle="tooltip" data-placement="top" title="'.__('files.Edit').'"><i class="far fa-edit"></i></a>';
                 }
 
                 if(auth()->user()->can('designations_delete')) {
-                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.designations.destroy', $designation) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions" 
+                    $retAction .= '<form class="float-left pl-2" action="' . route('admin.designations.destroy', $designation) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions"
 data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'"><i class="fa fa-trash"></i></button></form>';
                 }
                 return $retAction;
