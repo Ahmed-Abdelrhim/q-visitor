@@ -26,6 +26,7 @@ class VisitorService
             // Return Only The VisitingDetails Created By This User Or Edit By The Current User
             return VisitingDetails::query()
                 ->where('creator_id', $user->id)
+//                ->orWhere('creator_employee', )
                 ->orWhere('editor_id', $user->id)
                 ->orWhere('employee_id', $user->employee->id)
                 ->orWhere('user_id', $user->id)
@@ -37,10 +38,7 @@ class VisitorService
         }
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     */
+
     public function find($id)
     {
         // if(auth()->user()->getrole->name == 'Employee') {
