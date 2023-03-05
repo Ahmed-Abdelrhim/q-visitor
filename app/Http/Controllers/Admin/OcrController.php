@@ -251,6 +251,7 @@ class OcrController extends Controller
                     'status' => 5,
                     'user_id' => 3,
                     'employee_id' => 3,
+                    'type_id' => 1,
                     'visitor_id' => $visitor->id,
                     'creator_type' => 'App\Scan',
                     'creator_id' => 1,

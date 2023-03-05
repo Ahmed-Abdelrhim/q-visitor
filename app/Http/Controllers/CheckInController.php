@@ -98,24 +98,15 @@ class CheckInController extends Controller
         return redirect()->route('check-in.step-two');
     }
 
-    /**
-     * Show the step 2 Form for creating a new product.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function createStepTwo(Request $request)
     {
         $visitingDetails = $request->session()->get('visitor');
-        $employee = Employee::find($visitingDetails['employee_id']);
+        $employee = Employee::query()->find($visitingDetails['employee_id']);
 
         return view('frontend.check-in.step-two', compact('employee', 'visitingDetails'));
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
         $getVisitor = $request->session()->get('visitor');
@@ -209,7 +200,8 @@ class CheckInController extends Controller
             $visiting['creator_type'] = 'App\User';
             $visiting['editor_type'] = 'App\User';
             $visiting['editor_id'] = 1;
-            $visitingDetails = VisitingDetails::create($visiting);
+            $visitor['type_id'] = 1;
+            $visitingDetails = VisitingDetails::query()->create($visiting);
             /*if ($imageName) {
                 $visitingDetails->addMedia($imageName)->toMediaCollection('visitor');
                 //File::delete($imageName);

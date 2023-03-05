@@ -153,13 +153,15 @@ class="btn btn-sm btn-icon float-left btn-primary actions" data-toggle="tooltip"
 data-placement="top" title="' . __('files.Edit') . '"><i class="far fa-edit"></i></a>';
                 }
 
-                if (auth()->user()->can('types_delete')) {
+                if (auth()->user()->can('types_delete') && $designation->id != 1 ) {
                     $retAction .= '<form class="float-left pl-2" action="' . route('admin.types.destroy', $designation) . '" method="POST">' .
                         method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions"
 data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '"><i class="fa fa-trash"></i></button></form>';
                 }
                 return $retAction;
             })
+
+
             ->editColumn('status', function ($designation) {
                 return ($designation->status == 5 ? trans('statuses.' . Status::ACTIVE) : trans('statuses.' . Status::INACTIVE));
             })

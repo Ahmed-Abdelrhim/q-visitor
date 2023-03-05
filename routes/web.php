@@ -122,8 +122,6 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
     });
 
 
-    /*Multi step form*/
-
     Route::group(['middleware' => ['installed']], function () {
         Route::group(['middleware' => ['frontend']], function () {
             Route::get('/', 'CheckInController@index')->name('/');
@@ -233,4 +231,5 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 // Upload the VisitingDetails and Type Models.
 // VisitorController create , edit , show and VisitorService.
 // Web .php , Translation Files.
+// CheckInController , DashboardController , dashboard index.blade.php , OcrController
 // ============================================================================================================================================

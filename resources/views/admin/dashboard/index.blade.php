@@ -92,6 +92,7 @@
         @endif
 
         <div class="row">
+            <!-- Start Visits -->
             <div class="col-md-9">
                 <div class="card" style="border-radius: 15px; !important">
                     <div class="card-header">
@@ -132,6 +133,7 @@
                     </div>
                 </div>
             </div>
+            <!-- End Visits -->
             <div class="col-md-3">
                 <div class="card">
                     <div class="profile-dashboard bg-maroon-light">
