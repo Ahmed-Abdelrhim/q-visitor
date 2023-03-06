@@ -101,10 +101,11 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('ocr-print/{id?}', [OcrController::class, 'ocrPrint'])->name('ocr.print');
         Route::post('ocr-save', [OcrController::class, 'ocrSave'])->name('ocr.save');
 
-        Route::get('ocr/view',[OcrController::class,'viewFirstPage']);
-        // Route::group(['middleware' => ['role_or_permission:Admin,ocr|ocr_create']], function () {
-        // Route::group(['middleware' => ['role:Admin|OCR','permission:ocr|ocr_show|ocr_create|ocr_edit|ocr_delete']], function () {
-        // });
+        Route::get('ocr/view',[OcrController::class,'viewFirstPage'])->name('reload.ocr.view');
+        Route::get('Optical/Character/Recognition/View/Scan/{id}',[OcrController::class,'viewScanPage'])->name('view.scan.page');
+        Route::get('New/Scan',[OcrController::class,'newScan'])->name('new.scan');
+        Route::get('Visits/Search',[OcrController::class,'searchVisitingDetails'])->name('ocr.search.visitors');
+
 
         // Settings Routes···
         Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {

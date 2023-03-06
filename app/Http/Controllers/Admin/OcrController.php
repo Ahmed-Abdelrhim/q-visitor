@@ -27,7 +27,24 @@ class OcrController extends Controller
     {
         $this->authorizedToView();
         $this->linker();
-        return view('admin.ocr.layout_main');
+
+        $date = Carbon::now()->format('Y-d-m');
+        $visits = VisitingDetails::query()->with('visitor')
+            ->whereRaw('date(checkin_at) = CURDATE() ')
+            ->get();
+
+        return view('admin.ocr.view', ['visits' => $visits]);
+        // return view('admin.ocr.layout_main');
+    }
+
+    public function viewScanPage($id)
+    {
+        $id = decrypt($id);
+        $visit = VisitingDetails::query()->find($id);
+        if (!$visit) {
+            return 'This Visit Was Deleted';
+        }
+        return view('admin.ocr.layout_main', ['visit' => $visit]);
     }
 
     public function authorizedToView()
@@ -35,6 +52,33 @@ class OcrController extends Controller
         if (!Gate::allows('authorizedToViewOcr'))
             abort(403);
         return true;
+    }
+
+    public function newScan()
+    {
+        return view('admin.ocr.new_scan');
+    }
+
+    public function searchVisitingDetails()
+    {
+        $date1 = Carbon::parse($_GET['v2date']);
+        $date2 = Carbon::parse($_GET['v3date']);
+
+        $visits = VisitingDetails::query()
+            ->with('visitor')
+            ->whereBetween('checkin_at',[$date1, $date2])
+            ->get();
+        if (!count($visits) > 0) {
+            // return 'No Data Found';
+            //            $visits = VisitingDetails::query()->with('visitor')
+            //                ->whereRaw('date(checkin_at) = CURDATE() ')
+            //                ->get();
+            $notifications = array('message'=>'لم يتم ايجاد بيانات في هذا التاريخ','alert-type'=>'error');
+            return redirect()->back()->with($notifications);
+
+            // return view('admin.ocr.view', ['not'=>$notifications,'visits' => $visits]);
+        }
+        return view('admin.ocr.view', ['visits' => $visits]);;
     }
 
 
@@ -70,19 +114,13 @@ class OcrController extends Controller
 
     public function viewFirstPage()
     {
-        //        $datetime = new DateTime();
-        //        $data = $datetime->format('Y-m-d');
-        //        return $data;
-
         $date = Carbon::now()->format('Y-d-m');
         $visits = VisitingDetails::query()->with('visitor')
             ->whereRaw('date(checkin_at) = CURDATE() ')
             ->get();
-
-
+        return view('admin.ocr.view', ['visits' => $visits]);
         // $visits = VisitingDetails::query()->whereRaw('date(checkin_at) = CURDATE() ',[Carbon::now()->format('Y-m-d')])->get();
         // return $visits;
-        return view('admin.ocr.view', ['visits' => $visits]);
     }
 
     public function linker()

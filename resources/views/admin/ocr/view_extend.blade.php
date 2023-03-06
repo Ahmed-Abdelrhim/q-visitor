@@ -10,12 +10,6 @@
 </script>
 
 
-
-
-
-
-
-
 <style>
     .find, .newscan, .clr {
         height: 40px;
@@ -30,6 +24,12 @@
 <script>
     $(document).ready(function () {
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
 
         $('.edit').click(function () {
             vid = $(this).attr('id');
@@ -40,7 +40,11 @@
         $('.find').click(function () {
             v2date = $('.v2date').val();
             v3date = $('.v3date').val();
-            $.redirect("view.php", {v2date: v2date, v3date: v3date}, "POST", null, null, true);
+            // $.redirect("view.php", {v2date: v2date, v3date: v3date}, "POST", null, null, true);
+            $.redirect("{{route('admin.ocr.search.visitors')}}", {
+                v2date: v2date,
+                v3date: v3date
+            }, "GET", null, null, true);
         });
 
 
@@ -51,10 +55,14 @@
             });
         });
         $('.newscan').click(function () {
-            $.redirect("index.php", {}, "POST", null, null, true);
+            // $.redirect("index.php", {}, "POST", null, null, true);
+            $.redirect("{{route('admin.new.scan')}}", {
+                // 'cs'
+            }, "GET", null, null, true);
         });
         $('.clr').click(function () {
-            $.redirect("view.php", {}, "GET", null, null, true);
+            // $.redirect("view.php", {}, "GET", null, null, true);
+            $.redirect("{{route('admin.reload.ocr.view')}}", {}, "GET", null, null, true);
         });
         flatpickr("#v2date", {
             enableTime: false,
@@ -70,5 +78,48 @@
         });
     });
 </script>
+
+<script src="{{ asset('assets/modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+<script>
+    console.log('no data found');
+    @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type','info') }}"
+    switch (type) {
+        case 'info':
+            iziToast.info({
+                title: 'info',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
+            break;
+
+        case 'success':
+            iziToast.success({
+                title: 'Success',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
+            break;
+
+        case 'warning':
+            iziToast.warning({
+                title: 'warning',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
+            break;
+
+        case 'error':
+            iziToast.error({
+                title: 'error',
+                message: '{{ session('message') }}',
+                position: 'topRight'
+            });
+            break;
+    }
+    @endif
+</script>
+
+
 
 

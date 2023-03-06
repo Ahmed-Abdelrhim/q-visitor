@@ -3,7 +3,12 @@
 <head>
     <title>View Visitors</title>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="{{ asset('assets/modules/izitoast/dist/css/iziToast.min.css') }}">
+
     <script src="{{asset('DataTables/other/jquery.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('DataTables/other/jquery.redirect.js')}}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
@@ -18,7 +23,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('DataTables/other/bootstrap.css')}}"/>
     <script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>
-    <link href="css/buttons.dataTables.min.css"/>
+    <link href="{{asset('DataTables/other/buttons.dataTables.min.css')}}"/>
 
     <script type="text/javascript" src="{{asset('DataTables/dataTables.buttons.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('DataTables/jszip.min.js')}}"></script>
@@ -74,6 +79,8 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
 
                                     </div>
                                     <div style="width:100%;float:left"></div>
+
+
                                     <button class="btn btn-sm btn-icon mr-2  float-left btn-success find"
                                             data-toggle="tooltip" data-placement="top" title="Search"><i
                                             class="fa fa-search"></i> Search
@@ -105,22 +112,22 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                 </tr>
                                 </thead>
                                 <tbody>
-{{--                                <?php--}}
-{{--                                if ($result->num_rows > 0) {--}}
-{{--                                    // output data of each row--}}
-{{--                                    while ($row = $result->fetch_assoc()) {--}}
-{{--                                        $date = explode(" ", $row["checkin_at"]);--}}
-{{--                                        echo "<tr><td>" . $row["visitor_id"] . "</td><td>" . $row["first_name"] . " " . $row["last_name"] . "</td><td>" . $row["phone"] . "</td>--}}
-{{--												<td>" . $date[0] . "</td><td>" . $date[1] . "</td>";--}}
-{{--                                        echo '<td>--}}
+                                {{--                                <?php--}}
+                                {{--                                if ($result->num_rows > 0) {--}}
+                                {{--                                    // output data of each row--}}
+                                {{--                                    while ($row = $result->fetch_assoc()) {--}}
+                                {{--                                        $date = explode(" ", $row["checkin_at"]);--}}
+                                {{--                                        echo "<tr><td>" . $row["visitor_id"] . "</td><td>" . $row["first_name"] . " " . $row["last_name"] . "</td><td>" . $row["phone"] . "</td>--}}
+                                {{--												<td>" . $date[0] . "</td><td>" . $date[1] . "</td>";--}}
+                                {{--                                        echo '<td>--}}
 
-{{--											<a class="btn btn-sm btn-icon mr-2 float-left btn-primary edit" data-toggle="tooltip" data-placement="top" title="Edit" id="' . $row["visitor_id"] . '"> <i class="far fa-edit"></i></a>--}}
-{{--											<a class="btn btn-sm btn-icon mr-2 float-left btn-danger delete" data-toggle="tooltip" data-placement="top" title="Delete" id="' . $row["visitor_id"] . '"> <i class="fa fa-trash"></i></a>--}}
+                                {{--											<a class="btn btn-sm btn-icon mr-2 float-left btn-primary edit" data-toggle="tooltip" data-placement="top" title="Edit" id="' . $row["visitor_id"] . '"> <i class="far fa-edit"></i></a>--}}
+                                {{--											<a class="btn btn-sm btn-icon mr-2 float-left btn-danger delete" data-toggle="tooltip" data-placement="top" title="Delete" id="' . $row["visitor_id"] . '"> <i class="fa fa-trash"></i></a>--}}
 
-{{--											</td></tr>';--}}
-{{--                                    }--}}
-{{--                                }--}}
-{{--                                ?>--}}
+                                {{--											</td></tr>';--}}
+                                {{--                                    }--}}
+                                {{--                                }--}}
+                                {{--                                ?>--}}
 
                                 @if(isset($visits) && count($visits) > 0)
                                     @foreach($visits as $visit)
@@ -131,14 +138,22 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                             <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('Y-m-d')}}</td>
                                             <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('H:i:s')}}</td>
                                             <td>
-                                                <a  class="btn btn-sm btn-icon mr-2 float-left btn-primary edit" data-toggle="tooltip" data-placement="top"4
-                                                    title="Edit" id="{{$visit->id}}">
+                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-primary edit"
+                                                   data-toggle="tooltip" data-placement="top" 4
+                                                   title="Edit" id="{{$visit->id}}">
                                                     <i class="far fa-edit"></i>
                                                 </a>
 
-                                                <a  class="btn btn-sm btn-icon mr-2 float-left btn-danger delete" data-toggle="tooltip" data-placement="top"4
-                                                    title="Delete" id="{{$visit->id}}">
+                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-danger delete"
+                                                   data-toggle="tooltip" data-placement="top" 4
+                                                   title="Delete" id="{{$visit->id}}">
                                                     <i class="fa fa-trash"></i>
+                                                </a>
+
+                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-success scan"
+                                                   id="scan" title="scan"
+                                                   href="{{route('admin.view.scan.page',encrypt($visit->id))}}">
+                                                    <i class="fa-solid fa-binoculars"></i>
                                                 </a>
                                             </td>
                                         </tr>
