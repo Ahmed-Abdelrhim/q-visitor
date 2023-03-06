@@ -48,12 +48,13 @@
         });
 
 
-        $('.delete').click(function () {
-            id = $(this).attr('id');
-            $.post("delete.php", {id: id}, function (data) {
-                location.reload();
-            });
-        });
+        {{--$('.delete').click(function () {--}}
+        {{--    id = $(this).attr('id');--}}
+        {{--    // $.post("delete.php", {id: id}, function (data) {--}}
+        {{--    $.post("{{route('')}}", {id: id}, function (data) {--}}
+        {{--        location.reload();--}}
+        {{--    });--}}
+        {{--});--}}
         $('.newscan').click(function () {
             // $.redirect("index.php", {}, "POST", null, null, true);
             $.redirect("{{route('admin.new.scan')}}", {
@@ -81,7 +82,6 @@
 
 <script src="{{ asset('assets/modules/izitoast/dist/js/iziToast.min.js') }}"></script>
 <script>
-    console.log('no data found');
     @if(Session::has('message'))
     var type = "{{ Session::get('alert-type','info') }}"
     switch (type) {

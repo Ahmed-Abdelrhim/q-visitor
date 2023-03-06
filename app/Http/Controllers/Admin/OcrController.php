@@ -109,7 +109,10 @@ class OcrController extends Controller
 
     public function destroy($id)
     {
-        //
+        $id = decrypt($id);
+        VisitingDetails::query()->find($id)->delete();
+        $notifications = array('message'=>'تم مسح الزيارة بنجاح','alert-type'=>'success');
+        return redirect()->back()->with($notifications);
     }
 
     public function viewFirstPage()

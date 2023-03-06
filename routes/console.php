@@ -17,3 +17,18 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+
+
+
+
+
+
+
+
+
+
+// Table visitors_companions => id , first_name , last_name , id_national_card , phone  and visitor_id
+//
+//
+

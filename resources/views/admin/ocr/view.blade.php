@@ -138,15 +138,18 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                             <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('Y-m-d')}}</td>
                                             <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('H:i:s')}}</td>
                                             <td>
+
                                                 <a class="btn btn-sm btn-icon mr-2 float-left btn-primary edit"
-                                                   data-toggle="tooltip" data-placement="top" 4
+                                                   data-toggle="tooltip" data-placement="top"
                                                    title="Edit" id="{{$visit->id}}">
                                                     <i class="far fa-edit"></i>
                                                 </a>
 
+
                                                 <a class="btn btn-sm btn-icon mr-2 float-left btn-danger delete"
-                                                   data-toggle="tooltip" data-placement="top" 4
-                                                   title="Delete" id="{{$visit->id}}">
+                                                   data-toggle="tooltip" data-placement="top" href="{{ route('admin.ocr.destroy',encrypt($visit->id)) }}"
+                                                   title="Delete" id="{{$visit->id}}"
+                                                   oncancel="event.preventDefault();document.getElementById('deleteVisit').submit();">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
 
@@ -155,6 +158,12 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                                    href="{{route('admin.view.scan.page',encrypt($visit->id))}}">
                                                     <i class="fa-solid fa-binoculars"></i>
                                                 </a>
+
+                                                <form action="{{ route('admin.ocr.destroy',encrypt($visit->id)) }}"
+                                                      class="display-none"
+                                                      method="POST" id="deleteVisit">
+                                                    @csrf
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -174,3 +183,10 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
 </section>
 </body>
 </html>
+{{--                                                    <button--}}
+{{--                                                        class="btn btn-sm btn-icon mr-2 float-left btn-danger delete"--}}
+{{--                                                        type="submit"--}}
+{{--                                                        title="Delete" id="{{$visit->id}}" data-toggle="tooltip"--}}
+{{--                                                        data-placement="top">--}}
+{{--                                                        <i class="fa fa-trash"></i>--}}
+{{--                                                    </button>--}}
