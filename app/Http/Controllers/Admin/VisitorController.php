@@ -122,14 +122,17 @@ class VisitorController extends Controller
 
                 // Implement Show Approve Button And The Status
                 if ($visitingDetail->creatorEmployee->level == 0) {
-                    if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_id ) {
+                    // if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_id ) {
+                    // if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_employee ) {
+                    if (auth()->user()->hasRole(1) || auth()->user()->id == $visitingDetail->creator_id ) {
                         $msg = __('files.Re-Send Sms');
                         $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                     }
                 }
 
                 if ($visitingDetail->creatorEmployee->level == 1) {
-                    if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_one || auth()->user()->hasRole(1)) {
+                    // if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_one || auth()->user()->hasRole(1)) {
+                    if (auth()->user()->employee->id == $visitingDetail->emp_one || auth()->user()->hasRole(1)) {
                         if ($visitingDetail->approval_status == 0) {
                             $msg = 'Approve';
                             $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
@@ -145,19 +148,22 @@ class VisitorController extends Controller
 
                 if ($visitingDetail->creatorEmployee->level == 2) {
                     if ($visitingDetail->approval_status == 0) {
-                        if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_one || auth()->user()->hasRole(1)) {
+                        // if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_one || auth()->user()->hasRole(1)) {
+                        if (auth()->user()->employee->id == $visitingDetail->emp_one || auth()->user()->hasRole(1)) {
                             $msg = __('files.First Approval');
                             $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
                     }
                     if ($visitingDetail->approval_status == 1) {
-                        if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_two || auth()->user()->hasRole(1)) {
+                        // if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_two || auth()->user()->hasRole(1)) {
+                        if (auth()->user()->employee->id == $visitingDetail->emp_two || auth()->user()->hasRole(1)) {
                             $msg = __('files.Second Approval');
                             $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
                     }
                     if ($visitingDetail->approval_status == 2) {
-                        if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_one || auth()->user()->hasRole(1)) {
+                        // if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_one || auth()->user()->hasRole(1)) {
+                        if (auth()->user()->employee->id == $visitingDetail->emp_two || auth()->user()->hasRole(1)) {
                             $msg = __('files.Re-Send Sms');
                             $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }

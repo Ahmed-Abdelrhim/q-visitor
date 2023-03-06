@@ -234,3 +234,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 // CheckInController , DashboardController , dashboard index.blade.php , OcrController
 // DesignationsController
 // ============================================================================================================================================
+
+
+// emp one = 7   , , ,  emp two = 3
+// emp one = 42   , , ,  emp two = 41
