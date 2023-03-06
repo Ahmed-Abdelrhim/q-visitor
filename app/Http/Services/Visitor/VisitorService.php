@@ -26,8 +26,8 @@ class VisitorService
             // Return Only The VisitingDetails Created By This User Or Edit By The Current User
             return VisitingDetails::query()
                 ->where('creator_id', $user->id)
-                ->orWhere('emp_one', $user->id)
-                ->orWhere('emp_two' , $user->id)
+                ->orWhere('emp_one', $user->employee->id)
+                ->orWhere('emp_two' ,$user->employee->id)
                 ->orWhere('editor_id', $user->id)
                 ->orWhere('employee_id', $user->employee->id)
                 ->orWhere('user_id', $user->id)
