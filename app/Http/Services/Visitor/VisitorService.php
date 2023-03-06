@@ -32,6 +32,7 @@ class VisitorService
                 ->orWhere('employee_id', $user->employee->id)
                 ->orWhere('user_id', $user->id)
                 ->with('type')
+                ->orderBy('id', 'desc')
                 ->get();
         } else {
             // The User Is Of Type ADMIN So Return All The VisitingDetails

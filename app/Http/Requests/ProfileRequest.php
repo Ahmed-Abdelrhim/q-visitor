@@ -31,7 +31,7 @@ class ProfileRequest extends FormRequest
             'username'   => request('username') ? ['required', 'string', Rule::unique("users", "username")->ignore($this->profile), 'max:60'] : ['nullable'],
             'phone'      => ['required', 'max:60'],
             'address'    => ['nullable', 'max:200'],
-            'image'      => 'nullable|mimes:jpeg,jpg,png,gif|max:3096',
+            'image'      => 'nullable|mimes:jpeg,jpg,png,gif|max:4096',
         ];
     }
 
