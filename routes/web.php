@@ -100,6 +100,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('ocr-indexxarr', [OcrController::class, 'ocrIndexxar'])->name('ocr.indexxar');
         Route::get('ocr-print/{id?}', [OcrController::class, 'ocrPrint'])->name('ocr.print');
         Route::post('ocr-save', [OcrController::class, 'ocrSave'])->name('ocr.save');
+
+        Route::get('ocr/view',[OcrController::class,'viewFirstPage']);
         // Route::group(['middleware' => ['role_or_permission:Admin,ocr|ocr_create']], function () {
         // Route::group(['middleware' => ['role:Admin|OCR','permission:ocr|ocr_show|ocr_create|ocr_edit|ocr_delete']], function () {
         // });

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Languages;
 use App\Models\VisitingDetails;
 use App\Models\Visitor;
+use DateTime;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -65,6 +66,23 @@ class OcrController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function viewFirstPage()
+    {
+        //        $datetime = new DateTime();
+        //        $data = $datetime->format('Y-m-d');
+        //        return $data;
+
+        $date = Carbon::now()->format('Y-d-m');
+        $visits = VisitingDetails::query()->with('visitor')
+            ->whereRaw('date(checkin_at) = CURDATE() ')
+            ->get();
+
+
+        // $visits = VisitingDetails::query()->whereRaw('date(checkin_at) = CURDATE() ',[Carbon::now()->format('Y-m-d')])->get();
+        // return $visits;
+        return view('admin.ocr.view', ['visits' => $visits]);
     }
 
     public function linker()
@@ -308,12 +326,12 @@ class OcrController extends Controller
         $emp_one = NULL;
         $emp_two = NULL;
 
-        if (auth()->user()->employee->level == 1 ) {
-            $emp_one =  auth()->user()->employee->emp_one;
+        if (auth()->user()->employee->level == 1) {
+            $emp_one = auth()->user()->employee->emp_one;
         }
 
         if (auth()->user()->employee->level == 2) {
-            $emp_one =  auth()->user()->employee->emp_one;
+            $emp_one = auth()->user()->employee->emp_one;
             $emp_two = auth()->user()->employee->emp_two;
         }
         return 'Emp One => ' . $emp_one . '<br> Emp Two => ' . $emp_two;
@@ -322,6 +340,8 @@ class OcrController extends Controller
         //        $visit = VisitingDetails::query()->find(146);
         //        return $visit->creatorEmployee;
     }
+
+
 }
 
 
