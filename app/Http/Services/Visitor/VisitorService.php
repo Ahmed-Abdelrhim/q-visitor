@@ -26,7 +26,8 @@ class VisitorService
             // Return Only The VisitingDetails Created By This User Or Edit By The Current User
             return VisitingDetails::query()
                 ->where('creator_id', $user->id)
-//                ->orWhere('creator_employee', )
+                ->orWhere('emp_one', $user->id)
+                ->orWhere('emp_two' , $user->id)
                 ->orWhere('editor_id', $user->id)
                 ->orWhere('employee_id', $user->employee->id)
                 ->orWhere('user_id', $user->id)
@@ -49,40 +50,26 @@ class VisitorService
         }
     }
 
-    /**
-     * @param $column
-     * @param $value
-     * @return mixed
-     */
+
     public function findWhere($column, $value)
     {
         return VisitingDetails::query()->where($column, $value)->get();
     }
 
-    /**
-     * @param $column
-     * @param $value
-     * @return mixed
-     */
+
     public function findWhereFirst($column, $value)
     {
 
         return VisitingDetails::query()->where($column, $value)->first();
     }
 
-    /**
-     * @param int $perPage
-     * @return mixed
-     */
+
     public function paginate($perPage = 10)
     {
         return VisitingDetails::query()->paginate($perPage);
     }
 
-    /**
-     * @param VisitorRequest $request
-     * @return mixed
-     */
+
     public function make(VisitorRequest $request)
     {
         $visitor = DB::table('visiting_details')->orderBy('reg_no', 'desc')->first();
@@ -137,6 +124,25 @@ class VisitorService
             $visiting['visitor_id'] = $visitor->id;
             $visiting['status'] = Status::ACTIVE;
             $visiting['user_id'] = $request->input('employee_id');
+            $visiting['creator_employee'] = auth()->user()->employee->id;
+
+            $emp_one = NULL;
+            $emp_two = NULL;
+
+            if (auth()->user()->employee->level == 1 ) {
+                $emp_one =  auth()->user()->employee->emp_one;
+            }
+
+            if (auth()->user()->employee->level == 2) {
+                $emp_one =  auth()->user()->employee->emp_one;
+                $emp_two = auth()->user()->employee->emp_two;
+            }
+
+
+
+            $visiting['emp_one'] = $emp_one;
+            $visiting['emp_two'] = $emp_two;
+
             //$visiting['qrcode'] = $request->input('qrcode');
             $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
 
@@ -229,6 +235,12 @@ class VisitorService
             $visiting['expiry_date'] = $request->input('expiry_date');
             $visiting['from_date'] = $request->input('from_date');
             $visiting['type_id'] = $request->input('type');
+
+
+
+
+
+
             $visitingDetails->update($visiting);
         }
 

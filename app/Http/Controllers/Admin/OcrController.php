@@ -305,9 +305,22 @@ class OcrController extends Controller
 
     public function playy()
     {
-//        return auth()->user()->employee;
-        $visit = VisitingDetails::query()->find(146);
-        return $visit->creatorEmployee;
+        $emp_one = NULL;
+        $emp_two = NULL;
+
+        if (auth()->user()->employee->level == 1 ) {
+            $emp_one =  auth()->user()->employee->emp_one;
+        }
+
+        if (auth()->user()->employee->level == 2) {
+            $emp_one =  auth()->user()->employee->emp_one;
+            $emp_two = auth()->user()->employee->emp_two;
+        }
+        return 'Emp One => ' . $emp_one . '<br> Emp Two => ' . $emp_two;
+
+        //        return auth()->user()->employee;
+        //        $visit = VisitingDetails::query()->find(146);
+        //        return $visit->creatorEmployee;
     }
 }
 

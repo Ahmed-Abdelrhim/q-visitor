@@ -6,6 +6,7 @@ use App\Http\Requests\EmployeeRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
 use App\Models\Attendance;
 use App\Models\Employee;
+use App\Models\VisitingDetails;
 use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -115,7 +116,7 @@ class EmployeeService
 
     public function update($id, EmployeeUpdateRequest $request)
     {
-        $employee = Employee::find($id);
+        $employee = Employee::query()->find($id);
 
         $input['first_name'] = $request->input('first_name');
         $input['last_name'] = $request->input('last_name');
@@ -149,12 +150,37 @@ class EmployeeService
             $data['date_of_joining'] = $request->input('date_of_joining');
 
             $data['level'] = $request->input('level');
-            $data['emp_one'] = $request->input('emp_one');
-            $data['emp_two'] = $request->input('emp_two');
 
             $data['about'] = $request->input('about');
             $data['status'] = 5;
             $data['creator_employee'] = auth()->user()->employee->id;
+
+
+            $emp_one = NULL;
+            $emp_two = NULL;
+
+
+            if ($request->level == 1 && !empty($request->get('emp_one'))  ) {
+                $emp_one =  $request->get('emp_one');
+            }
+
+            if ($request->level == 2  && !empty($request->get('emp_one')) && !empty($request->get('emp_two')) ) {
+                $emp_one =  $request->get('emp_one');
+                $emp_two = $request->get('emp_two');
+            }
+
+            $data['emp_one'] = $emp_one;
+            $data['emp_two'] = $emp_two;
+
+            $visits = VisitingDetails::query()->where('creator_employee',$employee->id)->get();
+
+            foreach ($visits as $visit) {
+                $visit->emp_one = $emp_one;
+                $visit->emp_two = $emp_two;
+                $visit->save();
+            }
+
+
 
             $employee->update($data);
         }
