@@ -189,7 +189,7 @@ class OcrController extends Controller
         }
         $id = decrypt($id);
 
-        $visit = VisitingDetails::query()->find($id);
+        $visit = VisitingDetails::query()->with('visitor')->find($id);
         if (!$visit) {
             $notifications = array('message' => 'لم يتم إيجاد هذة الزيارة', 'alert-type' => 'error');
             return redirect()->route('admin.OCR.index')->with($notifications);
@@ -202,7 +202,6 @@ class OcrController extends Controller
         if (isset($_POST['name'])) {
             $name = explode(" ", $_POST['name']);
             $last_name = substr(strstr($_POST['name'], " "), 1);
-            // $name = $_POST['name'];
         }
 
         $gender = null;
@@ -261,17 +260,22 @@ class OcrController extends Controller
             $add = $_POST['add'];
         }
 
-
-        // $visitingDetail = VisitingDetails::query()->max('reg_no');
-        // $visitingDetail = VisitingDetails::query()->orderBy('id','desc')->first()->reg_no;
-        // $reg_no = $visitingDetail + 1;
-
         $reg_no = $visit->reg_no;
 
         $data = $perpic;
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);
         $data = base64_decode($data);
+
+        if ($nat_id != '' && !empty($nat_id)) {
+            $visit->visitor->national_identification_no = $nat_id;
+            $visit->save();
+        }
+
+        if ($address != '' && !empty($address)) {
+            $visit->visitor->address = $address;
+            $visit->save();
+        }
 
         if (!file_exists($reg_no)) {
             File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $reg_no), 0777, true, true);
@@ -283,8 +287,7 @@ class OcrController extends Controller
                 ->addMedia(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '/' . $reg_no . '.png'))
                 ->preservingOriginal()
                 ->toMediaCollection('visitor');
-        } catch (\Exception $e) {
-        }
+        } catch (\Exception $e) {}
 
         if (!file_exists(storage_path('app/public' . '/images' . '/' . $reg_no))) {
             File::makeDirectory(storage_path('app/public' . '/images' . '/' . $reg_no), 0777, true, true);
@@ -295,13 +298,11 @@ class OcrController extends Controller
                 $img = str_replace("data:image/jpeg;base64,", "", $img);
                 if ($img != '' or $img != ' ') {
                     file_put_contents(storage_path('app/public' . '/' . 'images/' . $reg_no . '/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
-                    // file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
                 }
             }
 
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
-        } catch (\Exception $e) {
-        }
+        } catch (\Exception $e) {}
 
         return $visit->visitor_id;
     }
