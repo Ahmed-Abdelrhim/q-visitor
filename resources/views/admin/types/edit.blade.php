@@ -34,73 +34,6 @@
                                 </div>
                                 <!-- End Name -->
 
-                                <!-- Level -->
-                                <div class="form-group">
-                                    <label>{{ __('files.Approval Levels') }}</label> <span class="text-danger">*</span>
-                                    <select name="level" id="approval_level" class="form-control @error('level') is-invalid @enderror">
-                                        <option value="0" @if($types->level == 0) selected @endif>0</option>
-                                        <option value="1" @if($types->level == 1) selected @endif>1</option>
-                                        <option value="2" @if($types->level == 2) selected @endif>2</option>
-                                    </select>
-                                    @error('level')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                                <!-- End Level -->
-
-
-                                <!-- Approval One -->
-                                @if(isset($roles) && count($roles) > 0)
-                                    <div class="form-group">
-                                        <label>{{ __('files.Approval One') }}</label> <span class="text-danger">*</span>
-                                        <select name="role_one" id="role_one"
-                                                class="form-control @error('role_one') is-invalid @enderror" @if(!empty($types->role_two)) @else disabled @endif>
-                                            <option value="0" selected>NONE</option>
-                                            @foreach($roles as $role)
-                                                <option value="{{ $role->id }}"
-                                                        @if($types->role_one == $role->id) selected @endif>
-                                                    {{ $role->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('role_one')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <!-- End Approval One  -->
-
-
-                                    <!-- Approval Two -->
-                                    <div class="form-group">
-                                        <label>{{ __('files.Approval Two') }}</label> <span class="text-danger">*</span>
-                                        <select name="role_two" id="role_two"
-                                                class="form-control @error('role_two') is-invalid @enderror" @if(!empty($types->role_two)) @else disabled @endif>
-                                            @if(!empty($types->role_two))
-                                                <option value="0">NONE</option>
-                                            @else
-                                                <option value="0" selected>NONE</option>
-                                            @endif
-
-                                            @foreach($roles as $role)
-                                                <option value="{{ $role->id }}" @if(!empty($types->role_two))
-                                                    @if($types->role_two == $role->id) selected @endif @endif>
-                                                    {{ $role->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('role_two')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                @endif
-                                <!-- End  Approval Two  -->
-
                                 <!--Status -->
                                 <div class="form-group">
                                     <label>{{ __('files.Status') }}</label> <span class="text-danger">*</span>
@@ -173,3 +106,72 @@
         });
     </script>
 @endsection
+
+
+
+{{--<!-- Level -->--}}
+{{--<div class="form-group">--}}
+{{--    <label>{{ __('files.Approval Levels') }}</label> <span class="text-danger">*</span>--}}
+{{--    <select name="level" id="approval_level" class="form-control @error('level') is-invalid @enderror">--}}
+{{--        <option value="0" @if($types->level == 0) selected @endif>0</option>--}}
+{{--        <option value="1" @if($types->level == 1) selected @endif>1</option>--}}
+{{--        <option value="2" @if($types->level == 2) selected @endif>2</option>--}}
+{{--    </select>--}}
+{{--    @error('level')--}}
+{{--    <div class="invalid-feedback">--}}
+{{--        {{ $message }}--}}
+{{--    </div>--}}
+{{--    @enderror--}}
+{{--</div>--}}
+{{--<!-- End Level -->--}}
+
+
+{{--<!-- Approval One -->--}}
+{{--@if(isset($roles) && count($roles) > 0)--}}
+{{--    <div class="form-group">--}}
+{{--        <label>{{ __('files.Approval One') }}</label> <span class="text-danger">*</span>--}}
+{{--        <select name="role_one" id="role_one"--}}
+{{--                class="form-control @error('role_one') is-invalid @enderror" @if(!empty($types->role_two)) @else disabled @endif>--}}
+{{--            <option value="0" selected>NONE</option>--}}
+{{--            @foreach($roles as $role)--}}
+{{--                <option value="{{ $role->id }}"--}}
+{{--                        @if($types->role_one == $role->id) selected @endif>--}}
+{{--                    {{ $role->name }}--}}
+{{--                </option>--}}
+{{--            @endforeach--}}
+{{--        </select>--}}
+{{--        @error('role_one')--}}
+{{--        <div class="invalid-feedback">--}}
+{{--            {{ $message }}--}}
+{{--        </div>--}}
+{{--        @enderror--}}
+{{--    </div>--}}
+{{--    <!-- End Approval One  -->--}}
+
+
+{{--    <!-- Approval Two -->--}}
+{{--    <div class="form-group">--}}
+{{--        <label>{{ __('files.Approval Two') }}</label> <span class="text-danger">*</span>--}}
+{{--        <select name="role_two" id="role_two"--}}
+{{--                class="form-control @error('role_two') is-invalid @enderror" @if(!empty($types->role_two)) @else disabled @endif>--}}
+{{--            @if(!empty($types->role_two))--}}
+{{--                <option value="0">NONE</option>--}}
+{{--            @else--}}
+{{--                <option value="0" selected>NONE</option>--}}
+{{--            @endif--}}
+
+{{--            @foreach($roles as $role)--}}
+{{--                <option value="{{ $role->id }}" @if(!empty($types->role_two))--}}
+{{--                    @if($types->role_two == $role->id) selected @endif @endif>--}}
+{{--                    {{ $role->name }}--}}
+{{--                </option>--}}
+{{--            @endforeach--}}
+{{--        </select>--}}
+{{--        @error('role_two')--}}
+{{--        <div class="invalid-feedback">--}}
+{{--            {{ $message }}--}}
+{{--        </div>--}}
+{{--        @enderror--}}
+{{--    </div>--}}
+{{--@endif--}}
+{{--<!-- End  Approval Two  -->--}}

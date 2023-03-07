@@ -14,7 +14,7 @@ class AddColumnsToTypes extends Migration
     public function up()
     {
         Schema::table('types', function (Blueprint $table) {
-            $table->tinyInteger('level');
+            $table->tinyInteger('level')->nullable();
             $table->string('role_one')->nullable();
             $table->string('role_two')->nullable();
         });

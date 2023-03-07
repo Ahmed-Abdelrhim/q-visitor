@@ -49,22 +49,22 @@ class TypesController extends Controller
 
     public function store(TypesRequest $request)
     {
-        $role_one = Null;
-        if ($request->has('role_one') && $request->get('role_one') != 0) {
-            $role_one = $request->get('role_one');
-        }
-        $role_two = null;
-        if (!empty($request->get('role_two')) && $request->get('role_two') != 0) {
-            $role_two = $request->get('role_two');
-        }
+        //        $role_one = Null;
+        //        if ($request->has('role_one') && $request->get('role_one') != 0) {
+        //            $role_one = $request->get('role_one');
+        //        }
+        //        $role_two = null;
+        //        if (!empty($request->get('role_two')) && $request->get('role_two') != 0) {
+        //            $role_two = $request->get('role_two');
+        //        }
 
         try {
             DB::beginTransaction();
             Types::query()->insert([
                 'name' => $request->get('name'),
-                'level' => $request->get('level'),
-                'role_one' => $request->get('role_one'),
-                'role_two' => $role_two,
+                // 'level' => $request->get('level'),
+                // 'role_one' => $request->get('role_one'),
+                // 'role_two' => $role_two,
                 'status' => $request->get('status'),
                 'created_at' => Carbon::now(),
             ]);
@@ -93,24 +93,24 @@ class TypesController extends Controller
     {
         $this->validate($request, ['name' => 'required|string|max:255|unique:types,name,' . $id]);;
         $designation = Types::query()->findOrFail($id);
-        $role_one = NULL;
-        if ($request->has('role_one')) {
-            $role_one = $request->get('role_one');
-        }
-
-        $role_two = NULL;
-        if ($request->has('role_two')) {
-            $role_two = $request->get('role_two');
-        }
+        //        $role_one = NULL;
+        //        if ($request->has('role_one')) {
+        //            $role_one = $request->get('role_one');
+        //        }
+        //
+        //        $role_two = NULL;
+        //        if ($request->has('role_two')) {
+        //            $role_two = $request->get('role_two');
+        //        }
 
         try {
             DB::beginTransaction();
             $designation->update([
                 'name' => $request->get('name'),
                 'status' => $request->get('status'),
-                'level' => $request->get('level'),
-                'role_one' => $role_one,
-                'role_two' => $role_two,
+                // 'level' => $request->get('level'),
+                // 'role_one' => $role_one,
+                // 'role_two' => $role_two,
                 'updated_at' => Carbon::now(),
             ]);
             DB::commit();
