@@ -139,22 +139,22 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                             <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('H:i:s')}}</td>
                                             <td>
 
-                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-primary edit"
-                                                   data-toggle="tooltip" data-placement="top"
-                                                   title="Edit" id="{{$visit->id}}">
-                                                    <i class="far fa-edit"></i>
-                                                </a>
+                                                {{--                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-primary edit"--}}
+                                                {{--                                                   data-toggle="tooltip" data-placement="top"--}}
+                                                {{--                                                   title="Edit" id="{{$visit->id}}">--}}
+                                                {{--                                                    <i class="far fa-edit"></i>--}}
+                                                {{--                                                </a>--}}
 
 
-                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-danger delete"
-                                                   data-toggle="tooltip" data-placement="top" href="{{ route('admin.ocr.destroy',encrypt($visit->id)) }}"
-                                                   title="Delete" id="{{$visit->id}}"
-                                                   oncancel="event.preventDefault();document.getElementById('deleteVisit').submit();">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
+                                                {{--                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-danger delete"--}}
+                                                {{--                                                   data-toggle="tooltip" data-placement="top" href="{{ route('admin.ocr.destroy',encrypt($visit->id)) }}"--}}
+                                                {{--                                                   title="Delete" id="{{$visit->id}}"--}}
+                                                {{--                                                   oncancel="event.preventDefault();document.getElementById('deleteVisit').submit();">--}}
+                                                {{--                                                    <i class="fa fa-trash"></i>--}}
+                                                {{--                                                </a>--}}
 
-                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-success scan"
-                                                   id="scan" title="scan"
+                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-success scan mx-auto"
+                                                   id="scan" title="scan" style="width: 50px;"
                                                    href="{{route('admin.view.scan.page',encrypt($visit->id))}}">
                                                     <i class="fa-solid fa-binoculars"></i>
                                                 </a>

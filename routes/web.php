@@ -103,9 +103,15 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('ocr/view',[OcrController::class,'viewFirstPage'])->name('reload.ocr.view');
         Route::get('Optical/Character/Recognition/View/Scan/{id}',[OcrController::class,'viewScanPage'])->name('view.scan.page');
+
+        // New Scan To Create A Visit...
         Route::get('New/Scan',[OcrController::class,'newScan'])->name('new.scan');
+        Route::post('New/Scan/Post',[OcrController::class,'newScanSaveData'])->name('new.scan.post');
+
         Route::get('Visits/Search',[OcrController::class,'searchVisitingDetails'])->name('ocr.search.visitors');
         Route::get('Visits/Destroy/{id}',[OcrController::class,'destroy'])->name('ocr.destroy');
+
+
 
 
         // Settings Routes···

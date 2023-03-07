@@ -37,6 +37,13 @@ class OcrController extends Controller
         // return view('admin.ocr.layout_main');
     }
 
+    public function authorizedToView()
+    {
+        if (!Gate::allows('authorizedToViewOcr'))
+            abort(403);
+        return true;
+    }
+
     public function viewScanPage($id)
     {
         $id = decrypt($id);
@@ -45,13 +52,6 @@ class OcrController extends Controller
             return 'This Visit Was Deleted';
         }
         return view('admin.ocr.layout_main', ['visit' => $visit]);
-    }
-
-    public function authorizedToView()
-    {
-        if (!Gate::allows('authorizedToViewOcr'))
-            abort(403);
-        return true;
     }
 
     public function newScan()
@@ -66,19 +66,13 @@ class OcrController extends Controller
 
         $visits = VisitingDetails::query()
             ->with('visitor')
-            ->whereBetween('checkin_at',[$date1, $date2])
+            ->whereBetween('checkin_at', [$date1, $date2])
             ->get();
         if (!count($visits) > 0) {
-            // return 'No Data Found';
-            //            $visits = VisitingDetails::query()->with('visitor')
-            //                ->whereRaw('date(checkin_at) = CURDATE() ')
-            //                ->get();
-            $notifications = array('message'=>'لم يتم ايجاد بيانات في هذا التاريخ','alert-type'=>'error');
+            $notifications = array('message' => 'لم يتم ايجاد بيانات في هذا التاريخ', 'alert-type' => 'info');
             return redirect()->back()->with($notifications);
-
-            // return view('admin.ocr.view', ['not'=>$notifications,'visits' => $visits]);
         }
-        return view('admin.ocr.view', ['visits' => $visits]);;
+        return view('admin.ocr.view', ['visits' => $visits]);
     }
 
 
@@ -111,7 +105,7 @@ class OcrController extends Controller
     {
         $id = decrypt($id);
         VisitingDetails::query()->find($id)->delete();
-        $notifications = array('message'=>'تم مسح الزيارة بنجاح','alert-type'=>'success');
+        $notifications = array('message' => 'تم مسح الزيارة بنجاح', 'alert-type' => 'success');
         return redirect()->back()->with($notifications);
     }
 
@@ -186,6 +180,22 @@ class OcrController extends Controller
 
     public function ocrSave()
     {
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+        } else {
+            $notifications = array('message' => 'Something Went Wrong', 'alert-type' => 'error');
+
+            return redirect()->route('admin.OCR.index')->with($notifications);
+        }
+        $id = decrypt($id);
+
+        $visit = VisitingDetails::query()->find($id);
+        if (!$visit) {
+            $notifications = array('message' => 'لم يتم إيجاد هذة الزيارة', 'alert-type' => 'error');
+            return redirect()->route('admin.OCR.index')->with($notifications);
+        }
+
+
         $name = null;
         $last_name = null;
         $notifications = array('message' => 'Success', 'alert-type' => 'success');
@@ -252,13 +262,128 @@ class OcrController extends Controller
         }
 
 
-        $visitingDetail = VisitingDetails::query()->max('reg_no');
-        $reg_no = $visitingDetail + 1;
+        // $visitingDetail = VisitingDetails::query()->max('reg_no');
+        // $visitingDetail = VisitingDetails::query()->orderBy('id','desc')->first()->reg_no;
+        // $reg_no = $visitingDetail + 1;
+
+        $reg_no = $visit->reg_no;
 
         $data = $perpic;
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);
         $data = base64_decode($data);
+
+        if (!file_exists($reg_no)) {
+            File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $reg_no), 0777, true, true);
+        }
+
+        try {
+            $image = file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '/' . $reg_no . '.png'), $data);
+            $visit
+                ->addMedia(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '/' . $reg_no . '.png'))
+                ->preservingOriginal()
+                ->toMediaCollection('visitor');
+        } catch (\Exception $e) {
+        }
+
+        if (!file_exists(storage_path('app/public' . '/images' . '/' . $reg_no))) {
+            File::makeDirectory(storage_path('app/public' . '/images' . '/' . $reg_no), 0777, true, true);
+        }
+
+        try {
+            foreach ($images as $counter => $img) {
+                $img = str_replace("data:image/jpeg;base64,", "", $img);
+                if ($img != '' or $img != ' ') {
+                    file_put_contents(storage_path('app/public' . '/' . 'images/' . $reg_no . '/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
+                    // file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
+                }
+            }
+
+            $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
+        } catch (\Exception $e) {
+        }
+
+        return $visit->visitor_id;
+    }
+
+    public function newScanSaveData()
+    {
+        $name = null;
+        $last_name = null;
+        $notifications = array('message' => 'Success', 'alert-type' => 'success');
+        if (isset($_POST['name'])) {
+            $name = explode(" ", $_POST['name']);
+            $last_name = substr(strstr($_POST['name'], " "), 1);
+            // $name = $_POST['name'];
+        }
+
+        $gender = null;
+        if (isset($_POST['gender'])) {
+            $gender = $_POST['gender'];
+            $gender = 5;
+            if ($gender == 'F') {
+                $gender = 10;
+            }
+        }
+
+
+        $address = null;
+        if (isset($_POST['address'])) {
+            $address = $_POST['address'];
+        }
+
+        $nat_id = null;
+        if (isset($_POST['nat_id'])) {
+            $nat_id = $_POST['nat_id'];
+        }
+
+
+        $checkin_date = null;
+        if (isset($_POST['checkin_date'])) {
+            $checkin_date = $_POST['checkin_date'];
+        }
+
+
+        $checkin_time = null;
+        if (isset($_POST['checkin_time'])) {
+            $checkin_time = $_POST['checkin_time'];
+        }
+
+        if (isset($_POST['images'])) {
+            $images = explode("||", $_POST['images']);
+        }
+
+        $perpic = null;
+        if (isset($_POST['perpic'])) {
+            $perpic = $_POST['perpic'];
+        }
+
+        $exdate = null;
+        if (isset($_POST['exdate'])) {
+            $exdate = $_POST['exdate'];
+        }
+
+        $plate_no = null;
+        if (isset($_POST['plate_no'])) {
+            $plate_no = $_POST['plate_no'];
+        }
+
+        $add = null;
+        if (isset($_POST['add'])) {
+            $add = $_POST['add'];
+        }
+
+
+        // $visitingDetail = VisitingDetails::query()->max('reg_no');
+        $visitingDetail = VisitingDetails::query()->orderBy('id', 'desc')->first();
+        $reg_no = $visitingDetail->reg_no + 1;
+
+
+        $data = $perpic;
+        list($type, $data) = explode(';', $data);
+        list(, $data) = explode(',', $data);
+        $data = base64_decode($data);
+
 
         try {
             DB::beginTransaction();
@@ -298,6 +423,18 @@ class OcrController extends Controller
 
         $visitor = Visitor::query()->latest()->first();
         if ($visitor) {
+            $user = auth()->user();
+            $employee = $user->employee;
+            $emp_one = Null;
+            $emp_two = Null;
+            if ($employee->level == 1) {
+                $emp_one = $employee->emp_one;
+            }
+            if ($employee->level == 2) {
+                $emp_one = $employee->emp_one;
+                $emp_one = $employee->emp_two;
+            }
+
             try {
                 DB::beginTransaction();
                 $visiting_details = VisitingDetails::query()->insert([
@@ -308,22 +445,23 @@ class OcrController extends Controller
                     'checkin_at' => Carbon::now(),
                     'checkout_at' => NULL,
                     'status' => 5,
-                    'user_id' => 3,
-                    'employee_id' => 3,
+                    'user_id' => $user->id,
+                    'creator_employee' => $employee->id,
+                    'emp_one' => $emp_one,
+                    'emp_two' => $emp_two,
+                    'employee_id' => $user->id,
                     'type_id' => 1,
                     'visitor_id' => $visitor->id,
                     'creator_type' => 'App\Scan',
-                    'creator_id' => 1,
-                    'editor_type' => 'App\Scan',
-                    'editor_id' => 1,
+                    'creator_id' => $user->id,
+                    'editor_type' => 'App\User',
+                    'editor_id' => $user->id,
+                    'plate_no' => $plate_no,
+                    'approval_status' => 0,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
                     'qrcode' => $qrcode,
                     'expiry_date' => NULL,
-                    'plate_no' => $plate_no,
                 ]);
-                // TODO:: add this image to visiting details folder path
-                // $visitingDetails->addMedia($image)->toMediaCollection('visitor');
                 DB::commit();
             } catch
             (\Exception $e) {
@@ -339,24 +477,27 @@ class OcrController extends Controller
                     $file = File::makeDirectory(storage_path('app/public' . '/per_images'), 0777, true, true);
                 }
 
+                File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $visiting_details->reg_no), 0777, true, true);
 
-                file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '.png'), $data);
+                file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $visiting_details->reg_no . '/' . $reg_no . '.png'), $data);
 
                 if (!file_exists(storage_path('app/public' . '/images'))) {
                     $file = File::makeDirectory(storage_path('app/public' . '/images'), 0777, true, true);
                 }
 
+                File::makeDirectory(storage_path('app/public' . '/images' . '/' . $visiting_details->reg_no), 0777, true, true);
+
                 foreach ($images as $counter => $img) {
                     $img = str_replace("data:image/jpeg;base64,", "", $img);
                     if ($img != '' or $img != ' ') {
-                        file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
+                        file_put_contents(storage_path('app/public' . '/' . 'images/' . $visiting_details->reg_no . '/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
+                        // file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
                     }
                 }
 
                 $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
             }
-        } catch
-        (\Exception $e) {
+        } catch (\Exception $e) {
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
         }
         return $visitor->id;
@@ -395,7 +536,6 @@ class OcrController extends Controller
         //            ]);
         //        }
         //        return 'Done';
-
 
 
         // ==========================================================

@@ -52,6 +52,7 @@
 
 
         $('.save').prop('disabled', true);
+        $('.finish').prop('disabled', true);
 
 
         $('.save').click(function () {
@@ -73,6 +74,7 @@
             perpic = $('.perpic').text();
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
+            id = $('.save').attr('id');
             // __token = $('input[name="_token"]').val();
 
             $.ajaxSetup({
@@ -83,6 +85,7 @@
 
             $.post('{{route('admin.ocr.save')}}', {
                 // __token: __token,
+                id: id,
                 name: name,
                 gender: gender,
                 address: full_address,
@@ -100,11 +103,56 @@
                 wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
                 wnd.print();
                 location.reload();
+            });
+        });
 
+
+        $('.newscan').click(function () {
+            $(this).serialize();
+            cnf = confirm("Add another Person ID?");
+            if (cnf == true) add = 'Y'; else add = 'N';
+            $(this).prop('disabled', true);
+            obj = $(this);
+            $(this).attr('value', 'Saving...');
+            name = $('#name').text();
+            gender = $('#sex').text();
+            address = $('#icc').text();
+            nat_id = $('#mrz').text();
+            address2 = $('#address').text();
+            full_address = address2 + ' ' + address;
+            checkin_date = $('#vdate').val();
+            checkin_time = $('#vtime').val();
+            images = $('.images').text();
+            perpic = $('.perpic').text();
+            exdate = $('#exdate').text();
+            plate_no = $('.plate_no').val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
 
-
+            $.post('{{route('admin.new.scan.post')}}', {
+                name: name,
+                gender: gender,
+                address: full_address,
+                nat_id: nat_id,
+                checkin_date: checkin_date,
+                checkin_time: checkin_time,
+                images: images,
+                perpic: perpic,
+                exdate: exdate,
+                plate_no: plate_no,
+                add: add
+            }, function (data) {
+                console.log(data);
+                wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
+                wnd.print();
+                location.reload();
+            });
         });
+
 
         $('.get_plate').click(function () {
             $.get('{{route('admin.get.last.car.plate')}}', {}, function (data) {
@@ -162,13 +210,6 @@
 {{--},--}}
 
 {{--});--}}
-
-
-
-
-
-
-
 
 
 {{--name = 'Ahmed Abdelrhim Ahmed';--}}

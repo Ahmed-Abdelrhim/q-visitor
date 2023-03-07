@@ -42,11 +42,11 @@
                             {{--  <img src="<?php echo 'per_images/' . $reg_no . '.png'; ?>" alt=""--}}
 
 
-                            <img src="{{asset('storage/per_images/'. $data->reg_no.'.png') }} " alt="not-found"
-                                 style="clip-path: circle();width:50%">
+                            <img src="{{ $data->images}}" alt="not-found" style="clip-path: circle();width:50%">
+                            {{--                            <img src="{{asset('storage/per_images/'. $data->reg_no.'.png') }} " alt="not-found" style="clip-path: circle();width:50%">--}}
 
-{{--                            <img src="{{$data->images}} " alt="not-found"--}}
-{{--                                 style="clip-path: circle();width:50%">--}}
+                            {{--                            <img src="{{$data->images}} " alt="not-found"--}}
+                            {{--                                 style="clip-path: circle();width:50%">--}}
                         </div>
                         <h2>{{$data->visitor->first_name}} {{$data->visitor->last_name}} </h2>
                         {{--                        <!--<h3>Ph:<?php echo $phone ?></h3>--}}

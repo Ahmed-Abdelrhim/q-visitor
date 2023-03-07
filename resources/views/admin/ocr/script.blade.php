@@ -210,6 +210,7 @@
                     document.getElementById("exdate").style.color = '#000';
 
                     $('.save').prop('disabled', false);
+                    $('.finish').prop('disabled', false);
 
                 }
                 if (json.Param.DESC.indexOf('Failed') !== -1) {
