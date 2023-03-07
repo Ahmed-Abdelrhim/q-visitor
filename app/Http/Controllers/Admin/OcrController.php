@@ -438,7 +438,7 @@ class OcrController extends Controller
 
             try {
                 DB::beginTransaction();
-                $visiting_details = VisitingDetails::query()->insert([
+                $visiting_details = VisitingDetails::query()->create([
                     'reg_no' => $reg_no,
                     'purpose' => 'زيارة',
                     'company_name' => NULL,
@@ -472,34 +472,43 @@ class OcrController extends Controller
             }
         }
 
+
         try {
             if ($visiting_details) {
-                if (!file_exists(storage_path('app/public' . '/per_images'))) {
-                    $file = File::makeDirectory(storage_path('app/public' . '/per_images'), 0777, true, true);
+                if (!file_exists(storage_path('app/public' . '/' .'per_images'))) {
+                    $file = File::makeDirectory(storage_path('app/public' . '/' .'per_images'), 0777, true, true);
                 }
 
-                File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $visiting_details->reg_no), 0777, true, true);
+                // File::makeDirectory(storage_path('app/public'.'/per_images'. '/' . $visiting_details->reg_no), 0777, true, true);
 
-                file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $visiting_details->reg_no . '/' . $reg_no . '.png'), $data);
 
-                if (!file_exists(storage_path('app/public' . '/images'))) {
-                    $file = File::makeDirectory(storage_path('app/public' . '/images'), 0777, true, true);
+                File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $reg_no), 0777, true, true);
+
+
+
+                $visitor_image = file_put_contents(storage_path('app/public' . '/' . 'per_images' . '/' . $reg_no . '/' . $reg_no . '.png'), $data);
+
+                $visiting_details->addMedia(storage_path('app/public'.'/per_images'.'/'.$reg_no.'/'.$reg_no.'.png'))
+                    ->preservingOriginal()
+                    ->toMediaCollection('visitor');
+
+                if (!file_exists(storage_path('app/public' . '/' .'images'))) {
+                    $file = File::makeDirectory(storage_path('app/public' . '/' . 'images'), 0777, true, true);
                 }
 
-                File::makeDirectory(storage_path('app/public' . '/images' . '/' . $visiting_details->reg_no), 0777, true, true);
+                File::makeDirectory(storage_path('app/public'.'/images'. '/' . $reg_no), 0777, true, true);
 
                 foreach ($images as $counter => $img) {
                     $img = str_replace("data:image/jpeg;base64,", "", $img);
                     if ($img != '' or $img != ' ') {
-                        file_put_contents(storage_path('app/public' . '/' . 'images/' . $visiting_details->reg_no . '/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
-                        // file_put_contents(storage_path('app/public' . '/' . 'images/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
+                        file_put_contents(storage_path('app/public' . '/' . 'images' . '/' . $reg_no . '/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
                     }
                 }
-
                 $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
             }
         } catch (\Exception $e) {
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
+            return 'add image not sent';
         }
         return $visitor->id;
     }
