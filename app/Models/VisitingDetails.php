@@ -46,7 +46,8 @@ class VisitingDetails extends Model implements  HasMedia
 
     public function employee()
     {
-        return $this->belongsTo(Employee::class, 'employee_id');
+//        return $this->belongsTo(Employee::class, 'employee_id');
+        return $this->belongsTo(Employee::class, 'creator_employee');
     }
 
     public function attendance()

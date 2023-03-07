@@ -111,16 +111,16 @@
                                 </tr>
                                     @if(!blank($visitors))
                                         @foreach($visitors as $visitor)
-                                            @php
-                                                if($loop->index > 5) {
-                                                    break;
-                                                }
-                                            @endphp
+{{--                                            @php--}}
+{{--                                                if($loop->index > 5) {--}}
+{{--                                                    break;--}}
+{{--                                                }--}}
+{{--                                            @endphp--}}
                                             <tr>
                                                 <td>{{ $visitor->visitor->name }}</td>
                                                 <td>{{ $visitor->visitor->email }}</td>
                                                 <td>{{ $visitor->reg_no }}</td>
-                                                <td>{{ $visitor->employee->user->name }}</td>
+                                                <td>{{ $visitor->employee->name }}</td>
                                                 <td>{{ date('d-m-Y h:i A', strtotime($visitor->checkin_at)) }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.visitors.show', $visitor) }}" class="btn btn-sm btn-icon btn-primary show"><i class="far fa-eye"></i></a>

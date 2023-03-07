@@ -20,7 +20,7 @@ class Visitor extends Model implements HasMedia
 
 
     protected $table = 'visitors';
-//    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
     protected $guarded = [];
     protected $auditColumn = true;
 
