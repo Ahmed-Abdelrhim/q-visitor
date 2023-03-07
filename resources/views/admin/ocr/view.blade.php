@@ -30,6 +30,12 @@
     <script type="text/javascript" src="{{asset('DataTables/buttons.html5.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('DataTables/buttons.print.min.js')}}"></script>
 
+    <style>
+        .approved_visit {
+            background-color: green;
+        }
+    </style>
+
 
     @extends('admin.ocr.view_extend')
 
@@ -112,58 +118,27 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{--                                <?php--}}
-                                {{--                                if ($result->num_rows > 0) {--}}
-                                {{--                                    // output data of each row--}}
-                                {{--                                    while ($row = $result->fetch_assoc()) {--}}
-                                {{--                                        $date = explode(" ", $row["checkin_at"]);--}}
-                                {{--                                        echo "<tr><td>" . $row["visitor_id"] . "</td><td>" . $row["first_name"] . " " . $row["last_name"] . "</td><td>" . $row["phone"] . "</td>--}}
-                                {{--												<td>" . $date[0] . "</td><td>" . $date[1] . "</td>";--}}
-                                {{--                                        echo '<td>--}}
-
-                                {{--											<a class="btn btn-sm btn-icon mr-2 float-left btn-primary edit" data-toggle="tooltip" data-placement="top" title="Edit" id="' . $row["visitor_id"] . '"> <i class="far fa-edit"></i></a>--}}
-                                {{--											<a class="btn btn-sm btn-icon mr-2 float-left btn-danger delete" data-toggle="tooltip" data-placement="top" title="Delete" id="' . $row["visitor_id"] . '"> <i class="fa fa-trash"></i></a>--}}
-
-                                {{--											</td></tr>';--}}
-                                {{--                                    }--}}
-                                {{--                                }--}}
-                                {{--                                ?>--}}
-
                                 @if(isset($visits) && count($visits) > 0)
                                     @foreach($visits as $visit)
-                                        <tr>
+                                        {{-- <tr class="approved_visit" > --}}
+                                        <tr style="@if($visit->employee->level == $visit->approval_status) background-color: green @endif">
                                             <td>{{$visit->id}}</td>
                                             <td>{{$visit->visitor->name}}</td>
                                             <td>{{$visit->visitor->phone}}</td>
                                             <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('Y-m-d')}}</td>
                                             <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('H:i:s')}}</td>
                                             <td>
-
-                                                {{--                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-primary edit"--}}
-                                                {{--                                                   data-toggle="tooltip" data-placement="top"--}}
-                                                {{--                                                   title="Edit" id="{{$visit->id}}">--}}
-                                                {{--                                                    <i class="far fa-edit"></i>--}}
-                                                {{--                                                </a>--}}
-
-
-                                                {{--                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-danger delete"--}}
-                                                {{--                                                   data-toggle="tooltip" data-placement="top" href="{{ route('admin.ocr.destroy',encrypt($visit->id)) }}"--}}
-                                                {{--                                                   title="Delete" id="{{$visit->id}}"--}}
-                                                {{--                                                   oncancel="event.preventDefault();document.getElementById('deleteVisit').submit();">--}}
-                                                {{--                                                    <i class="fa fa-trash"></i>--}}
-                                                {{--                                                </a>--}}
-
                                                 <a class="btn btn-sm btn-icon mr-2 float-left btn-success scan mx-auto"
                                                    id="scan" title="scan" style="width: 50px;"
                                                    href="{{route('admin.view.scan.page',encrypt($visit->id))}}">
                                                     <i class="fa-solid fa-binoculars"></i>
                                                 </a>
 
-                                                <form action="{{ route('admin.ocr.destroy',encrypt($visit->id)) }}"
-                                                      class="display-none"
-                                                      method="POST" id="deleteVisit">
-                                                    @csrf
-                                                </form>
+                                                {{--                                                <form action="{{ route('admin.ocr.destroy',encrypt($visit->id)) }}"--}}
+                                                {{--                                                      class="display-none"--}}
+                                                {{--                                                      method="POST" id="deleteVisit">--}}
+                                                {{--                                                    @csrf--}}
+                                                {{--                                                </form>--}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -190,3 +165,36 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
 {{--                                                        data-placement="top">--}}
 {{--                                                        <i class="fa fa-trash"></i>--}}
 {{--                                                    </button>--}}
+
+
+{{--                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-primary edit"--}}
+{{--                                                   data-toggle="tooltip" data-placement="top"--}}
+{{--                                                   title="Edit" id="{{$visit->id}}">--}}
+{{--                                                    <i class="far fa-edit"></i>--}}
+{{--                                                </a>--}}
+
+
+{{--                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-danger delete"--}}
+{{--                                                   data-toggle="tooltip" data-placement="top" href="{{ route('admin.ocr.destroy',encrypt($visit->id)) }}"--}}
+{{--                                                   title="Delete" id="{{$visit->id}}"--}}
+{{--                                                   oncancel="event.preventDefault();document.getElementById('deleteVisit').submit();">--}}
+{{--                                                    <i class="fa fa-trash"></i>--}}
+{{--                                                </a>--}}
+
+
+{{--                                <?php--}}
+{{--                                if ($result->num_rows > 0) {--}}
+{{--                                    // output data of each row--}}
+{{--                                    while ($row = $result->fetch_assoc()) {--}}
+{{--                                        $date = explode(" ", $row["checkin_at"]);--}}
+{{--                                        echo "<tr><td>" . $row["visitor_id"] . "</td><td>" . $row["first_name"] . " " . $row["last_name"] . "</td><td>" . $row["phone"] . "</td>--}}
+{{--												<td>" . $date[0] . "</td><td>" . $date[1] . "</td>";--}}
+{{--                                        echo '<td>--}}
+
+{{--											<a class="btn btn-sm btn-icon mr-2 float-left btn-primary edit" data-toggle="tooltip" data-placement="top" title="Edit" id="' . $row["visitor_id"] . '"> <i class="far fa-edit"></i></a>--}}
+{{--											<a class="btn btn-sm btn-icon mr-2 float-left btn-danger delete" data-toggle="tooltip" data-placement="top" title="Delete" id="' . $row["visitor_id"] . '"> <i class="fa fa-trash"></i></a>--}}
+
+{{--											</td></tr>';--}}
+{{--                                    }--}}
+{{--                                }--}}
+{{--                                ?>--}}

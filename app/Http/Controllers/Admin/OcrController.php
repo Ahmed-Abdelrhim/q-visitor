@@ -29,9 +29,17 @@ class OcrController extends Controller
         $this->linker();
 
         $date = Carbon::now()->format('Y-d-m');
-        $visits = VisitingDetails::query()->with('visitor')
+        $visits = VisitingDetails::query()
+            ->with('visitor')
+            ->with('employee')
             ->whereRaw('date(checkin_at) = CURDATE() ')
+            ->orderBy('id','desc')
             ->get();
+
+        //        if($visits[0]->employee->level == $visits[0]->approval_status) {
+        //            return 'Approved';
+        //        }
+        //        return 'Pending';
 
         return view('admin.ocr.view', ['visits' => $visits]);
         // return view('admin.ocr.layout_main');
