@@ -364,18 +364,54 @@ class OcrController extends Controller
 
     public function playy()
     {
-        $emp_one = NULL;
-        $emp_two = NULL;
+        //        $qrcode = 'https://www.qudratech-eg.net/qrcode/temp/test8b6578560c26ddca8b2a6207e2fecb79.png';
+        //        $visitors = Visitor::query()->take(20)->get();
+        //
+        //        for ($i = 0 ; $i < 10 ; $i++) {
+        //            $random = $visitors->random();
+        //            $id = $random->id;
+        //            $reg_no = VisitingDetails::query()->orderBy('id','desc')->first()->reg_no;
+        //            $visit = VisitingDetails::query()->create([
+        //                'reg_no' => $reg_no + 1,
+        //                'purpose' => 'Visit' . $i+1,
+        //                'company_name' => 'Qudra-Tech',
+        //                'checkin_at' => Carbon::now(),
+        //                'checkout_at' => Carbon::now()->addHours(5),
+        //                'status' => 5,
+        //                'user_id' => 43,
+        //                'creator_employee' => 42,
+        //                'emp_one' => 41,
+        //                'visitor_id' => $id,
+        //                'employee_id' => 43,
+        //                'creator_type' => 'App\User',
+        //                'creator_id' => $id,
+        //                // 'editor_type' => '',
+        //                // 'editor_id' => '',
+        //                'plate_no' => 'ل ق أ 284',
+        //                'approval_status' => 0,
+        //                'sent_sms_before' => 0,
+        //                'qrcode' =>$qrcode,
+        //                'created_at' => Carbon::now(),
+        //            ]);
+        //        }
+        //        return 'Done';
 
-        if (auth()->user()->employee->level == 1) {
-            $emp_one = auth()->user()->employee->emp_one;
-        }
 
-        if (auth()->user()->employee->level == 2) {
-            $emp_one = auth()->user()->employee->emp_one;
-            $emp_two = auth()->user()->employee->emp_two;
-        }
-        return 'Emp One => ' . $emp_one . '<br> Emp Two => ' . $emp_two;
+
+        // ==========================================================
+
+        //        $emp_one = NULL;
+        //        $emp_two = NULL;
+        //
+        //        if (auth()->user()->employee->level == 1) {
+        //            $emp_one = auth()->user()->employee->emp_one;
+        //        }
+        //
+        //        if (auth()->user()->employee->level == 2) {
+        //            $emp_one = auth()->user()->employee->emp_one;
+        //            $emp_two = auth()->user()->employee->emp_two;
+        //        }
+        //        return 'Emp One => ' . $emp_one . '<br> Emp Two => ' . $emp_two;
 
         //        return auth()->user()->employee;
         //        $visit = VisitingDetails::query()->find(146);
