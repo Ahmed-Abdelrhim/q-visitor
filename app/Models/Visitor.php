@@ -12,7 +12,7 @@ use Shipu\Watchable\Traits\HasAuditColumn;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Visitor extends Model implements  HasMedia
+class Visitor extends Model implements HasMedia
 {
     use Notifiable;
     use InteractsWithMedia;
@@ -40,12 +40,13 @@ class Visitor extends Model implements  HasMedia
     {
         return $this->hasOne(PreRegister::class);
     }
+
     public function employee()
     {
         return $this->belongsTo(Employee::class);
     }
-	
-	public function types()
+
+    public function types()
     {
         return $this->belongsTo(Types::class);
     }
@@ -59,6 +60,7 @@ class Visitor extends Model implements  HasMedia
     {
         return trans('statuses.' . $this->status);
     }
+
     public function getMyGenderAttribute()
     {
         return trans('genders.' . $this->gender);

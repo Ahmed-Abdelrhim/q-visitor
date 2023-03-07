@@ -84,7 +84,6 @@
             });
 
             $.post('{{route('admin.ocr.save')}}', {
-                // __token: __token,
                 id: id,
                 name: name,
                 gender: gender,

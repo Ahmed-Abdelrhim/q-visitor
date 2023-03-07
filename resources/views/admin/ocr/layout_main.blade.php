@@ -347,7 +347,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                                onclick="connect();">
                                         <!-- <input type="button" value="Save Data" class="btn btn-success save"> -->
 
-                                        <input type="button" value="Add Visitor" class="btn btn-success " id="{{encrypt($visit->id)}}">
+                                        <input type="button" value="Add Visitor" class="btn btn-success save" id="{{encrypt($visit->id)}}">
                                         <input style="margin-left: 10px;" type="button" value="Finish" class="btn btn-dark finish">
 
 
