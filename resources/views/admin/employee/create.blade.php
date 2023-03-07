@@ -131,7 +131,7 @@
                                             <label>{{ __('files.Employee One') }}</label> <span class="text-danger">*</span>
                                             <select name="emp_one" id="emp_one"
                                                     class="form-control @error('emp_one') is-invalid @enderror" disabled>
-                                                <option value="0" selected>NONE</option>
+                                                <option value="0" selected id="none_one">NONE</option>
                                                 @foreach($employees as $emp)
                                                     <option value="{{ $emp->id }}">{{ $emp->first_name }} {{$emp->last_name}}</option>
                                                 @endforeach
@@ -150,7 +150,7 @@
                                             <label>{{ __('files.Employee Two') }}</label> <span class="text-danger">*</span>
                                             <select name="emp_two" id="emp_two"
                                                     class="form-control @error('emp_two') is-invalid @enderror" disabled>
-                                                <option value="0" selected>NONE</option>
+                                                <option value="0" selected id="none_two">NONE</option>
                                                 @foreach($employees as $emp)
                                                     <option value="{{ $emp->id }}">{{ $emp->first_name }} {{$emp->last_name}}</option>
                                                 @endforeach
@@ -309,6 +309,9 @@
 
     <script>
         $(document).ready(function () {
+            let none_one = $('#none_one').val();
+            let none_two = $('#none_two').val();
+
             let value = $('#approval_level').val();
             if (value == 1) {
                 $('#emp_one').removeAttr('disabled');
@@ -332,6 +335,7 @@
                 console.log('Value=> ' + value);
                 if (value == 1) {
                     $('#emp_one').removeAttr('disabled');
+                    $('#emp_two').val(none_two);
                     $('#emp_two').attr('disabled', true);
                 }
 
@@ -341,8 +345,14 @@
                 }
 
                 if (value == 0) {
+                    $('#emp_one').val(none_one);
+                    $('#emp_two').val(none_two);
+
+
                     $('#emp_one').attr('disabled', true);
                     $('#emp_two').attr('disabled', true);
+
+
                 }
             });
         });
