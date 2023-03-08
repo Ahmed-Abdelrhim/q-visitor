@@ -193,22 +193,22 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     <div class="col-md-3">
                                         <div class="form-group"
                                              style="text-align:center;float:left;margin-right:20px">
-                                            <img id="pic" src="" />
+                                            <img id="pic" src="{{asset('images/personal.png')}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="white_picture" src="" />
+                                            <img id="white_picture" src="{{asset('images/id.jpg')}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="ocr_head" src="" />
+                                            <img id="ocr_head" src="{{asset('images/id.jpg')}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="chip_head" src="" />
+                                            <img id="chip_head" src="{{asset('images/id.jpg')}}" />
                                         </div>
                                     </div>
 
