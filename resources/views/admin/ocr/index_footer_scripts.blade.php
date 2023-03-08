@@ -97,9 +97,13 @@
                 add: add
             }, function (data) {
                 console.log(data);
-                // wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
-                // wnd.print();
+                wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
+                wnd.print();
                 // location.reload();
+
+                {{--window.location.href = '{{  }}';--}}
+                location.replace("{{ route('admin.view.scan.page') }}?id="+data);
+
             });
         });
 
@@ -148,9 +152,9 @@
                 add: add,
             }, function (data) {
                 console.log(data);
-                // wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
-                // wnd.print();
-                // location.reload();
+                wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
+                wnd.print();
+                location.reload();
             });
         });
 

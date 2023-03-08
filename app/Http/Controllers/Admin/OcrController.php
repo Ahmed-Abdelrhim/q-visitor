@@ -47,7 +47,7 @@ class OcrController extends Controller
         return true;
     }
 
-    public function viewScanPage($id)
+    public function viewScanPage($id = null)
     {
         $id = decrypt($id);
         $visit = VisitingDetails::query()->find($id);
@@ -310,6 +310,11 @@ class OcrController extends Controller
         } catch (\Exception $e) {}
 
         return $visit->visitor_id;
+    }
+
+    public function addCompanionToVisit($id)
+    {
+
     }
 
     public function newScanSaveData()

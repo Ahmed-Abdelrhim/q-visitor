@@ -176,11 +176,16 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                                               value="<?php echo $plate; ?>"/>
                                     <input type="button" value="Last Car plate" class="btn btn-success get_plate"
                                            style="height: 35px; padding: 7px 14px;margin-left: 7%">
-
-                                    <a class="btn btn-primary dashboard" href="{{ route('admin.dashboard.index') }}"
-                                       style="height: 35px; padding: 7px 14px;margin-left: 7%">
-                                        Dashboard
-                                    </a>
+                                    @if(isset($companion))
+                                        <h3 class="h3" style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                            إضافة مرافق إلي -- {{ $visit->visitor->name }}
+                                        </h3>
+                                    @else
+                                        <a class="btn btn-primary dashboard" href="{{ route('admin.dashboard.index') }}"
+                                           style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                            Dashboard
+                                        </a>
+                                    @endif
 
                                 </div>
                                 <br/>
@@ -188,22 +193,22 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     <div class="col-md-3">
                                         <div class="form-group"
                                              style="text-align:center;float:left;margin-right:20px">
-                                            <img id="pic" src=""/>
+                                            <img id="pic" src="" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="white_picture" src=""/>
+                                            <img id="white_picture" src="" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="ocr_head" src=""/>
+                                            <img id="ocr_head" src="" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="chip_head" src=""/>
+                                            <img id="chip_head" src="" />
                                         </div>
                                     </div>
 
