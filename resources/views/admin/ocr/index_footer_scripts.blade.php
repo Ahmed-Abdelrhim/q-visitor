@@ -96,13 +96,16 @@
                 plate_no: plate_no,
                 add: add
             }, function (data) {
+                // Save
                 console.log(data);
                 wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
                 wnd.print();
                 // location.reload();
 
                 {{--window.location.href = '{{  }}';--}}
-                location.replace("{{ route('admin.view.scan.page') }}?id="+data);
+                {{--location.replace("{{ route('admin.add.companion.to.visit' , }}"+ data + "{{   ) }}" );--}}
+
+                window.open("http://127.0.0.1:8000/admin/Add/Visit/Companion/"+data );
 
             });
         });
@@ -151,6 +154,7 @@
                 plate_no: plate_no,
                 add: add,
             }, function (data) {
+                // Finish
                 console.log(data);
                 wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
                 wnd.print();
@@ -160,7 +164,96 @@
 
 
 
+        $('.another_companion').click(function () {
+            $(this).serialize();
+            add = 'N';
+            $(this).prop('disabled', true);
+            obj = $(this);
+            $(this).attr('value', 'Saving...');
+            name = $('#name').text();
+            gender = $('#sex').text();
+            address = $('#icc').text();
+            nat_id = $('#mrz').text();
+            address2 = $('#address').text();
+            full_address = address2 + ' ' + address;
+            checkin_date = $('#vdate').val();
+            checkin_time = $('#vtime').val();
+            images = $('.images').text();
+            perpic = $('.perpic').text();
+            exdate = $('#exdate').text();
+            plate_no = $('.plate_no').val();
+            id = $('.save').attr('id');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
+            $.post('{{route('admin.add.another.companion')}}', {
+                id: id,
+                name: name,
+                gender: gender,
+                address: full_address,
+                nat_id: nat_id,
+                checkin_date: checkin_date,
+                checkin_time: checkin_time,
+                images: images,
+                perpic: perpic,
+                exdate: exdate,
+                plate_no: plate_no,
+                add: add,
+            }, function (data) {
+                // Another Companion
+                // console.log(data);
+                location.reload();
+            });
+        });
+
+
+        $('.last_companion').click(function () {
+            $(this).serialize();
+            add = 'N';
+            $(this).prop('disabled', true);
+            obj = $(this);
+            $(this).attr('value', 'Saving...');
+            name = $('#name').text();
+            gender = $('#sex').text();
+            address = $('#icc').text();
+            nat_id = $('#mrz').text();
+            address2 = $('#address').text();
+            full_address = address2 + ' ' + address;
+            checkin_date = $('#vdate').val();
+            checkin_time = $('#vtime').val();
+            images = $('.images').text();
+            perpic = $('.perpic').text();
+            exdate = $('#exdate').text();
+            plate_no = $('.plate_no').val();
+            id = $('.save').attr('id');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.post('{{route('admin.add.last.companion')}}', {
+                id: id,
+                name: name,
+                gender: gender,
+                address: full_address,
+                nat_id: nat_id,
+                checkin_date: checkin_date,
+                checkin_time: checkin_time,
+                images: images,
+                perpic: perpic,
+                exdate: exdate,
+                plate_no: plate_no,
+                add: add,
+            }, function (data) {
+                // Last Companion
+                // console.log(data);
+
+            });
+        });
 
 
 

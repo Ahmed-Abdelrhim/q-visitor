@@ -325,7 +325,6 @@ class OcrController extends Controller
         if (isset($_POST['name'])) {
             $name = explode(" ", $_POST['name']);
             $last_name = substr(strstr($_POST['name'], " "), 1);
-            // $name = $_POST['name'];
         }
 
         $gender = null;

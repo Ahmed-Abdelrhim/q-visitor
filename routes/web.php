@@ -91,7 +91,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('send-sms/{visitingDetail}', 'VisitorController@sendSms')->name('visitors.send.sms');
         // Route::post('Visit/First/Approve', [VisitorController::class,'visitFirstApprove'])->name('visit.first.approve');
         // Route::post('Visit/Second/Approve', [VisitorController::class,'visitSecondApprove'])->name('visit.second.approve');
-        Route::get('Visit/Approve/{approval_status}', [VisitorController::class,'visitApprove'])->name('visit.approval');
+        Route::get('Visit/Approve/{approval_status}', [VisitorController::class, 'visitApprove'])->name('visit.approval');
 
 
         // Ocr Resource Controller···
@@ -102,20 +102,22 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('ocr-print/{id?}', [OcrController::class, 'ocrPrint'])->name('ocr.print');
         Route::post('ocr-save', [OcrController::class, 'ocrSave'])->name('ocr.save');
 
-        Route::get('ocr/view',[OcrController::class,'viewFirstPage'])->name('reload.ocr.view');
-        Route::get('Optical/Character/Recognition/View/Scan/{id?}',[OcrController::class,'viewScanPage'])->name('view.scan.page');
+        Route::get('ocr/view', [OcrController::class, 'viewFirstPage'])->name('reload.ocr.view');
+        Route::get('Optical/Character/Recognition/View/Scan/{id?}', [OcrController::class, 'viewScanPage'])->name('view.scan.page');
 
         // New Scan To Create A Visit...
-        Route::get('New/Scan',[OcrController::class,'newScan'])->name('new.scan');
-        Route::post('New/Scan/Post',[OcrController::class,'newScanSaveData'])->name('new.scan.post');
+        Route::get('New/Scan', [OcrController::class, 'newScan'])->name('new.scan');
+        Route::post('New/Scan/Post', [OcrController::class, 'newScanSaveData'])->name('new.scan.post');
 
-        Route::get('Visits/Search',[OcrController::class,'searchVisitingDetails'])->name('ocr.search.visitors');
-        Route::get('Visits/Destroy/{id}',[OcrController::class,'destroy'])->name('ocr.destroy');
+        Route::get('Visits/Search', [OcrController::class, 'searchVisitingDetails'])->name('ocr.search.visitors');
+        Route::get('Visits/Destroy/{id}', [OcrController::class, 'destroy'])->name('ocr.destroy');
 
 
         // Companion...
-        Route::get('Companion/{id}',[CompanionController::class,'index'])->name('companion.index');
-        Route::get('Add/Visit/Companion/{visit_id}',[CompanionController::class,'addVisitCompanion'])->name('add.companion.to.visit');
+        Route::get('Companion/{id}', [CompanionController::class, 'index'])->name('companion.index');
+        Route::get('Add/Visit/Companion/{visit_id}', [CompanionController::class, 'addVisitCompanion'])->name('add.companion.to.visit');
+        Route::post('Add/Another/Companion/{visit_id}', [CompanionController::class, 'addAnotherCompanion'])->name('add.another.companion');
+        Route::post('Add/Last/Companion/{visit_id}', [CompanionController::class, 'addLastCompanion'])->name('add.last.companion');
 
 
 
@@ -191,7 +193,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
                 Artisan::call('storage:link');
             });
 
-            Route::get('email/check',[\App\Http\Controllers\Admin\VisitorController::class,'checkEmail']);
+            Route::get('email/check', [\App\Http\Controllers\Admin\VisitorController::class, 'checkEmail']);
 
 
         });

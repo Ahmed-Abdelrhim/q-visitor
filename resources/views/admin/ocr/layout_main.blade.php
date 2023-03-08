@@ -347,19 +347,30 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 <div class="dbox w-100 d-flex align-items-center"
                                      style="margin-bottom:0px !important;height: 50px !important;margin-top:55px;text-align:center;padding-left: 35%;">
                                     <div class="form-group">
-                                        <input type="button" value="New Scan" class="btn btn-danger new_page">
-                                        <input type="button" value="Scan" class="btn btn-danger scan"
-                                               onclick="connect();">
-                                        <!-- <input type="button" value="Save Data" class="btn btn-success save"> -->
 
-                                        <input type="button" value="Add Another Visitor" class="btn btn-success save" id="{{encrypt($visit->id)}}">
-                                        <input style="margin-left: 10px;" type="button" value="Finish" class="btn btn-dark finish" id="{{encrypt($visit->id)}}">
+                                        @if(isset($companion))
+                                            <input type="button" value="New Scan" class="btn btn-danger new_page">
+                                            <input type="button" value="Scan" class="btn btn-danger scan"
+                                                   onclick="connect();">
+
+                                            <input type="button" value="Add Another Companion" class="btn btn-success another_companion" id="{{encrypt($visit->id)}}">
+                                            <input style="margin-left: 10px;" type="button" value="Last Companion last_companion" class="btn btn-dark" id="{{encrypt($visit->id)}}">
+                                        @else
+                                            <input type="button" value="New Scan" class="btn btn-danger new_page">
+                                            <input type="button" value="Scan" class="btn btn-danger scan"
+                                                   onclick="connect();">
+
+                                            <input type="button" value="Add Another Visitor" class="btn btn-success save" id="{{encrypt($visit->id)}}">
+                                            <input style="margin-left: 10px;" type="button" value="Finish" class="btn btn-dark finish" id="{{encrypt($visit->id)}}">
 
 
-                                        <a type="button" class="btn btn-success view"
-                                           href="{{ route('admin.OCR.index') }}">
-                                            View Visitors
-                                        </a>
+                                            <a type="button" class="btn btn-success view"
+                                               href="{{ route('admin.OCR.index') }}">
+                                                View Visitors
+                                            </a>
+                                        @endif
+
+
 
                                         <div class="submitting"></div>
                                     </div>
