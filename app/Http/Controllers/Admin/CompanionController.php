@@ -131,6 +131,9 @@ class CompanionController extends Controller
             $notification = array('Error While Adding Companion' , 'alert-type'=>'error');
             return redirect()->route('admin.OCR.index')->with($notification);
         }
+
+
+        // Only Adding Images Of Companion
         return $visit->id;
     }
 }
