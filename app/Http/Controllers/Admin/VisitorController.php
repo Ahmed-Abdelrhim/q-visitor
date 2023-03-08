@@ -87,15 +87,12 @@ class VisitorController extends Controller
     public function update(VisitorRequest $request, VisitingDetails $visitor)
     {
         $this->visitorService->update($request, $visitor->id);
-        // $notifications = array('message' => 'The data updated successfully!', 'alert-type' => 'success');
         return redirect()->route('admin.visitors.index')->withSuccess('The data updated successfully!');
-        // return redirect()->route('admin.visitors.index')->with($notifications);
     }
 
     public function destroy($id)
     {
         $this->visitorService->delete($id);
-        //return route('admin.visitors.index')->withSuccess('The data delete successfully!');
         return redirect()->route('admin.visitors.index')->withSuccess('The data delete successfully!');
     }
 

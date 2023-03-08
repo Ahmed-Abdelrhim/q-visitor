@@ -36,11 +36,6 @@ class OcrController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        //        if($visits[0]->employee->level == $visits[0]->approval_status) {
-        //            return 'Approved';
-        //        }
-        //        return 'Pending';
-
         return view('admin.ocr.view', ['visits' => $visits]);
         // return view('admin.ocr.layout_main');
     }
@@ -268,6 +263,7 @@ class OcrController extends Controller
             $add = $_POST['add'];
         }
 
+
         $reg_no = $visit->reg_no;
 
         $data = $perpic;
@@ -311,8 +307,7 @@ class OcrController extends Controller
             }
 
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
-        } catch (\Exception $e) {
-        }
+        } catch (\Exception $e) {}
 
         return $visit->visitor_id;
     }
@@ -488,15 +483,8 @@ class OcrController extends Controller
                 if (!file_exists(storage_path('app/public' . '/' . 'per_images'))) {
                     $file = File::makeDirectory(storage_path('app/public' . '/' . 'per_images'), 0777, true, true);
                 }
-
-                // File::makeDirectory(storage_path('app/public'.'/per_images'. '/' . $visiting_details->reg_no), 0777, true, true);
-
-
                 File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $reg_no), 0777, true, true);
-
-
                 $visitor_image = file_put_contents(storage_path('app/public' . '/' . 'per_images' . '/' . $reg_no . '/' . $reg_no . '.png'), $data);
-
                 $visiting_details->addMedia(storage_path('app/public' . '/per_images' . '/' . $reg_no . '/' . $reg_no . '.png'))
                     ->preservingOriginal()
                     ->toMediaCollection('visitor');
@@ -504,7 +492,6 @@ class OcrController extends Controller
                 if (!file_exists(storage_path('app/public' . '/' . 'images'))) {
                     $file = File::makeDirectory(storage_path('app/public' . '/' . 'images'), 0777, true, true);
                 }
-
                 File::makeDirectory(storage_path('app/public' . '/images' . '/' . $reg_no), 0777, true, true);
 
                 foreach ($images as $counter => $img) {

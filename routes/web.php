@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CompanionController;
 use App\Http\Controllers\Admin\OcrController;
 use App\Http\Controllers\Admin\VisitorController;
 use App\Http\Controllers\HomeController;
@@ -110,6 +111,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('Visits/Search',[OcrController::class,'searchVisitingDetails'])->name('ocr.search.visitors');
         Route::get('Visits/Destroy/{id}',[OcrController::class,'destroy'])->name('ocr.destroy');
+
+
+        // Companion...
+        Route::get('Companion/{id}',[CompanionController::class,'index'])->name('companion.index');
 
 
 

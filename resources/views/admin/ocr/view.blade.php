@@ -134,11 +134,6 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                                     <i class="fa-solid fa-binoculars"></i>
                                                 </a>
 
-                                                {{--                                                <form action="{{ route('admin.ocr.destroy',encrypt($visit->id)) }}"--}}
-                                                {{--                                                      class="display-none"--}}
-                                                {{--                                                      method="POST" id="deleteVisit">--}}
-                                                {{--                                                    @csrf--}}
-                                                {{--                                                </form>--}}
                                             </td>
                                         </tr>
                                     @endforeach
