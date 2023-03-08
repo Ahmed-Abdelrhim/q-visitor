@@ -33,7 +33,7 @@ class OcrController extends Controller
             ->with('visitor')
             ->with('employee')
             ->whereRaw('date(checkin_at) = CURDATE() ')
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->get();
 
         //        if($visits[0]->employee->level == $visits[0]->approval_status) {
@@ -295,7 +295,8 @@ class OcrController extends Controller
                 ->addMedia(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '/' . $reg_no . '.png'))
                 ->preservingOriginal()
                 ->toMediaCollection('visitor');
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         if (!file_exists(storage_path('app/public' . '/images' . '/' . $reg_no))) {
             File::makeDirectory(storage_path('app/public' . '/images' . '/' . $reg_no), 0777, true, true);
@@ -310,7 +311,8 @@ class OcrController extends Controller
             }
 
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         return $visit->visitor_id;
     }
@@ -483,8 +485,8 @@ class OcrController extends Controller
 
         try {
             if ($visiting_details) {
-                if (!file_exists(storage_path('app/public' . '/' .'per_images'))) {
-                    $file = File::makeDirectory(storage_path('app/public' . '/' .'per_images'), 0777, true, true);
+                if (!file_exists(storage_path('app/public' . '/' . 'per_images'))) {
+                    $file = File::makeDirectory(storage_path('app/public' . '/' . 'per_images'), 0777, true, true);
                 }
 
                 // File::makeDirectory(storage_path('app/public'.'/per_images'. '/' . $visiting_details->reg_no), 0777, true, true);
@@ -493,18 +495,17 @@ class OcrController extends Controller
                 File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $reg_no), 0777, true, true);
 
 
-
                 $visitor_image = file_put_contents(storage_path('app/public' . '/' . 'per_images' . '/' . $reg_no . '/' . $reg_no . '.png'), $data);
 
-                $visiting_details->addMedia(storage_path('app/public'.'/per_images'.'/'.$reg_no.'/'.$reg_no.'.png'))
+                $visiting_details->addMedia(storage_path('app/public' . '/per_images' . '/' . $reg_no . '/' . $reg_no . '.png'))
                     ->preservingOriginal()
                     ->toMediaCollection('visitor');
 
-                if (!file_exists(storage_path('app/public' . '/' .'images'))) {
+                if (!file_exists(storage_path('app/public' . '/' . 'images'))) {
                     $file = File::makeDirectory(storage_path('app/public' . '/' . 'images'), 0777, true, true);
                 }
 
-                File::makeDirectory(storage_path('app/public'.'/images'. '/' . $reg_no), 0777, true, true);
+                File::makeDirectory(storage_path('app/public' . '/images' . '/' . $reg_no), 0777, true, true);
 
                 foreach ($images as $counter => $img) {
                     $img = str_replace("data:image/jpeg;base64,", "", $img);
@@ -523,33 +524,34 @@ class OcrController extends Controller
 
     public function playy()
     {
-        //        $qrcode = 'https://www.qudratech-eg.net/qrcode/temp/test8b6578560c26ddca8b2a6207e2fecb79.png';
+        //        $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=';
+        //
         //        $visitors = Visitor::query()->take(20)->get();
         //
-        //        for ($i = 0 ; $i < 10 ; $i++) {
+        //        for ($i = 0; $i < 10; $i++) {
         //            $random = $visitors->random();
-        //            $id = $random->id;
-        //            $reg_no = VisitingDetails::query()->orderBy('id','desc')->first()->reg_no;
+        //            $reg_no = VisitingDetails::query()->orderBy('id', 'desc')->first()->reg_no;
         //            $visit = VisitingDetails::query()->create([
         //                'reg_no' => $reg_no + 1,
-        //                'purpose' => 'Visit' . $i+1,
+        //                'purpose' => 'Visit' . $i + 1,
         //                'company_name' => 'Qudra-Tech',
         //                'checkin_at' => Carbon::now(),
         //                'checkout_at' => Carbon::now()->addHours(5),
         //                'status' => 5,
-        //                'user_id' => 43,
-        //                'creator_employee' => 42,
-        //                'emp_one' => 41,
-        //                'visitor_id' => $id,
+        //                'user_id' => 48,
+        //                'creator_employee' => 46,
+        //                'emp_one' => 45,
+        //                'emp_two' => 46,
+        //                'visitor_id' => $random->id,
         //                'employee_id' => 43,
         //                'creator_type' => 'App\User',
-        //                'creator_id' => $id,
+        //                'creator_id' => 48,
         //                // 'editor_type' => '',
         //                // 'editor_id' => '',
         //                'plate_no' => 'ل ق أ 284',
         //                'approval_status' => 0,
         //                'sent_sms_before' => 0,
-        //                'qrcode' =>$qrcode,
+        //                'qrcode' => $url . $random->first_name . $random->id,
         //                'created_at' => Carbon::now(),
         //            ]);
         //        }
