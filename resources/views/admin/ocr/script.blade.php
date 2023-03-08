@@ -212,6 +212,9 @@
                     $('.save').prop('disabled', false);
                     $('.finish').prop('disabled', false);
 
+                    $('.another_companion').prop('disabled', false);
+                    $('.last_companion').prop('disabled', false);
+
                 }
                 if (json.Param.DESC.indexOf('Failed') !== -1) {
                     document.getElementById("white_picture").style.transform = 'rotate(180deg)';

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Companion;
 use App\Models\Languages;
 use App\Models\VisitingDetails;
 use App\Models\Visitor;
@@ -174,10 +175,14 @@ class OcrController extends Controller
     public function ocrPrint()
     {
         $id = $_GET['id'];
+        //        $data = VisitingDetails::query()
+        //            ->with('visitor')
+        //            ->where('visitor_id', $id)
+        //            ->first();
+
         $data = VisitingDetails::query()
             ->with('visitor')
-            ->where('visitor_id', $id)
-            ->first();
+            ->find($id);
         return view('admin.ocr.print', ['data' => $data]);
     }
 
@@ -309,7 +314,7 @@ class OcrController extends Controller
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
         } catch (\Exception $e) {}
 
-        return $visit->visitor_id;
+        return $visit->id;
     }
 
     public function addCompanionToVisit($id)
@@ -515,6 +520,17 @@ class OcrController extends Controller
 
     public function playy()
     {
+//        $companion = Companion::query()->insert([
+//            'first_name' => 'Ahmed',
+//            'last_name' => 'Ahmed',
+//            'national_id' => 299,
+//            'gender' => 5,
+//            'visit_id' => 383,
+//            'created_at' => Carbon::now(),
+//        ]);
+
+
+
         //        $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=';
         //
         //        $visitors = Visitor::query()->take(20)->get();

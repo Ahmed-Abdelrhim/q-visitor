@@ -354,7 +354,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                                    onclick="connect();">
 
                                             <input type="button" value="Add Another Companion" class="btn btn-success another_companion" id="{{encrypt($visit->id)}}">
-                                            <input style="margin-left: 10px;" type="button" value="Last Companion last_companion" class="btn btn-dark" id="{{encrypt($visit->id)}}">
+                                            <input style="margin-left: 10px;" type="button" value="Last Companion" class="btn btn-dark last_companion" id="{{encrypt($visit->id)}}">
                                         @else
                                             <input type="button" value="New Scan" class="btn btn-danger new_page">
                                             <input type="button" value="Scan" class="btn btn-danger scan"

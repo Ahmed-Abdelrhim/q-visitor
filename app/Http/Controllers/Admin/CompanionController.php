@@ -18,10 +18,14 @@ class CompanionController extends Controller
     public function addVisitCompanion($id)
     {
         $visit_id = $id;
+        //        $visit = VisitingDetails::query()->with('visitor')
+        //            ->where('visitor_id', $visit_id)
+        //            ->orderBy('id', 'desc')
+        //            ->first();
         $visit = VisitingDetails::query()->with('visitor')
-            ->where('visitor_id', $visit_id)
             ->orderBy('id', 'desc')
-            ->first();
+            ->find($id);
+
         if (!$visit) {
             $notifications = array('message' => 'Something Went Wrong While Adding Companion', 'alert-type' => 'error');
             return redirect()->route('admin.OCR.index')->with($notifications);
@@ -31,13 +35,15 @@ class CompanionController extends Controller
 
     public function addAnotherCompanion()
     {
-        $visit_id = $this->commonParts();
+        return $visit_id = $this->commonParts();
+        return 'Done Another';
         return $visit_id;
     }
 
     public function addLastCompanion()
     {
-        $visit_id = $this->commonParts();
+        return $visit_id = $this->commonParts();
+        return 'Done last';
         $notifications = array('message'=>'تم اضافة المرافقون بنجاح' ,'alert-type'=>'success');
         return redirect()->route('admin.OCR.index')->with($notifications);
     }
@@ -47,13 +53,15 @@ class CompanionController extends Controller
     {
         $id = NULL;
         if (isset($_POST['id'])) {
-            $id  = $_POST['id'];
+            $id  = decrypt($_POST['id']);
         }
 
-        $visit = VisitingDetails::query()->find($id);
+        // $visit = VisitingDetails::query()->where('visitor_id',$id)->first();
+        $visit = VisitingDetails::query()->with('visitor')->find($id);
         if (!$visit) {
             $notification = array('error while finding visit details when adding another companion' ,'alert-type'=>'error');
-            return redirect()->route('admin.OCR.index')->with($notification);
+            // return redirect()->route('admin.OCR.index')->with($notification);
+            return 'Visit Not Found';
         }
 
         $name = null;
@@ -115,6 +123,7 @@ class CompanionController extends Controller
             $plate_no = $_POST['plate_no'];
         }
 
+
         try {
             DB::beginTransaction();
             $companion = Companion::query()->insert([
@@ -128,8 +137,9 @@ class CompanionController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            $notification = array('Error While Adding Companion' , 'alert-type'=>'error');
-            return redirect()->route('admin.OCR.index')->with($notification);
+            return 'Error While Adding Companion';
+            // $notification = array('Error While Adding Companion' , 'alert-type'=>'error');
+            // return redirect()->route('admin.OCR.index')->with($notification);
         }
 
 

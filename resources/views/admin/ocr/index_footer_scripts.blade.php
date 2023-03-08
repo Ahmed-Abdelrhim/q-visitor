@@ -54,6 +54,9 @@
         $('.save').prop('disabled', true);
         $('.finish').prop('disabled', true);
 
+        $('.another_companion').prop('disabled', true);
+        $('.last_companion').prop('disabled', true);
+
 
         $('.save').click(function () {
             $(this).serialize();
@@ -105,14 +108,10 @@
                 {{--window.location.href = '{{  }}';--}}
                 {{--location.replace("{{ route('admin.add.companion.to.visit' , }}"+ data + "{{   ) }}" );--}}
 
-                window.open("http://127.0.0.1:8000/admin/Add/Visit/Companion/"+data );
+                window.open("http://127.0.0.1:8000/admin/Add/Visit/Companion/" + data);
 
             });
         });
-
-
-
-
 
 
         $('.finish').click(function () {
@@ -163,7 +162,6 @@
         });
 
 
-
         $('.another_companion').click(function () {
             $(this).serialize();
             add = 'N';
@@ -182,7 +180,7 @@
             perpic = $('.perpic').text();
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
-            id = $('.save').attr('id');
+            id = $('.another_companion').attr('id');
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -204,8 +202,13 @@
                 add: add,
             }, function (data) {
                 // Another Companion
-                // console.log(data);
-                location.reload();
+                console.log(data);
+                iziToast.success({
+                    title: 'Success',
+                    message: 'تم إضافة المرافق بنجاح',
+                    position: 'topRight'
+                });
+                // location.reload();
             });
         });
 
@@ -228,7 +231,7 @@
             perpic = $('.perpic').text();
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
-            id = $('.save').attr('id');
+            id = $('.last_companion').attr('id');
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -250,22 +253,18 @@
                 add: add,
             }, function (data) {
                 // Last Companion
-                // console.log(data);
-
+                console.log(data);
+                iziToast.success({
+                    title: 'Success',
+                    message: 'تم إضافة المرافقين بنجاح',
+                    position: 'topRight'
+                });
+                setTimeout(reloadPage,2000)
+                function reloadPage() {
+                    location.replace("http://127.0.0.1:8000/admin/OCR");
+                }
             });
         });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         $('.newscan').click(function () {
@@ -313,11 +312,6 @@
                 location.reload();
             });
         });
-
-
-
-
-
 
 
         $('.get_plate').click(function () {
