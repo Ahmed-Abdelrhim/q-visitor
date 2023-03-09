@@ -53,10 +53,18 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
 <body>
 <section class="ftco-section">
     <div class="container">
-        <div class="row justify-content-right" style="direction:rtl"><a href="indexar.php">عربى</a>|<a>English</a></div>
+        <div class="row justify-content-right" style="direction:rtl">
+            <a href="{{route('change_locale','ar')}}">
+                عربى
+            </a>
+            |
+            <a href="{{route('change_locale','en')}}">
+                English
+            </a>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5" style="margin-bottom:0px !important">
-                <h2 class="heading-section">Manage Visits</h2>
+                <h2 class="heading-section">{{__('files.Manage Visits')}}</h2>
             </div>
         </div>
         <br/>
@@ -66,21 +74,25 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                     <div class="row no-gutters">
                         <div class="col-md-12">
                             <div class="contact-wrap w-100 p-lg-5 p-4">
-                                <label style="color:#fff;font-size:26px;font-weight:bold">Filter By Date Period:</label>
+                                <label
+                                    style="color:#fff;font-size:26px;font-weight:bold">{{__('files.Filter By Date Period')}}
+                                    : </label>
 
                                 <div class="row" style="text-align:center !important;padding-left:27%">
                                     <div class="text pl-3" style="margin-left:3%">
-                                        <p><span style="color:#fff">Check in Date:</span> <input type="text"
-                                                                                                 class="v2date form-control"
-                                                                                                 id="v2date"
-                                                                                                 style="color:#000 !important"/>
+                                        <p><span style="color:#fff">{{__('files.Check in Date')}} :</span> <input
+                                                type="text"
+                                                class="v2date form-control"
+                                                id="v2date"
+                                                style="color:#000 !important"/>
                                         </p>
                                     </div>
                                     <div class="text pl-3">
-                                        <p><span style="color:#fff">Check out Date:</span> <input type="text"
-                                                                                                  class="v3date form-control"
-                                                                                                  id="v3date"
-                                                                                                  style="color:#000 !important"/>
+                                        <p><span style="color:#fff">{{__('files.Check out Date')}} :</span> <input
+                                                type="text"
+                                                class="v3date form-control"
+                                                id="v3date"
+                                                style="color:#000 !important"/>
                                         </p>
 
                                     </div>
@@ -89,15 +101,15 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
 
                                     <button class="btn btn-sm btn-icon mr-2  float-left btn-success find"
                                             data-toggle="tooltip" data-placement="top" title="Search"><i
-                                            class="fa fa-search"></i> Search
+                                            class="fa fa-search"></i> {{__('files.Search')}}
                                     </button>
                                     <button class="btn btn-sm btn-icon mr-2  float-left btn-success clr"
                                             data-toggle="tooltip" data-placement="top" title="clear"><i
-                                            class="fa fa-refresh"></i> Clear Search
+                                            class="fa fa-refresh"></i> {{__('files.Clear Search')}}
                                     </button>
                                     <button class="btn btn-sm btn-icon mr-2  float-left btn-success newscan"
                                             data-toggle="tooltip" data-placement="top" title="New Scan"><i
-                                            class="far fa-check-circle"></i> New Scan
+                                            class="far fa-check-circle"></i> {{__('files.New Scan')}}
                                     </button>
                                 </div>
 
@@ -109,12 +121,12 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                             <table id="view_visitor" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Visit Date</th>
-                                    <th>Visit Time</th>
-                                    <th>Action</th>
+                                    <th>{{__('files.ID')}}</th>
+                                    <th>{{__('files.Name')}}</th>
+                                    <th>{{__('files.Phone')}}</th>
+                                    <th>{{__('files.Visit Date')}}</th>
+                                    <th>{{__('files.Visit Time')}}</th>
+                                    <th>{{__('files.Action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

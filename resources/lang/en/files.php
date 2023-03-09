@@ -213,8 +213,27 @@ return [
     'Re-Send Sms' => 'Re-Send Sms',
     'Employee One' => 'Employee One',
     'Employee Two' => 'Employee Two',
-    '' => '',
-    '' => '',
+
+
+    'Date Of Birth' => 'Date Of Birth',
+    'ID Number' => 'ID Number',
+    'Visit Date' => 'Visit Date',
+    'Job' => 'Job',
+    'Marital status' => 'Marital status',
+    'Issuing Date' => 'Issuing Date',
+    'Visit Time' => 'Visit Time',
+    'Country Code' => 'Country Code',
+
+    'New Scan' => 'New Scan',
+    'Clear Search' => 'Clear Search',
+    'Search' => 'Search',
+
+    'Check in Date' => 'Check in Date',
+    'Check out Date' => 'Check out Date',
+    'Filter By Date Period' => 'Filter By Date Period',
+    'Manage Visits' => 'Manage Visits',
+
+    'Last Car plate' => 'Last Car plate',
     '' => '',
     '' => '',
     '' => '',

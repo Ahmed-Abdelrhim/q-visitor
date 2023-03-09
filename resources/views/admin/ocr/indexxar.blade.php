@@ -13,6 +13,33 @@
     @include('admin.ocr.index_style')
 
     <style>
+        .loading {
+            z-index: 20;
+            position: absolute;
+            top: 0;
+            left: 5px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0,4);
+        }
+
+        .loading-content {
+            position: absolute;
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            top: 40%;
+            left: 50%;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {transform: rotate(0deg) ;}
+            100% {transform: rotate(360deg);}
+        }
+
         .contact-wrap {
             background-color: #24ba64 !important;
             background-image: linear-gradient(to bottom right, #24ba64, #c6cdc6) !important;
@@ -155,6 +182,10 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
 
 
 <body>
+<div id="loading">
+    <div id="loading-content"></div>
+</div>
+
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-right" style="direction:rtl"><a>عربى</a>|<a href="{{route('admin.OCR.index')}}">English</a>
@@ -191,22 +222,22 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 <div class="row" style="text-align:center">
                                     <div class="col-md-3">
                                         <div class="form-group" style="text-align:center;float:right;margin-left:90px">
-                                            <img id="pic" src="" alt=""/>
+                                            <img id="pic" src="{{asset('images/personal.png')}}" alt=""/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="white_picture" src="" alt=""/>
+                                            <img id="white_picture" src="{{asset('images/id.png')}}" alt=""/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="ocr_head" src="" alt=""/>
+                                            <img id="ocr_head" src="{{asset('images/id.png')}}" alt=""/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="chip_head" src="" alt=""/>
+                                            <img id="chip_head" src="{{asset('images/id.png')}}" alt=""/>
                                         </div>
                                     </div>
 
