@@ -36,8 +36,8 @@ class CompanionController extends Controller
     public function addAnotherCompanion()
     {
         return $visit_id = $this->commonParts();
-        return 'Done Another';
-        return $visit_id;
+        // return 'Done Another';
+        // return $visit_id;
     }
 
     public function addLastCompanion()

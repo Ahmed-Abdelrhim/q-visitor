@@ -201,13 +201,17 @@
                 add: add,
             }, function (data) {
                 // Another Companion
-                console.log(data);
+                // console.log(data);
                 iziToast.success({
                     title: 'Success',
                     message: 'تم إضافة المرافق بنجاح',
                     position: 'topRight'
                 });
-                // location.reload();
+                setTimeout(reload,2000);
+
+                function reload() {
+                    location.reload();
+                }
             });
         });
 
