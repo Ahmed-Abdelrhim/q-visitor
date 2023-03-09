@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="comment">{{ __('files.Comment') }}</label>
+                                        <label  class="comment-label col-md-12" for="comment">{{ __('files.Comment') }}</label>
                                         <textarea name="comment"
                                                   class="summernote-simple form-control height-textarea @error('comment')
                                                       is-invalid @enderror"
@@ -154,7 +154,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label for="address">{{ __('files.Address') }}</label>
+                                        <label class="address-label col-md-12" for="address">{{ __('files.Address') }}</label>
                                         <textarea name="address"
                                                   class="summernote-simple form-control height-textarea @error('address')
                                                       is-invalid @enderror"
