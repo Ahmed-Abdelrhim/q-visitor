@@ -312,7 +312,8 @@ class OcrController extends Controller
             }
 
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         return $visit->id;
     }
@@ -520,49 +521,40 @@ class OcrController extends Controller
 
     public function playy()
     {
-//        $companion = Companion::query()->insert([
-//            'first_name' => 'Ahmed',
-//            'last_name' => 'Ahmed',
-//            'national_id' => 299,
-//            'gender' => 5,
-//            'visit_id' => 383,
-//            'created_at' => Carbon::now(),
-//        ]);
 
-
-
-        //        $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=';
-        //
-        //        $visitors = Visitor::query()->take(20)->get();
-        //
-        //        for ($i = 0; $i < 10; $i++) {
-        //            $random = $visitors->random();
-        //            $reg_no = VisitingDetails::query()->orderBy('id', 'desc')->first()->reg_no;
-        //            $visit = VisitingDetails::query()->create([
-        //                'reg_no' => $reg_no + 1,
-        //                'purpose' => 'Visit' . $i + 1,
-        //                'company_name' => 'Qudra-Tech',
-        //                'checkin_at' => Carbon::now(),
-        //                'checkout_at' => Carbon::now()->addHours(5),
-        //                'status' => 5,
-        //                'user_id' => 48,
-        //                'creator_employee' => 46,
-        //                'emp_one' => 45,
-        //                'emp_two' => 46,
-        //                'visitor_id' => $random->id,
-        //                'employee_id' => 43,
-        //                'creator_type' => 'App\User',
-        //                'creator_id' => 48,
-        //                // 'editor_type' => '',
-        //                // 'editor_id' => '',
-        //                'plate_no' => 'ل ق أ 284',
-        //                'approval_status' => 0,
-        //                'sent_sms_before' => 0,
-        //                'qrcode' => $url . $random->first_name . $random->id,
-        //                'created_at' => Carbon::now(),
-        //            ]);
-        //        }
-        //        return 'Done';
+    //        $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=';
+    //
+    //        $visitors = Visitor::query()->take(20)->get();
+    //
+    //        for ($i = 0; $i < 10; $i++) {
+    //            $random = $visitors->random();
+    //            $reg_no = VisitingDetails::query()->orderBy('id', 'desc')->first()->reg_no;
+    //            $data = file_get_contents( $url . $random->first_name . $random->id);
+    //            $visit = VisitingDetails::query()->create([
+    //                'reg_no' => $reg_no + 1,
+    //                'purpose' => 'Visit' . $i + 1,
+    //                'company_name' => 'Qudra-Tech',
+    //                'checkin_at' => Carbon::now(),
+    //                'checkout_at' => Carbon::now()->addHours(5),
+    //                'status' => 5,
+    //                'user_id' => 48,
+    //                'creator_employee' => 46,
+    //                'emp_one' => 45,
+    //                'emp_two' => 46,
+    //                'visitor_id' => $random->id,
+    //                'employee_id' => 43,
+    //                'creator_type' => 'App\User',
+    //                'creator_id' => 48,
+    //                // 'editor_type' => '',
+    //                // 'editor_id' => '',
+    //                'plate_no' => 'ل ق أ 284',
+    //                'approval_status' => 0,
+    //                'sent_sms_before' => 0,
+    //                'qrcode' => $url . $random->first_name . $random->id,
+    //                'created_at' => Carbon::now(),
+    //            ]);
+    //        }
+    //        return 'Done';
 
 
         // ==========================================================
