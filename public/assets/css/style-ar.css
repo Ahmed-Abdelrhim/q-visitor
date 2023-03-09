@@ -4548,7 +4548,18 @@ td:has(> button.actions) {
     float: left !important;
     margin-left: 88% !important;
 }
+.form-group .comment-label{
+    float: left !important;
+        margin-left: 88% !important;
+}
 
 .note-toolbar.card-header{
     margin-right: 0 !important;
+}
+.note-editor.note-frame .note-editing-area .note-editable{
+    padding: 50px 15px !important;
+    float: right !important;
+}
+.note-editable p{
+    float: right !important;
 }
