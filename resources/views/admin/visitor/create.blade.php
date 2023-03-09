@@ -138,7 +138,7 @@
                                     </div>
                                 </div>
 								<div class="form-row">
-                                   
+
                                     <div class="form-group col">
                                         <label>{{ __('files.TypeApproval') }}</label>
                                         <!--<input type="text" name="type" class="form-control @error('type') is-invalid @enderror" value="{{ old('type') }}" id="type" >-->
@@ -160,12 +160,12 @@
                                 <!-- حجز زيارة-->
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        
+
                                             <label class="purbose-label required col-md-12" for="purpose">{{ __('files.Purpose') }}</label>
-                                      
-                                        
+
+
                                         <textarea name="purpose"
-                                                  class="summernote-simple form-control height-textarea @error('purpose')
+                                                  class="summernote-simple  summernote form-control height-textarea @error('purpose')
                                                       is-invalid @enderror"
                                                   id="purpose" >
                                             {{ old('purpose') }}
@@ -177,11 +177,11 @@
                                         @enderror
                                     </div>
 
-                                    
+
                                     <div class="form-group col">
                                         <label class="address-label required col-md-12" for="address">{{ __('files.Address') }}</label>
                                         <textarea name="address"
-                                                  class="summernote-simple form-control height-textarea @error('address')
+                                                  class="summernote-simple summernote form-control height-textarea @error('address')
                                                       is-invalid @enderror"
                                                   id="address" >
                                             {{ old('address') }}

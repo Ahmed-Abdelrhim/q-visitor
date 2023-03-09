@@ -206,9 +206,9 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     <input type="button" value="Last Car plate" class="btn btn-success get_plate"
                                            style="height: 35px; padding: 7px 14px;margin-left: 7%">
                                     @if(isset($companion))
-                                        <h3 class="h3" style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                        <h2 class="h2 text-capitalize text-lg-left" style="height: 35px; padding: 7px 14px;margin-left: 23%">
                                             إضافة مرافق إلي -- {{ $visit->visitor->name }}
-                                        </h3>
+                                        </h2>
                                     @else
                                         <a class="btn btn-primary dashboard" href="{{ route('admin.dashboard.index') }}"
                                            style="height: 35px; padding: 7px 14px;margin-left: 7%">
