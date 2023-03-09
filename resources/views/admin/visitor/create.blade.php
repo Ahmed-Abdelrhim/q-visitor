@@ -8,7 +8,12 @@
 @endsection
 
 @section('main-content')
-
+<style>
+  .required:after {
+    content:" *";
+    color: red;
+  }
+</style>
     <section class="section">
         <div class="section-header">
             <h1>{{ __('files.Visit Reservation') }}</h1>
@@ -155,7 +160,10 @@
                                 <!-- حجز زيارة-->
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="purpose">{{ __('files.Purpose') }}</label> <span class="text-danger">*</span>
+                                        
+                                            <label class="purbose-label required col-md-12" for="purpose">{{ __('files.Purpose') }}</label>
+                                      
+                                        
                                         <textarea name="purpose"
                                                   class="summernote-simple form-control height-textarea @error('purpose')
                                                       is-invalid @enderror"
@@ -171,7 +179,7 @@
 
                                     
                                     <div class="form-group col">
-                                        <label for="address">{{ __('files.Address') }}</label>
+                                        <label class="address-label required col-md-12" for="address">{{ __('files.Address') }}</label>
                                         <textarea name="address"
                                                   class="summernote-simple form-control height-textarea @error('address')
                                                       is-invalid @enderror"

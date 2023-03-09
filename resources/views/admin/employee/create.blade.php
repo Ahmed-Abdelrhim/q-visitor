@@ -9,6 +9,7 @@
 
 @section('main-content')
 
+
     <section class="section">
         <div class="section-header">
             <h1>{{ __('files.Employees') }}</h1>
@@ -255,7 +256,7 @@
 
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label for="about">{{ __('files.About') }}</label>
+                                        <label class="purbose-label col-md-12" for="about">{{ __('files.About') }}</label>
                                         <textarea name="about"
                                                   class="summernote-simple form-control height-textarea @error('about')
                                                   is-invalid @enderror"

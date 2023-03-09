@@ -4540,3 +4540,15 @@ td:has(> button.actions) {
 .profile-form {
     direction: rtl;
 }
+.form-group .purbose-label, .form-group span.required{
+    float: left !important;
+    margin-left: 84% !important;
+}
+.form-group .address-label,.form-group span.required{
+    float: left !important;
+    margin-left: 88% !important;
+}
+
+.note-toolbar.card-header{
+    margin-right: 0 !important;
+}
