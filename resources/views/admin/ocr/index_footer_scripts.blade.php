@@ -28,6 +28,12 @@
             });
         });
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $(document).ajaxStart(function () {
             // alert('Playing With Ajax');
             $('#loading').addClass('loading');
@@ -262,8 +268,9 @@
 
         $('.newscan').click(function () {
             $(this).serialize();
-            cnf = confirm("Add another Person ID?");
-            if (cnf == true) add = 'Y'; else add = 'N';
+            // cnf = confirm("Add another Person ID?");
+            // if (cnf == true) add = 'Y'; else add = 'N';
+            add = 'N';
             $(this).prop('disabled', true);
             obj = $(this);
             $(this).attr('value', 'Saving...');
@@ -280,11 +287,7 @@
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+
 
             $.post('{{route('admin.new.scan.post')}}', {
                 name: name,
