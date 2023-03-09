@@ -287,8 +287,6 @@
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
 
-
-
             $.post('{{route('admin.new.scan.post')}}', {
                 name: name,
                 gender: gender,
@@ -302,7 +300,7 @@
                 plate_no: plate_no,
                 add: add
             }, function (data) {
-                console.log(data);
+                // console.log(data);
                 wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
                 wnd.print();
                 location.reload();

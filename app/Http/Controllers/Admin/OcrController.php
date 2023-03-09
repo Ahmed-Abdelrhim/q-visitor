@@ -515,7 +515,7 @@ class OcrController extends Controller
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
             return 'add image not sent';
         }
-        return $visitor->id;
+        return $visiting_details->id;
     }
 
     public function playy()
