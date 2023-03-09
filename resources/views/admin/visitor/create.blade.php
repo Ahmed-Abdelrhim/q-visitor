@@ -151,6 +151,8 @@
 									<div class="form-group col">
 									</div>
                                 </div>
+
+                                <!-- حجز زيارة-->
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label for="purpose">{{ __('files.Purpose') }}</label> <span class="text-danger">*</span>
@@ -166,6 +168,8 @@
                                         </div>
                                         @enderror
                                     </div>
+
+                                    
                                     <div class="form-group col">
                                         <label for="address">{{ __('files.Address') }}</label>
                                         <textarea name="address"
