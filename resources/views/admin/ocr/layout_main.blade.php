@@ -216,11 +216,12 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     <h5>Car Plate:</h5><input type="text" class="form-control plate_no"
                                                               value="<?php echo $plate; ?>"/>
                                     <input type="button" value="{{__('files.Last Car plate')}}" class="btn btn-success get_plate"
-                                           style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                           style="height: 35px; padding: 5px 14px;margin-left: 7%">
                                     @if(isset($companion))
-                                        <h2 class="h2 text-capitalize text-lg-left" style="height: 35px; padding: 7px 14px;margin-left: 23%">
-                                            إضافة مرافق إلي -- {{ $visit->visitor->name }}
-                                        </h2>
+{{--                                        <h1 class="h1 text-capitalize text-lg-left" style="height: 35px; padding: 7px 14px;margin-left: 18%">--}}
+                                        <h1 class="h1 text-capitalize text-lg-left" style="height: 35px; margin-left: 18%">
+                                            إضافة مرافق إلي الزائر -- {{ $visit->visitor->name }}
+                                        </h1>
                                     @else
                                         <a class="btn btn-primary dashboard" href="{{ route('admin.dashboard.index') }}"
                                            style="height: 35px; padding: 7px 14px;margin-left: 7%">
@@ -394,9 +395,9 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                             <input type="button" value="{{__('files.Scan')}}" class="btn btn-danger scan"
                                                    onclick="connect();">
 
-                                            <input type="button" value="Add Another Companion" class="btn-primary btn another_companion"
+                                            <input type="button" value="{{__('files.Add Another Companion')}}" class="btn-primary btn another_companion"
                                                    style="background-color: #0a71db !important;" id="{{encrypt($visit->id)}}">
-                                            <input style="margin-left: 10px;" type="button" value="Last Companion" class="btn btn-dark last_companion" id="{{encrypt($visit->id)}}">
+                                            <input style="margin-left: 10px;" type="button" value="{{__('files.Last Companion')}}" class="btn btn-dark last_companion" id="{{encrypt($visit->id)}}">
                                         @else
                                             <input type="button" value="New Scan" class="btn btn-danger new_page">
                                             <input type="button" value="Scan" class="btn btn-danger scan"

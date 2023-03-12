@@ -40,11 +40,10 @@
             $('#loading-content').addClass('loading-content');
         });
 
-        $(document).ajaxStop(function (){
+        $(document).ajaxStop(function () {
             $('#loading').removeClass('loading');
             $('#loading-content').removeClass('loading-content');
         });
-
 
 
         // Just For Playing
@@ -54,6 +53,7 @@
         $('.finish').prop('disabled', true);
 
         $('.another_companion').prop('disabled', true);
+
         $('.last_companion').prop('disabled', true);
 
 
@@ -106,8 +106,9 @@
 
                 {{--window.location.href = '{{  }}';--}}
                 {{--location.replace("{{ route('admin.add.companion.to.visit' , }}"+ data + "{{   ) }}" );--}}
+                location.replace('http://127.0.0.1:8000/admin/Add/Visit/Companion/' + data);
 
-                window.open("http://127.0.0.1:8000/admin/Add/Visit/Companion/" + data);
+                // window.open("http://127.0.0.1:8000/admin/Add/Visit/Companion/" + data);
 
             });
         });
@@ -207,7 +208,7 @@
                     message: 'تم إضافة المرافق بنجاح',
                     position: 'topRight'
                 });
-                setTimeout(reload,2000);
+                setTimeout(reload, 2000);
 
                 function reload() {
                     location.reload();
@@ -262,7 +263,8 @@
                     message: 'تم إضافة المرافقين بنجاح',
                     position: 'topRight'
                 });
-                setTimeout(reloadPage,2000)
+                setTimeout(reloadPage, 2000)
+
                 function reloadPage() {
                     location.replace("http://127.0.0.1:8000/admin/OCR");
                 }
@@ -384,13 +386,6 @@
 
 {{--// $.post("save.php", {--}}
 {{--// $.post( '{ {storage_path('app/public' . '/' .'save.php')}}', {--}}
-
-
-
-
-
-
-
 
 
 {{--/*flatpickr("#v2time", {--}}

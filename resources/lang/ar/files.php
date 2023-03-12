@@ -228,8 +228,9 @@ return [
 
 
     'Last Car plate' => 'رقم اخر عربية',
-    '' => '',
-    '' => '',
+    'Scan' => 'بحث',
+    'Add Another Companion' => 'إضافة مرافق اخر',
+    'Last Companion' => 'اخر مرافق',
     '' => '',
     '' => '',
     '' => '',

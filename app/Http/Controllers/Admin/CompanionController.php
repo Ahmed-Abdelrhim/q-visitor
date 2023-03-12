@@ -43,9 +43,9 @@ class CompanionController extends Controller
     public function addLastCompanion()
     {
         return $visit_id = $this->commonParts();
-        return 'Done last';
-        $notifications = array('message'=>'تم اضافة المرافقون بنجاح' ,'alert-type'=>'success');
-        return redirect()->route('admin.OCR.index')->with($notifications);
+        // return 'Done last';
+        // $notifications = array('message'=>'تم اضافة المرافقون بنجاح' ,'alert-type'=>'success');
+        // return redirect()->route('admin.OCR.index')->with($notifications);
     }
 
 
@@ -80,7 +80,6 @@ class CompanionController extends Controller
                 $gender = 10;
             }
         }
-
 
         $address = null;
         if (isset($_POST['address'])) {

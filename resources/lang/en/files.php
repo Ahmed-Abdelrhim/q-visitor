@@ -225,6 +225,7 @@ return [
     'Country Code' => 'Country Code',
 
     'New Scan' => 'New Scan',
+    'Scan' => 'Scan',
     'Clear Search' => 'Clear Search',
     'Search' => 'Search',
 
@@ -234,8 +235,8 @@ return [
     'Manage Visits' => 'Manage Visits',
 
     'Last Car plate' => 'Last Car plate',
-    '' => '',
-    '' => '',
+    'Add Another Companion' => 'Add Another Companion',
+    'Last Companion' => 'Last Companion',
     '' => '',
     '' => '',
     '' => '',
