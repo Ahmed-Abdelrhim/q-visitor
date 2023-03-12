@@ -388,22 +388,22 @@
 {{--// $.post( '{ {storage_path('app/public' . '/' .'save.php')}}', {--}}
 
 
-/*flatpickr("#v2time", {
-enableTime: true,
-noCalendar: true,
-dateFormat: "H:i",
-defaultDate: "13:45"
-});
-flatpickr("#v3date", {
-enableTime: false,
-noCalendar: false,
-dateFormat: "d-m-Y",
-defaultDate: "today"
-});
-$('#vdate').datepicker();
-$('.view').click(function () {
+{{--/*flatpickr("#v2time", {--}}
+{{--enableTime: true,--}}
+{{--noCalendar: true,--}}
+{{--dateFormat: "H:i",--}}
+{{--defaultDate: "13:45"--}}
+{{--});--}}
+{{--flatpickr("#v3date", {--}}
+{{--enableTime: false,--}}
+{{--noCalendar: false,--}}
+{{--dateFormat: "d-m-Y",--}}
+{{--defaultDate: "today"--}}
+{{--});--}}
+{{--$('#vdate').datepicker();--}}
+{{--$('.view').click(function () {--}}
 
-$.redirect("view.php", {}, "POST", null, null, true);
+{{--$.redirect("view.php", {}, "POST", null, null, true);--}}
 
-});
-*/
+{{--});--}}
+{{--*/--}}

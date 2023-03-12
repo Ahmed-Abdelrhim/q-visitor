@@ -213,7 +213,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     Data was sent, thank you!
                                 </div>
                                 <div class="row" style="text-align:center">
-                                    <h5>Car Plate:</h5><input type="text" class="form-control plate_no"
+                                    <h5>{{__('files.Car Plate')}} :</h5><input type="text" class="form-control plate_no"
                                                               value="<?php echo $plate; ?>"/>
                                     <input type="button" value="{{__('files.Last Car plate')}}" class="btn btn-success get_plate"
                                            style="height: 35px; padding: 5px 14px;margin-left: 7%">
@@ -225,7 +225,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     @else
                                         <a class="btn btn-primary dashboard" href="{{ route('admin.dashboard.index') }}"
                                            style="height: 35px; padding: 7px 14px;margin-left: 7%">
-                                            Dashboard
+                                            {{__('files.Dashboard')}}
                                         </a>
                                     @endif
 
@@ -399,17 +399,17 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                                    style="background-color: #0a71db !important;" id="{{encrypt($visit->id)}}">
                                             <input style="margin-left: 10px;" type="button" value="{{__('files.Last Companion')}}" class="btn btn-dark last_companion" id="{{encrypt($visit->id)}}">
                                         @else
-                                            <input type="button" value="New Scan" class="btn btn-danger new_page">
-                                            <input type="button" value="Scan" class="btn btn-danger scan"
+                                            <input type="button" value="{{__('files.New Scan')}}" class="btn btn-danger new_page">
+                                            <input type="button" value="{{__('files.Scan')}}" class="btn btn-danger scan"
                                                    onclick="connect();">
 
-                                            <input type="button" value="Add Another Visitor" class="btn btn-success save" id="{{encrypt($visit->id)}}">
-                                            <input style="margin-left: 10px;" type="button" value="Finish" class="btn btn-dark finish" id="{{encrypt($visit->id)}}">
+                                            <input type="button" value="{{__('files.Add Companion')}}" class="btn btn-success save" id="{{encrypt($visit->id)}}">
+                                            <input style="margin-left: 10px;" type="button" value="{{__('files.Finish')}}" class="btn btn-dark finish" id="{{encrypt($visit->id)}}">
 
 
                                             <a type="button" class="btn btn-success view"
                                                href="{{ route('admin.OCR.index') }}">
-                                                View Visitors
+                                                {{__('files.View Visitors')}}
                                             </a>
                                         @endif
 

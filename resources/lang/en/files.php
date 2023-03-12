@@ -237,10 +237,10 @@ return [
     'Last Car plate' => 'Last Car plate',
     'Add Another Companion' => 'Add Another Companion',
     'Last Companion' => 'Last Companion',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'Finish' => 'Finish',
+    'Add Companion' => 'Add Companion',
+    'View Visitors' => 'View Visitors',
+    'Car Plate' => 'Car Plate',
 
     '' => '',
 

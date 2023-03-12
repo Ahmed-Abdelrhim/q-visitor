@@ -8,6 +8,7 @@ use App\Models\VisitingDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class CompanionController extends Controller
 {
@@ -122,6 +123,11 @@ class CompanionController extends Controller
             $plate_no = $_POST['plate_no'];
         }
 
+        $data = $perpic;
+        list($type, $data) = explode(';', $data);
+        list(, $data) = explode(',', $data);
+        $data = base64_decode($data);
+
 
         try {
             DB::beginTransaction();
@@ -140,9 +146,22 @@ class CompanionController extends Controller
             // $notification = array('Error While Adding Companion' , 'alert-type'=>'error');
             // return redirect()->route('admin.OCR.index')->with($notification);
         }
-
-
         // Only Adding Images Of Companion
+
+//        if (!file_exists(storage_path('app/public' . '/per_images'.'/'. $visit->reg_no . '/companions'))) {
+//            File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $visit->reg_no . '/companions'), 0777, true, true);
+//        }
+//
+//        try {
+//            $image = file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $visit->reg_no . '/companions/' . $companion->id . '.png'), $data);
+////            $visit
+////                ->addMedia(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '/' . $reg_no . '.png'))
+////                ->preservingOriginal()
+////                ->toMediaCollection('visitor');
+//        } catch (\Exception $e) {}
+
+
+
         return $visit->id;
     }
 }

@@ -286,7 +286,8 @@ class OcrController extends Controller
             $visit->save();
         }
 
-        if (!file_exists($reg_no)) {
+        // if (!file_exists($reg_no)) {
+        if (!file_exists(storage_path('app/public' . '/per_images'.'/'. $reg_no))) {
             File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $reg_no), 0777, true, true);
         }
 
@@ -296,8 +297,7 @@ class OcrController extends Controller
                 ->addMedia(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '/' . $reg_no . '.png'))
                 ->preservingOriginal()
                 ->toMediaCollection('visitor');
-        } catch (\Exception $e) {
-        }
+        } catch (\Exception $e) {}
 
         if (!file_exists(storage_path('app/public' . '/images' . '/' . $reg_no))) {
             File::makeDirectory(storage_path('app/public' . '/images' . '/' . $reg_no), 0777, true, true);
@@ -312,8 +312,7 @@ class OcrController extends Controller
             }
 
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
-        } catch (\Exception $e) {
-        }
+        } catch (\Exception $e) {}
 
         return $visit->id;
     }
@@ -521,6 +520,18 @@ class OcrController extends Controller
 
     public function playy()
     {
+//        $visits = VisitingDetails::query()->get();
+//        $arabic = ['أ','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي'];
+//        $nums = [0,1,2,3,4,5,6,7,8,9];
+//
+//        foreach ($visits as $visit) {
+//            $num1 = array_rand($arabic);
+//            $num2 = array_rand($arabic);
+//            $num3 = array_rand($arabic);
+//            $visit->plate_no = $arabic[$num1] . ' ' . $arabic[$num2] . ' ' . $arabic[$num3] . ' '.array_rand($nums) .array_rand($nums) .array_rand($nums);
+//            $visit->save();
+//        }
+//        return 'Done';
 
     //        $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=';
     //
