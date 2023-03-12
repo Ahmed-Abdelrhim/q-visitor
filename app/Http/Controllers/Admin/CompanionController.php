@@ -54,13 +54,13 @@ class CompanionController extends Controller
     {
         $id = NULL;
         if (isset($_POST['id'])) {
-            $id  = decrypt($_POST['id']);
+            $id = decrypt($_POST['id']);
         }
 
         // $visit = VisitingDetails::query()->where('visitor_id',$id)->first();
         $visit = VisitingDetails::query()->with('visitor')->find($id);
         if (!$visit) {
-            $notification = array('error while finding visit details when adding another companion' ,'alert-type'=>'error');
+            $notification = array('error while finding visit details when adding another companion', 'alert-type' => 'error');
             // return redirect()->route('admin.OCR.index')->with($notification);
             return 'Visit Not Found';
         }
@@ -143,23 +143,40 @@ class CompanionController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return 'Error While Adding Companion';
-            // $notification = array('Error While Adding Companion' , 'alert-type'=>'error');
-            // return redirect()->route('admin.OCR.index')->with($notification);
         }
         // Only Adding Images Of Companion
 
-//        if (!file_exists(storage_path('app/public' . '/per_images'.'/'. $visit->reg_no . '/companions'))) {
-//            File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $visit->reg_no . '/companions'), 0777, true, true);
-//        }
-//
-//        try {
-//            $image = file_put_contents(storage_path('app/public' . '/' . 'per_images/' . $visit->reg_no . '/companions/' . $companion->id . '.png'), $data);
-////            $visit
-////                ->addMedia(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '/' . $reg_no . '.png'))
-////                ->preservingOriginal()
-////                ->toMediaCollection('visitor');
-//        } catch (\Exception $e) {}
+        if (!file_exists(storage_path('app/public' . '/per_images' . '/' . $visit->reg_no . '/companions'))) {
+            File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $visit->reg_no . '/companions'), 0777, true, true);
+        }
+        if ($companion) {
+            $companion = Companion::query()->orderBy('id', 'desc')->first();
+        }
 
+        // adding only face image
+        try {
+            $image = file_put_contents(storage_path('app/public' . '/' . 'per_images' . '/' . $visit->reg_no . '/' . 'companions' . '/' . $companion->id . '.png'), $data);
+            $companion
+                ->addMedia(storage_path('app/public' . '/' . 'per_images/' . $visit->reg_no . '/companions/' . $companion->id . '.png'))
+                ->preservingOriginal()
+                ->toMediaCollection('companion');
+        } catch (\Exception $e) {}
+
+
+        // adding all identification images
+
+        try {
+            if (!file_exists(storage_path('app/public'.'/images/'.$visit->reg_no .'/companions'))) {
+                File::makeDirectory(storage_path('app/public'.'/images/'.$visit->reg_no .'/companions') ,0777,true,true);
+            }
+
+            foreach ($images as $counter => $img) {
+                $img = str_replace("data:image/jpeg;base64,", "", $img);
+                if ($img != '' or $img != ' ') {
+                    file_put_contents(storage_path('app/public' . '/images/' . $visit->reg_no . '/companions/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
+                }
+            }
+        } catch (\Exception $e) {}
 
 
         return $visit->id;
