@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class VisitorService
@@ -150,8 +151,13 @@ class VisitorService
             $data = file_get_contents($url);
             $visiting['qrcode'] = $data;
 
-            $visiting['expiry_date'] = $request->input('expiry_date');
-            $visiting['from_date'] = $request->input('from_date');
+            // $visiting['expiry_date'] = Carbon::parse( $request->input('expiry_date'));
+            $visiting['expiry_date'] = date('Y-m-d H:i:s', strtotime($request->input('expiry_date')));
+
+            // $visiting['from_date'] =  Carbon::parse($request->input('from_date'));
+            $visiting['from_date'] =   date('Y-m-d H:i:s', strtotime($request->input('from_date')));
+
+
             $visiting['type_id'] = $request->input('type');
             $visitingDetails = VisitingDetails::query()->create($visiting);
 
@@ -233,7 +239,12 @@ class VisitorService
             $visiting['status'] = Status::ACTIVE;
             $visiting['user_id'] = $request->input('employee_id');
             // $visiting['qrcode'] = $request->input('qrcode');
-            $visiting['expiry_date'] = $request->input('expiry_date');
+
+            // $visiting['expiry_date'] = $request->input('expiry_date');
+            // $visiting['expiry_date'] = Carbon::parse($request->input('expiry_date'))->format('Y-m-d H:i:s');
+            $visiting['expiry_date'] = date('Y-m-d H:i:s', strtotime($request->input('expiry_date')));
+
+
             $visiting['from_date'] = $request->input('from_date');
             $visiting['type_id'] = $request->input('type');
 

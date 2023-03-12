@@ -76,6 +76,32 @@
     }
     @endif
 
+    flatpickr("#v2date", {
+        enableTime: true,
+        noCalendar: false,
+        // dateFormat: "d-m-Y H:i",
+        dateFormat: "Y-m-d H:i",
+        defaultDate: "today"
+    });
+    flatpickr("#v3date", {
+        enableTime: true,
+        noCalendar: false,
+        // dateFormat: "d-m-Y H:i",
+        dateFormat: "Y-m-d H:i",
+        defaultDate: "today"
+    });
+
+    flatpickr("#vdate", {
+        enableTime: false,
+        noCalendar: false,
+        // dateFormat: "d-m-Y H:i",
+        dateFormat: "Y-m-d",
+        defaultDate: "today"
+    });
+
+
+
+
     //     element = document.getElementById('pp').parentNode;
     // console.log(element);
 

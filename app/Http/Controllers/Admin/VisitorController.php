@@ -13,6 +13,7 @@ use App\Http\Services\Visitor\VisitorService;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -56,6 +57,9 @@ class VisitorController extends Controller
 
     public function store(VisitorRequest $request)
     {
+        // return date('Y-m-d H:i:s', strtotime($request->input('from_date')));
+        // return Carbon::parse($request->input('expiry_date'));
+        // return $request;
         $this->visitorService->make($request);
         return redirect()->route('admin.visitors.index')->withSuccess('The data inserted successfully!');
     }
@@ -121,7 +125,7 @@ class VisitorController extends Controller
                 if ($visitingDetail->creatorEmployee->level == 0) {
                     // if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_id ) {
                     // if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_employee ) {
-                    if (auth()->user()->hasRole(1) || auth()->user()->id == $visitingDetail->creator_id ) {
+                    if (auth()->user()->hasRole(1) || auth()->user()->id == $visitingDetail->creator_id) {
                         $msg = __('files.Re-Send Sms');
                         $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                     }

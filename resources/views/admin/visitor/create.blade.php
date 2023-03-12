@@ -120,7 +120,7 @@
 								<div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.From Date') }}</label>
-                                        <input type="datetime-local" name="from_date" class="form-control @error('from_date') is-invalid @enderror" value="{{ old('from_date') }}" id="from_date">
+                                        <input type="datetime-local" name="from_date" id="v2date" class="v2date form-control @error('from_date') is-invalid @enderror" value="{{ old('from_date') }}" id="from_date">
                                         @error('from_date')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="form-group col">
                                         <label>{{ __('files.Expiry Date') }}</label>
-                                        <input type="datetime-local" name="expiry_date" class="form-control @error('expiry_date') is-invalid @enderror" value="{{ old('expiry_date') }}" id="expiry_date">
+                                        <input type="datetime-local" name="expiry_date" id="v3date" class="v3date form-control @error('expiry_date') is-invalid @enderror" value="{{ old('expiry_date') }}" id="expiry_date">
                                         @error('expiry_date')
                                         <div class="invalid-feedback">
                                             {{ $message }}

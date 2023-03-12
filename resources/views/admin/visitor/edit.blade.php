@@ -145,8 +145,8 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.Expiry Date') }}</label>
-                                        <input type="datetime-local" name="expiry_date"
-                                               class="form-control @error('expiry_date') is-invalid @enderror"
+                                        <input type="datetime-local" name="expiry_date" id="v3date"
+                                               class="v3date form-control @error('expiry_date') is-invalid @enderror"
                                                value="{{ old('expiry_date',$visitingDetails->visitor->expiry_date) }}"
                                                id="expiry_date">
                                         @error('expiry_date')
@@ -182,7 +182,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label class="purbose-label required col-md-12" for="purpose">{{ __('files.Purpose') }}</label> 
+                                        <label class="purbose-label required col-md-12" for="purpose">{{ __('files.Purpose') }}</label>
                                         <textarea name="purpose"
                                                   class="summernote-simple summernote form-control height-textarea @error('purpose')
                                                       is-invalid @enderror"

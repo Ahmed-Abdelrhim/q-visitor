@@ -68,7 +68,9 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.Joining Date') }}</label> <span class="text-danger">*</span>
-                                        <input type="text" autocomplete="off" id="date-picker" name="date_of_joining" class="form-control @error('date_of_joining') is-invalid @enderror" value="{{ old('date_of_joining',$employee->date_of_joining) }}">
+                                        <input type="text" autocomplete="off" id="vdate" name="date_of_joining"
+                                               class="vdate form-control @error('date_of_joining') is-invalid @enderror"
+                                               value="{{ old('date_of_joining',$employee->date_of_joining) }}">
                                         @error('date_of_joining')
                                         <div class="invalid-feedback">
                                             {{ $message }}
