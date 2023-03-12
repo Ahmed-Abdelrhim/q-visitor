@@ -65,15 +65,16 @@ class CompanionController extends Controller
             return 'Visit Not Found';
         }
 
-        $name = null;
-        $last_name = null;
+
+        $name = NULL;
+        $last_name = NULL;
         $notifications = array('message' => 'Success', 'alert-type' => 'success');
         if (isset($_POST['name'])) {
             $name = explode(" ", $_POST['name']);
             $last_name = substr(strstr($_POST['name'], " "), 1);
         }
 
-        $gender = null;
+        $gender = NULL;
         if (isset($_POST['gender'])) {
             $gender = $_POST['gender'];
             $gender = 5;
@@ -82,24 +83,27 @@ class CompanionController extends Controller
             }
         }
 
-        $address = null;
+        $address = NULL;
         if (isset($_POST['address'])) {
             $address = $_POST['address'];
         }
 
-        $nat_id = null;
+        $nat_id = NULL;
         if (isset($_POST['nat_id'])) {
             $nat_id = $_POST['nat_id'];
+
+            if (!is_integer($nat_id))
+                $nat_id = NULL;
         }
 
 
-        $checkin_date = null;
+        $checkin_date = NULL;
         if (isset($_POST['checkin_date'])) {
             $checkin_date = $_POST['checkin_date'];
         }
 
 
-        $checkin_time = null;
+        $checkin_time = NULL;
         if (isset($_POST['checkin_time'])) {
             $checkin_time = $_POST['checkin_time'];
         }
@@ -108,7 +112,7 @@ class CompanionController extends Controller
             $images = explode("||", $_POST['images']);
         }
 
-        $perpic = null;
+        $perpic = NULL;
         if (isset($_POST['perpic'])) {
             $perpic = $_POST['perpic'];
         }
@@ -123,10 +127,13 @@ class CompanionController extends Controller
             $plate_no = $_POST['plate_no'];
         }
 
+
         $data = $perpic;
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);
         $data = base64_decode($data);
+
+        // return 'First Name => ' . $name[0] . ' Last Name => ' . $last_name . ' National ID => ' . $nat_id . ' Gender => '. $gender . ' Visit_id => ' . $visit->id;
 
 
         try {
@@ -160,14 +167,15 @@ class CompanionController extends Controller
                 ->addMedia(storage_path('app/public' . '/' . 'per_images/' . $visit->reg_no . '/companions/' . $companion->id . '.png'))
                 ->preservingOriginal()
                 ->toMediaCollection('companion');
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
 
         // adding all identification images
 
         try {
-            if (!file_exists(storage_path('app/public'.'/images/'.$visit->reg_no .'/companions'))) {
-                File::makeDirectory(storage_path('app/public'.'/images/'.$visit->reg_no .'/companions') ,0777,true,true);
+            if (!file_exists(storage_path('app/public' . '/images/' . $visit->reg_no . '/companions'))) {
+                File::makeDirectory(storage_path('app/public' . '/images/' . $visit->reg_no . '/companions'), 0777, true, true);
             }
 
             foreach ($images as $counter => $img) {
@@ -179,6 +187,6 @@ class CompanionController extends Controller
         } catch (\Exception $e) {}
 
 
-        return $visit->id;
+        return (int) $visit->id;
     }
 }

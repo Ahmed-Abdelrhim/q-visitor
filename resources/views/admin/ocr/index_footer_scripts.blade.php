@@ -158,12 +158,12 @@
                 wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
                 wnd.print();
                 iziToast.success({
-                    title : 'Success',
-                    message : 'تمت إضافة البيانات بنجاح',
-                    position : 'topRight',
+                    title: 'Success',
+                    message: 'تمت إضافة البيانات بنجاح',
+                    position: 'topRight',
                 });
 
-                setTimeout(home,2000);
+                setTimeout(home, 2000);
 
                 function home() {
                     location.replace('http://127.0.0.1:8000/admin/OCR');
@@ -212,17 +212,38 @@
                 add: add,
             }, function (data) {
                 // Another Companion
-                console.log(data);
-                iziToast.success({
-                    title: 'Success',
-                    message: 'تم إضافة المرافق بنجاح',
-                    position: 'topRight'
-                });
-                // setTimeout(reload, 2000);
+                console.log(typeof(data) );
 
-                // function reload() {
-                //     location.reload();
-                // }
+                if (data === 'Error While Adding Companion') {
+                    iziToast.error({
+                        title: 'error',
+                        message: 'حدث خطأ اثناء قراءة بيانات الهوية',
+                        position: 'topRight'
+                    });
+                }
+
+                if (data === 'Visit Not Found') {
+                    iziToast.error({
+                        title: 'error',
+                        message: 'لم يتم ايجاد هذة الزيارة ',
+                        position: 'topRight'
+                    });
+                }
+
+                else {
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'تم إضافة المرافق بنجاح',
+                        position: 'topRight'
+                    });
+                    setTimeout(reload, 2000);
+
+                    function reload() {
+                        location.reload();
+                    }
+                }
+
+                console.log(data);
             });
         });
 
@@ -268,16 +289,36 @@
             }, function (data) {
                 // Last Companion
                 console.log(data);
-                iziToast.success({
-                    title: 'Success',
-                    message: 'تم إضافة المرافقين بنجاح',
-                    position: 'topRight'
-                });
-                setTimeout(reloadPage, 2000)
 
-                function reloadPage() {
-                    location.replace("http://127.0.0.1:8000/admin/OCR");
+
+                if(data === 'Error While Adding Companion') {
+                    iziToast.error({
+                        title: 'error',
+                        message: 'حدث خطأ اثناء قراءة بيانات الهوية',
+                        position: 'topRight'
+                    });
                 }
+                if(data === 'Visit Not Found') {
+                    iziToast.error({
+                        title: 'error',
+                        message: 'لم يتم ايجاد هذة الزيارة ',
+                        position: 'topRight'
+                    });
+                }
+
+                else {
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'تم إضافة المرافقين بنجاح',
+                        position: 'topRight'
+                    });
+                    setTimeout(reloadPage, 2000)
+
+                    function reloadPage() {
+                        location.replace("http://127.0.0.1:8000/admin/OCR");
+                    }
+                }
+
             });
         });
 
