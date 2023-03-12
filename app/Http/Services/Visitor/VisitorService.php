@@ -106,6 +106,8 @@ class VisitorService
         // $input['address'] = strip_tags(trim($request->input('address')));
         $address = strip_tags(trim($request->input('address')));
         $address = str_replace('&nbsp;', '', $address);
+        $address = str_replace('<p>;', '', $address);
+        $address = str_replace('</p>', '', $address);
         $input['address'] = $address;
         $input['type'] = $request->input('type');
         $input['national_identification_no'] = $request->input('national_identification_no');
@@ -117,6 +119,9 @@ class VisitorService
         if ($visitor) {
             $purpose = strip_tags(trim($request->input('purpose')));
             $purpose = str_replace('&nbsp;', '', $purpose);
+            $purpose = str_replace('<p>;', '', $purpose);
+            $purpose = str_replace('</p>;', '', $purpose);
+
             $visiting['purpose'] = $purpose;
             $visiting['reg_no'] = $reg_no;
             // $visiting['purpose'] = strip_tags(trim($request->input('purpose')));
@@ -221,6 +226,8 @@ class VisitorService
         $input['gender'] = $request->input('gender');
         $address = strip_tags(trim($request->input('address')));
         $address = str_replace('&nbsp;', '', $address);
+        $address = str_replace('<p>;', '', $address);
+        $address = str_replace('</p>;', '', $address);
         $input['address'] = $address;
         // $input['address'] = strip_tags(trim($request->input('address')));
         $input['type'] = $request->input('type');
@@ -232,6 +239,8 @@ class VisitorService
         if ($visitingDetails) {
             $purpose = strip_tags(trim($request->input('purpose')));
             $purpose = str_replace('&nbsp;', '', $purpose);
+            $purpose = str_replace('<p>;', '', $purpose);
+            $purpose = str_replace('</p>', '', $purpose);
             $visiting['purpose'] = $purpose;
             $visiting['company_name'] = $request->input('company_name');
             $visiting['employee_id'] = $request->input('employee_id');
