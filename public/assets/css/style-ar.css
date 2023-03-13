@@ -4563,3 +4563,10 @@ td:has(> button.actions) {
 .note-editable p{
     float: right !important;
 }
+
+.contact-wrap {
+    background-color: #24ba64 !important;
+    background-image: linear-gradient(to bottom right, #24ba64, #c6cdc6) !important;
+    border-radius: 15px 15px 0 0 !important;
+}
+

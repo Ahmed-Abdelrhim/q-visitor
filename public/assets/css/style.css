@@ -3015,3 +3015,8 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
   visibility: visible;
   opacity: 1;
 }
+.contact-wrap{
+  background-color: #24ba64 !important;
+    background-image: linear-gradient(to bottom right, #24ba64, #c6cdc6) !important;
+    border-radius: 15px 15px 0 0 !important;
+}
