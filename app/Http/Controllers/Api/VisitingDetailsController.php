@@ -9,6 +9,31 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 class VisitingDetailsController extends Controller
 {
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'first_name' => 'required|string|min:3',
+            'last_name' => 'required|string|min:3',
+            'email' => 'required|email',
+            'password' => 'required|string|min:6',
+            'phone' => 'nullable|numeric',
+            'address' => 'nullable|string',
+            'joining_date' => 'nullable|date',
+            'gender' => ['required','string','max:6','regex:(female|Female|male|Male|MALE|FEMALE)'],
+            'level' => 'required|between:0,2',
+            'emp_one' => 'nullable|numeric|exists:employees,id',
+            'emp_two' => 'nullable|numeric|exists:employees,id',
+            'role' => 'required|numeric|exists:roles,id',
+            'department' => 'required|numeric|exists:departments,id',
+            'designation' => 'required|numeric|exists:designation,id',
+            'about' => 'nullable|string|max:100',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['data' => $validator->errors()],400 ,['msg' => 'Validation Error']);
+        }
+    }
+
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -17,19 +42,23 @@ class VisitingDetailsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['data' => $validator->errors(),'status' => 400 , 'msg' => 'Validation Error']);
+            // return response()->json(['data' => $validator->errors(),'status' => 400 , 'msg' => 'Validation Error']);
+            return response()->json(['data' => $validator->errors()] ,400 ,['msg' => 'Validation Error']);
         }
         $user = User::query()->where('email',$request->get('email'))->first();
         if (!$user) {
-            return response()->json(['status' => 'There Is No Such email' ,'status',401]);
+            // return response()->json(['status' => 'There Is No Such email' ,'status',401]);
+            return response()->json(['data' => 'There Is No Such email'] ,400, ['msg' => 'Not Valid']);
         }
 
         if (auth()->attempt($this->credentials($request))) {
             $token = $user->createToken('authToken')->plainTextToken;
+            // return response()->json(['token'=> $token , 'msg' => 'Login Success','status' => 200]);
             return response()->json(['token'=> $token , 'msg' => 'Login Success','status' => 200]);
         }
 
-        return response()->json(['msg' =>'Password Is Incorrect','status'=>400]);
+        // return response()->json(['msg' =>'Password Is Incorrect','status'=>400]);
+        return response()->json(['data' =>'Password Is Incorrect'],400,[]);
     }
 
     public function credentials($request)
