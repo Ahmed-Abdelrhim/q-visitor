@@ -17,11 +17,11 @@ class PreRegisterService
     public function all()
     {
         if(auth()->user()->getrole->name == 'Employee') {
-            return PreRegister::where(['employee_id'=>auth()->user()->employee->id])
+            return PreRegister::query()->where(['employee_id'=>auth()->user()->employee->id])
 
                 ->orderBy('id', 'desc')->get();
         }else {
-            return PreRegister::orderBy('id', 'desc')->get();
+            return PreRegister::query()->orderBy('id', 'desc')->get();
         }
     }
 
@@ -32,9 +32,9 @@ class PreRegisterService
     public function find($id)
     {
         if(auth()->user()->getrole->name == 'Employee') {
-            return PreRegister::where(['id'=>$id,'employee_id'=>auth()->user()->employee->id])->first();
+            return PreRegister::query()->where(['id'=>$id,'employee_id'=>auth()->user()->employee->id])->first();
         }else {
-            return PreRegister::find($id);
+            return PreRegister::query()->find($id);
         }
     }
 
@@ -45,7 +45,7 @@ class PreRegisterService
      */
     public function findWhere($column, $value)
     {
-        $result = PreRegister::where($column, $value)->get();
+        $result = PreRegister::query()->where($column, $value)->get();
 
         return $result;
     }
@@ -57,7 +57,7 @@ class PreRegisterService
      */
     public function findWhereFirst($column, $value)
     {
-        $result = PreRegister::where($column, $value)->first();
+        $result = PreRegister::query()->where($column, $value)->first();
 
         return $result;
     }
@@ -82,20 +82,34 @@ class PreRegisterService
         $input['email'] = $request->input('email');
         $input['phone'] = $request->input('phone');
         $input['gender'] = $request->input('gender');
-        $input['address'] = $request->input('address');
+
+        $address = strip_tags(trim($request->input('address')));
+        $address = str_replace('&nbsp;' , '' , $request->input('address'));
+        $address = str_replace('<p>;' , '' , $request->input('address'));
+        $address = str_replace('</p>;' , '' , $request->input('address'));
+        $input['address'] = $address;
+
+
         $input['is_pre_register'] = true;
         $input['status'] = Status::ACTIVE;
-        $visitor = Visitor::create($input);
+        $visitor = Visitor::query()->create($input);
         $result='';
         if($visitor) {
             $preArray['expected_date']  = $request->input('expected_date');
             $preArray['expected_time']  = date('H:i:s', strtotime($request->input('expected_time')));
             $preArray['exit_date']  = $request->input('exit_date');
             $preArray['exit_time']  = date('H:i:s', strtotime($request->input('exit_time')));
-            $preArray['comment']        = $request->input('comment');
+
+            $comment = strip_tags(trim($request->input('comment')));
+            $comment = str_replace('&nbsp;','',$request->input('comment'));
+            $comment = str_replace('<p>;','',$request->input('comment'));
+            $comment = str_replace('</p>','',$request->input('comment'));
+            $preArray['comment'] = $comment;
+
+
             $preArray['visitor_id']     = $visitor->id;
             $preArray['employee_id']     = $request->input('employee_id');
-            $result = PreRegister::create($preArray);
+            $result = PreRegister::query()->create($preArray);
             try {
                 $result->visitor->user()->notify(new SendInvitationToVisitors($result));
             } catch (\Exception $e) {
@@ -113,14 +127,23 @@ class PreRegisterService
      */
     public function update(Request $request, $id)
     {
-        $pre_register = PreRegister::findOrFail($id);
+        $pre_register = PreRegister::query()->findOrFail($id);
 
         $input['first_name'] = $request->input('first_name');
         $input['last_name'] = $request->input('last_name');
         $input['email'] = $request->input('email');
         $input['phone'] = $request->input('phone');
         $input['gender'] = $request->input('gender');
-        $input['address'] = $request->input('address');
+
+        $address = strip_tags(trim($request->input('address')));
+        $address = str_replace('&nbsp;', '', $address);
+        $address = str_replace('<p>;', '', $address);
+        $address = str_replace('</p>;', '', $address);
+        $input['address'] = $address;
+
+
+        // $input['address'] = $request->input('address');
+
         // $input['employee_id'] = $request->input('employee_id');
         $input['is_pre_register'] = true;
         $input['status'] = Status::ACTIVE;
@@ -130,7 +153,17 @@ class PreRegisterService
             $preArray['expected_time']  = date('H:i:s', strtotime($request->input('expected_time')));
             $preArray['exit_date']  = $request->input('exit_date');
             $preArray['exit_time']  = date('H:i:s', strtotime($request->input('exit_time')));
-            $preArray['comment']        = $request->input('comment');
+
+
+            $comment = strip_tags(trim($request->input('comment')));
+            $comment = str_replace('&nbsp;', '', $comment);
+            $comment = str_replace('<p>;', '', $comment);
+            $comment = str_replace('</p>;', '', $comment);
+            $preArray['comment']  = $comment;
+
+            // $preArray['comment']        = $request->input('comment');
+
+
             $preArray['employee_id'] = $request->input('employee_id');
             $pre_register->update($preArray);
             try {
