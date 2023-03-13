@@ -56,4 +56,11 @@ class VisitingDetailsController extends Controller
         return response()->json(['data' => $visit , 'status' => 200 , 'msg'=> 'Success']);
     }
 
+    public function logout(Request $request)
+    {
+        $user = $request->user()->first_name;
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['msg' => 'Good Bye Hope See You Soon ' . $user , 'status' => 200]);
+    }
+
 }

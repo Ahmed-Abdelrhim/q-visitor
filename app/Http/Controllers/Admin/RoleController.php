@@ -28,26 +28,16 @@ class RoleController extends BackendController
 
     public function index()
     {
-        $this->data['roles'] = Role::all();
+        $this->data['roles'] = Role::query()->orderBy('id','asc')->get();
         return view('admin.role.index', $this->data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('admin.role.create', $this->data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(RoleRequest $request)
     {
         $role       = new Role;
