@@ -48,8 +48,7 @@ class VisitingDetailsController extends Controller
             return response()->json(['msg'=> 'Visit ID Should Be An Integer' , 'status' => 400]);
         }
 
-        $visit = VisitingDetails::query()->with('visitor')->find($visit_id);
-
+        $visit = VisitingDetails::query()->with('visitor')->with('companions')->find($visit_id);
         if (!$visit) {
             return response()->json(['msg'=> 'Visit Not Found' , 'status' => 400]);
         }
