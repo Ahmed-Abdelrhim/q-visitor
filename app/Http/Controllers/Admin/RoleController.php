@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends BackendController
 {
-    public $notDeleteArray = [1, 2, 3];
+    public $notDeleteArray = [1, 2, 3 , 14 , 15];
 
     public function __construct()
     {
