@@ -6,10 +6,10 @@ use App\Http\Controllers\API\VisitingDetailsController;
 Route::post('visit/register', [VisitingDetailsController::class, 'register']);
 Route::post('visit/login', [VisitingDetailsController::class, 'login']);
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
+//Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('getVisitDetails/{id}',[VisitingDetailsController::class,'getVisitDetails']);
-    Route::post('visit/logout', [VisitingDetailsController::class, 'logout']);
-});
+//    Route::post('visit/logout', [VisitingDetailsController::class, 'logout']);
+//});
 
 // 1|H0oRnTAsdjgnN23P3ESsYWFRwZ9Kv67PMbuiHu6q
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\VisitngDetailsResource;
 use App\Models\VisitingDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -56,7 +57,6 @@ class VisitingDetailsController extends Controller
             // return response()->json(['token'=> $token , 'msg' => 'Login Success','status' => 200]);
             return response()->json(['token'=> $token , 'msg' => 'Login Success','status' => 200]);
         }
-
         // return response()->json(['msg' =>'Password Is Incorrect','status'=>400]);
         return response()->json(['data' =>'Password Is Incorrect'],400,[]);
     }
@@ -81,6 +81,8 @@ class VisitingDetailsController extends Controller
         if (!$visit) {
             return response()->json(['msg'=> 'Visit Not Found' , 'status' => 400]);
         }
+
+        $visit = new VisitngDetailsResource($visit);
 
         return response()->json(['data' => $visit , 'status' => 200 , 'msg'=> 'Success']);
     }
