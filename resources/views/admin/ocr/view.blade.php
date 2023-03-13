@@ -34,6 +34,26 @@
         .approved_visit {
             background-color: green;
         }
+        .actions-btns, .visits-btns{
+            padding-left: 40px !important;
+        }
+        .heading-section{
+            padding-bottom:20px !important;
+        }
+        .visits-btns{
+             padding-top:15px !important;
+        }
+        .contact-wrap{
+            border-radius: 30px 30px 0 0 !important;
+        }
+        .btn-icon{
+            font-weight: bold !important;
+        }
+        /* .contact-wrap {
+    background-color: #24ba64 !important;
+    background-image: linear-gradient(to bottom right, #24ba64, #c6cdc6) !important;
+    border-radius: 15px 15px 0 0 !important;
+} */
     </style>
 
 
@@ -67,54 +87,102 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                 <h2 class="heading-section">{{__('files.Manage Visits')}}</h2>
             </div>
         </div>
-        <br/>
-        <div class="row justify-content-center">
+       
+        <div class="row">
             <div class="col-md-12">
                 <div class="wrapper">
                     <div class="row no-gutters">
                         <div class="col-md-12">
                             <div class="contact-wrap w-100 p-lg-5 p-4">
-                                <label
-                                    style="color:#fff;font-size:26px;font-weight:bold">{{__('files.Filter By Date Period')}}
-                                    : </label>
+                                
+                                
 
-                                <div class="row" style="text-align:center !important;padding-left:27%">
-                                    <div class="text pl-3" style="margin-left:3%">
-                                        <p><span style="color:#fff">{{__('files.Check in Date')}} :</span> <input
-                                                type="text"
-                                                class="v2date form-control"
-                                                id="v2date"
-                                                style="color:#000 !important"/>
-                                        </p>
-                                    </div>
-                                    <div class="text pl-3">
-                                        <p><span style="color:#fff">{{__('files.Check out Date')}} :</span> <input
-                                                type="text"
-                                                class="v3date form-control"
-                                                id="v3date"
-                                                style="color:#000 !important"/>
-                                        </p>
-
-                                    </div>
-                                    <div style="width:100%;float:left"></div>
+                                <div class="row">
+                                <label class="col-12"
+                                    style="color:#fff;font-size:26px;font-weight:bold; padding-bootom:10px;">{{__('files.Filter By Date Period')}}
+                                    : </label>    
 
 
-                                    <button class="btn btn-sm btn-icon mr-2  float-left btn-success find"
-                                            data-toggle="tooltip" data-placement="top" title="Search"><i
-                                            class="fa fa-search"></i> {{__('files.Search')}}
-                                    </button>
-                                    <button class="btn btn-sm btn-icon mr-2  float-left btn-success clr"
-                                            data-toggle="tooltip" data-placement="top" title="clear"><i
-                                            class="fa fa-refresh"></i> {{__('files.Clear Search')}}
-                                    </button>
-                                    <button class="btn btn-sm btn-icon mr-2  float-left btn-success newscan"
-                                            data-toggle="tooltip" data-placement="top" title="New Scan"><i
-                                            class="far fa-check-circle"></i> {{__('files.New Scan')}}
-                                    </button>
+                                        <div class="text pl-3" style="margin-left:3%">
+                                            <p><span style="color:#fff">{{__('files.Check in Date')}} :</span> <input
+                                                    type="text"
+                                                    class="v2date form-control"
+                                                    id="v2date"
+                                                    style="color:#000 !important"/>
+                                            </p>
+                                        </div>
+
+
+                                        <div class="text pl-3">
+                                            <p><span style="color:#fff">{{__('files.Check out Date')}} :</span> <input
+                                                    type="text"
+                                                    class="v3date form-control"
+                                                    id="v3date"
+                                                    style="color:#000 !important"/>
+                                            </p>
+                                        </div>
+
+
+                                        
+
+                                        <div class="actions-btns">
+                                            <button class="btn btn-sm btn-icon mr-2  float-left btn-success find"
+                                                data-toggle="tooltip" data-placement="top" title="Search"><i
+                                                class="fa fa-search"></i> {{__('files.Search')}}
+                                            </button>
+                                            <button class="btn btn-sm btn-icon mr-2  float-left btn-success clr"
+                                                data-toggle="tooltip" data-placement="top" title="clear"><i
+                                                class="fa fa-refresh"></i> {{__('files.Clear Search')}}
+                                            </button>
+                                        </div>
+
+
+                                        
+                                        <!-- <button class="btn btn-sm btn-icon mr-2  float-left btn-success newscan"
+                                                data-toggle="tooltip" data-placement="top" title="New Scan"><i
+                                                class="far fa-check-circle"></i> {{__('files.New Scan')}}
+                                        </button> -->
+
+
                                 </div>
 
+
+
+                                <!-- New Row  -->
+                                <div class="row">
+                                     <label class="col-12"
+                                    style="color:#fff;font-size:26px;font-weight:bold; padding-bootom:10px;">
+                                    {{__('files.New Visit')}}
+                                    : </label>
+
+                                        <div class="visits-btns">
+                                            <button class="btn btn-sm btn-icon   float-left btn-success"
+                                                data-toggle="tooltip" data-placement="top" title="Search" style="width: 125px;
+    height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-truck" style="font-size: 25px;"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-icon   float-left btn-success"
+                                                data-toggle="tooltip" data-placement="top" title="clear" style="width: 125px;
+    height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-car" style="font-size: 25px;"></i>
+                                            </button>
+
+                                            <button class="btn btn-sm btn-icon   float-left btn-success "
+                                                data-toggle="tooltip" data-placement="top" title="clear" style="width: 125px;
+    height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-person-walking" style="font-size: 25px;"></i>
+                                            </button>
+                                        </div>
+
+
+                                </div>
+                                <!-- End New Row -->
+
                             </div>
-                        </div>
+
+
+                            
+
+
+
+                           
 
                         <div class="col-md-12 d-flex align-items-stretch"
                              style="text-align:center;padding-top:25px;padding-bottom:25px">
