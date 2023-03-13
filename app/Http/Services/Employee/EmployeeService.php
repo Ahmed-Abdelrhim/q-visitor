@@ -134,11 +134,8 @@ class EmployeeService
         $user = User::query()->find($employee->user_id);
         $user->update($input);
         if ($request->get('role') > 0 && is_numeric($request->get('role'))) {
-
             DB::table('model_has_roles')->where('model_id', $user->id)->delete();
-
-            $role = Role::find($request->get('role'));
-
+            $role = Role::query()->find($request->get('role'));
             $user->assignRole($role);
         }
 
@@ -159,11 +156,13 @@ class EmployeeService
             $data['level'] = $request->input('level');
 
 
-            $about = strip_tags(trim($request->input('about')));
-            $about = str_replace('&nbsp;','',$request->input('about'));
-            $about = str_replace('<p>;','',$request->input('about'));
-            $about = str_replace('</p>','',$request->input('about'));
+            $about = str_replace('&nbsp;','',  $request->input('about'));
+            $about = str_replace('<p>;',  '',  $request->input('about'));
+            $about = str_replace('</p>',  '',  $request->input('about'));
+            $about = trim($about);
             $data['about'] = $about;
+
+            return $data['about'];
 
             // data['about'] = $request->input('about');
 

@@ -1,6 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\VisitingDetailsController;
+
+
+Route::post('visit/login', [VisitingDetailsController::class, 'login']);
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('getVisitDetails/{id}',[VisitingDetailsController::class,'getVisitDetails']);
+});
+
+// 1|H0oRnTAsdjgnN23P3ESsYWFRwZ9Kv67PMbuiHu6q
 
 Route::group(['prefix' => 'v1'], function () {
 
@@ -62,10 +71,9 @@ Route::group(['prefix' => 'v1'], function () {
     Route::delete('requestwithdraw/{id}', 'Api\v1\RequestWithdrawController@delete');
 
 
-
     Route::get('orders', 'Api\v1\OrderController@index');
     Route::post('orders', 'Api\v1\OrderController@store');
-    Route::put('orders/{id}', 'Api\v1\OrderController@update'); //done 
+    Route::put('orders/{id}', 'Api\v1\OrderController@update'); //done
     Route::get('orders/{id}/show', 'Api\v1\OrderController@show');
     Route::post('orders/payment', 'Api\v1\OrderController@orderPayment'); //need chck
     Route::get('orders/{id}/download-attachmement', 'Api\v1\OrderController@attachment');
@@ -83,14 +91,14 @@ Route::group(['prefix' => 'v1'], function () {
     Route::put('notification-order-status/{id}/update', 'Api\v1\NotificationOrderController@orderStatus');
     Route::get('notification-order/{id}/show', 'Api\v1\NotificationOrderController@show');
     Route::get('notification-order/history', 'Api\v1\NotificationOrderController@history');
-    
+
     Route::get('search/{shop}/shops', 'Api\v1\SearchController@shops'); //need check
     Route::get('search/{shop}/shops/{product}/products', 'Api\v1\SearchController@shopProducts'); //need check
     Route::get('best-selling/products', 'Api\v1\SearchController@bestSellingProducts');
     Route::get('best-selling/categories', 'Api\v1\SearchController@bestSellingCategories');
 
     Route::get('banners', 'Api\v1\BannerController@index');
-    
+
     Route::post('checkout/invoice', 'Api\v1\CheckoutController@invoice');
     Route::post('checkout/payment', 'Api\v1\CheckoutController@payment');
     Route::post('checkout/cancel', 'Api\v1\CheckoutController@cancel');

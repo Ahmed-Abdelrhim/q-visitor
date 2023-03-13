@@ -221,7 +221,7 @@
                                                   class="summernote-simple form-control height-textarea @error('about')
                                                       is-invalid @enderror"
                                                   id="about" >
-                                            {{ old('about',$employee->about) }}
+                                            {{ old('about',trim($employee->about)) }}
                                         </textarea>
                                         @error('about')
                                         <div class="invalid-feedback">

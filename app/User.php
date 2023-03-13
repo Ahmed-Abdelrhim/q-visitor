@@ -6,6 +6,8 @@ use App\Models\Employee;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Shipu\Watchable\Traits\HasModelEvents;
+use Laravel\Sanctum\HasApiTokens;
+
 
 //use Spatie\MediaLibrary\HasMedia\HasMedia;
 //use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -18,7 +20,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class User extends Authenticatable implements JWTSubject, HasMedia
 {
-    use Notifiable, InteractsWithMedia, HasModelEvents, HasRoles;
+    use Notifiable, HasApiTokens ,InteractsWithMedia, HasModelEvents, HasRoles;
 
     /**
      * The attributes that are mass assignable.

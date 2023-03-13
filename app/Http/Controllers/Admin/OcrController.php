@@ -287,7 +287,7 @@ class OcrController extends Controller
         }
 
         // if (!file_exists($reg_no)) {
-        if (!file_exists(storage_path('app/public' . '/per_images'.'/'. $reg_no))) {
+        if (!file_exists(storage_path('app/public' . '/per_images' . '/' . $reg_no))) {
             File::makeDirectory(storage_path('app/public' . '/per_images' . '/' . $reg_no), 0777, true, true);
         }
 
@@ -297,7 +297,8 @@ class OcrController extends Controller
                 ->addMedia(storage_path('app/public' . '/' . 'per_images/' . $reg_no . '/' . $reg_no . '.png'))
                 ->preservingOriginal()
                 ->toMediaCollection('visitor');
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         if (!file_exists(storage_path('app/public' . '/images' . '/' . $reg_no))) {
             File::makeDirectory(storage_path('app/public' . '/images' . '/' . $reg_no), 0777, true, true);
@@ -312,7 +313,8 @@ class OcrController extends Controller
             }
 
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         return $visit->id;
     }
@@ -520,110 +522,21 @@ class OcrController extends Controller
 
     public function playy()
     {
-//        $visits = VisitingDetails::query()->get();
-//        $arabic = ['أ','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي'];
-//        $nums = [0,1,2,3,4,5,6,7,8,9];
-//
-//        foreach ($visits as $visit) {
-//            $num1 = array_rand($arabic);
-//            $num2 = array_rand($arabic);
-//            $num3 = array_rand($arabic);
-//            $visit->plate_no = $arabic[$num1] . ' ' . $arabic[$num2] . ' ' . $arabic[$num3] . ' '.array_rand($nums) .array_rand($nums) .array_rand($nums);
-//            $visit->save();
-//        }
-//        return 'Done';
 
-    //        $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=';
-    //
-    //        $visitors = Visitor::query()->take(20)->get();
-    //
-    //        for ($i = 0; $i < 10; $i++) {
-    //            $random = $visitors->random();
-    //            $reg_no = VisitingDetails::query()->orderBy('id', 'desc')->first()->reg_no;
-    //            $data = file_get_contents( $url . $random->first_name . $random->id);
-    //            $visit = VisitingDetails::query()->create([
-    //                'reg_no' => $reg_no + 1,
-    //                'purpose' => 'Visit' . $i + 1,
-    //                'company_name' => 'Qudra-Tech',
-    //                'checkin_at' => Carbon::now(),
-    //                'checkout_at' => Carbon::now()->addHours(5),
-    //                'status' => 5,
-    //                'user_id' => 48,
-    //                'creator_employee' => 46,
-    //                'emp_one' => 45,
-    //                'emp_two' => 46,
-    //                'visitor_id' => $random->id,
-    //                'employee_id' => 43,
-    //                'creator_type' => 'App\User',
-    //                'creator_id' => 48,
-    //                // 'editor_type' => '',
-    //                // 'editor_id' => '',
-    //                'plate_no' => 'ل ق أ 284',
-    //                'approval_status' => 0,
-    //                'sent_sms_before' => 0,
-    //                'qrcode' => $url . $random->first_name . $random->id,
-    //                'created_at' => Carbon::now(),
-    //            ]);
-    //        }
-    //        return 'Done';
+        return $visit = VisitingDetails::query()->with('visitor')->find(143);
 
+//        $login = Http::withHeaders([
+//            'Accept' => 'application/json',
+//            'Content-Type' => 'application/json',
+//        ])->post('http://127.0.0.1:8000/api/go/login', [
+//            'email' => 'guard.one@example.com',
+//            'password' => '12345678',
+//        ]);
 
-        // ==========================================================
+        // return Http::get('https://jsonplaceholder.typicode.com/todos/1');
 
-        //        $emp_one = NULL;
-        //        $emp_two = NULL;
-        //
-        //        if (auth()->user()->employee->level == 1) {
-        //            $emp_one = auth()->user()->employee->emp_one;
-        //        }
-        //
-        //        if (auth()->user()->employee->level == 2) {
-        //            $emp_one = auth()->user()->employee->emp_one;
-        //            $emp_two = auth()->user()->employee->emp_two;
-        //        }
-        //        return 'Emp One => ' . $emp_one . '<br> Emp Two => ' . $emp_two;
-
-        //        return auth()->user()->employee;
-        //        $visit = VisitingDetails::query()->find(146);
-        //        return $visit->creatorEmployee;
+        // return $login;
     }
 
 
 }
-
-
-
-//        $visit = VisitingDetails::query()->with('type')->find(279);
-//        if ($visit->approval_status == 0) {
-//            $status = 'Pending';
-//            if (auth()->user()->hasRole(intval($visit->type->role_one))) {
-//                $visit->approval_status = 1;
-//                $visit->save();
-//                return 'Will Show The First Approve Button';
-//            } else {
-//                return 'Will Not Show The First Approve Button';
-//            }
-//        }
-//        if ($visit->approval_status == 1) {
-//            $status = 'Waiting Fo Second Approval';
-//            if(auth()->user()->hasRole(intval($visit->type->role_two)) ) {
-//                $visit->approval_status = 2;
-//                $visit->save();
-//                return 'Will Show The Second Approve Button';
-//            } else {
-//                return 'Will Not Show The Second Approve Button';
-//            }
-//        }
-//
-//        if ($visit->approval_status == 2) {
-//            $status = 'Approved';
-//            return $status;
-//        }
-
-//        return auth()->user()->employee;
-//        // return $last = VisitingDetails::query()->latest()->first();
-//        if (!file_exists(storage_path('app/public' . '/playing'))) {
-//            $file = File::makeDirectory(storage_path('app/public' . '/' . 'playing'), 0777, true, true);
-//            return 'File Created Successfully';
-//        }
-//        return 'File Already Exists';
