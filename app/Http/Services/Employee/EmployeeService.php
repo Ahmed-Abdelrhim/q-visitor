@@ -97,7 +97,14 @@ class EmployeeService
             $data['department_id'] = $request->input('department_id');
             $data['designation_id'] = $request->input('designation_id');
             $data['date_of_joining'] = $request->input('date_of_joining');
-            $data['about'] = $request->input('about');
+
+
+            $about = strip_tags(trim($request->input('about')));
+            $about = str_replace('&nbsp;','',$request->input('about'));
+            $about = str_replace('<p>;','',$request->input('about'));
+            $about = str_replace('</p>','',$request->input('about'));
+            $data['about'] = $about;
+            // $data['about'] = $request->input('about');
 
             $data['level'] = $request->input('level');
             $data['emp_one'] = $request->input('emp_one');
@@ -151,7 +158,16 @@ class EmployeeService
 
             $data['level'] = $request->input('level');
 
-            $data['about'] = $request->input('about');
+
+            $about = strip_tags(trim($request->input('about')));
+            $about = str_replace('&nbsp;','',$request->input('about'));
+            $about = str_replace('<p>;','',$request->input('about'));
+            $about = str_replace('</p>','',$request->input('about'));
+            $data['about'] = $about;
+
+            // data['about'] = $request->input('about');
+
+
             $data['status'] = 5;
             $data['creator_employee'] = auth()->user()->employee->id;
 
