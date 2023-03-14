@@ -15,7 +15,7 @@ class BackgroundJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $tries = 3;
-//    public $visitingDetails;
+    public $visitingDetails;
 
     /**
      * Create a new job instance.
@@ -25,7 +25,7 @@ class BackgroundJob implements ShouldQueue
     public function __construct($visitingDetails)
         // public function __construct()
     {
-        // $this->visitingDetails = $visitingDetails;
+        $this->visitingDetails = $visitingDetails;
     }
 
     /**

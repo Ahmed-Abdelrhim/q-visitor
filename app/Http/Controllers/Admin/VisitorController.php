@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VisitorRequest;
+use App\Jobs\BackgroundJob;
 use App\Models\Employee;
 use App\Models\Languages;
 use App\Models\Types;
@@ -265,35 +266,24 @@ class VisitorController extends Controller
     public
     function sendSms($visitingDetail_id)
     {
-        $visit_details = VisitingDetails::query()->find($visitingDetail_id);
-        $user_id = $visit_details->visitor_id;
-        $user = Visitor::query()->find($user_id);
-        if (!$user) {
-            $notifications = array('error' => 'User Was Not Found');
+        $visit_details = VisitingDetails::query()->with('visitor')->find($visitingDetail_id);
+        if (empty($visit_details->visitor->phone)) {
+            $notifications = array('error' => 'يرجي إدخال رقم هاتف الزائر');
             return redirect()->back()->with($notifications);
         }
-        if (empty($user->phone)) {
-            $notifications = array('error' => 'User phone number can not be empty');
-            return redirect()->back()->with($notifications);
-        }
-
         try {
-            $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $user->id);
-            $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $user->phone);
-        } catch (\Exception $e) {
+            $job = BackgroundJob::dispatch($visit_details);
+        } catch (\Exception) {
             $notifications = array('error' => 'Something Went Wrong');
             return redirect()->back()->with($notifications);
         }
+        $notifications = array('success' => __('جاري إرسال الرسالة والإيميل'));
+        $visit_details->sent_sms_before = 1;
+        $visit_details->save();
+        return redirect()->back()->with($notifications);
 
-        if ($send_sms->status() == 200) {
-            $notifications = array('success' => __('files.Success Transaction'));
-            $visit_details->sent_sms_before = 1;
-            $visit_details->save();
-            return redirect()->back()->with($notifications);
-        } else {
-            $notifications = array('error' => 'Something Went Wrong');
-            return redirect()->back()->with($notifications);
-        }
+
+
 
     }
 
@@ -359,40 +349,3 @@ class VisitorController extends Controller
         return auth()->user()->employee();
     }
 }
-
-
-//                if ($approve) {
-//                    $msg = $status;
-//                    if ($visitingDetail->sent_sms_before == 1) {
-//                        $msg = __('files.Re-send sms');
-//                    }
-//                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-//                    $retAction .= '<a href="' . route('admin.visit.approval', $visitingDetail->approval_status) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-//                }
-
-
-//if (auth()->user()->hasRole('Admin')) {
-//    $approve = true;
-//} else {
-//    $type = Types::query()->find($visitingDetail->visitor->type);
-//    if ($type) {
-//        $role = Role::query()->find($type->role_one);
-//        if ($role) {
-//            if (auth()->user()->hasRole($role->name))
-//                $approve = true;
-//        }
-//    }
-//}
-
-
-//                if ($visitingDetail->sent_sms_before == 0)
-//                    return __('files.Pending');
-//                return __('files.Approved');
-
-
-//                if ($visitingDetail->approval_status == 0) {
-//                    return __('files.Pending');
-//                }
-//                if ($visitingDetail->approval_status == 1) {
-//                    return __('files.Waiting For First Approval');
-//                }
