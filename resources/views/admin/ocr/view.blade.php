@@ -39,6 +39,8 @@
         }
         .heading-section{
             padding-bottom:20px !important;
+            color: #494848 !important;
+            font-weight: bold !important;
         }
         .visits-btns{
              padding-top:15px !important;
