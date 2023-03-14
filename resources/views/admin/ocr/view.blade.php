@@ -30,35 +30,9 @@
     <script type="text/javascript" src="{{asset('DataTables/buttons.html5.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('DataTables/buttons.print.min.js')}}"></script>
 
-    <style>
-        .approved_visit {
-            background-color: green;
-        }
-        .actions-btns, .visits-btns{
-            padding-left: 40px !important;
-        }
-        .heading-section{
-            padding-bottom:20px !important;
-            color: #494848 !important;
-            font-weight: bold !important;
-        }
-        .visits-btns{
-             padding-top:15px !important;
-        }
-        .contact-wrap{
-            border-radius: 30px 30px 0 0 !important;
-        }
-        .btn-icon{
-            font-weight: bold !important;
-        }
-        /* .contact-wrap {
-    background-color: #24ba64 !important;
-    background-image: linear-gradient(to bottom right, #24ba64, #c6cdc6) !important;
-    border-radius: 15px 15px 0 0 !important;
-} */
-    </style>
 
 
+    @extends('admin.ocr.ocr_styles')
     @extends('admin.ocr.view_extend')
 
 </head>
@@ -80,7 +54,7 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                 عربى
             </a>
             |
-            <a href="{{route('change_locale','en')}}">
+            <a href="{{route('change_locale','en')}}"   class="@if(app()->getLocale() == 'ar') @endif">
                 English
             </a>
         </div>
@@ -89,20 +63,20 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                 <h2 class="heading-section">{{__('files.Manage Visits')}}</h2>
             </div>
         </div>
-       
+
         <div class="row">
             <div class="col-md-12">
                 <div class="wrapper">
                     <div class="row no-gutters">
                         <div class="col-md-12">
                             <div class="contact-wrap w-100 p-lg-5 p-4">
-                                
-                                
+
+
 
                                 <div class="row">
                                 <label class="col-12"
                                     style="color:#fff;font-size:26px;font-weight:bold; padding-bootom:10px;">{{__('files.Filter By Date Period')}}
-                                    : </label>    
+                                    : </label>
 
 
                                         <div class="text pl-3" style="margin-left:3%">
@@ -125,7 +99,7 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                         </div>
 
 
-                                        
+
 
                                         <div class="actions-btns">
                                             <button class="btn btn-sm btn-icon mr-2  float-left btn-success find"
@@ -139,7 +113,7 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                         </div>
 
 
-                                        
+
                                         <!-- <button class="btn btn-sm btn-icon mr-2  float-left btn-success newscan"
                                                 data-toggle="tooltip" data-placement="top" title="New Scan"><i
                                                 class="far fa-check-circle"></i> {{__('files.New Scan')}}
@@ -180,11 +154,11 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                             </div>
 
 
-                            
 
 
 
-                           
+
+
 
                         <div class="col-md-12 d-flex align-items-stretch"
                              style="text-align:center;padding-top:25px;padding-bottom:25px">
