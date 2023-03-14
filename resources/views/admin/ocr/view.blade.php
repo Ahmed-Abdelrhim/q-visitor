@@ -31,15 +31,11 @@
     <script type="text/javascript" src="{{asset('DataTables/buttons.print.min.js')}}"></script>
 
 
-
-    @if(app()->getLocale() == 'ar') 
-        @extends('admin.ocr.ocr_styles_ar')
-        @else
-            @extends('admin.ocr.ocr_styles')
+    @if(app()->getLocale() == 'ar')
+        @extends('admin.ocr.ocrstyles_ar')
+    @else
+        @extends('admin.ocr.ocr_styles')
     @endif
-    
-    
-
 
     @extends('admin.ocr.view_extend')
 
@@ -62,7 +58,7 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                 عربى
             </a>
             |
-            <a href="{{route('change_locale','en')}}" >
+            <a href="{{route('change_locale','en')}}">
                 English
             </a>
         </div>
@@ -80,80 +76,75 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                             <div class="contact-wrap w-100 p-lg-5 p-4">
 
 
-
                                 <div class="row">
-                                <label class="col-12"
-                                    style="color:#fff;font-size:26px;font-weight:bold; padding-bootom:10px;">{{__('files.Filter By Date Period')}}
-                                    : </label>
+                                    <label class="col-12"
+                                           style="color:#fff;font-size:26px;font-weight:bold; padding-bootom:10px;">{{__('files.Filter By Date Period')}}
+                                        : </label>
 
 
-                                        <div class="text pl-3" style="margin-left:3%">
-                                            <p><span style="color:#fff">{{__('files.Check in Date')}} :</span> <input
-                                                    type="text"
-                                                    class="v2date form-control"
-                                                    id="v2date"
-                                                    style="color:#000 !important"/>
-                                            </p>
-                                        </div>
+                                    <div class="text pl-3" style="margin-left:3%">
+                                        <p><span style="color:#fff">{{__('files.Check in Date')}} :</span> <input
+                                                type="text"
+                                                class="v2date form-control"
+                                                id="v2date"
+                                                style="color:#000 !important"/>
+                                        </p>
+                                    </div>
 
 
-                                        <div class="text pl-3">
-                                            <p><span style="color:#fff">{{__('files.Check out Date')}} :</span> <input
-                                                    type="text"
-                                                    class="v3date form-control"
-                                                    id="v3date"
-                                                    style="color:#000 !important"/>
-                                            </p>
-                                        </div>
+                                    <div class="text pl-3">
+                                        <p><span style="color:#fff">{{__('files.Check out Date')}} :</span> <input
+                                                type="text"
+                                                class="v3date form-control"
+                                                id="v3date"
+                                                style="color:#000 !important"/>
+                                        </p>
+                                    </div>
 
 
-
-
-                                        <div class="actions-btns">
-                                            <button class="btn btn-sm btn-icon mr-2  float-left btn-success find"
+                                    <div class="actions-btns">
+                                        <button class="btn btn-sm btn-icon mr-2  float-left btn-success find"
                                                 data-toggle="tooltip" data-placement="top" title="Search"><i
                                                 class="fa fa-search"></i> {{__('files.Search')}}
-                                            </button>
-                                            <button class="btn btn-sm btn-icon mr-2  float-left btn-success clr"
+                                        </button>
+                                        <button class="btn btn-sm btn-icon mr-2  float-left btn-success clr"
                                                 data-toggle="tooltip" data-placement="top" title="clear"><i
                                                 class="fa fa-refresh"></i> {{__('files.Clear Search')}}
-                                            </button>
-                                        </div>
+                                        </button>
+                                    </div>
 
 
-
-                                        <!-- <button class="btn btn-sm btn-icon mr-2  float-left btn-success newscan"
+                                    <!-- <button class="btn btn-sm btn-icon mr-2  float-left btn-success newscan"
                                                 data-toggle="tooltip" data-placement="top" title="New Scan"><i
                                                 class="far fa-check-circle"></i> {{__('files.New Scan')}}
-                                        </button> -->
+                                    </button> -->
 
 
                                 </div>
 
 
-
                                 <!-- New Row  -->
                                 <div class="row">
-                                     <label class="col-12"
-                                    style="color:#fff;font-size:26px;font-weight:bold; padding-bootom:10px;">
-                                    {{__('files.New Visit')}}
-                                    : </label>
+                                    <label class="col-12"
+                                           style="color:#fff;font-size:26px;font-weight:bold; padding-bootom:10px;">
+                                        {{__('files.New Visit')}}
+                                        : </label>
 
-                                        <div class="visits-btns">
-                                            <button class="btn btn-sm btn-icon   float-left btn-success"
+                                    <div class="visits-btns">
+                                        <button class="btn btn-sm btn-icon   float-left btn-success"
                                                 data-toggle="tooltip" data-placement="top" title="Search" style="width: 125px;
     height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-truck" style="font-size: 25px;"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-icon   float-left btn-success"
+                                        </button>
+                                        <button class="btn btn-sm btn-icon   float-left btn-success"
                                                 data-toggle="tooltip" data-placement="top" title="clear" style="width: 125px;
     height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-car" style="font-size: 25px;"></i>
-                                            </button>
+                                        </button>
 
-                                            <button class="btn btn-sm btn-icon   float-left btn-success "
+                                        <button class="btn btn-sm btn-icon   float-left btn-success "
                                                 data-toggle="tooltip" data-placement="top" title="clear" style="width: 125px;
     height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-person-walking" style="font-size: 25px;"></i>
-                                            </button>
-                                        </div>
+                                        </button>
+                                    </div>
 
 
                                 </div>
@@ -162,57 +153,51 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                             </div>
 
 
+                            <div class="col-md-12 d-flex align-items-stretch"
+                                 style="text-align:center;padding-top:25px;padding-bottom:25px">
+                                <table id="view_visitor" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th>{{__('files.ID')}}</th>
+                                        <th>{{__('files.Name')}}</th>
+                                        <th>{{__('files.Phone')}}</th>
+                                        <th>{{__('files.Visit Date')}}</th>
+                                        <th>{{__('files.Visit Time')}}</th>
+                                        <th>{{__('files.Action')}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if(isset($visits) && count($visits) > 0)
+                                        @foreach($visits as $visit)
+                                            {{-- <tr class="approved_visit" > --}}
+                                            <tr style="@if($visit->employee->level == $visit->approval_status) background-color: #24ba64 @endif">
+                                                <td>{{$visit->id}}</td>
+                                                <td>{{$visit->visitor->name}}</td>
+                                                <td>{{$visit->visitor->phone}}</td>
+                                                <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('Y-m-d')}}</td>
+                                                <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('H:i:s')}}</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-icon mr-2 float-left btn-success scan mx-auto"
+                                                       id="scan" title="scan" style="width: 50px;"
+                                                       href="{{route('admin.view.scan.page',encrypt($visit->id))}}">
+                                                        <i class="fa-solid fa-binoculars"></i>
+                                                    </a>
+
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
 
 
+                                    </tbody>
+                                </table>
+                            </div>
 
-
-
-
-                        <div class="col-md-12 d-flex align-items-stretch"
-                             style="text-align:center;padding-top:25px;padding-bottom:25px">
-                            <table id="view_visitor" class="table table-striped table-bordered" style="width:100%">
-                                <thead>
-                                <tr>
-                                    <th>{{__('files.ID')}}</th>
-                                    <th>{{__('files.Name')}}</th>
-                                    <th>{{__('files.Phone')}}</th>
-                                    <th>{{__('files.Visit Date')}}</th>
-                                    <th>{{__('files.Visit Time')}}</th>
-                                    <th>{{__('files.Action')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @if(isset($visits) && count($visits) > 0)
-                                    @foreach($visits as $visit)
-                                        {{-- <tr class="approved_visit" > --}}
-                                        <tr style="@if($visit->employee->level == $visit->approval_status) background-color: #24ba64 @endif">
-                                            <td>{{$visit->id}}</td>
-                                            <td>{{$visit->visitor->name}}</td>
-                                            <td>{{$visit->visitor->phone}}</td>
-                                            <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('Y-m-d')}}</td>
-                                            <td>{{\Illuminate\Support\Carbon::parse($visit->checkin_at)->format('H:i:s')}}</td>
-                                            <td>
-                                                <a class="btn btn-sm btn-icon mr-2 float-left btn-success scan mx-auto"
-                                                   id="scan" title="scan" style="width: 50px;"
-                                                   href="{{route('admin.view.scan.page',encrypt($visit->id))}}">
-                                                    <i class="fa-solid fa-binoculars"></i>
-                                                </a>
-
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-
-
-                                </tbody>
-                            </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 </body>
