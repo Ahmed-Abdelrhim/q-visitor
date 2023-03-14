@@ -4,6 +4,7 @@ namespace App\Http\Services\Visitor;
 
 use App\Enums\Status;
 use App\Http\Requests\VisitorRequest;
+use App\Jobs\BackgroundJob;
 use App\Models\Booking;
 use App\Models\PreRegister;
 use App\Models\Types;
@@ -194,8 +195,9 @@ class VisitorService
             // if ($visitingDetails->type->level == 0) {
             if (auth()->user()->employee->level == 0) {
                 try {
-                    $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $visitingDetails->visitor->id);
-                    $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $visitingDetails->visitor->phone);
+                    $job = BackgroundJob::dispatch($visitingDetails);
+                    // $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $visitingDetails->visitor->id);
+                    // $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $visitingDetails->visitor->phone);
                 } catch
                 (\Exception $e) {
                     $notification = array('message' => 'Message was not sent', 'alert-type' => 'info');
@@ -209,13 +211,7 @@ class VisitorService
         }
     }
 
-    /**
-     * @param $id
-     * @param VisitorRequest $request
-     * @return mixed
-     */
-    public
-    function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $visitingDetails = VisitingDetails::query()->findOrFail($id);
 
