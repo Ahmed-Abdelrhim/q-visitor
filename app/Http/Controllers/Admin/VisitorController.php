@@ -225,25 +225,31 @@ class VisitorController extends Controller
             })
             ->addColumn('status', function ($visitingDetail) {
                 if ($visitingDetail->creatorEmployee->level == 0) {
-                    return $status = __('files.Approved');
+                    // return $status = __('files.Approved');
+                    return '<span class="" style="background-color: red"> Approved </span> ';
                 }
                 if ($visitingDetail->creatorEmployee->level == 1) {
                     if ($visitingDetail->approval_status == 0) {
-                        return $status = __('files.Pending');
+                        // return $status = __('files.Pending');
+                        return '<span class="" style="background-color: red"> Approved </span> ';
                     }
                     if ($visitingDetail->approval_status == 1) {
-                        return $status = __('files.Approved');
+                        // return $status = __('files.Approved');
+                        return '<span class="" style="background-color: red"> Approved </span> ';
                     }
                 }
                 if ($visitingDetail->creatorEmployee->level == 2) {
                     if ($visitingDetail->approval_status == 0) {
-                        return $status = __('files.Pending');
+                        // return $status = __('files.Pending');
+                        return '<span class="" style="background-color: red"> Approved </span> ';
                     }
                     if ($visitingDetail->approval_status == 1) {
-                        return $status = __('files.Waiting Second Approval');
+                        // return $status = __('files.Waiting Second Approval');
+                        return '<span class="" style="background-color: red"> Approved </span> ';
                     }
                     if ($visitingDetail->approval_status == 2) {
-                        return $status = __('files.Approved');
+                        // return $status = __('files.Approved');
+                        return '<span class="" style="background-color: red"> Approved </span> ';
                     }
                 }
             })
