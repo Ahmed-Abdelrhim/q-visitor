@@ -32,7 +32,15 @@
 
 
 
-    @extends('admin.ocr.ocr_styles')
+    @if(app()->getLocale() == 'ar') 
+        @extends('admin.ocr.ocr_styles_ar')
+        @else
+            @extends('admin.ocr.ocr_styles')
+    @endif
+    
+    
+
+
     @extends('admin.ocr.view_extend')
 
 </head>
@@ -54,7 +62,7 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                 عربى
             </a>
             |
-            <a href="{{route('change_locale','en')}}"   class="@if(app()->getLocale() == 'ar') @endif">
+            <a href="{{route('change_locale','en')}}" >
                 English
             </a>
         </div>
