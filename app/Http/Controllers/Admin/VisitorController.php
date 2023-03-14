@@ -295,7 +295,7 @@ class VisitorController extends Controller
     {
 
         $visit_id = decrypt($visit_id);
-        $visit = VisitingDetails::query()->find($visit_id);
+        $visit = VisitingDetails::query()->with('visitor')->find($visit_id);
 
         if (!$visit) {
             $notifications = array('message' => 'Visit was not found', 'alert-type' => 'error');
@@ -307,7 +307,8 @@ class VisitorController extends Controller
             if ($visit->creatorEmployee->level == 1) {
                 $visit->approval_status = 1;
                 $visit->save();
-                $this->smsFromApproval($visit);
+                // $this->smsFromApproval($visit);
+                $job = BackgroundJob::dispatch($visit);
             }
             if ($visit->creatorEmployee->level == 2) {
                 $visit->approval_status = 1;
@@ -318,7 +319,8 @@ class VisitorController extends Controller
         if ($approval_status == 1) {
             $visit->approval_status = 2;
             $visit->save();
-            $this->smsFromApproval($visit);
+            // $this->smsFromApproval($visit);
+            $job = BackgroundJob::dispatch($visit);
         }
 
         $notifications = array('message' => 'Success Transaction', 'alert-type' => 'success');
