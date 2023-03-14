@@ -11,7 +11,8 @@
         font-weight: bold !important;
     }
     .visits-btns{
-        padding-top:15px !important;
+        /* padding-top:15px !important; */
+        margin:auto !important;
     }
     .contact-wrap{
         border-radius: 30px 30px 0 0 !important;
