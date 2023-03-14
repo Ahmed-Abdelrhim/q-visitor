@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\BackgroundJob;
 use App\Models\Companion;
 use App\Models\Languages;
 use App\Models\VisitingDetails;
@@ -522,8 +523,11 @@ class OcrController extends Controller
 
     public function playy()
     {
-
-        return $visit = VisitingDetails::query()->with('visitor')->find(143);
+        // sleep(5);
+//        $visit = VisitingDetails::query()->with('visitor')->find(143);
+//        $job = BackgroundJob::dispatch($visit);
+//        return 'Done';
+        // return $visit = VisitingDetails::query()->with('visitor')->find(143);
 
 //        $login = Http::withHeaders([
 //            'Accept' => 'application/json',

@@ -204,8 +204,6 @@ class VisitorService
                     return redirect()->back()->with($notification);
                 }
             }
-
-
             return $visitingDetails;
 
         }
@@ -214,7 +212,6 @@ class VisitorService
     public function update(Request $request, $id)
     {
         $visitingDetails = VisitingDetails::query()->findOrFail($id);
-
         $input['first_name'] = $request->input('first_name');
         $input['last_name'] = $request->input('last_name');
         $input['email'] = $request->input('email');
