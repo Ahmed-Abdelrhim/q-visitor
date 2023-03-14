@@ -231,3 +231,21 @@ button#date-search:hover, button#refresh:hover {
 
 
 
+.Approved,.second-approve{
+        padding: 7px !important;
+        /* width: 70px !important;
+        height: 40px !important; */
+        border-radius: 5px !important;
+        color: #30b32e !important;
+        background: rgba(0, 151, 19, 0.1) !important;
+}
+
+.Pending {
+    padding: 7px 13px !important;
+    border-radius: 5px !important;
+    color: #e7b059 !important;
+    background: rgba(231, 176, 89, 0.2) !important;
+}
+.table.dataTable td{
+    padding-top: 25px !important;
+}
