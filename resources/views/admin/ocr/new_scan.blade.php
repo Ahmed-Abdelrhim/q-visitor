@@ -373,7 +373,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                         <input type="button" value="New Scan" class="btn btn-danger new_page">
                                         <input type="button" value="Scan" class="btn btn-danger scan"
                                                onclick="connect();">
-                                        <input type="button" value="Save Data" class="btn btn-success newscan newscann">
+                                        <input type="button" value="Save Data" class="btn btn-success newscan" style="background-color: #0a71db !important;">
                                         {{-- <input type="button" value="View Visitors" class="btn btn-success view" --}}
                                         {{-- onclick="{{route('admin.visitors.index')}};"> --}}
                                         <a type="button" class="btn btn-success view"

@@ -354,7 +354,6 @@
                 nat_id: nat_id,
                 checkin_date: checkin_date,
                 checkin_time: checkin_time,
-                // car_type : car_type,
                 images: images,
                 perpic: perpic,
                 exdate: exdate,

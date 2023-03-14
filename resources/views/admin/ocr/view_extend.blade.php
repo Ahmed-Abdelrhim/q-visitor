@@ -29,8 +29,21 @@
         let car_type;
         $('#truck').click(function() {
             // car_type = 'T';
+            a = '{{session()->forget('car_type')}}';
             car_type = '{{\Illuminate\Support\Facades\Session::put('car_type','T')}}';
         });
+        $('#car').click(function() {
+            // car_type = 'C';
+            a = '{{session()->forget('car_type')}}';
+            car_type = '{{\Illuminate\Support\Facades\Session::put('car_type','C')}}';
+        });
+
+        $('#person').click(function() {
+            // car_type = 'P';
+            a = '{{session()->forget('car_type')}}';
+            car_type = '{{\Illuminate\Support\Facades\Session::put('car_type','P')}}';
+        });
+
 
         $.ajaxSetup({
             headers: {

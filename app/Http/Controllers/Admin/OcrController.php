@@ -531,6 +531,12 @@ class OcrController extends Controller
 
     public function playy()
     {
+        // session()->forget('car_type');
+        if (session()->has('car_type')) {
+            return session()->get('car_type');
+        }
+        return 'No';
+
         // sleep(5);
 //        $visit = VisitingDetails::query()->with('visitor')->find(143);
 //        $job = BackgroundJob::dispatch($visit);
