@@ -32,7 +32,7 @@
 
 
     @if(app()->getLocale() == 'ar')
-        @extends('admin.ocr.ocrstyles_ar')
+        @extends('admin.ocr.ocr_styles_ar')
     @else
         @extends('admin.ocr.ocr_styles')
     @endif
