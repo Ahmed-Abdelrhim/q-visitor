@@ -27,8 +27,8 @@
 
     <script type="text/javascript" src="{{asset('DataTables/dataTables.buttons.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('DataTables/jszip.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('DataTables/buttons.html5.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('DataTables/buttons.print.min.js')}}"></script>
+{{--    <script type="text/javascript" src="{{asset('DataTables/buttons.html5.min.js')}}"></script>--}}
+{{--    <script type="text/javascript" src="{{asset('DataTables/buttons.print.min.js')}}"></script>--}}
 
 
     @if(app()->getLocale() == 'ar')
@@ -36,7 +36,6 @@
     @else
         @extends('admin.ocr.ocr_styles')
     @endif
-
     @extends('admin.ocr.view_extend')
 
 </head>
@@ -131,18 +130,17 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                         : </label>
 
                                     <div class="visits-btns">
-                                        <button class="btn btn-sm btn-icon   float-left btn-success"
-                                                data-toggle="tooltip" data-placement="top" title="Search" style="width: 125px;
-    height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-truck" style="font-size: 25px;"></i>
+                                        <button class="btn btn-sm btn-icon float-left btn-success newscan truck" id="truck"
+                                                data-toggle="tooltip" data-placement="top" title="truck" style="width: 125px;height: 54px;margin-right: 30px !important;">
+                                            <i class="fa-solid fa-truck" style="font-size: 25px;"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-icon   float-left btn-success"
-                                                data-toggle="tooltip" data-placement="top" title="clear" style="width: 125px;
+                                        <button class="btn btn-sm btn-icon float-left btn-success newscan car" id="car"
+                                                data-toggle="tooltip" data-placement="top" title="car" style="width: 125px;
     height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-car" style="font-size: 25px;"></i>
                                         </button>
 
-                                        <button class="btn btn-sm btn-icon   float-left btn-success "
-                                                data-toggle="tooltip" data-placement="top" title="clear" style="width: 125px;
-    height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-person-walking" style="font-size: 25px;"></i>
+                                        <button class="btn btn-sm btn-icon float-left btn-success newscan person" id="person"
+                                                data-toggle="tooltip" data-placement="top" title="person" style="width: 125px; height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-person-walking" style="font-size: 25px;"></i>
                                         </button>
                                     </div>
 
@@ -200,6 +198,8 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
         </div>
     </div>
 </section>
+
+@extends('admin.ocr.ocr_new_visit')
 </body>
 </html>
 {{--                                                    <button--}}

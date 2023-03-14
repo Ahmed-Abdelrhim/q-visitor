@@ -392,6 +392,13 @@ class OcrController extends Controller
         }
 
 
+        $car_type = 'null';
+        if (isset($_POST['car_type'])) {
+            $car_type = $_POST['add'];
+        }
+        return session()->get('car_type');
+
+
         // $visitingDetail = VisitingDetails::query()->max('reg_no');
         $visitingDetail = VisitingDetails::query()->orderBy('id', 'desc')->first();
         $reg_no = $visitingDetail->reg_no + 1;
@@ -518,6 +525,7 @@ class OcrController extends Controller
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
             return 'add image not sent';
         }
+
         return $visiting_details->id;
     }
 

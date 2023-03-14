@@ -22,6 +22,9 @@
     // import * as url from "url";
 
     $(document).ready(function () {
+
+
+
         $('.new_page').click(function () {
             $.get('{{route('admin.ocr.clear')}}', {}, function (data) {
                 location.reload();
@@ -351,16 +354,17 @@
                 nat_id: nat_id,
                 checkin_date: checkin_date,
                 checkin_time: checkin_time,
+                // car_type : car_type,
                 images: images,
                 perpic: perpic,
                 exdate: exdate,
                 plate_no: plate_no,
                 add: add
             }, function (data) {
-                // console.log(data);
-                wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
-                wnd.print();
-                location.reload();
+                console.log(data);
+                // wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
+                // wnd.print();
+                // location.reload();
             });
         });
 

@@ -242,6 +242,9 @@ return [
     'View Visitors' => 'View Visitors',
     'Car Plate' => 'Car Plate',
 
+    'New Visit' => 'New Visit',
+    '' => '',
+    '' => '',
     '' => '',
 
 

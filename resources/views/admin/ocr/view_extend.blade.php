@@ -1,4 +1,4 @@
-<Script>
+<script>
     $(document).ready(function () {
         $('#view_visitor').DataTable({
             dom: 'Bfrtip',
@@ -23,6 +23,14 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
     $(document).ready(function () {
+
+
+
+        let car_type;
+        $('#truck').click(function() {
+            // car_type = 'T';
+            car_type = '{{\Illuminate\Support\Facades\Session::put('car_type','T')}}';
+        });
 
         $.ajaxSetup({
             headers: {
