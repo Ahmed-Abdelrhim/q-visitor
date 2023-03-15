@@ -253,7 +253,7 @@ return [
     'Second Photo' => 'Second Photo',
     'Third Photo' => 'Third Photo',
     'Fourth Photo' => 'Fourth Photo',
-    '' => '',
+    'Scanner' => 'Scanner',
     '' => '',
     '' => '',
 

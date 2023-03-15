@@ -553,7 +553,6 @@ class OcrController extends Controller
                 ->orWhere('editor_id', $user->id)
                 ->orWhere('employee_id', $user->employee->id)
                 ->orWhere('user_id', $user->id)
-
                 ->orderBy('id', 'desc')
                 ->get();
         } else {

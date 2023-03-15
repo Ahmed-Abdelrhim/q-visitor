@@ -189,7 +189,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5" style="margin-bottom:0px !important">
-                <h2 class="heading-section">Passport Scanner</h2>
+                <h2 class="heading-section">{{__('files.Scanner')}}</h2>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -199,7 +199,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                         <div class="col-md-12">
                             <div class="contact-wrap w-100 p-lg-5 p-4">
 
-                                <div id="form-message-warning"ل ق أ 284 class="mb-4"></div>
+                                <div id="form-message-warning" class="mb-4"></div>
                                 <div id="form-message-success" class="mb-4">
                                     Data was sent, thank you!
                                 </div>
