@@ -103,7 +103,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('ocr-save', [OcrController::class, 'ocrSave'])->name('ocr.save');
 
         Route::get('ocr/view', [OcrController::class, 'viewFirstPage'])->name('reload.ocr.view');
-        Route::get('Optical/Character/Recognition/View/Scan/{id?}', [OcrController::class, 'viewScanPage'])->name('view.scan.page');
+        Route::get('Optical/Character/Recognition/View/Scan/{visit_id?}', [OcrController::class, 'viewScanPage'])->name('view.scan.page');
 
         // New Scan To Create A Visit...
         Route::get('New/Scan/{car_type}', [OcrController::class, 'newScan'])->name('new.scan');
@@ -254,3 +254,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 // ============================================================================================================================================
 
 
+
+
+// #truck , #person , #car => admin.new.scan
+// Add Images To Visit     => admin.view.scan.page
+//
