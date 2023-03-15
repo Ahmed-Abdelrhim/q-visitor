@@ -165,6 +165,7 @@ class VisitorService
 
 
             $visiting['type_id'] = $request->input('type');
+            $visiting['car_type'] = $request->input('car_type');
             $visitingDetails = VisitingDetails::query()->create($visiting);
 
             if ($request->file('image')) {
@@ -249,6 +250,8 @@ class VisitorService
 
             $visiting['from_date'] = $request->input('from_date');
             $visiting['type_id'] = $request->input('type');
+            $visiting['car_type'] = $request->input('car_type');
+
 
 
 

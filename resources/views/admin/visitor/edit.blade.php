@@ -179,7 +179,29 @@
                                         </div>
                                         @enderror
                                     </div>
+
+                                    <div class="form-group col">
+                                        <label>{{ __('files.Car Type') }}</label>
+                                        <select id="car_type" name="car_type"
+                                                class="form-control select2 @error('car_type') is-invalid @enderror">
+                                            <option value="T">
+                                                {{__('files.Truck')}}
+                                            </option>
+                                            <option value="C">{{__('files.Car')}}</option>
+                                            <option value="P">{{__('files.Person')}}</option>
+                                        </select>
+                                        @error('car_type')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+
+
+
                                 </div>
+
+
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label class="purbose-label required col-md-12" for="purpose">{{ __('files.Purpose') }}</label>

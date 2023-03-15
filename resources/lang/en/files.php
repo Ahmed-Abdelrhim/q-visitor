@@ -243,7 +243,10 @@ return [
     'Car Plate' => 'Car Plate',
 
     'New Visit' => 'New Visit',
-    '' => '',
+    'Car Type' => 'Car Type',
+    'Truck' => 'Truck',
+    'Car' => 'Car',
+    'Person' => 'Person',
     '' => '',
     '' => '',
 

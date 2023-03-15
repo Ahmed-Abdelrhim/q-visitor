@@ -58,9 +58,6 @@ class VisitorController extends Controller
 
     public function store(VisitorRequest $request)
     {
-        // return date('Y-m-d H:i:s', strtotime($request->input('from_date')));
-        // return Carbon::parse($request->input('expiry_date'));
-        // return $request;
         $this->visitorService->make($request);
         return redirect()->route('admin.visitors.index')->withSuccess('The data inserted successfully!');
     }
