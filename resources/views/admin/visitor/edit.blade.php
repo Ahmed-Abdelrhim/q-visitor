@@ -184,11 +184,9 @@
                                         <label>{{ __('files.Car Type') }}</label>
                                         <select id="car_type" name="car_type"
                                                 class="form-control select2 @error('car_type') is-invalid @enderror">
-                                            <option value="T">
-                                                {{__('files.Truck')}}
-                                            </option>
-                                            <option value="C">{{__('files.Car')}}</option>
-                                            <option value="P">{{__('files.Person')}}</option>
+                                            <option value="T" @if($visitingDetails->car_type == 'T') selected @endif >{{__('files.Truck')}}</option>
+                                            <option value="C" @if($visitingDetails->car_type == 'C') selected @endif >{{__('files.Car')}}</option>
+                                            <option value="P" @if($visitingDetails->car_type == 'P') selected @endif >{{__('files.Person')}}</option>
                                         </select>
                                         @error('car_type')
                                         <div class="invalid-feedback">

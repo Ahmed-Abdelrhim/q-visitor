@@ -199,7 +199,7 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
     </div>
 </section>
 
-@extends('admin.ocr.ocr_new_visit')
+{{--@extends('admin.ocr.ocr_new_visit')--}}
 </body>
 </html>
 {{--                                                    <button--}}

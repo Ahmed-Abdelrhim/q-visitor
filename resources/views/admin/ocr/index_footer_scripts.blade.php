@@ -346,7 +346,7 @@
             perpic = $('.perpic').text();
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
-            car_type = '{{$car_type}}',
+            car_type = @if(isset($car_type)) '{{$car_type}}' @endif
 
             $.post('{{route('admin.new.scan.post')}}', {
                 name: name,
