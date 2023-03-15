@@ -227,30 +227,30 @@ class VisitorController extends Controller
             ->addColumn('status', function ($visitingDetail) {
                 if ($visitingDetail->creatorEmployee->level == 0) {
                     // return $status = __('files.Approved');
-                    return '<span class="Approved"> Approved </span> ';
+                    return '<span class="Approved"  style="font-size: 15px"> Approved </span> ';
                 }
                 if ($visitingDetail->creatorEmployee->level == 1) {
                     if ($visitingDetail->approval_status == 0) {
                         // return $status = __('files.Pending');
-                        return '<span class="Pending"> Pending </span> ';
+                        return '<span class="Pending" style="font-size: 15px"> Pending </span> ';
                     }
                     if ($visitingDetail->approval_status == 1) {
                         // return $status = __('files.Approved');
-                        return '<span class="Approved" > Approved </span> ';
+                        return '<span class="Approved" style="font-size: 15px"> Approved </span> ';
                     }
                 }
                 if ($visitingDetail->creatorEmployee->level == 2) {
                     if ($visitingDetail->approval_status == 0) {
                         // return $status = __('files.Pending');
-                        return '<span class="Pending"> Pending </span> ';
+                        return '<span class="Pending" style="font-size: 15px"> Pending </span> ';
                     }
                     if ($visitingDetail->approval_status == 1) {
                         // return $status = __('files.Waiting Second Approval');
-                        return '<span class="second-approve"> Waiting Second Approval </span> ';
+                        return '<span class="second-approve" style="font-size: 15px; display: flex; white-space: nowrap;"> Waiting Second Approval </span> ';
                     }
                     if ($visitingDetail->approval_status == 2) {
                         // return $status = __('files.Approved');
-                        return '<span class="Approved"> Approved </span> ';
+                        return '<span class="Approved"  style="font-size: 15px"> Approved </span> ';
                     }
                 }
             })
