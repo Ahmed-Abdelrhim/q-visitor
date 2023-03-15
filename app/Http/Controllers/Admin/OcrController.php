@@ -61,6 +61,12 @@ class OcrController extends Controller
 
     public function newScan($car_type)
     {
+        $car_type = decrypt($car_type);
+        $car_type_array = ['T','C','P'];
+        if (!in_array($car_type,$car_type_array)) {
+            $notifications = array('message' => 'Invalid car type' , 'alert-type' =>'error');
+            return redirect()->back()->with($notifications);
+        }
         return view('admin.ocr.new_scan',['car_type' => $car_type]);
     }
 

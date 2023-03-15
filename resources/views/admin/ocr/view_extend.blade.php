@@ -30,14 +30,14 @@
         });
 
         $('#truck').click(function() {
-            $.redirect("{{route('admin.new.scan','T')}}", {}, "GET", null, null, true);
+            $.redirect("{{route('admin.new.scan',encrypt('T'))}}", {}, "GET", null, null, true);
         });
         $('#car').click(function() {
-            $.redirect("{{route('admin.new.scan','C')}}", {}, "GET", null, null, true);
+            $.redirect("{{route('admin.new.scan',encrypt('C'))}}", {}, "GET", null, null, true);
         });
 
         $('#person').click(function() {
-            $.redirect("{{route('admin.new.scan','P')}}", {}, "GET", null, null, true);
+            $.redirect("{{route('admin.new.scan',encrypt('P'))}}", {}, "GET", null, null, true);
         });
 
 
@@ -45,7 +45,6 @@
 
         $('.edit').click(function () {
             vid = $(this).attr('id');
-
             $.redirect("edit.php", {vid: vid}, "POST", null, null, true);
         });
 
