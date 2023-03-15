@@ -185,7 +185,6 @@ class VisitorController extends Controller
                                     data-toggle="tooltip" data-placement="top" title="'.__('files.Companions').'" style="margin-left: 10px;">
                                     <i class="far fa-user"></i>
                                     </a>';
-
                 }
 
                 if (auth()->user()->can('visitors_delete')) {
@@ -195,7 +194,7 @@ class VisitorController extends Controller
                 }
 
                 return $retAction;
-                // return $visitingDetail->type->level . ' Approval Status ' . $visitingDetail->approval_status;;
+                // return $visitingDetail->type->level . ' Approval Status ' . $visitingDetail->approval_status;
             })
             ->editColumn('name', function ($visitingDetail) {
                 return Str::limit($visitingDetail->visitor->name, 50);
