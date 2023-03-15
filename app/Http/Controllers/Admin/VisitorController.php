@@ -180,6 +180,13 @@ class VisitorController extends Controller
                                     <i class="far fa-edit"></i></a>';
                 }
 
+                if (count($visitingDetail->companions) > 0 ) {
+                    $retAction .= '<a href="' . route('admin.visitors.companions', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon float-left btn-primary actions"
+                                    data-toggle="tooltip" data-placement="top" title="Companions" style="margin-left: 10px;">
+                                    <i class="far fa-user"></i>
+                                    </a>';
+
+                }
 
                 if (auth()->user()->can('visitors_delete')) {
                     $retAction .= '<form class="float-left pl-2" action="' . route('admin.visitors.destroy', $visitingDetail) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions"
@@ -258,6 +265,23 @@ class VisitorController extends Controller
             ->escapeColumns([])
             ->make(true);
         // var_dump($visitingDetail);
+    }
+
+    public function companions($visit_id)
+    {
+        $visit_id = decrypt($visit_id);
+        $visit = VisitingDetails::query()
+            ->with('visitor')
+            ->with('companions')
+            ->find($visit_id);
+
+        if (!$visit) {
+            $notifications = array('message' => 'Visit Was Not Found','alert-type'=>'error');
+            return redirect()->back()->with($notifications);
+        }
+        // return $visit;
+
+        return view('admin.visitor.companion',['visit' => $visit]);
     }
 
     public

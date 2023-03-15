@@ -14,6 +14,7 @@ class CompanionController extends Controller
 {
     public function index($id)
     {
+
     }
 
     public function addVisitCompanion($id)
@@ -181,7 +182,7 @@ class CompanionController extends Controller
             foreach ($images as $counter => $img) {
                 $img = str_replace("data:image/jpeg;base64,", "", $img);
                 if ($img != '' or $img != ' ') {
-                    file_put_contents(storage_path('app/public' . '/images/' . $visit->reg_no . '/companions/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
+                    file_put_contents(storage_path('app/public' . '/images/' . $visit->reg_no . '/companions/' . $visit->reg_no . '-' . $companion->id . '-' .  ($counter + 1) . '.jpg'), base64_decode($img));
                 }
             }
         } catch (\Exception $e) {}

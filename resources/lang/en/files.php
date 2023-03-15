@@ -247,6 +247,13 @@ return [
     'Truck' => 'Truck',
     'Car' => 'Car',
     'Person' => 'Person',
+    'Companion' => 'Companion',
+    'Companions' => 'Companions',
+    'First Photo' => 'First Photo',
+    'Second Photo' => 'Second Photo',
+    'Third Photo' => 'Third Photo',
+    'Fourth Photo' => 'Fourth Photo',
+    '' => '',
     '' => '',
     '' => '',
 

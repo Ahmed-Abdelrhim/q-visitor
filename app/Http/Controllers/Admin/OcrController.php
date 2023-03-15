@@ -315,7 +315,7 @@ class OcrController extends Controller
             foreach ($images as $counter => $img) {
                 $img = str_replace("data:image/jpeg;base64,", "", $img);
                 if ($img != '' or $img != ' ') {
-                    file_put_contents(storage_path('app/public' . '/' . 'images/' . $reg_no . '/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
+                    file_put_contents(storage_path('app/public' . '/' . 'images/' . $reg_no . '/' . $reg_no . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
                 }
             }
 
@@ -541,6 +541,33 @@ class OcrController extends Controller
 
     public function playy()
     {
+        $user = auth()->user();
+        if (!$user->hasRole(1)) {
+            // Return Only The VisitingDetails Created By This User Or Edit By The Current User
+            $visits = VisitingDetails::query()
+                ->with('visitor')
+                ->with('companions')
+                ->where('creator_id', $user->id)
+                ->orWhere('emp_one', $user->employee->id)
+                ->orWhere('emp_two' ,$user->employee->id)
+                ->orWhere('editor_id', $user->id)
+                ->orWhere('employee_id', $user->employee->id)
+                ->orWhere('user_id', $user->id)
+
+                ->orderBy('id', 'desc')
+                ->get();
+        } else {
+            // The User Is Of Type ADMIN So Return All The VisitingDetails
+            $visits =  VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
+        }
+
+
+        if (count($visits[0]->companions) > 0) {
+            return $visits[0]->companions;
+        }
+
+        return 'No Companions';
+
         // session()->forget('car_type');
         if (session()->has('car_type')) {
             return session()->get('car_type');
