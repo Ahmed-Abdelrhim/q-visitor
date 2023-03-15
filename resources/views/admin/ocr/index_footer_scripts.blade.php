@@ -346,6 +346,7 @@
             perpic = $('.perpic').text();
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
+            car_type = '{{$car_type}}',
 
             $.post('{{route('admin.new.scan.post')}}', {
                 name: name,
@@ -358,12 +359,30 @@
                 perpic: perpic,
                 exdate: exdate,
                 plate_no: plate_no,
-                add: add
+                add: add,
+                car_type : car_type,
             }, function (data) {
-                console.log(data);
-                // wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
-                // wnd.print();
-                // location.reload();
+                if(data === 'Visitor Error') {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'حدث خطأ أثناء إدخال بيانات الزائر',
+                        position: 'topRight',
+                    });
+                }
+
+                if(data === 'Visit Error') {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'حدث خطأ أثناء إنشاء بيانات الزيارة',
+                        position: 'topRight',
+                    });
+                }
+                else {
+                    console.log(data);
+                    wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
+                    wnd.print();
+                    location.reload();
+                }
             });
         });
 

@@ -440,10 +440,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
 {{--@extends('admin.ocr.view_extend')--}}
 
 @include('admin.ocr.index_footer_scripts')
-
-
 </body>
-
 </html>
 
 {{-- < ?php --}}

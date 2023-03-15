@@ -62,12 +62,12 @@ class OcrController extends Controller
     public function newScan($car_type)
     {
         $car_type = decrypt($car_type);
-        $car_type_array = ['T','C','P'];
-        if (!in_array($car_type,$car_type_array)) {
-            $notifications = array('message' => 'Invalid car type' , 'alert-type' =>'error');
+        $car_type_array = ['T', 'C', 'P'];
+        if (!in_array($car_type, $car_type_array)) {
+            $notifications = array('message' => 'Invalid car type', 'alert-type' => 'error');
             return redirect()->back()->with($notifications);
         }
-        return view('admin.ocr.new_scan',['car_type' => $car_type]);
+        return view('admin.ocr.new_scan', ['car_type' => $car_type]);
     }
 
     public function searchVisitingDetails()
@@ -398,11 +398,10 @@ class OcrController extends Controller
         }
 
 
-        $car_type = 'null';
+        $car_type = NULL;
         if (isset($_POST['car_type'])) {
-            $car_type = $_POST['add'];
+            $car_type = $_POST['car_type'];
         }
-        return session()->get('car_type');
 
 
         // $visitingDetail = VisitingDetails::query()->max('reg_no');
@@ -440,8 +439,10 @@ class OcrController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            $notifications = array('message' => 'Qrcode was not sent', 'alert-type' => 'info');
-            return throwException($e);
+            return 'Visitor Error';
+            // $notifications = array('message' => 'Qrcode was not sent', 'alert-type' => 'info');
+            // $notifications = array('message' => 'Visitor Was Not Created', 'alert-type' => 'error');
+            // return throwException($e);
         }
 
         try {
@@ -452,8 +453,9 @@ class OcrController extends Controller
             $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
         }
 
-        $visitor = Visitor::query()->latest()->first();
+
         if ($visitor) {
+            $visitor = Visitor::query()->orderBy('id', 'desc')->first();
             $user = auth()->user();
             $employee = $user->employee;
             $emp_one = Null;
@@ -488,6 +490,7 @@ class OcrController extends Controller
                     'editor_type' => 'App\User',
                     'editor_id' => $user->id,
                     'plate_no' => $plate_no,
+                    'car_type' => $car_type,
                     'approval_status' => 0,
                     'created_at' => Carbon::now(),
                     'qrcode' => $qrcode,
@@ -497,8 +500,9 @@ class OcrController extends Controller
             } catch
             (\Exception $e) {
                 DB::rollBack();
-                $notifications = array('message' => 'visit was not created , something went wrong', 'alert-type' => 'error');
-                return redirect()->route('OCR.index')->with($notifications);
+                return 'Visit Error';
+                // $notifications = array('message' => 'visit was not created , something went wrong', 'alert-type' => 'error');
+                // return redirect()->route('OCR.index')->with($notifications);
             }
         }
 
