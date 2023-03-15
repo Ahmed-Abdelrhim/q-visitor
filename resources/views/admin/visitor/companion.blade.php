@@ -42,27 +42,28 @@
                                             <td>{{$visit->visitor->name}}</td>
                                             <td>
                                                 <img
-                                                    src="{{asset('storage/images/'.$visit->reg_no.'/'.$visit->visitor->national_identification_no .'-1.jpg')}}"
-                                                    style="width: 150px; height: 100px;">
+                                                    src="{{asset('storage/images/'.$visit->reg_no.'/'.$visit->reg_no .'-1.jpg')}}"
+                                                    style="width: 150px; height: 100px;" />
                                             </td>
 
 
                                             <td>
                                                 <img
-                                                    src="{{asset('storage/images/'.$visit->reg_no.'/'.$visit->visitor->national_identification_no .'-2.jpg')}}"
-                                                    style="width: 150px; height: 100px;">
+                                                <img
+                                                    src="{{asset('storage/images/'.$visit->reg_no.'/'.$visit->reg_no .'-2.jpg')}}"
+                                                    style="width: 150px; height: 100px;" />
                                             </td>
 
                                             <td>
                                                 <img
-                                                    src="{{asset('storage/images/'.$visit->reg_no.'/'.$visit->visitor->national_identification_no .'-3.jpg')}}"
-                                                    style="width: 150px; height: 100px;">
+                                                    src="{{asset('storage/images/'.$visit->reg_no.'/'.$visit->reg_no .'-3.jpg')}}"
+                                                    style="width: 150px; height: 100px;" />
                                             </td>
 
                                             <td>
                                                 <img
-                                                    src="{{asset('storage/images/'.$visit->reg_no.'/'.$visit->visitor->national_identification_no .'-4.jpg')}}"
-                                                    style="width: 150px; height: 100px;">
+                                                    src="{{asset('storage/images/'.$visit->reg_no.'/'.$visit->reg_no .'-4.jpg')}}"
+                                                    style="width: 150px; height: 100px;" />
                                             </td>
 
                                             <td>
