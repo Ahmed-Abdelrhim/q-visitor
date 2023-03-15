@@ -181,8 +181,8 @@ class VisitorController extends Controller
                 }
 
                 if (count($visitingDetail->companions) > 0 ) {
-                    $retAction .= '<a href="' . route('admin.visitors.companions', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon float-left btn-primary actions"
-                                    data-toggle="tooltip" data-placement="top" title="Companions" style="margin-left: 10px;">
+                    $retAction .= '<a href="' . route('admin.visitors.companions', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon float-left btn-info actions"
+                                    data-toggle="tooltip" data-placement="top" title="'.__('files.Companions').'" style="margin-left: 10px;">
                                     <i class="far fa-user"></i>
                                     </a>';
 
