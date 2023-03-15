@@ -254,6 +254,11 @@ return [
     'Third Photo' => 'Third Photo',
     'Fourth Photo' => 'Fourth Photo',
     'Scanner' => 'Scanner',
+    'Save Data' => 'Save Data',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
     '' => '',
     '' => '',
 

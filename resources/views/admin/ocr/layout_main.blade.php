@@ -198,7 +198,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
 
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5" style="margin-bottom:0px !important">
-                <h2 class="heading-section">{{__(files.Scanner)}}</h2>
+                <h2 class="heading-section">{{__('files.Scanner')}}</h2>
             </div>
         </div>
         <div class="row justify-content-center">
