@@ -106,7 +106,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('Optical/Character/Recognition/View/Scan/{id?}', [OcrController::class, 'viewScanPage'])->name('view.scan.page');
 
         // New Scan To Create A Visit...
-        Route::get('New/Scan', [OcrController::class, 'newScan'])->name('new.scan');
+        Route::get('New/Scan/{car_type}', [OcrController::class, 'newScan'])->name('new.scan');
         Route::post('New/Scan/Post', [OcrController::class, 'newScanSaveData'])->name('new.scan.post');
 
         Route::get('Visits/Search', [OcrController::class, 'searchVisitingDetails'])->name('ocr.search.visitors');

@@ -59,9 +59,9 @@ class OcrController extends Controller
         return view('admin.ocr.layout_main', ['visit' => $visit]);
     }
 
-    public function newScan()
+    public function newScan($car_type)
     {
-        return view('admin.ocr.new_scan');
+        return view('admin.ocr.new_scan',['car_type' => $car_type]);
     }
 
     public function searchVisitingDetails()

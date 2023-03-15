@@ -130,16 +130,16 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                         : </label>
 
                                     <div class="visits-btns">
-                                        <button class="btn btn-sm btn-icon float-left btn-success newscan truck" id="truck"
+                                        <button class="btn btn-sm btn-icon float-left btn-success  truck" id="truck"
                                                 data-toggle="tooltip" data-placement="top" title="truck" style="width: 125px;height: 54px;margin-right: 30px !important;">
                                             <i class="fa-solid fa-truck" style="font-size: 25px;"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-icon float-left btn-success newscan car" id="car"
+                                        <button class="btn btn-sm btn-icon float-left btn-success  car" id="car"
                                                 data-toggle="tooltip" data-placement="top" title="car" style="width: 125px;
     height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-car" style="font-size: 25px;"></i>
                                         </button>
 
-                                        <button class="btn btn-sm btn-icon float-left btn-success newscan person" id="person"
+                                        <button class="btn btn-sm btn-icon float-left btn-success  person" id="person"
                                                 data-toggle="tooltip" data-placement="top" title="person" style="width: 125px; height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-person-walking" style="font-size: 25px;"></i>
                                         </button>
                                     </div>

@@ -23,33 +23,24 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
     $(document).ready(function () {
-
-
-
-        let car_type;
-        $('#truck').click(function() {
-            // car_type = 'T';
-            a = '{{session()->forget('car_type')}}';
-            car_type = '{{\Illuminate\Support\Facades\Session::put('car_type','T')}}';
-        });
-        $('#car').click(function() {
-            // car_type = 'C';
-            a = '{{session()->forget('car_type')}}';
-            car_type = '{{\Illuminate\Support\Facades\Session::put('car_type','C')}}';
-        });
-
-        $('#person').click(function() {
-            // car_type = 'P';
-            a = '{{session()->forget('car_type')}}';
-            car_type = '{{\Illuminate\Support\Facades\Session::put('car_type','P')}}';
-        });
-
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        $('#truck').click(function() {
+            $.redirect("{{route('admin.new.scan','T')}}", {}, "GET", null, null, true);
+        });
+        $('#car').click(function() {
+            $.redirect("{{route('admin.new.scan','C')}}", {}, "GET", null, null, true);
+        });
+
+        $('#person').click(function() {
+            $.redirect("{{route('admin.new.scan','P')}}", {}, "GET", null, null, true);
+        });
+
+
 
 
         $('.edit').click(function () {
@@ -76,12 +67,24 @@
         {{--        location.reload();--}}
         {{--    });--}}
         {{--});--}}
-        $('.newscan').click(function () {
-            // $.redirect("index.php", {}, "POST", null, null, true);
-            $.redirect("{{route('admin.new.scan')}}", {
-                // 'cs'
-            }, "GET", null, null, true);
-        });
+
+
+        {{--$('.newscan').click(function () {--}}
+        {{--    $.ajax({--}}
+        {{--        type: 'POST',--}}
+        {{--        url : '{{route('admin.new.scan',car_type)}}',--}}
+        {{--    });--}}
+
+        {{--    // $.redirect("index.php", {}, "POST", null, null, true);--}}
+        {{--    $.redirect("{{route('admin.new.scan')}}", {--}}
+        {{--        // 'cs'--}}
+        {{--    }, "GET", null, null, true);--}}
+        {{--});--}}
+
+
+
+
+
         $('.clr').click(function () {
             // $.redirect("view.php", {}, "GET", null, null, true);
             $.redirect("{{route('admin.reload.ocr.view')}}", {}, "GET", null, null, true);
