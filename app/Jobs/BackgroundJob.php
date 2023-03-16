@@ -23,7 +23,6 @@ class BackgroundJob implements ShouldQueue
      * @return void
      */
     public function __construct($visitingDetails)
-        // public function __construct()
     {
         $this->visitingDetails = $visitingDetails;
     }
