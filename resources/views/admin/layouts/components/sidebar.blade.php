@@ -27,7 +27,7 @@
             {{--            {!! $backendMenus !!}--}}
 
             <!-- Start Dashboard -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('dashboard') )
+            @if(auth()->user()->hasRole(1) || auth()->user()->hasPermissionTo('dashboard') )
                 <li class="dashboard">
                     <a class="nav-link" href="{{route('admin.dashboard.index')}}">
                         <i class="fa fa-home"></i>
@@ -39,7 +39,7 @@
 
 
             <!-- Start Profile -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('profile') )
+            @if(auth()->user()->hasRole(1) || auth()->user()->hasPermissionTo('profile') )
                 <li class="profile">
                     <a class="nav-link" href="{{route('admin.profile')}}">
                         <i class="far fa-user"></i>
@@ -50,7 +50,7 @@
             <!-- End Profile -->
 
             <!-- Start Departments -->
-            @if(auth()->user()->hasRole('Admin') ||
+            @if(auth()->user()->hasRole(1) ||
                 auth()->user()->hasAnyPermission(['departments','departments_create','departments_edit','departments_delete','departments_show']))
                 <li class="departments">
                     <a class="nav-link" href="{{route('admin.departments.index')}}">
@@ -63,7 +63,7 @@
 
 
             <!-- Start  Positions , designations -->
-            @if(auth()->user()->hasRole('Admin') ||
+            @if(auth()->user()->hasRole(1) ||
                 auth()->user()->hasAnyPermission(['designations','designations_create','designations_edit','designations_delete','designations_show']))
                 <li class="positions">
                     <a class="nav-link" href="{{route('admin.designations.index')}}">
@@ -75,7 +75,7 @@
             <!-- End Positions -->
 
             <!-- Start  Employees -->
-            @if(auth()->user()->hasRole('Admin') ||
+            @if(auth()->user()->hasRole(1) ||
                 auth()->user()->hasAnyPermission(['employees','employees_create','employees_edit','employees_delete','employees_show']))
                 <li class="employees">
                     <a class="nav-link" href="{{route('admin.employees.index')}}">
@@ -88,7 +88,7 @@
 
 
             <!-- Start  Visitors -->
-            @if(auth()->user()->hasRole('Admin') ||
+            @if(auth()->user()->hasRole(1) ||
                 auth()->user()->hasAnyPermission(['visitors','visitors_create','visitors_edit','visitors_delete','visitors_show']))
                 <li class="visitors">
                     <a class="nav-link" href="{{route('admin.visitors.index')}}">
@@ -101,7 +101,7 @@
             <!-- End Visitors -->
 
             <!-- Start  Pre-Register -->
-            @if(auth()->user()->hasRole('Admin') ||
+            @if(auth()->user()->hasRole(1) ||
                 auth()->user()->hasAnyPermission(['pre-registers','pre-registers_create','pre-registers_edit','pre-registers_delete','pre-registers_show']))
                 <li class="pre-register">
                     <a class="nav-link" href="{{route('admin.pre-registers.index')}}">
@@ -113,7 +113,7 @@
             <!-- End  Pre-Register -->
 
             <!-- Start  Administrators , adminusers -->
-            @if(auth()->user()->hasRole('Admin') ||
+            @if(auth()->user()->hasRole(1) ||
                 auth()->user()->hasAnyPermission(['adminusers','adminusers_create','adminusers_edit','adminusers_delete','adminusers_show']))
                 <li class="administrators">
                     <a class="nav-link" href="{{route('admin.adminusers.index')}}">
@@ -138,7 +138,7 @@
             <!-- End  Role -->
 
             <!-- Start  Types -->
-            @if(auth()->user()->hasRole('Admin') ||
+            @if(auth()->user()->hasRole(1) ||
                 auth()->user()->hasAnyPermission(['types','types_create','types_edit','types_delete','types_show']))
                 <li class="role">
                     <a class="nav-link" href="{{route('admin.types.index')}}">
@@ -149,9 +149,21 @@
             @endif
             <!-- End  Types -->
 
+            <!-- Start  Shipments -->
+            @if(auth()->user()->hasRole(1) ||
+                auth()->user()->hasAnyPermission(['shipment','shipment_create','shipment_edit','shipment_delete','shipment_show']))
+                <li class="role">
+                    <a class="nav-link" href="{{route('admin.types.index')}}">
+                        <i class="fas fa-layer-group"></i>
+                        <span>{{__('files.Shipments')}}</span>
+                    </a>
+                </li>
+            @endif
+            <!-- End  Shipments -->
+
 
             <!-- Start  Settings -->
-            @if(auth()->user()->hasRole('Admin') || auth()->user()->hasPermissionTo('setting'))
+            @if(auth()->user()->hasRole(1) || auth()->user()->hasPermissionTo('setting'))
                 <li class="settings">
                     <a class="nav-link" href="{{route('admin.setting.index')}}">
                         <!-- <i class="fa fa-star"></i> -->
@@ -162,7 +174,7 @@
             @endif
             <!-- End  Settings -->
 
-            @if(auth()->user()->hasRole('Admin') ||
+            @if(auth()->user()->hasRole(1) ||
                 auth()->user()->hasAnyPermission(['ocr','ocr_create','ocr_edit','ocr_show','ocr_delete']))
                 <li class="ocr">
                     <a class="nav-link" href="{{route('admin.OCR.index')}}">

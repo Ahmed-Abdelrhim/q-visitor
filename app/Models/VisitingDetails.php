@@ -70,6 +70,11 @@ class VisitingDetails extends Model implements  HasMedia
         return $this->hasMany(Companion::class,'visit_id','id');
     }
 
+    public function shipment()
+    {
+        return $this->hasOne(Shipment::class,'shipment_id','id');
+    }
+
     public function getMyStatusAttribute()
     {
         return trans('statuses.' . $this->status);

@@ -77,7 +77,7 @@ return [
 
     'Approved & Message Sent Successfully' => 'تمت المواقفة و إرسال الرسالة بنجاح',
     'Success Transaction' => 'عملية ناجحة',
-    '' => '',
+    'Shipments' => 'الشحنات',
     '' => '',
     '' => '',
 
