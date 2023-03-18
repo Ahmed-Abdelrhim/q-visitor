@@ -27,7 +27,7 @@
                                     <tr>
                                         <th>{{ __('files.Name') }}</th>
 {{--                                        <th>{{ __('files.ID') }}</th>--}}
-                                        @if (auth()->user()->can('Shipmet_show') || auth()->user()->can('Shipmet_edit') || auth()->user()->can('Shipmet_delete'))
+                                        @if (auth()->user()->can('shipment_create') || auth()->user()->can('shipment_edit') || auth()->user()->can('shipment_delete'))
                                             <th>{{ __('files.Actions') }}</th>
                                         @endif
                                     </tr>
@@ -38,16 +38,17 @@
                                         @foreach($shipments as $shipment)
                                             <tr>
                                                 <td>{{ $shipment->name}}</td>
-                                                <td>{{ $loop->index+1}}</td>
+{{--                                                <td>{{ $loop->index+1}}</td>--}}
 
                                                 @if (auth()->user()->can('shipment_show') || auth()->user()->can('shipment_edit') || auth()->user()->can('shipment_delete'))
                                                     <td class="td-style td-actions">
                                                         @if (auth()->user()->can('shipment_show'))
                                                             <a href="{{ route('admin.shipment.show', $shipment->id) }}"
-                                                               class="btn btn-sm btn-icon float-left btn-success"
+                                                               class="btn btn-sm btn-icon float-left btn-info"
                                                                data-toggle="tooltip" data-placement="top"
-                                                               title="{{__('files.Permission')}}"><i
-                                                                        class="fas fa-plus"></i></a>
+                                                               title="{{__('files.Permission')}}">
+                                                                <i class="far fa-eye"></i>
+                                                            </a>
                                                         @endif
 
                                                         @if (auth()->user()->can('shipment_edit'))
