@@ -4,7 +4,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('shipments') }}</h1>
+            <h1>{{ __('Add shipments') }}</h1>
             {{ Breadcrumbs::render('role/add') }}
         </div>
 

@@ -16,7 +16,7 @@ class CreateShipmentsTable extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('qulaity_check');
+            $table->tinyInteger('quality_check');
             $table->timestamps();
         });
     }

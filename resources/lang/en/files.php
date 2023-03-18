@@ -262,6 +262,10 @@ return [
     'Needs Qulaity Control Check' => 'Needs Qulaity Control Check',
     'Yes' => 'Yes',
     'No' => 'No',
+    'Something Went Wrong While Adding The Shipment' => 'Something Went Wrong While Adding The Shipment',
+    '' => '',
+    '' => '',
+    '' => '',
     '' => '',
 
 
