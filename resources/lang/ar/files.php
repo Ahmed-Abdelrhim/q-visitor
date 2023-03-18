@@ -78,8 +78,9 @@ return [
     'Approved & Message Sent Successfully' => 'تمت المواقفة و إرسال الرسالة بنجاح',
     'Success Transaction' => 'عملية ناجحة',
     'Shipments' => 'الشحنات',
-    '' => '',
-    '' => '',
+    'Shipment' => 'الشحنة',
+    'Add Shipments' => 'إضافة شحنة',
+    'Add Shipment' => 'إضافة شحنة',
 
 
     // Pre -Register
@@ -249,6 +250,10 @@ return [
     'Fourth Photo' => 'الصورة الرابعة',
     'Scanner' => 'الماسح الضوئي',
     'Save Data' => 'حفظ البيانات',
+    'Needs Qulaity Control Check' => 'تحتاج إلي موافقة قسم مراقبة الجودة',
+    'Yes' => 'نعم',
+    'No' => 'لا',
+    '' => '',
     '' => '',
     '' => '',
 

@@ -256,10 +256,12 @@ return [
     'Scanner' => 'Scanner',
     'Save Data' => 'Save Data',
     'Shipments' => 'Shipments',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'Shipment' => 'Shipment',
+    'Add Shipment' => 'Add Shipment',
+    'Edit Shipment' => 'Add Shipment',
+    'Needs Qulaity Control Check' => 'Needs Qulaity Control Check',
+    'Yes' => 'Yes',
+    'No' => 'No',
     '' => '',
 
 
