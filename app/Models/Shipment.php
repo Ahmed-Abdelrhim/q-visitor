@@ -15,6 +15,6 @@ class Shipment extends Model
 
     public function visit()
     {
-        return $this->belongsTo(VisitingDetails::class,'shipment_id');
+            return $this->belongsTo(VisitingDetails::class,'shipment_id');
     }
 }

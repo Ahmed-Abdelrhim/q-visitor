@@ -27,6 +27,12 @@ class CreateVisitingDetailsTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->unsignedInteger('type_id')->nullable();
             $table->unsignedBigInteger('visitor_id');
+
+            $table->integer('shipment_id')->default(0);
+            $table->integer('shipment_number')->nullable();
+            $table->integer('qulaity_check')->nullable();
+
+
             $table->string('plate_no',100)->nullable();
             $table->string('car_type')->nullable();
             $table->tinyInteger('approval_status')->default(0); // length = 1
