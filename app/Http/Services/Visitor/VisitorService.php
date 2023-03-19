@@ -24,7 +24,7 @@ class VisitorService
     public function all()
     {
         $user = auth()->user();
-        if (!$user->hasRole(1)) {
+        if (!$user->hasRole(1) && !$user->hasRole(15)) {
             // Return Only The VisitingDetails Created By This User Or Edit By The Current User
             return VisitingDetails::query()
                 ->with('visitor')

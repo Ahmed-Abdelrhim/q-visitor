@@ -123,6 +123,7 @@
                                         </div>
                                         @enderror
                                     </div>
+
                                     <div class="form-group col">
                                         <label for="employee_id">{{ __('files.Select Employee') }}</label> <span
                                             class="text-danger">*</span>
@@ -142,6 +143,43 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                @if(auth()->user()->hasRole(15))
+                                    <!-- Start Logisitcs -->
+                                    <div class="form-row">
+                                        <div class="form-group col">
+                                            <label id="shipment_number">{{ __('files.Shipment Number') }}</label>
+                                            <input type="text" name="shipment_number" id="shipment_number"
+                                                   class="form-control @error('shipment_number') is-invalid @enderror">
+                                            @error('shipment_number')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group col">
+                                            <label for="shipment_id">{{ __('files.Select Shipment') }}</label> <span
+                                                    class="text-danger">*</span>
+                                            <select id="shipment_id" name="shipment_id"
+                                                    class="form-control select2 @error('shipment_id') is-invalid @enderror">
+                                                @foreach($shipments as $key => $shipment)
+                                                    <option value="{{ $shipment->id }}">
+                                                        {{ $shipment->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('shipment_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <!-- End Logistics-->
+                                @endif
+
+
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.Expiry Date') }}</label>

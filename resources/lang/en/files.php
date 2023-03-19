@@ -268,7 +268,9 @@ return [
     'You Should Select The Qulaity Cnotrol For This Shipment' => 'You Should Select The Qulaity Cnotrol For This Shipment',
     'Shipment Was Not Found' => 'Shipment Was Not Found',
     'Shipment Was deleted successfully' => 'Shipment Was deleted successfully',
-    '' => '',
+    'Shipment Number' => 'Shipment Number',
+    'Select Shipment' => 'Select Shipment',
+
     '' => '',
     '' => '',
     '' => '',

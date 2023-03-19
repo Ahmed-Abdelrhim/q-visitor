@@ -8,6 +8,7 @@ use App\Http\Requests\VisitorRequest;
 use App\Jobs\BackgroundJob;
 use App\Models\Employee;
 use App\Models\Languages;
+use App\Models\Shipment;
 use App\Models\Types;
 use App\Models\VisitingDetails;
 use App\Http\Services\Visitor\VisitorService;
@@ -75,8 +76,9 @@ class VisitorController extends Controller
 
     public function edit($id)
     {
-        $this->data['employees'] = Employee::where('status', Status::ACTIVE)->get();
-        $this->data['types'] = Types::where('status', Status::ACTIVE)->get();
+        $this->data['employees'] = Employee::query()->where('status', Status::ACTIVE)->get();
+        $this->data['types'] = Types::query()->where('status', Status::ACTIVE)->get();
+        $this->data['shipments'] = Shipment::query()->get();
         $this->data['visitingDetails'] = $this->visitorService->find($id);
 
         if ($this->data['visitingDetails']) {

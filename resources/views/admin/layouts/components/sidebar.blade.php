@@ -154,7 +154,9 @@
                 auth()->user()->hasAnyPermission(['shipment','shipment_create','shipment_edit','shipment_delete','shipment_show']))
                 <li class="role">
                     <a class="nav-link" href="{{route('admin.shipment.index')}}">
-                        <i class="fas fa-layer-group"></i>
+                        {{--                        <i class="fas fa-layer-group"></i>  --}}
+                        {{--                        <i class="fa fa-truck-ramp-box"></i>  --}}
+                        <i class="fa fa-truck"></i>
                         <span>{{__('files.Shipments')}}</span>
                     </a>
                 </li>
