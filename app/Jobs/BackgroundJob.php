@@ -27,11 +27,6 @@ class BackgroundJob implements ShouldQueue
         $this->visitingDetails = $visitingDetails;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
         // sleep(10);
