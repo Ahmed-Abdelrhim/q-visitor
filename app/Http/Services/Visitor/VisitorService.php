@@ -7,6 +7,7 @@ use App\Http\Requests\VisitorRequest;
 use App\Jobs\BackgroundJob;
 use App\Models\Booking;
 use App\Models\PreRegister;
+use App\Models\Shipment;
 use App\Models\Types;
 use App\Models\VisitingDetails;
 use App\Models\Visitor;
@@ -255,10 +256,27 @@ class VisitorService
             $visiting['car_type'] = $request->input('car_type');
 
 
+            if (!auth()->user()->hasRole(15) ) {
+                $visiting['shipment_number'] = $visitingDetails->shipment_number;
+                $visiting['shipment_id'] = $visitingDetails->shipment_id;
+                $visiting['quality_check'] = $visitingDetails->quality_check;
+            } else {
+                $visiting['shipment_number'] = $request->input('shipment_number');
+                $visiting['shipment_id'] = $request->input('shipment_id');
+                $shipment = Shipment::query()->find($request->input('shipment_id'));
+                // Qulaity_check
+                if ($shipment) {
+                    $quality_check = $shipment->quality_check;
+                    if ($quality_check == 0) {
+                        $visiting['quality_check'] = 0;
+                    }
+                    if ($quality_check == 1) {
+                        $visiting['quality_check'] = 1;
+                    }
 
+                }
 
-
-
+            }
 
             $visitingDetails->update($visiting);
         }

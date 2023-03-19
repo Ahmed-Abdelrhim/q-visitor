@@ -90,6 +90,19 @@ class VisitorController extends Controller
 
     public function update(VisitorRequest $request, VisitingDetails $visitor)
     {
+        if (auth()->user()->hasRole(15) ) {
+
+            if (!$request->has('shipment_id') || empty($request->input('shipment_id'))) {
+                $nottifications = array('message' => __('files.You Should Select A Shipment'),'alert-type' => 'error');
+                return redirect()->back()->with($nottifications);
+            }
+            if (!$request->has('shipment_number') || empty($request->input('shipment_number')) ) {
+                $nottifications = array('message' => __('files.You Should Add A Shipment Number') , 'alert-type' => 'error');
+                return redirect()->back()->with($nottifications);
+            }
+
+        }
+        // return $request;
         $this->visitorService->update($request, $visitor->id);
         return redirect()->route('admin.visitors.index')->withSuccess('The data updated successfully!');
     }

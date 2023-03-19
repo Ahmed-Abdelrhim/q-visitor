@@ -150,6 +150,7 @@
                                         <div class="form-group col">
                                             <label id="shipment_number">{{ __('files.Shipment Number') }}</label>
                                             <input type="text" name="shipment_number" id="shipment_number"
+                                                   @if(!empty($visitingDetails->shipment_number)) value="{{$visitingDetails->shipment_number}}" @endif
                                                    class="form-control @error('shipment_number') is-invalid @enderror">
                                             @error('shipment_number')
                                             <div class="invalid-feedback">
@@ -164,7 +165,8 @@
                                             <select id="shipment_id" name="shipment_id"
                                                     class="form-control select2 @error('shipment_id') is-invalid @enderror">
                                                 @foreach($shipments as $key => $shipment)
-                                                    <option value="{{ $shipment->id }}">
+                                                    <option value="{{ $shipment->id }}"
+                                                    @if($visitingDetails->shipment_id == $shipment->id) selected @endif >
                                                         {{ $shipment->name }}
                                                     </option>
                                                 @endforeach

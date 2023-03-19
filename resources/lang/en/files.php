@@ -271,8 +271,8 @@ return [
     'Shipment Number' => 'Shipment Number',
     'Select Shipment' => 'Select Shipment',
 
-    '' => '',
-    '' => '',
+    'You Should Add A Shipment Number' => 'You Should Add A Shipment Number',
+    'You Should Select A Shipment' => 'You Should Select A Shipment',
     '' => '',
     '' => '',
     '' => '',

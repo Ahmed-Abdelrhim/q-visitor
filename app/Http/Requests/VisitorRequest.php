@@ -40,6 +40,8 @@ class VisitorRequest extends FormRequest
             'national_identification_no'=> 'nullable|max:100',
             'purpose'                   => 'required|max:191',
             'address'                   => 'nullable|max:191',
+            'shipment_id'               => 'nullable|numeric|exists:shipments,id',
+            'shipment_number'           => 'nullable|numeric',
             'image'                     => 'nullable|image|mimes:jpeg,png,jpg|max:5098',
         ];
     }
