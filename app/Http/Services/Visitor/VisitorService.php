@@ -140,6 +140,10 @@ class VisitorService
             $emp_one = NULL;
             $emp_two = NULL;
 
+            if (auth()->user()->employee->level == 0 ) {
+                $visiting['approval_status']  =  1;
+            }
+
             if (auth()->user()->employee->level == 1 ) {
                 $emp_one =  auth()->user()->employee->emp_one;
             }
@@ -197,17 +201,23 @@ class VisitorService
             //$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
 
             // if ($visitingDetails->type->level == 0) {
-            if (auth()->user()->employee->level == 0) {
-                try {
-                    $job = BackgroundJob::dispatch($visitingDetails);
-                    // $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $visitingDetails->visitor->id);
-                    // $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $visitingDetails->visitor->phone);
-                } catch
-                (\Exception $e) {
-                    $notification = array('message' => 'Message was not sent', 'alert-type' => 'info');
-                    return redirect()->back()->with($notification);
-                }
-            }
+
+
+
+            //            if (auth()->user()->employee->level == 0) {
+            //                try {
+            //                    $job = BackgroundJob::dispatch($visitingDetails);
+            //                    // $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $visitingDetails->visitor->id);
+            //                    // $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $visitingDetails->visitor->phone);
+            //                } catch
+            //                (\Exception $e) {
+            //                    $notification = array('message' => 'Message was not sent', 'alert-type' => 'info');
+            //                    return redirect()->back()->with($notification);
+            //                }
+            //            }
+
+
+
             return $visitingDetails;
 
         }
@@ -275,9 +285,7 @@ class VisitorService
                     }
 
                 }
-
             }
-
             $visitingDetails->update($visiting);
         }
 

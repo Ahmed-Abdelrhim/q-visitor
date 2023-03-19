@@ -139,9 +139,18 @@ class VisitorController extends Controller
                     // if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_id ) {
                     // if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_employee ) {
                     if (auth()->user()->hasRole(1) || auth()->user()->id == $visitingDetail->creator_id) {
-                        $msg = __('files.Re-Send Sms');
-                        $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        if ($visitingDetail->approval_status == 1) {
+                            $msg = __('files.Approve');
+                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        }
+                        if ($visitingDetail->approval_status == 2) {
+                            $msg = __('files.Re-Send Sms');
+                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        }
+
                     }
+
+
                 }
 
                 if ($visitingDetail->creatorEmployee->level == 1) {
@@ -334,12 +343,16 @@ class VisitorController extends Controller
 
     public function visitApprove($visit_id)
     {
-
         $visit_id = decrypt($visit_id);
         $visit = VisitingDetails::query()->with('visitor')->find($visit_id);
 
         if (!$visit) {
             $notifications = array('message' => 'Visit was not found', 'alert-type' => 'error');
+            return redirect()->back()->with($notifications);
+        }
+
+        if (empty($visit->qulaity_check) || $visit->qulaity_check == 1) {
+            $notifications = array('message' => __('files.Visit Needs To be Checked From Qulaity Control Section First'), 'alert-type' => 'info');
             return redirect()->back()->with($notifications);
         }
 

@@ -263,7 +263,7 @@ return [
     'Shipment Number' => 'رقم الشحنة',
     'You Should Add A Shipment Number' => 'يجب إدخال رقم الشحنة',
     'You Should Select A Shipment' => 'يجب أن تختار شحنة',
-    '' => '',
+    'Visit Needs To be Checked From Qulaity Control Section First' => 'هذة الزيارة تحتاج إالي المراجعة من قسم مراقبة الجودة أولا',
     '' => '',
     '' => '',
     '' => '',

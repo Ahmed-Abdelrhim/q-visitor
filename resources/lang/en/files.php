@@ -273,7 +273,7 @@ return [
 
     'You Should Add A Shipment Number' => 'You Should Add A Shipment Number',
     'You Should Select A Shipment' => 'You Should Select A Shipment',
-    '' => '',
+    'Visit Needs To be Checked From Qulaity Control Section First' => 'Visit Needs To be Checked From Qulaity Control Section First',
     '' => '',
     '' => '',
 
