@@ -198,6 +198,17 @@ class VisitorController extends Controller
                                     data-toggle="tooltip" data-placement="top" title="' . __('files.View') . '"><i class="far fa-eye"></i></a>';
                 }
 
+
+                if (auth()->user()->hasRole(15)) {
+
+                    if ($visitingDetail->qulaity_check == 1 || empty($visitingDetail->qulaity_check)) {
+                        $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions" 
+                    style="background-color: #007bff"
+                                    data-toggle="tooltip" data-placement="top" title="' . __('files.Qulaity Approve') . '"><i class="fa fa-check"></i></a>';
+                    }
+
+                }
+
                 if (auth()->user()->can('visitors_edit')) {
                     $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary actions"
                                     data-toggle="tooltip" data-placement="top" title="' . __('files.Edit') . '">
@@ -325,9 +336,37 @@ class VisitorController extends Controller
         $visit_details->sent_sms_before = 1;
         $visit_details->save();
         return redirect()->back()->with($notifications);
+    }
 
+    public function visitApproveFromQulaity($visit_id)
+    {
+        $visit_id = decrypt($visit_id);
+        $visit_ = VisitingDetails::query()->find($visit_id);
+        if (!$visit_) {
+            $notifications = array('message' => 'Visit Not Found While Approving From Qulaity Control', 'alert-type' => 'error');
+            return redirect()->back()->with($notifications);
+        }
+        if (empty($visit->shipment_number) || $visit->shipment_id == 0 ) {
+            $notifications = array('message' => __('files.You Should Add Shipment Number And Select Shipment Type Of The Visit First'), 'alert-type' => 'info');
+            return redirect()->back()->with($notifications);
+        }
 
+        $shipment = Shipment::query()->find($visit->shipment_id);
 
+        if (!$shipment) {
+            $notifications = array('message' => __('files.Shipment Type of This Visit Has Been Deleted or Not Found'), 'alert-type' => 'info');
+            return redirect()->back()->with($notifications);
+        }
+        if ($shipment->qulaity_check == 0) {
+            $visit->quality_check = 0;
+            $visit->save();
+        }
+        if ($shipment->qulaity_check == 1) {
+            $visit->quality_check = 2;
+            $visit->save();
+        }
+        $notifications = array('message' => __('files.Visit Quality Approved Successfully'), 'alert-type' => 'info');
+        return redirect()->back()->with($notifications);
 
     }
 

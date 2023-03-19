@@ -98,6 +98,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('Visit/Approve/{approval_status}', [VisitorController::class, 'visitApprove'])->name('visit.approval');
 
         Route::get('visitors/{id}/Companions',[VisitorController::class,'companions'])->name('visitors.companions');
+        Route::get('visitors/Qulaity/Approve/{id}',[VisitorController::class,'visitApproveFromQulaity'])->name('visitors.qulaity.approve');
 
         // Ocr Resource Controller···
         Route::resource('OCR', 'OcrController');
