@@ -90,14 +90,14 @@ class VisitorController extends Controller
 
     public function update(VisitorRequest $request, VisitingDetails $visitor)
     {
-        if (auth()->user()->hasRole(15) ) {
+        if (auth()->user()->hasRole(15)) {
 
             if (!$request->has('shipment_id') || empty($request->input('shipment_id'))) {
-                $nottifications = array('message' => __('files.You Should Select A Shipment'),'alert-type' => 'error');
+                $nottifications = array('message' => __('files.You Should Select A Shipment'), 'alert-type' => 'error');
                 return redirect()->back()->with($nottifications);
             }
-            if (!$request->has('shipment_number') || empty($request->input('shipment_number')) ) {
-                $nottifications = array('message' => __('files.You Should Add A Shipment Number') , 'alert-type' => 'error');
+            if (!$request->has('shipment_number') || empty($request->input('shipment_number'))) {
+                $nottifications = array('message' => __('files.You Should Add A Shipment Number'), 'alert-type' => 'error');
                 return redirect()->back()->with($nottifications);
             }
 
@@ -200,13 +200,11 @@ class VisitorController extends Controller
 
 
                 if (auth()->user()->hasRole(15)) {
-
-                    if ($visitingDetail->qulaity_check == 1 || empty($visitingDetail->qulaity_check)) {
-                        $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions" 
+                    if ($visitingDetail->quality_check != 2 ) {
+                        $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions" 
                     style="background-color: #007bff"
                                     data-toggle="tooltip" data-placement="top" title="' . __('files.Qulaity Approve') . '"><i class="fa fa-check"></i></a>';
                     }
-
                 }
 
                 if (auth()->user()->can('visitors_edit')) {
@@ -215,9 +213,9 @@ class VisitorController extends Controller
                                     <i class="far fa-edit"></i></a>';
                 }
 
-                if (count($visitingDetail->companions) > 0 ) {
+                if (count($visitingDetail->companions) > 0) {
                     $retAction .= '<a href="' . route('admin.visitors.companions', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon float-left btn-info actions"
-                                    data-toggle="tooltip" data-placement="top" title="'.__('files.Companions').'" style="margin-left: 10px;">
+                                    data-toggle="tooltip" data-placement="top" title="' . __('files.Companions') . '" style="margin-left: 10px;">
                                     <i class="far fa-user"></i>
                                     </a>';
                 }
@@ -310,12 +308,12 @@ class VisitorController extends Controller
             ->find($visit_id);
 
         if (!$visit) {
-            $notifications = array('message' => 'Visit Was Not Found','alert-type'=>'error');
+            $notifications = array('message' => 'Visit Was Not Found', 'alert-type' => 'error');
             return redirect()->back()->with($notifications);
         }
         // return $visit;
 
-        return view('admin.visitor.companion',['visit' => $visit]);
+        return view('admin.visitor.companion', ['visit' => $visit]);
     }
 
     public
@@ -341,31 +339,32 @@ class VisitorController extends Controller
     public function visitApproveFromQulaity($visit_id)
     {
         $visit_id = decrypt($visit_id);
-        $visit_ = VisitingDetails::query()->find($visit_id);
-        if (!$visit_) {
+        $visit = VisitingDetails::query()->with('shipment')->find($visit_id);
+        if (!$visit) {
             $notifications = array('message' => 'Visit Not Found While Approving From Qulaity Control', 'alert-type' => 'error');
             return redirect()->back()->with($notifications);
         }
-        if (empty($visit->shipment_number) || $visit->shipment_id == 0 ) {
+        if (empty($visit->shipment_number) || $visit->shipment_id == 0) {
             $notifications = array('message' => __('files.You Should Add Shipment Number And Select Shipment Type Of The Visit First'), 'alert-type' => 'info');
             return redirect()->back()->with($notifications);
         }
 
-        $shipment = Shipment::query()->find($visit->shipment_id);
+        // $shipment = Shipment::query()->find($visit->shipment_id);
 
-        if (!$shipment) {
-            $notifications = array('message' => __('files.Shipment Type of This Visit Has Been Deleted or Not Found'), 'alert-type' => 'info');
-            return redirect()->back()->with($notifications);
-        }
-        if ($shipment->qulaity_check == 0) {
-            $visit->quality_check = 0;
-            $visit->save();
-        }
-        if ($shipment->qulaity_check == 1) {
+        //        if (!$shipment) {
+        //            $notifications = array('message' => __('files.Shipment Type of This Visit Has Been Deleted or Not Found'), 'alert-type' => 'info');
+        //            return redirect()->back()->with($notifications);
+        //        }
+
+        if ($visit->shipment->qulaity_check == 0) {
             $visit->quality_check = 2;
             $visit->save();
         }
-        $notifications = array('message' => __('files.Visit Quality Approved Successfully'), 'alert-type' => 'info');
+        if ($visit->shipment->qulaity_check == 1) {
+            $visit->quality_check = 2;
+            $visit->save();
+        }
+        $notifications = array('message' => __('files.Visit Quality Approved Successfully'), 'alert-type' => 'success');
         return redirect()->back()->with($notifications);
 
     }
@@ -390,8 +389,9 @@ class VisitorController extends Controller
             return redirect()->back()->with($notifications);
         }
 
-        if (empty($visit->qulaity_check) || $visit->qulaity_check == 1) {
-            $notifications = array('message' => __('files.Visit Needs To be Checked From Qulaity Control Section First'), 'alert-type' => 'info');
+        // Check Quality Control Approval
+        if ($visit->quality_check != 2) {
+            $notifications = array('message' => __('files.Visit Needs To be Checked From Quality Control Section First'), 'alert-type' => 'info');
             return redirect()->back()->with($notifications);
         }
 

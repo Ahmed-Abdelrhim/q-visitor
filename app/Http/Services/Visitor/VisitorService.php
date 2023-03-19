@@ -278,7 +278,7 @@ class VisitorService
                 if ($shipment) {
                     $quality_check = $shipment->quality_check;
                     if ($quality_check == 0) {
-                        $visiting['quality_check'] = 0;
+                        $visiting['quality_check'] = 2;
                     }
                     if ($quality_check == 1) {
                         $visiting['quality_check'] = 1;

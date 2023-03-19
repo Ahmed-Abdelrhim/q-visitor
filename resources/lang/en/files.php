@@ -259,7 +259,7 @@ return [
     'Shipment' => 'Shipment',
     'Add Shipment' => 'Add Shipment',
     'Edit Shipment' => 'Add Shipment',
-    'Needs Qulaity Control Check' => 'Needs Qulaity Control Check',
+    'Needs Quality Control Check' => 'Needs Qulaity Control Check',
     'Yes' => 'Yes',
     'No' => 'No',
     'Something Went Wrong While Adding The Shipment' => 'Something Went Wrong While Adding The Shipment',
@@ -273,7 +273,7 @@ return [
 
     'You Should Add A Shipment Number' => 'You Should Add A Shipment Number',
     'You Should Select A Shipment' => 'You Should Select A Shipment',
-    'Visit Needs To be Checked From Qulaity Control Section First' => 'Visit Needs To be Checked From Qulaity Control Section First',
+    'Visit Needs To be Checked From Quality Control Section First' => 'Visit Needs To be Checked From Qulaity Control Section First',
     'Qulaity Approve' => 'Qulaity Approve',
     'You Should Add Shipment Number And Select Shipment Type Of The Visit First' => 'You Should Add Shipment Number And Select Shipment Type Of The Visit First',
     'Shipment Type of This Visit Has Been Deleted or Not Found' => 'Shipment Type of This Visit Has Been Deleted or Not Found',

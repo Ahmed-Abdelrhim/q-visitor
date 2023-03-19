@@ -13,8 +13,8 @@ class Shipment extends Model
     protected $guarded = [];
     public $hidden = [];
 
-    public function visit()
-    {
-            return $this->belongsTo(VisitingDetails::class,'shipment_id');
-    }
+//    public function visit()
+//    {
+//            return $this->belongsTo(VisitingDetails::class,'shipment_id');
+//    }
 }

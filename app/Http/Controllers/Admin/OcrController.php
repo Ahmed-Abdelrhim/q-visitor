@@ -541,37 +541,48 @@ class OcrController extends Controller
 
     public function playy()
     {
-        $user = auth()->user();
-        if (!$user->hasRole(1)) {
-            // Return Only The VisitingDetails Created By This User Or Edit By The Current User
-            $visits = VisitingDetails::query()
-                ->with('visitor')
-                ->with('companions')
-                ->where('creator_id', $user->id)
-                ->orWhere('emp_one', $user->employee->id)
-                ->orWhere('emp_two' ,$user->employee->id)
-                ->orWhere('editor_id', $user->id)
-                ->orWhere('employee_id', $user->employee->id)
-                ->orWhere('user_id', $user->id)
-                ->orderBy('id', 'desc')
-                ->get();
-        } else {
-            // The User Is Of Type ADMIN So Return All The VisitingDetails
-            $visits =  VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
+
+        $visit = VisitingDetails::query()->with('shipment')->find(347);
+         // return $visit->quality_check;
+        $quality_check = (int) $visit->quality_check;
+        return $quality_check;
+        if ($visit->quality_check  == 0 ){
+            return 'Yes Null Or Zero';
         }
+        return '$visit->shipment_number';
 
 
-        if (count($visits[0]->companions) > 0) {
-            return $visits[0]->companions;
-        }
-
-        return 'No Companions';
-
-        // session()->forget('car_type');
-        if (session()->has('car_type')) {
-            return session()->get('car_type');
-        }
-        return 'No';
+        //        $user = auth()->user();
+        //        if (!$user->hasRole(1)) {
+        //            // Return Only The VisitingDetails Created By This User Or Edit By The Current User
+        //            $visits = VisitingDetails::query()
+        //                ->with('visitor')
+        //                ->with('companions')
+        //                ->where('creator_id', $user->id)
+        //                ->orWhere('emp_one', $user->employee->id)
+        //                ->orWhere('emp_two' ,$user->employee->id)
+        //                ->orWhere('editor_id', $user->id)
+        //                ->orWhere('employee_id', $user->employee->id)
+        //                ->orWhere('user_id', $user->id)
+        //                ->orderBy('id', 'desc')
+        //                ->get();
+        //        } else {
+        //            // The User Is Of Type ADMIN So Return All The VisitingDetails
+        //            $visits =  VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
+        //        }
+        //
+        //
+        //        if (count($visits[0]->companions) > 0) {
+        //            return $visits[0]->companions;
+        //        }
+        //
+        //        return 'No Companions';
+        //
+        //        // session()->forget('car_type');
+        //        if (session()->has('car_type')) {
+        //            return session()->get('car_type');
+        //        }
+        //        return 'No';
 
         // sleep(5);
 //        $visit = VisitingDetails::query()->with('visitor')->find(143);

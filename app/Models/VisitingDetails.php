@@ -72,7 +72,7 @@ class VisitingDetails extends Model implements  HasMedia
 
     public function shipment()
     {
-        return $this->hasOne(Shipment::class,'shipment_id','id');
+        return $this->belongsTo(Shipment::class,'shipment_id','id');
     }
 
     public function getMyStatusAttribute()
