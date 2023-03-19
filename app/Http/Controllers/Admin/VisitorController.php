@@ -23,6 +23,7 @@ use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 use Twilio\Rest\Client;
+use function PHPUnit\Framework\isFalse;
 
 class VisitorController extends Controller
 {
@@ -228,6 +229,12 @@ class VisitorController extends Controller
 
                 return $retAction;
                 // return $visitingDetail->type->level . ' Approval Status ' . $visitingDetail->approval_status;
+            })
+
+            ->setRowClass(function ($visitingDetail) {
+                if ($visitingDetail->quality_check != 2) {
+                    return 'pending_quality_approval';
+                }
             })
             ->editColumn('name', function ($visitingDetail) {
                 return Str::limit($visitingDetail->visitor->name, 50);

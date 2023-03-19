@@ -249,3 +249,8 @@ button#date-search:hover, button#refresh:hover {
 .table.dataTable td{
     padding-top: 25px !important;
 }
+
+.pending_quality_approval {
+    /*background-color: #ffc107 !important;*/
+    background-color: rgba(231, 176, 89, 0.2) !important;
+}
