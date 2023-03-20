@@ -541,17 +541,16 @@ class OcrController extends Controller
 
     public function playy()
     {
+        //        $response = Http::get('http://127.0.0.1:8000/api/getVisitDetails/299', [
+        //            'name' => 'Taylor',
+        //            'page' => 1,
+        //        ]);
 
-        $visit = VisitingDetails::query()->with('shipment')->find(347);
-         // return $visit->quality_check;
-        $quality_check = (int) $visit->quality_check;
-        return $quality_check;
-        if ($visit->quality_check  == 0 ){
-            return 'Yes Null Or Zero';
-        }
-        return '$visit->shipment_number';
+        $response = Http::get('http://127.0.0.1:8000/api/getVisitDetails/299');
+        return response()->json();
 
 
+        //
         //        $user = auth()->user();
         //        if (!$user->hasRole(1)) {
         //            // Return Only The VisitingDetails Created By This User Or Edit By The Current User
@@ -601,7 +600,6 @@ class OcrController extends Controller
         // return Http::get('https://jsonplaceholder.typicode.com/todos/1');
 
         // return $login;
+
     }
-
-
 }

@@ -82,7 +82,7 @@ class VisitingDetailsController extends Controller
             return response()->json(['msg'=> 'Visit Not Found' , 'status' => 400]);
         }
 
-        $visit = new VisitngDetailsResource($visit);
+        // $visit = new VisitngDetailsResource($visit);
 
         return response()->json(['data' => $visit , 'status' => 200 , 'msg'=> 'Success']);
     }
