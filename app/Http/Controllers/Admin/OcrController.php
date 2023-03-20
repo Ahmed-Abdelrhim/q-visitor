@@ -546,8 +546,8 @@ class OcrController extends Controller
         //            'page' => 1,
         //        ]);
 
-        $response = Http::get('http://127.0.0.1:8000/api/getVisitDetails/299');
-        return response()->json();
+//        $response = Http::get('http://127.0.0.1:8000/api/getVisitDetails/299');
+//        return response()->json();
 
 
         //
