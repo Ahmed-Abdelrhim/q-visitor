@@ -63,6 +63,13 @@ class VisitorController extends Controller
 
     public function store(VisitorRequest $request)
     {
+        if (auth()->user()->hasRole(15) && $request->input('car_type') == 'T' ) {
+            if (empty($request->input('shipemnt_number')) || empty($request->input('shipment_id')) ) {
+                $notifications = array('message' => __('files.You Should Select Shipmet Type And Shipment Number') ,'alert-type' => 'info');
+                return redirect()->back()->with($notifications);
+            }
+        }
+        return $request;
         $this->visitorService->make($request);
         return redirect()->route('admin.visitors.index')->withSuccess('The data inserted successfully!');
     }

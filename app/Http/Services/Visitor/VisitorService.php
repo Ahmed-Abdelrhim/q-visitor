@@ -102,6 +102,15 @@ class VisitorService
         }
 
 
+        if (auth()->user()->hasRole(15) && $request->input('car_type' == 'T' ) ) {
+                if (empty($request->input('shipment_number')) ||  empty($request->input('shipment_id'))) {
+                    $notifications = array('message'=>'The Shipment Number & Shipment ID Can Not be Empty');
+                    return redirect()->back()->with($notifications);
+                }
+        }
+
+
+
         $input['first_name'] = $request->input('first_name');
         $input['last_name'] = $request->input('last_name');
         $input['email'] = $request->input('email');

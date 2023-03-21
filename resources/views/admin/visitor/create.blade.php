@@ -191,7 +191,7 @@
                                         <label>{{ __('files.Car Type') }}</label>
                                         <select id="car_type" name="car_type"
                                                 class="form-control select2 @error('car_type') is-invalid @enderror">
-                                            <option value="N" selected>{{__('files.None')}}</option>
+                                            <option value="0">{{__('files.None')}}</option>
                                             <option value="T">{{__('files.Truck')}}</option>
                                             <option value="C">{{__('files.Car')}}</option>
                                             <option value="P">{{__('files.Person')}}</option>
