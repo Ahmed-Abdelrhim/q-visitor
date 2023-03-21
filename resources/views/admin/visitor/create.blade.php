@@ -333,11 +333,10 @@
         var car_type = $("#car_type").val();
         if(car_type == 'T') {
             console.log('Add Class View');
-           //  $('.view_car_type').removeClass('hidden_car_type');
+            $('.select2-container--default').css({"width":"100%"});
             $('.view_car_type').css({"display":""});
             } else {
                         console.log('Remove Class View');
-                        // $('.view_car_type').addClass('hidden_car_type');
                         $('.view_car_type').css({"display":"none"});
 
             }
