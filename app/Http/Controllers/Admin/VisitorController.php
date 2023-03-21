@@ -55,6 +55,9 @@ class VisitorController extends Controller
     {
         $this->data['employees'] = Employee::query()->where('status', Status::ACTIVE)->get();
         $this->data['types'] = Types::query()->where('status', Status::ACTIVE)->get();
+
+
+        $this->data['shipments'] = Shipment::query()->get();
         return view('admin.visitor.create', $this->data);
     }
 
@@ -140,6 +143,12 @@ class VisitorController extends Controller
                     // if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_id ) {
                     // if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_employee ) {
                     if (auth()->user()->hasRole(1) || auth()->user()->id == $visitingDetail->creator_id) {
+                        if ($visitingDetail->approval_status == 0) {
+                            $msg = __('files.Re-Send Sms');
+                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        }
+
+
                         if ($visitingDetail->approval_status == 1) {
                             $msg = __('files.Approve');
                             $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
@@ -148,10 +157,7 @@ class VisitorController extends Controller
                             $msg = __('files.Re-Send Sms');
                             $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
-
                     }
-
-
                 }
 
                 if ($visitingDetail->creatorEmployee->level == 1) {
@@ -200,7 +206,7 @@ class VisitorController extends Controller
                 }
 
 
-                if (auth()->user()->hasRole(15)) {
+                if (auth()->user()->hasRole(14) && $visitingDetail->car_type == 'T') {
                     if ($visitingDetail->quality_check != 2 ) {
                         $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions" 
                     style="background-color: #007bff"
@@ -232,7 +238,7 @@ class VisitorController extends Controller
             })
 
             ->setRowClass(function ($visitingDetail) {
-                if ($visitingDetail->quality_check != 2) {
+                if ($visitingDetail->quality_check != 2 && $visitingDetail->car_type == 'T') {
                     return 'pending_quality_approval';
                 }
             })
@@ -356,13 +362,6 @@ class VisitorController extends Controller
             return redirect()->back()->with($notifications);
         }
 
-        // $shipment = Shipment::query()->find($visit->shipment_id);
-
-        //        if (!$shipment) {
-        //            $notifications = array('message' => __('files.Shipment Type of This Visit Has Been Deleted or Not Found'), 'alert-type' => 'info');
-        //            return redirect()->back()->with($notifications);
-        //        }
-
         if ($visit->shipment->qulaity_check == 0) {
             $visit->quality_check = 2;
             $visit->save();
@@ -397,15 +396,24 @@ class VisitorController extends Controller
         }
 
         // Check Quality Control Approval
-        if ($visit->quality_check != 2) {
-            $notifications = array('message' => __('files.Visit Needs To be Checked From Quality Control Section First'), 'alert-type' => 'info');
-            return redirect()->back()->with($notifications);
+
+        if ($visit->car_type == 'T' ) {
+            if ($visit->quality_check != 2) {
+                if (empty($visit->shipment_number ) || $visit->shipment_id == 0) {
+                    $notifications = array('message' => __('files.Visit Needs Shipment Number And Shipment Type'), 'alert-type' => 'info');
+                    return redirect()->back()->with($notifications);
+                }
+                $notifications = array('message' => __('files.Visit Needs To be Checked From Quality Control Section First'), 'alert-type' => 'info');
+                return redirect()->back()->with($notifications);
+            }
         }
+
 
         $approval_status = $visit->approval_status;
         if ($approval_status == 0) {
             if ($visit->creatorEmployee->level == 1) {
                 $visit->approval_status = 1;
+                // $visit->approval_status = 1;
                 $visit->save();
                 // $this->smsFromApproval($visit);
                 $job = BackgroundJob::dispatch($visit);

@@ -50,7 +50,7 @@ return [
     'From Date' => 'From Date',
     'Expiry Date' => 'Expiry Date',
     'Type' => 'Type',
-    'Types' => 'Types',
+    'Types' => 'Visits Types',
 
     'TypeApproval' => 'Visit Approve Control',
 
@@ -278,8 +278,8 @@ return [
     'You Should Add Shipment Number And Select Shipment Type Of The Visit First' => 'You Should Add Shipment Number And Select Shipment Type Of The Visit First',
     'Shipment Type of This Visit Has Been Deleted or Not Found' => 'Shipment Type of This Visit Has Been Deleted or Not Found',
     'Visit Quality Approved Successfully' => 'Approved Successfully',
-    '' => '',
-    '' => '',
+    'Visit Needs Shipment Number And Shipment Type' => 'Visit Needs Shipment Number And Shipment Type',
+    'None' => 'None',
     '' => '',
     '' => '',
     '' => '',

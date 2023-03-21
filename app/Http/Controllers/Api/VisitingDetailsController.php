@@ -107,9 +107,7 @@ class VisitingDetailsController extends Controller
             ->whereBetween('created_at', [Carbon::parse($start_of_day), Carbon::parse($end_of_day)])
             ->get()
             ->pluck('visitor.name', 'id');
-
         return response()->json([$visits],200);
-
         // ->pluck('id','visitor.name');
         // ->where('created_at' , '>=' , Carbon::now())
         // ->whereRaw('date(created_at) = curdate()')

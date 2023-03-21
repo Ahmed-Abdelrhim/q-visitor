@@ -415,6 +415,7 @@ class OcrController extends Controller
         $data = base64_decode($data);
 
 
+
         try {
             DB::beginTransaction();
             $visitor = Visitor::query()->insert([
@@ -507,6 +508,7 @@ class OcrController extends Controller
         }
 
 
+
         try {
             if ($visiting_details) {
                 if (!file_exists(storage_path('app/public' . '/' . 'per_images'))) {
@@ -535,71 +537,17 @@ class OcrController extends Controller
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
             return 'add image not sent';
         }
-
         return $visiting_details->id;
     }
 
     public function playy()
     {
-        //        $response = Http::get('http://127.0.0.1:8000/api/getVisitDetails/299', [
-        //            'name' => 'Taylor',
-        //            'page' => 1,
-        //        ]);
-
-//        $response = Http::get('http://127.0.0.1:8000/api/getVisitDetails/299');
-//        return response()->json();
-
-
-        //
-        //        $user = auth()->user();
-        //        if (!$user->hasRole(1)) {
-        //            // Return Only The VisitingDetails Created By This User Or Edit By The Current User
-        //            $visits = VisitingDetails::query()
-        //                ->with('visitor')
-        //                ->with('companions')
-        //                ->where('creator_id', $user->id)
-        //                ->orWhere('emp_one', $user->employee->id)
-        //                ->orWhere('emp_two' ,$user->employee->id)
-        //                ->orWhere('editor_id', $user->id)
-        //                ->orWhere('employee_id', $user->employee->id)
-        //                ->orWhere('user_id', $user->id)
-        //                ->orderBy('id', 'desc')
-        //                ->get();
-        //        } else {
-        //            // The User Is Of Type ADMIN So Return All The VisitingDetails
-        //            $visits =  VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
+        //        $arr = array('T','C','P');
+        //        $vistis = VisitingDetails::query()->get();
+        //        foreach ($vistis as $visti) {
+        //            $visti->car_type = $arr[array_rand($arr,1)];
+        //            $visti->save();
         //        }
-        //
-        //
-        //        if (count($visits[0]->companions) > 0) {
-        //            return $visits[0]->companions;
-        //        }
-        //
-        //        return 'No Companions';
-        //
-        //        // session()->forget('car_type');
-        //        if (session()->has('car_type')) {
-        //            return session()->get('car_type');
-        //        }
-        //        return 'No';
-
-        // sleep(5);
-//        $visit = VisitingDetails::query()->with('visitor')->find(143);
-//        $job = BackgroundJob::dispatch($visit);
-//        return 'Done';
-        // return $visit = VisitingDetails::query()->with('visitor')->find(143);
-
-//        $login = Http::withHeaders([
-//            'Accept' => 'application/json',
-//            'Content-Type' => 'application/json',
-//        ])->post('http://127.0.0.1:8000/api/go/login', [
-//            'email' => 'guard.one@example.com',
-//            'password' => '12345678',
-//        ]);
-
-        // return Http::get('https://jsonplaceholder.typicode.com/todos/1');
-
-        // return $login;
-
+        //        return 'Done';
     }
 }

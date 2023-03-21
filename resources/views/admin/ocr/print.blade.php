@@ -44,7 +44,6 @@
 
                             <img src="{{ $data->images}}" alt="not-found" style="clip-path: circle();width:50%">
                             {{--                            <img src="{{asset('storage/per_images/'. $data->reg_no.'.png') }} " alt="not-found" style="clip-path: circle();width:50%">--}}
-
                             {{--                            <img src="{{$data->images}} " alt="not-found"--}}
                             {{--                                 style="clip-path: circle();width:50%">--}}
                         </div>

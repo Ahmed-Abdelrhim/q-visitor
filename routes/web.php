@@ -210,9 +210,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
     //Route::get('play',function (){
     //    return auth()->user()->getDirectPermissions();
     //});
-
 });
 
+
+// show only pending visits in the dashboard
 
 // git add .
 // git commit -m "aya update"

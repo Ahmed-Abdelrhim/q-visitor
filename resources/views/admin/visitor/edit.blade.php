@@ -144,7 +144,7 @@
                                     </div>
                                 </div>
 
-                                @if(auth()->user()->hasRole(15))
+                                @if(auth()->user()->hasRole(15) && $visitingDetails->car_type == 'T')
                                     <!-- Start Logisitcs -->
                                     <div class="form-row">
                                         <div class="form-group col">
@@ -221,7 +221,7 @@
                                     </div>
 
                                     <div class="form-group col">
-                                        <label>{{ __('files.Car Type') }}</label>
+                                        <label for="car_type">{{ __('files.Car Type') }}</label>
                                         <select id="car_type" name="car_type"
                                                 class="form-control select2 @error('car_type') is-invalid @enderror">
                                             <option value="T" @if($visitingDetails->car_type == 'T') selected @endif >{{__('files.Truck')}}</option>

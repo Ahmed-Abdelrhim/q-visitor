@@ -139,6 +139,10 @@
                                         @enderror
                                     </div>
                                 </div>
+
+
+
+
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label>{{ __('files.From Date') }}</label>
@@ -187,9 +191,8 @@
                                         <label>{{ __('files.Car Type') }}</label>
                                         <select id="car_type" name="car_type"
                                                 class="form-control select2 @error('car_type') is-invalid @enderror">
-                                            <option value="T">
-                                                {{__('files.Truck')}}
-                                            </option>
+                                            <option value="N" selected>{{__('files.None')}}</option>
+                                            <option value="T">{{__('files.Truck')}}</option>
                                             <option value="C">{{__('files.Car')}}</option>
                                             <option value="P">{{__('files.Person')}}</option>
                                         </select>
@@ -203,6 +206,44 @@
 
                                     {{-- <div class="form-group col"> --}}
                                     {{-- </div> --}}
+                                </div>
+
+
+                                <div class="view_car_type"  style="display: none">
+                                    @if(auth()->user()->hasRole(15) )
+                                        <!-- Start Logisitcs -->
+                                        <div class="form-row">
+                                            <div class="form-group col">
+                                                <label id="shipment_number">{{ __('files.Shipment Number') }}</label>
+                                                <input type="text" name="shipment_number" id="shipment_number"
+                                                       class="form-control @error('shipment_number') is-invalid @enderror">
+                                                @error('shipment_number')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group col">
+                                                <label for="shipment_id">{{ __('files.Select Shipment') }}</label> <span
+                                                        class="text-danger">*</span>
+                                                <select id="shipment_id" name="shipment_id"
+                                                        class="form-control select2 @error('shipment_id') is-invalid @enderror">
+                                                    @foreach($shipments as $key => $shipment)
+                                                        <option value="{{ $shipment->id }}">
+                                                            {{ $shipment->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('shipment_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <!-- End Logistics-->
+                                    @endif
                                 </div>
 
                                 <!-- حجز زيارة-->
@@ -243,6 +284,8 @@
                                         @enderror
                                     </div>
                                 </div>
+
+
                                 <div class="form-row">
                                     <div class="form-group col-6">
                                         <label for="customFile">{{ __('files.Image') }}</label>
@@ -282,5 +325,31 @@
     <script src="{{ asset('assets/modules/summernote/summernote-bs4.js') }}"></script>
     <script src="{{ asset('assets/modules/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('js/pre-register/create.js') }}"></script>
+    <script>
+        $(document).ready(function () {
 
+
+        $('#car_type').on('change', function () {
+        var car_type = $("#car_type").val();
+        if(car_type == 'T') {
+            console.log('Add Class View');
+           //  $('.view_car_type').removeClass('hidden_car_type');
+            $('.view_car_type').css({"display":"block"});
+            } else {
+                        console.log('Remove Class View');
+                        // $('.view_car_type').addClass('hidden_car_type');
+                        $('.view_car_type').css({"display":"none"});
+
+            }
+        });
+
+
+{{--        $('#car_type').on('change', function () {--}}
+{{--        --}}
+{{--        });--}}
+
+
+
+    });
+    </script>
 @endsection

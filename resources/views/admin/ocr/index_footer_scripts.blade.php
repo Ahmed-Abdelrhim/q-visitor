@@ -108,41 +108,41 @@
                 // location.reload();
 
                 {{--window.location.href = '{{  }}';--}}
-                {{--location.replace("{{ route('admin.add.companion.to.visit' , }}"+ data + "{{   ) }}" );--}}
-                location.replace('http://127.0.0.1:8000/admin/Add/Visit/Companion/' + data);
+    {{--location.replace("{{ route('admin.add.companion.to.visit' , }}"+ data + "{{   ) }}" );--}}
+    location.replace('http://127.0.0.1:8000/admin/Add/Visit/Companion/' + data);
 
-                // window.open("http://127.0.0.1:8000/admin/Add/Visit/Companion/" + data);
+    // window.open("http://127.0.0.1:8000/admin/Add/Visit/Companion/" + data);
 
-            });
-        });
+});
+});
 
 
-        $('.finish').click(function () {
-            $(this).serialize();
-            add = 'N';
-            $(this).prop('disabled', true);
-            obj = $(this);
-            $(this).attr('value', 'Saving...');
-            name = $('#name').text();
-            gender = $('#sex').text();
-            address = $('#icc').text();
-            nat_id = $('#mrz').text();
-            address2 = $('#address').text();
-            full_address = address2 + ' ' + address;
-            checkin_date = $('#vdate').val();
-            checkin_time = $('#vtime').val();
-            images = $('.images').text();
-            perpic = $('.perpic').text();
-            exdate = $('#exdate').text();
-            plate_no = $('.plate_no').val();
-            id = $('.save').attr('id');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+$('.finish').click(function () {
+$(this).serialize();
+add = 'N';
+$(this).prop('disabled', true);
+obj = $(this);
+$(this).attr('value', 'Saving...');
+name = $('#name').text();
+gender = $('#sex').text();
+address = $('#icc').text();
+nat_id = $('#mrz').text();
+address2 = $('#address').text();
+full_address = address2 + ' ' + address;
+checkin_date = $('#vdate').val();
+checkin_time = $('#vtime').val();
+images = $('.images').text();
+perpic = $('.perpic').text();
+exdate = $('#exdate').text();
+plate_no = $('.plate_no').val();
+id = $('.save').attr('id');
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
-            $.post('{{route('admin.ocr.save')}}', {
+$.post('{{route('admin.ocr.save')}}', {
                 id: id,
                 name: name,
                 gender: gender,
@@ -346,9 +346,11 @@
             perpic = $('.perpic').text();
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
-            car_type = @if(isset($car_type)) '{{$car_type}}' @endif
+            car_type = @if(isset($car_type))
+        '{{$car_type}}'
+    @endif
 
-            $.post('{{route('admin.new.scan.post')}}', {
+    $.post('{{route('admin.new.scan.post')}}', {
                 name: name,
                 gender: gender,
                 address: full_address,
@@ -379,9 +381,15 @@
                 }
                 else {
                     console.log(data);
+
+
+
                     wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
                     wnd.print();
                     location.reload();
+
+
+
                 }
             });
         });
@@ -397,6 +405,7 @@
 
 
     });
+
 
 </script>
 
