@@ -24,7 +24,7 @@ class EmployeeService
      */
     public function all()
     {
-        return Employee::orderBy('id', 'desc')->get();
+        return Employee::query()->orderBy('id', 'desc')->get();
     }
 
     /**
@@ -100,9 +100,9 @@ class EmployeeService
 
 
             $about = strip_tags(trim($request->input('about')));
-            $about = str_replace('&nbsp;','',$request->input('about'));
-            $about = str_replace('<p>;','',$request->input('about'));
-            $about = str_replace('</p>','',$request->input('about'));
+            $about = str_replace('&nbsp;', '', $request->input('about'));
+            $about = str_replace('<p>;', '', $request->input('about'));
+            $about = str_replace('</p>', '', $request->input('about'));
             $data['about'] = $about;
             // $data['about'] = $request->input('about');
 
@@ -156,13 +156,11 @@ class EmployeeService
             $data['level'] = $request->input('level');
 
 
-            $about = str_replace('&nbsp;','',  $request->input('about'));
-            $about = str_replace('<p>;',  '',  $request->input('about'));
-            $about = str_replace('</p>',  '',  $request->input('about'));
+            $about = str_replace('&nbsp;', '', $request->input('about'));
+            $about = str_replace('<p>;', '', $request->input('about'));
+            $about = str_replace('</p>', '', $request->input('about'));
             $about = trim($about);
             $data['about'] = $about;
-
-            return $data['about'];
 
             // data['about'] = $request->input('about');
 
@@ -175,26 +173,26 @@ class EmployeeService
             $emp_two = NULL;
 
 
-            if ($request->level == 1 && !empty($request->get('emp_one'))  ) {
-                $emp_one =  $request->get('emp_one');
+            if ($request->level == 1 && !empty($request->emp_one)) {
+                $emp_one = $request->get('emp_one');
             }
 
-            if ($request->level == 2  && !empty($request->get('emp_one')) && !empty($request->get('emp_two')) ) {
-                $emp_one =  $request->get('emp_one');
+            if ($request->level == 2 && !empty($request->get('emp_one')) && !empty($request->get('emp_two'))) {
+                $emp_one = $request->get('emp_one');
                 $emp_two = $request->get('emp_two');
             }
 
-            $data['emp_one'] = $emp_one;
-            $data['emp_two'] = $emp_two;
+            // $data['emp_one'] = $emp_one;
+            // $data['emp_two'] = $emp_two;
 
-            $visits = VisitingDetails::query()->where('creator_employee',$employee->id)->get();
+
+            $visits = VisitingDetails::query()->where('creator_employee', $employee->id)->get();
 
             foreach ($visits as $visit) {
                 $visit->emp_one = $emp_one;
                 $visit->emp_two = $emp_two;
                 $visit->save();
             }
-
 
 
             $employee->update($data);

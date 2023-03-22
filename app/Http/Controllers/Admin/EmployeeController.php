@@ -95,6 +95,14 @@ class EmployeeController extends Controller
     {
         // return preg_replace('/^\p{Z}+|\p{Z}+$/u', '', $request->input('about'));
         // return strip_tags(trim($request->input('about')));
+
+//        if (empty($request->emp_one)) {
+//            return 'None';
+//        }
+//        return $request->emp_one;
+
+
+
         $this->employeeService->update($employee->id, $request);
         return redirect()->route('admin.employees.index')->withSuccess('The data updated successfully!');
     }

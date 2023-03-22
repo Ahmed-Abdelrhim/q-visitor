@@ -271,7 +271,8 @@ return [
     'Visit Needs Shipment Number And Shipment Type' => 'هذة الزيارة تحتاج إلي رقم شحنة ونوع الشحنة',
     'None' => 'لا يوجد',
     'You Should Select Shipmet Type And Shipment Number' => 'اختر نوع الشحنة وادخل رقم الشحنة اولا',
-    '' => '',
+    'Approve' => 'موافقة',
+
     '' => '',
     '' => '',
     '' => '',

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\Employee\EmployeeService;
 use App\Jobs\BackgroundJob;
 use App\Models\Companion;
+use App\Models\Employee;
 use App\Models\Languages;
 use App\Models\VisitingDetails;
 use App\Models\Visitor;
@@ -415,7 +417,6 @@ class OcrController extends Controller
         $data = base64_decode($data);
 
 
-
         try {
             DB::beginTransaction();
             $visitor = Visitor::query()->insert([
@@ -508,7 +509,6 @@ class OcrController extends Controller
         }
 
 
-
         try {
             if ($visiting_details) {
                 if (!file_exists(storage_path('app/public' . '/' . 'per_images'))) {
@@ -542,12 +542,34 @@ class OcrController extends Controller
 
     public function playy()
     {
+        $visit = VisitingDetails::query()->with('visitor')->find(362);
+        if ( auth()->user()->employee->id == $visit->creatorEmployee->emp_one ) {
+            return 'Yes';
+        }
+        return 'None';
+
+
+
+
+
+
+        // return auth()->user()->employee;
+
+
         //        $arr = array('T','C','P');
-        //        $vistis = VisitingDetails::query()->get();
-        //        foreach ($vistis as $visti) {
-        //            $visti->car_type = $arr[array_rand($arr,1)];
-        //            $visti->save();
-        //        }
-        //        return 'Done';
+//        $vistis = VisitingDetails::query()->get();
+//        foreach ($vistis as $visit) {
+//            if ($visit->creatorEmployee->level == 0) {
+//                $visit->approval_status = 2;
+//                $visit->save();
+//            }
+//
+//            if ($visit->creatorEmployee->level == 1 || $visit->creatorEmployee->level == 2) {
+//                $visit->approval_status = 0;
+//                $visit->save();
+//            }
+//
+//        }
+//        return 'Done';
     }
 }

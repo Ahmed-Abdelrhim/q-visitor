@@ -25,23 +25,53 @@ class VisitorService
     public function all()
     {
         $user = auth()->user();
-        if (!$user->hasRole(1) && !$user->hasRole(15)) {
-            // Return Only The VisitingDetails Created By This User Or Edit By The Current User
+        // if (!$user->hasRole(1) && !$user->hasRole(14)) {
+        // Return Only The VisitingDetails Created By This User Or Edit By The Current User
+//            return VisitingDetails::query()
+//                ->with('visitor')
+//                ->with('companions')
+//                ->where('creator_id', $user->id)
+//                ->orWhere('emp_one', $user->employee->id)
+//                ->orWhere('emp_two' ,$user->employee->id)
+//                ->orWhere('editor_id', $user->id)
+//                ->orWhere('employee_id', $user->employee->id)
+//                ->orWhere('user_id', $user->id)
+//
+//                ->orderBy('id', 'desc')
+//                ->get();
+//        }
+//        else {
+//            // The User Is Of Type ADMIN So Return All The VisitingDetails
+//            return VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
+//        }
+
+
+        if ($user->hasRole(1)) {
+            return VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
+        }
+
+        if ( auth()->user()->hasRole(14) || auth()->user()->hasRole(15)) {
+            return VisitingDetails::query()
+                ->where('car_type', 'T')
+                ->orWhere('user_id', $user->id)
+                ->orWhere('creator_employee', $user->employee->id)
+                ->orWhere('emp_one', $user->employee->id)
+                ->orWhere('emp_two', $user->employee->id)
+                ->orWhere('creator_id', $user->id)
+                ->orderBy('id','desc')
+                ->get();
+        } else {
             return VisitingDetails::query()
                 ->with('visitor')
                 ->with('companions')
                 ->where('creator_id', $user->id)
                 ->orWhere('emp_one', $user->employee->id)
-                ->orWhere('emp_two' ,$user->employee->id)
+                ->orWhere('emp_two', $user->employee->id)
                 ->orWhere('editor_id', $user->id)
                 ->orWhere('employee_id', $user->employee->id)
                 ->orWhere('user_id', $user->id)
-
                 ->orderBy('id', 'desc')
                 ->get();
-        } else {
-            // The User Is Of Type ADMIN So Return All The VisitingDetails
-            return VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
         }
     }
 
@@ -49,11 +79,13 @@ class VisitorService
     public function find($id)
     {
         // if(auth()->user()->getrole->name == 'Employee') {
-        if (auth()->user()->hasRole('Employee')) {
-            return VisitingDetails::query()->where(['id' => $id, 'employee_id' => auth()->user()->employee->id])->first();
-        } else {
+
+
+//        if (auth()->user()->hasRole('Employee')) {
+//            return VisitingDetails::query()->where(['id' => $id, 'employee_id' => auth()->user()->employee->id])->first();
+//        } else {
             return VisitingDetails::query()->find($id);
-        }
+//        }
     }
 
 
@@ -83,6 +115,7 @@ class VisitorService
         $data = substr($date, 0, 2);
         $data1 = substr($date, 3, 2);
         $data2 = substr($date, 6, 8);
+        $flag = false;
 
         //        if ($visitor) {
         //            $value = substr($visitor->reg_no, -2);
@@ -102,13 +135,12 @@ class VisitorService
         }
 
 
-        if (auth()->user()->hasRole(15) && $request->input('car_type' == 'T' ) ) {
-                if (empty($request->input('shipment_number')) ||  empty($request->input('shipment_id'))) {
-                    $notifications = array('message'=>'The Shipment Number & Shipment ID Can Not be Empty');
-                    return redirect()->back()->with($notifications);
-                }
+        if (auth()->user()->hasRole(15) && $request->input('car_type' == 'T')) {
+            if (empty($request->input('shipment_number')) || empty($request->input('shipment_id'))) {
+                $notifications = array('message' => 'The Shipment Number & Shipment ID Can Not be Empty');
+                return redirect()->back()->with($notifications);
+            }
         }
-
 
 
         $input['first_name'] = $request->input('first_name');
@@ -149,40 +181,57 @@ class VisitorService
             $emp_one = NULL;
             $emp_two = NULL;
 
-            if (auth()->user()->employee->level == 0 ) {
-                $visiting['approval_status']  =  1;
-            }
-
-            if (auth()->user()->employee->level == 1 ) {
-                $emp_one =  auth()->user()->employee->emp_one;
+            if (auth()->user()->employee->level == 1) {
+                $emp_one = auth()->user()->employee->emp_one;
             }
 
             if (auth()->user()->employee->level == 2) {
-                $emp_one =  auth()->user()->employee->emp_one;
+                $emp_one = auth()->user()->employee->emp_one;
                 $emp_two = auth()->user()->employee->emp_two;
             }
 
+            if (auth()->user()->employee->level == 0) {
+                if ($request->input('car_type' != 'T')) {
+                    $visiting['approval_status'] = 2;
+                    // $visiting['approval_status']  =  1;
+                    $flag = true;
+                } else {
+                    $visiting['approval_status'] = 0;
+                }
+            }
 
 
             $visiting['emp_one'] = $emp_one;
             $visiting['emp_two'] = $emp_two;
 
             //$visiting['qrcode'] = $request->input('qrcode');
-            $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
+            try {
+                $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
 
-            $data = file_get_contents($url);
-            $visiting['qrcode'] = $data;
+                $data = file_get_contents($url);
+
+                $visiting['qrcode'] = $data;
+            } catch(\Exception $e) {
+                $visiting['qrcode'] = NULL;
+            }
 
             // $visiting['expiry_date'] = Carbon::parse( $request->input('expiry_date'));
             $visiting['expiry_date'] = date('Y-m-d H:i:s', strtotime($request->input('expiry_date')));
 
             // $visiting['from_date'] =  Carbon::parse($request->input('from_date'));
-            $visiting['from_date'] =   date('Y-m-d H:i:s', strtotime($request->input('from_date')));
+            $visiting['from_date'] = date('Y-m-d H:i:s', strtotime($request->input('from_date')));
 
 
             $visiting['type_id'] = $request->input('type');
             $visiting['car_type'] = $request->input('car_type');
+
+
             $visitingDetails = VisitingDetails::query()->create($visiting);
+
+            if ($flag) {
+                $job = BackgroundJob::dispatch($visiting);
+            }
+
 
             if ($request->file('image')) {
                 $visitingDetails->addMedia($request->file('image'))->toMediaCollection('visitor');
@@ -191,8 +240,6 @@ class VisitorService
             try {
                 $visitingDetails->employee->user()->notify(new SendVisitorToEmployee($visitingDetails));
             } catch (\Exception $e) {
-                // Using a generic exception
-
             }
         } else {
             $visitingDetails = '';
@@ -212,7 +259,6 @@ class VisitorService
             // if ($visitingDetails->type->level == 0) {
 
 
-
             //            if (auth()->user()->employee->level == 0) {
             //                try {
             //                    $job = BackgroundJob::dispatch($visitingDetails);
@@ -224,7 +270,6 @@ class VisitorService
             //                    return redirect()->back()->with($notification);
             //                }
             //            }
-
 
 
             return $visitingDetails;
@@ -275,7 +320,7 @@ class VisitorService
             $visiting['car_type'] = $request->input('car_type');
 
 
-            if (!auth()->user()->hasRole(15) ) {
+            if (!auth()->user()->hasRole(15)) {
                 $visiting['shipment_number'] = $visitingDetails->shipment_number;
                 $visiting['shipment_id'] = $visitingDetails->shipment_id;
                 $visiting['quality_check'] = $visitingDetails->quality_check;

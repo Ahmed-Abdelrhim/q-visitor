@@ -281,7 +281,7 @@ return [
     'Visit Needs Shipment Number And Shipment Type' => 'Visit Needs Shipment Number And Shipment Type',
     'None' => 'None',
     'You Should Select Shipmet Type And Shipment Number' => 'You Should Select Shipmet Type And Shipment Number',
-    '' => '',
+    'Approve' => 'Approve',
     '' => '',
     '' => '',
     '' => '',

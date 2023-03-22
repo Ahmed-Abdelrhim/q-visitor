@@ -63,13 +63,13 @@ class VisitorController extends Controller
 
     public function store(VisitorRequest $request)
     {
-        if (auth()->user()->hasRole(15) && $request->input('car_type') == 'T' ) {
-            if (empty($request->input('shipemnt_number')) || empty($request->input('shipment_id')) ) {
-                $notifications = array('message' => __('files.You Should Select Shipmet Type And Shipment Number') ,'alert-type' => 'info');
+        if (auth()->user()->hasRole(15) && $request->input('car_type') == 'T') {
+            if (empty($request->input('shipemnt_number')) || empty($request->input('shipment_id'))) {
+                $notifications = array('message' => __('files.You Should Select Shipmet Type And Shipment Number'), 'alert-type' => 'info');
                 return redirect()->back()->with($notifications);
             }
         }
-        return $request;
+        // return $request;
         $this->visitorService->make($request);
         return redirect()->route('admin.visitors.index')->withSuccess('The data inserted successfully!');
     }
@@ -144,68 +144,78 @@ class VisitorController extends Controller
                 $retAction = '';
                 $approve = false;
                 $status = 'Pending';
+                $level = $visitingDetail->creatorEmployee->level;
 
-                // Implement Show Approve Button And The Status
-                if ($visitingDetail->creatorEmployee->level == 0) {
-                    // if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_id ) {
-                    // if (auth()->user()->hasRole(1) || auth()->user()->employee->id == $visitingDetail->creator_employee ) {
-                    if (auth()->user()->hasRole(1) || auth()->user()->id == $visitingDetail->creator_id) {
-                        if ($visitingDetail->approval_status == 0) {
-                            $msg = __('files.Re-Send Sms');
-                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                        }
+                if ($visitingDetail->approval_status == 0) {
+                    // check if car type is truck
+                    if ($level == 0) {
+                        $msg = __('files.Approve');
+                        $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id )) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                    }
 
 
-                        if ($visitingDetail->approval_status == 1) {
+                    if ($level == 1) {
+                        if (auth()->user()->hasRole(1) ||$visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id ) {
                             $msg = __('files.Approve');
-                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                            $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id )) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
-                        if ($visitingDetail->approval_status == 2) {
+                    }
+
+                    if ($level == 2) {
+                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_two == auth()->user()->employee->id ) {
+                            $msg = __('files.First Approve');
+                            $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        }
+                    }
+
+                }
+
+
+                if ($visitingDetail->approval_status == 1) {
+                    if ($level == 1) {
+                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
+                            // ReSendSms
                             $msg = __('files.Re-Send Sms');
                             $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
                     }
-                }
 
-                if ($visitingDetail->creatorEmployee->level == 1) {
-                    // if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_one || auth()->user()->hasRole(1)) {
-                    if (auth()->user()->employee->id == $visitingDetail->emp_one || auth()->user()->hasRole(1)) {
-                        if ($visitingDetail->approval_status == 0) {
-                            $msg = 'Approve';
+                    if ($$level == 2) {
+                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_two == auth()->user()->employee->id) {
+                            $msg = __('files.Second Approve');
                             $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
-                        if ($visitingDetail->approval_status == 1) {
+                    }
+                }
+
+
+                if ($visitingDetail->approval_status == 2) {
+                    if ($level == 0) {
+                        if ( $visitingDetail->creatorEmployee->id == auth()->user()->employee->id || auth()->user()->hasRole(1)) {
                             $msg = __('files.Re-Send Sms');
                             $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
                     }
 
-
-                }
-
-                if ($visitingDetail->creatorEmployee->level == 2) {
-                    if ($visitingDetail->approval_status == 0) {
-                        // if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_one || auth()->user()->hasRole(1)) {
-                        if (auth()->user()->employee->id == $visitingDetail->emp_one || auth()->user()->hasRole(1)) {
-                            $msg = __('files.First Approval');
-                            $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                        }
-                    }
-                    if ($visitingDetail->approval_status == 1) {
-                        // if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_two || auth()->user()->hasRole(1)) {
-                        if (auth()->user()->employee->id == $visitingDetail->emp_two || auth()->user()->hasRole(1)) {
-                            $msg = __('files.Second Approval');
-                            $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                        }
-                    }
-                    if ($visitingDetail->approval_status == 2) {
-                        // if (auth()->user()->employee->id == $visitingDetail->creatorEmployee->emp_one || auth()->user()->hasRole(1)) {
-                        if (auth()->user()->employee->id == $visitingDetail->emp_two || auth()->user()->hasRole(1)) {
+                    if ($level == 1) {
+                        if ( $visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id || auth()->user()->hasRole(1)) {
                             $msg = __('files.Re-Send Sms');
                             $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
                     }
+
+                    if ($level == 2) {
+                        if ( $visitingDetail->creatorEmployee->emp_two == auth()->user()->employee->id || auth()->user()->hasRole(1)) {
+                            $msg = __('files.Re-Send Sms');
+                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        }
+                    }
+
                 }
+
+
+                // End Of New Version
+
 
                 if (auth()->user()->can('visitors_show')) {
                     $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-info actions"
@@ -214,7 +224,7 @@ class VisitorController extends Controller
 
 
                 if (auth()->user()->hasRole(14) && $visitingDetail->car_type == 'T') {
-                    if ($visitingDetail->quality_check != 2 ) {
+                    if ($visitingDetail->quality_check != 2) {
                         $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions" 
                     style="background-color: #007bff"
                                     data-toggle="tooltip" data-placement="top" title="' . __('files.Qulaity Approve') . '"><i class="fa fa-check"></i></a>';
@@ -239,11 +249,9 @@ class VisitorController extends Controller
                                     data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '">
                                     <i class="fa fa-trash"></i></button></form>';
                 }
-
                 return $retAction;
                 // return $visitingDetail->type->level . ' Approval Status ' . $visitingDetail->approval_status;
             })
-
             ->setRowClass(function ($visitingDetail) {
                 if ($visitingDetail->quality_check != 2 && $visitingDetail->car_type == 'T') {
                     return 'pending_quality_approval';
@@ -281,32 +289,44 @@ class VisitorController extends Controller
                 return date('d-m-Y h:i A', strtotime($visitingDetail->checkin_at));
             })
             ->addColumn('status', function ($visitingDetail) {
+
                 if ($visitingDetail->creatorEmployee->level == 0) {
                     // return $status = __('files.Approved');
-                    return '<span class="Approved"  style="font-size: 15px"> Approved </span> ';
+                    return '<span class="Approved"  style="font-size: 15px"> '. __('files.Approved'). ' </span> ';
                 }
+
+
+
+
                 if ($visitingDetail->creatorEmployee->level == 1) {
+
                     if ($visitingDetail->approval_status == 0) {
                         // return $status = __('files.Pending');
-                        return '<span class="Pending" style="font-size: 15px"> Pending </span> ';
+                        return '<span class="Pending" style="font-size: 15px"> '. __('files.Pending').' </span> ';
                     }
-                    if ($visitingDetail->approval_status == 1) {
+                    if ($visitingDetail->approval_status == 1 || $visitingDetail->approval_status == 2 ) {
                         // return $status = __('files.Approved');
-                        return '<span class="Approved" style="font-size: 15px"> Approved </span> ';
+                        return '<span class="Approved" style="font-size: 15px"> '. __('files.Approved').'  </span> ';
                     }
+
                 }
+
+
+
+
+
                 if ($visitingDetail->creatorEmployee->level == 2) {
                     if ($visitingDetail->approval_status == 0) {
                         // return $status = __('files.Pending');
-                        return '<span class="Pending" style="font-size: 15px"> Pending </span> ';
+                        return '<span class="Pending" style="font-size: 15px"> '.__('files.Pending') .' </span> ';
                     }
                     if ($visitingDetail->approval_status == 1) {
                         // return $status = __('files.Waiting Second Approval');
-                        return '<span class="second-approve" style="font-size: 15px; display: flex; white-space: nowrap;"> Waiting Second Approval </span> ';
+                        return '<span class="second-approve" style="font-size: 15px; display: flex; white-space: nowrap;"> '.__('files.Waiting Second Approval') .' </span> ';
                     }
                     if ($visitingDetail->approval_status == 2) {
                         // return $status = __('files.Approved');
-                        return '<span class="Approved"  style="font-size: 15px"> Approved </span> ';
+                        return '<span class="Approved"  style="font-size: 15px"> '.__('files.Approved').' </span> ';
                     }
                 }
             })
@@ -404,9 +424,9 @@ class VisitorController extends Controller
 
         // Check Quality Control Approval
 
-        if ($visit->car_type == 'T' ) {
+        if ($visit->car_type == 'T') {
             if ($visit->quality_check != 2) {
-                if (empty($visit->shipment_number ) || $visit->shipment_id == 0) {
+                if (empty($visit->shipment_number) || $visit->shipment_id == 0) {
                     $notifications = array('message' => __('files.Visit Needs Shipment Number And Shipment Type'), 'alert-type' => 'info');
                     return redirect()->back()->with($notifications);
                 }
@@ -418,8 +438,14 @@ class VisitorController extends Controller
 
         $approval_status = $visit->approval_status;
         if ($approval_status == 0) {
+            if ($visit->creatorEmployee->level == 0) {
+                $visit->approval_status = 2;
+                $visit->save();
+                $job = BackgroundJob::dispatch($visit);
+            }
+
             if ($visit->creatorEmployee->level == 1) {
-                $visit->approval_status = 1;
+                $visit->approval_status = 2;
                 // $visit->approval_status = 1;
                 $visit->save();
                 // $this->smsFromApproval($visit);

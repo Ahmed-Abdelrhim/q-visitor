@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\BackendController;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ProfileRequest;
+use App\Models\Employee;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -28,6 +29,21 @@ class ProfileController extends BackendController
         $user->username   = $request->username ?? $this->username($request->email);
         $user->address    = $request->get('address');
         $user->save();
+
+        try {
+            $emp = Employee::query()
+                ->where('user_id' , auth()->user()->id )
+                ->orderBy(  'id','desc' )
+                ->first();
+
+            if ($emp) {
+                $emp->first_name = $request->get('first_name');
+                $emp->last_name = $request->get('last_name');
+                $emp->save();
+            }
+
+        } catch (\Exception $e) {}
+
 
         if (request()->file('image')) {
             $user->media()->delete();
