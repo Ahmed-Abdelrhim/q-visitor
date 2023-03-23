@@ -173,17 +173,17 @@ class EmployeeService
             $emp_two = NULL;
 
 
-            if ($request->level == 1 ) {
+            if ($request->level == 1) {
                 if ($request->emp_one == 0) {
-                    $notifications = array('message' => __('files.You Should Choose Employee One'),'alert-type' =>'error');
+                    $notifications = array('message' => __('files.You Should Choose Employee One'), 'alert-type' => 'error');
                     return redirect()->back()->with($notifications);
                 }
                 $emp_one = $request->get('emp_one');
             }
 
-            if ($request->level == 2 ) {
-                if ($request->emp_one == 0 || $request->emp_two == 0 ) {
-                    $notifications = array('message' => __('files.You Should Choose Employee One And Two') ,'alert-type' =>'error');
+            if ($request->level == 2) {
+                if ($request->emp_one == 0 || $request->emp_two == 0) {
+                    $notifications = array('message' => __('files.You Should Choose Employee One And Two'), 'alert-type' => 'error');
                     return redirect()->back()->with($notifications);
                 }
 
@@ -196,19 +196,17 @@ class EmployeeService
             $data['emp_two'] = $emp_two;
 
 
-            //            $visits = VisitingDetails::query()->where('creator_employee', $employee->id)->get();
-            //
-            //            foreach ($visits as $visit) {
-            //                $visit->emp_one = $emp_one;
-            //                $visit->emp_two = $emp_two;
-            //                $visit->save();
-            //            }
-
+            $visits = VisitingDetails::query()->where('creator_employee', $employee->id)->get(['id', 'emp_one', 'emp_two']);
+            foreach ($visits as $visit) {
+                $visit->emp_one = $emp_one;
+                $visit->emp_two = $emp_two;
+                $visit->save();
+            }
 
             $employee->update($data);
         }
 
-        $notifications = array('message' => __('files.Employee Updated Successfully') , 'alert-type' => 'success');
+        $notifications = array('message' => __('files.Employee Updated Successfully'), 'alert-type' => 'success');
         return redirect(route('admin.employees.index'))->with($notifications);
         // return $employee;
     }
