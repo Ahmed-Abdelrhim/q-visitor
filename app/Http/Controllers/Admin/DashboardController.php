@@ -47,6 +47,7 @@ class DashboardController extends BackendController
             $visitors = VisitingDetails::query()
                 ->with('employee')
                 ->with('visitor')
+                ->where('approval_status' , '>=' ,1)
                 ->where('creator_id', $user->id)
                 ->orWhere('editor_id', $user->id)
                 ->orWhere('employee_id', $user->employee->id)

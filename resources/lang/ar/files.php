@@ -273,8 +273,9 @@ return [
     'You Should Select Shipmet Type And Shipment Number' => 'اختر نوع الشحنة وادخل رقم الشحنة اولا',
     'Approve' => 'موافقة',
 
-    '' => '',
-    '' => '',
+    'You Should Choose Employee One' => 'بجل أن تختار الموظف الأول',
+    'You Should Choose Employee One And Two' => 'بجل أن تختار الموظف الأول و الثاني',
+    'Employee Updated Successfully' => 'تم تحديث بيانات الموظف بنجاح',
     '' => '',
     '' => '',
     '' => '',

@@ -190,7 +190,7 @@
                                                 class="form-control @error('role') is-invalid @enderror">
                                             <option selected value="0">{{__('files.choose..')}}</option>
                                             @foreach($roles as $role)
-                                                <option value="{{$role->id}}">{{ $role->name }}</option>
+                                                <option value=" {{$role->id}} " > {{ $role->name }} </option>
                                             @endforeach
                                         </select>
                                         @error('role')

@@ -103,10 +103,13 @@ class EmployeeController extends Controller
 //        }
 //        return $request->emp_one;
 
+        //"level": "2",
+        //"emp_one": "54",
+        //"emp_two": "53",
 
 
-        $this->employeeService->update($employee->id, $request);
-        return redirect()->route('admin.employees.index')->withSuccess('The data updated successfully!');
+        return $this->employeeService->update($employee->id, $request);
+        // return redirect()->route('admin.employees.index')->withSuccess('The data updated successfully!');
     }
 
 

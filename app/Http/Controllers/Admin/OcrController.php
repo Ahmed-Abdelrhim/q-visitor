@@ -542,10 +542,6 @@ class OcrController extends Controller
 
     public function playy()
     {
-        $user = auth()->user();
-        return $user->employee;
-
-
         $emps = Employee::query()->pluck('id');
 
         $emps_to_choose = [ 3, 40, 44, 45, 46, 47, 49, 50, 51, 52 ];
