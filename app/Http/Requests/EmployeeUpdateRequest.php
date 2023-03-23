@@ -38,9 +38,11 @@ class EmployeeUpdateRequest extends FormRequest
             'department_id'             => 'required|numeric',
             'designation_id'            => 'required|numeric',
             'gender'                    => 'required|numeric',
+            'emp_one'                   => 'nullable|numeric|exists:employees,id',
+            'emp_two'                   => 'nullable|numeric|exists:employees,id',
             'date_of_joining'           => 'required',
             'about'                     => 'nullable|max:255',
-            'role'                     => 'nullable|numeric',
+            'role'                      => 'nullable|numeric',
             'image'                     => 'image|mimes:jpeg,png,jpg|max:5098',
         ];
     }

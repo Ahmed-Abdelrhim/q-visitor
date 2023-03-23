@@ -57,9 +57,9 @@ class EmployeeController extends Controller
         $this->data['designations'] = Designation::query()->where('status', Status::ACTIVE)->get();
         $this->data['departments'] = Department::query()->where('status', Status::ACTIVE)->get();
 
-        $employees = Employee::query()->get(['id','first_name','last_name']);
+        $employees = Employee::query()->get(['id', 'first_name', 'last_name']);
 
-        $this->data['roles'] = Role::query()->get(['id','name']);
+        $this->data['roles'] = Role::query()->get(['id', 'name']);
         $this->data['employees'] = $employees;
 
         return view('admin.employee.create', $this->data);
@@ -67,7 +67,6 @@ class EmployeeController extends Controller
 
     public function store(EmployeeRequest $request)
     {
-        // return $request;
         $this->employeeService->make($request);
         return redirect()->route('admin.employees.index')->withSuccess('The data inserted successfully!');
     }
@@ -84,7 +83,7 @@ class EmployeeController extends Controller
         $this->data['designations'] = Designation::query()->where('status', Status::ACTIVE)->get();
         $this->data['departments'] = Department::query()->where('status', Status::ACTIVE)->get();
 
-        $employees = Employee::query()->get(['id','first_name','last_name']);
+        $employees = Employee::query()->get(['id', 'first_name', 'last_name']);
         $this->data['employees'] = $employees;
 
         $this->data['roles'] = Role::query()->get();
@@ -123,7 +122,7 @@ class EmployeeController extends Controller
     {
         $this->employeeService->delete($id);
         // return route('admin.employees.index')->with(['success' => 'Employee delete successfully.']);
-        $notifications = array('message'=> 'Employee delete successfully.' , 'alert-type'=>'success');
+        $notifications = array('message' => 'Employee delete successfully.', 'alert-type' => 'success');
         return redirect()->route('admin.employees.index')->with($notifications);
     }
 
@@ -146,18 +145,18 @@ class EmployeeController extends Controller
                 $retAction = '';
 
                 if (auth()->user()->can('employees_show')) {
-                    $retAction .= '<a href="' . route('admin.employees.show', $employee) . '" class="btn btn-sm btn-icon mr-2 show  float-left btn-info actions" data-toggle="tooltip" data-placement="top" title="'.__('files.View').'">
+                    $retAction .= '<a href="' . route('admin.employees.show', $employee) . '" class="btn btn-sm btn-icon mr-2 show  float-left btn-info actions" data-toggle="tooltip" data-placement="top" title="' . __('files.View') . '">
                     <i class="far fa-eye"></i>
                     </a>';
                 }
 
                 if (auth()->user()->can('employees_edit')) {
-                    $retAction .= '<a href="' . route('admin.employees.edit', $employee) . '" class="btn btn-sm btn-icon float-left btn-primary actions" data-toggle="tooltip" data-placement="top" title="'.__('files.Edit').'"> <i class="far fa-edit"></i></a>';
+                    $retAction .= '<a href="' . route('admin.employees.edit', $employee) . '" class="btn btn-sm btn-icon float-left btn-primary actions" data-toggle="tooltip" data-placement="top" title="' . __('files.Edit') . '"> <i class="far fa-edit"></i></a>';
                 }
 
 
                 if (auth()->user()->can('employees_delete')) {
-                    if ($employee->user->email != 'admin@example.com') $retAction .= '<form class="float-left pl-2" action="' . route('admin.employees.destroy', $employee) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions" data-toggle="tooltip" data-placement="top" title="'.__('files.Delete').'"> <i class="fa fa-trash"></i></button></form>';
+                    if ($employee->user->email != 'admin@example.com') $retAction .= '<form class="float-left pl-2" action="' . route('admin.employees.destroy', $employee) . '" method="POST">' . method_field('DELETE') . csrf_field() . '<button class="btn btn-sm btn-icon btn-danger actions" data-toggle="tooltip" data-placement="top" title="' . __('files.Delete') . '"> <i class="fa fa-trash"></i></button></form>';
                 }
 
                 return $retAction;
