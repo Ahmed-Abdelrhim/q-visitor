@@ -50,7 +50,7 @@ class VisitorService
             return VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
         }
 
-        if ( auth()->user()->hasRole(14) || auth()->user()->hasRole(15)) {
+        if (auth()->user()->hasRole(14) || auth()->user()->hasRole(15)) {
             return VisitingDetails::query()
                 ->where('car_type', 'T')
                 ->orWhere('user_id', $user->id)
@@ -58,9 +58,27 @@ class VisitorService
                 ->orWhere('emp_one', $user->employee->id)
                 ->orWhere('emp_two', $user->employee->id)
                 ->orWhere('creator_id', $user->id)
-                ->orderBy('id','desc')
+                ->orderBy('id', 'desc')
                 ->get();
-        } else {
+        }
+//        if (auth()->user()->hasRole(14) ) {
+//            return VisitingDetails::query()
+//                ->Where('user_id', $user->id)
+//                ->where(function ($query) {
+//                    $query->where('car_type', 'T')
+//                        ->where_not_null('shipment_number')
+//                        ->where_not_null('shipment_id');
+//                })
+//                ->orWhere('creator_employee', $user->employee->id)
+//                ->orWhere('emp_one', $user->employee->id)
+//                ->orWhere('emp_two', $user->employee->id)
+//                ->orWhere('creator_id', $user->id)
+//                ->orderBy('id', 'desc')
+//                ->get();
+//        }
+
+
+        else {
             return VisitingDetails::query()
                 ->with('visitor')
                 ->with('companions')
@@ -84,7 +102,7 @@ class VisitorService
 //        if (auth()->user()->hasRole('Employee')) {
 //            return VisitingDetails::query()->where(['id' => $id, 'employee_id' => auth()->user()->employee->id])->first();
 //        } else {
-            return VisitingDetails::query()->find($id);
+        return VisitingDetails::query()->find($id);
 //        }
     }
 
@@ -211,7 +229,7 @@ class VisitorService
                 $data = file_get_contents($url);
 
                 $visiting['qrcode'] = $data;
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 $visiting['qrcode'] = NULL;
             }
 

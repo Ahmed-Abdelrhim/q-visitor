@@ -136,10 +136,12 @@
                                                     <option value="0" selected id="none_one">NONE</option>
                                                 @endif
                                                 @foreach($employees as $emp)
-                                                    <option value="{{ $emp->id }}"
-                                                            @if(!empty($employee->emp_one) && $employee->emp_one == $emp->id) selected @endif>
-                                                        {{ $emp->first_name }} {{$emp->last_name}}
-                                                    </option>
+                                                    @if($current_employee_id != $emp->id)
+                                                        <option value="{{ $emp->id }}"
+                                                                @if(!empty($employee->emp_one) && $employee->emp_one == $emp->id) selected @endif >
+                                                            {{ $emp->first_name }} {{$emp->last_name}}
+                                                        </option>
+                                                    @endif
                                                 @endforeach~
                                             </select>
                                             @error('emp_one')
@@ -162,10 +164,12 @@
                                                     <option value="0" selected id="none_two">NONE</option>
                                                 @endif
                                                 @foreach($employees as $emp)
-                                                    <option value="{{ $emp->id }}"
-                                                            @if(!empty($employee->emp_two) && $employee->emp_two == $emp->id) selected @endif>
-                                                        {{ $emp->first_name }} {{$emp->last_name}}
-                                                    </option>
+                                                    @if($current_employee_id != $emp->id)
+                                                        <option value="{{ $emp->id }}"
+                                                                @if(!empty($employee->emp_two) && $employee->emp_two == $emp->id) selected @endif>
+                                                            {{ $emp->first_name }} {{$emp->last_name}}
+                                                        </option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                             @error('emp_two')
@@ -346,6 +350,8 @@
                 }
             });
         });
+
+
 
 
 

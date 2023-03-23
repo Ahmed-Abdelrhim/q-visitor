@@ -542,16 +542,41 @@ class OcrController extends Controller
 
     public function playy()
     {
-        $visit = VisitingDetails::query()->with('visitor')->find(362);
-        if ( auth()->user()->employee->id == $visit->creatorEmployee->emp_one ) {
-            return 'Yes';
+        $user = auth()->user();
+        return $user->employee;
+
+
+        $emps = Employee::query()->pluck('id');
+
+        $emps_to_choose = [ 3, 40, 44, 45, 46, 47, 49, 50, 51, 52 ];
+
+        $choose_from_employees = array(3,40,46,47,52);
+        $array_of_employees = array(7.42,48);
+        // return $choose_from_employees[array_rand($choose_from_employees,1)];
+        // $array_of_employees[array_rand($array_of_employees , 1)] ;
+
+
+        $visits = VisitingDetails::query()
+        ->get(['id','creator_employee']);
+
+
+        foreach ($visits as $visit) {
+            $random = $emps_to_choose[array_rand($emps_to_choose,1)];
+
+//            if (in_array( $visit->creator_employee , $array_of_employees )) {
+//                $visit->creator_employee = $choose_from_employees[array_rand($choose_from_employees,1)];
+//                $visit->save();
+//            }
+
+            $visit->creator_employee = $random ;
+            $visit->save();
+
         }
-        return 'None';
 
+        return 'Done';
 
-
-
-
+        // Employees shopuld be exisited
+        // 3 , 7 , 40  , 42 , 46 , 47 , 48 , 52
 
         // return auth()->user()->employee;
 

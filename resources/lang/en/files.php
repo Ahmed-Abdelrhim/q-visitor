@@ -255,7 +255,7 @@ return [
     'Fourth Photo' => 'Fourth Photo',
     'Scanner' => 'Scanner',
     'Save Data' => 'Save Data',
-    'Shipments' => 'Shipments',
+    'Shipments' => 'Shipment Types',
     'Shipment' => 'Shipment',
     'Add Shipment' => 'Add Shipment',
     'Edit Shipment' => 'Add Shipment',

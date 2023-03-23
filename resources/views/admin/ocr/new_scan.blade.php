@@ -210,19 +210,21 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     Data was sent, thank you!
                                 </div>
 
-                                @if(!empty($car_type) && $car_type == 'T')
-                                    <div class="row" style="text-align:center">
-                                        <h5>{{__('files.Car Plate')}} :</h5><input type="text" class="form-control plate_no"
-                                                                                   value="<?php echo $plate; ?>" />
-                                        <input type="button" value="{{__('files.Last Car plate')}}" class="btn btn-success get_plate"
+                                @if(!empty($car_type))
+                                    @if($car_type == 'T' || $car_type == 'C')
+                                        <div class="row" style="text-align:center">
+                                            <h5>{{__('files.Car Plate')}} :</h5><input type="text" class="form-control plate_no"
+                                                                                       value="<?php echo $plate; ?>" />
+                                            <input type="button" value="{{__('files.Last Car plate')}}" class="btn btn-success get_plate"
+                                                   style="height: 35px; padding: 7px 14px;margin-left: 7%">
+
+                                            <a class="btn btn-primary dashboard" href="{{ route('admin.dashboard.index') }}"
                                                style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                                {{__('files.Dashboard')}}
+                                            </a>
 
-                                        <a class="btn btn-primary dashboard" href="{{ route('admin.dashboard.index') }}"
-                                           style="height: 35px; padding: 7px 14px;margin-left: 7%">
-                                            {{__('files.Dashboard')}}
-                                        </a>
-
-                                    </div>
+                                        </div>
+                                    @endif
                                 @endif
 
 

@@ -88,6 +88,8 @@ class EmployeeController extends Controller
         $this->data['employees'] = $employees;
 
         $this->data['roles'] = Role::query()->get();
+        $this->data['current_employee_id'] = $this->data['employee']->id;
+
         return view('admin.employee.edit', $this->data);
     }
 
