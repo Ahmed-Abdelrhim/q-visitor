@@ -173,19 +173,21 @@ class VisitorController extends Controller
 
                 if ($visitingDetail->approval_status == 1) {
                     if ($level == 1) {
-                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
+                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id )  {
                             // ReSendSms
                             $msg = __('files.Re-Send Sms');
                             $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
                     }
 
-                    if ($$level == 2) {
-                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_two == auth()->user()->employee->id) {
+                    if ($level == 2) {
+                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_two == auth()->user()->employee->id  ) {
                             $msg = __('files.Second Approve');
                             $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
                     }
+
+
                 }
 
 

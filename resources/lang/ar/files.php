@@ -276,6 +276,8 @@ return [
     'You Should Choose Employee One' => 'بجل أن تختار الموظف الأول',
     'You Should Choose Employee One And Two' => 'بجل أن تختار الموظف الأول و الثاني',
     'Employee Updated Successfully' => 'تم تحديث بيانات الموظف بنجاح',
+    'Second Approve' => 'الموافقة الثانية',
+    'First Approve' => 'الموافقة الأولي',
     '' => '',
     '' => '',
     '' => '',

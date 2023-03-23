@@ -285,8 +285,8 @@ return [
     'You Should Choose Employee One' => 'You Should Choose Employee One',
     'You Should Choose Employee One And Two' => 'You Should Choose Employee One And Two',
     'Employee Updated Successfully' => 'Employee Updated Successfully',
-    '' => '',
-    '' => '',
+    'Second Approve' => 'Second Approve',
+    'First Approve' => 'First Approve',
     '' => '',
     '' => '',
 
