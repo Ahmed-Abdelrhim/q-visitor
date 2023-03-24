@@ -230,7 +230,7 @@ class VisitorController extends Controller
                 //                        $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions"
                 //                    style="background-color: #007bff"
                 //                                    data-toggle="tooltip" data-placement="top" title="' . __('files.Qulaity Approve') . '"><i class="fa fa-check"></i></a>';
-                //                    }
+                //                 fasdfdasdasdaasrwe   }
                 //                }
 
                 if (auth()->user()->can('visitors_edit')) {

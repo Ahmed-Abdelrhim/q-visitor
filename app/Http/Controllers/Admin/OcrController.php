@@ -542,14 +542,14 @@ class OcrController extends Controller
 
     public function playy()
     {
-//        $visits = VisitingDetails::query()->pluck('visitor_id');
-//
-//        $visitors = Visitor::query()->whereNotIn('id', $visits)->get();
-//        foreach ($visitors as $visitor) {
-//            $visitor->delete();
-//        }
-//
-//        return 'Done';
+        //        $visits = VisitingDetails::query()->pluck('visitor_id');
+        //
+        //        $visitors = Visitor::query()->whereNotIn('id', $visits)->get();
+        //        foreach ($visitors as $visitor) {
+        //            $visitor->delete();
+        //        }
+        //
+        //        return 'Done';
 
 
         //        $emps = Employee::query()->pluck('id');

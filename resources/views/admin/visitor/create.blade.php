@@ -30,7 +30,7 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label for="first_name">{{ __('files.First Name') }}</label> <span
-                                            class="text-danger">*</span>
+                                                class="text-danger">*</span>
                                         <input id="first_name" type="text" name="first_name"
                                                class="form-control {{ $errors->has('first_name') ? " is-invalid " : '' }}"
                                                value="{{ old('first_name') }}">
@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="form-group col">
                                         <label for="last_name">{{ __('files.Last Name') }}</label> <span
-                                            class="text-danger">*</span>
+                                                class="text-danger">*</span>
                                         <input id="last_name" type="text" name="last_name"
                                                class="form-control {{ $errors->has('last_name') ? " is-invalid " : '' }}"
                                                value="{{ old('last_name') }}">
@@ -81,12 +81,12 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label for="gender">{{ __('files.Gender') }}</label> <span
-                                            class="text-danger">*</span>
+                                                class="text-danger">*</span>
                                         <select id="gender" name="gender"
                                                 class="form-control @error('gender') is-invalid @enderror">
                                             @foreach(trans('genders') as $key => $gender)
                                                 <option
-                                                    value="{{ $key }}" {{ (old('gender') == $key) ? 'selected' : '' }}>{{ $gender }}</option>
+                                                        value="{{ $key }}" {{ (old('gender') == $key) ? 'selected' : '' }}>{{ $gender }}</option>
                                             @endforeach
                                         </select>
                                         @error('gender')
@@ -122,12 +122,12 @@
                                     </div>
                                     <div class="form-group col">
                                         <label for="employee_id">{{ __('files.Select Employee') }}</label> <span
-                                            class="text-danger">*</span>
+                                                class="text-danger">*</span>
                                         <select id="employee_id" name="employee_id"
                                                 class="form-control select2 @error('employee_id') is-invalid @enderror">
                                             @foreach($employees as $key => $employee)
                                                 <option
-                                                    value="{{ $employee->id }}" {{ (old('employee_id') == $employee->id) ? 'selected' : '' }}>{{ $employee->name }}
+                                                        value="{{ $employee->id }}" {{ (old('employee_id') == $employee->id) ? 'selected' : '' }}>{{ $employee->name }}
                                                     ( {{$employee->department->name}} )
                                                 </option>
                                             @endforeach
@@ -141,11 +141,9 @@
                                 </div>
 
 
-
-
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('files.From Date') }}</label>
+                                        <label class="required">{{ __('files.From Date') }}</label>
                                         <input type="datetime-local" name="from_date" id="v2date"
                                                class="v2date form-control @error('from_date') is-invalid @enderror"
                                                value="{{ old('from_date') }}" id="from_date">
@@ -156,7 +154,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col">
-                                        <label>{{ __('files.Expiry Date') }}</label>
+                                        <label class="required">{{ __('files.Expiry Date') }}</label>
                                         <input type="datetime-local" name="expiry_date" id="v3date"
                                                class="v3date form-control @error('expiry_date') is-invalid @enderror"
                                                value="{{ old('expiry_date') }}" id="expiry_date">
@@ -170,13 +168,13 @@
                                 <div class="form-row">
 
                                     <div class="form-group col">
-                                        <label>{{ __('files.TypeApproval') }}</label>
+                                        <label class="required">{{ __('files.TypeApproval') }}</label>
                                         <!--<input type="text" name="type" class="form-control @error('type') is-invalid @enderror" value="{{ old('type') }}" id="type" >-->
                                         <select id="type" name="type"
                                                 class="form-control select2 @error('type') is-invalid @enderror">
                                             @foreach($types as $key => $type)
                                                 <option
-                                                    value="{{ $type->id }}" {{ (old('type_id') == $type->id) ? 'selected' : '' }}>{{ $type->name }} </option>
+                                                        value="{{ $type->id }}" {{ (old('type_id') == $type->id) ? 'selected' : '' }}>{{ $type->name }} </option>
                                             @endforeach
                                         </select>
                                         @error('type')
@@ -188,7 +186,7 @@
 
 
                                     <div class="form-group col">
-                                        <label>{{ __('files.Car Type') }}</label>
+                                        <label class="required">{{ __('files.Car Type') }}</label>
                                         <select id="car_type" name="car_type"
                                                 class="form-control select2 @error('car_type') is-invalid @enderror">
                                             <option value="0">{{__('files.None')}}</option>
@@ -209,7 +207,7 @@
                                 </div>
 
 
-                                <div class="view_car_type"  style="display: none">
+                                <div class="view_car_type" style="display: none">
                                     @if(auth()->user()->hasRole(15) )
                                         <!-- Start Logisitcs -->
                                         <div class="form-row">
@@ -269,7 +267,7 @@
 
 
                                     <div class="form-group col">
-                                        <label class="address-label required col-md-12"
+                                        <label class="address-label  col-md-12"
                                                for="address">{{ __('files.Address') }}</label>
                                         <textarea name="address"
                                                   class="summernote-simple summernote form-control height-textarea @error('address')
@@ -344,11 +342,11 @@
 
 
 {{--        $('#car_type').on('change', function () {--}}
-{{--        --}}
-{{--        });--}}
+        {{--        --}}
+        {{--        });--}}
 
 
+        });
 
-    });
     </script>
 @endsection
