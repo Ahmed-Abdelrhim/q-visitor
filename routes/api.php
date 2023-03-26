@@ -9,6 +9,8 @@ Route::post('visit/login', [VisitingDetailsController::class, 'login']);
 //Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('getVisitDetails/{id}',[VisitingDetailsController::class,'getVisitDetails']);
     Route::get('getTodayVisits',[VisitingDetailsController::class,'getTodayVisits']);
+    Route::get('lastSignedInVisit',[VisitingDetailsController::class,'lastSignedInVisit']);
+
 //    Route::post('visit/logout', [VisitingDetailsController::class, 'logout']);
 //});
 

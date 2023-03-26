@@ -7,6 +7,7 @@ use App\Http\Resources\VisitngDetailsResource;
 use App\Models\VisitingDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 
@@ -112,6 +113,23 @@ class VisitingDetailsController extends Controller
         // ->where('created_at' , '>=' , Carbon::now())
         // ->whereRaw('date(created_at) = curdate()')
         // return Carbon::parse($start_of_day) . '<br>' . Carbon::parse($end_of_day);
+    }
+
+
+    public function lastSignedInVisit()
+    {
+        // Here You Should Call The Api
+        $call = Http::get('127.0.0.1:8000/api/getLastSignedInVisit');
+        $visit = VisitingDetails::query()
+            ->with('visitor')
+            ->with('companion')
+            ->find($call);
+
+        if (!$visit) {
+            return response()->json(['data' => 'No Data Found'],404);
+        }
+
+        return response()->json(['data' => $visit],200);
     }
 
 }

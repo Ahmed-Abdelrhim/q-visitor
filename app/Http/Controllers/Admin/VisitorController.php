@@ -226,11 +226,14 @@ class VisitorController extends Controller
 
 
                 if (auth()->user()->hasRole(14) && $visitingDetail->car_type == 'T') {
-                    if ($visitingDetail->quality_check != 2) {
-                        $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions"
+                    if (!empty($visitingDetail->shipment_number) && $visitingDetail->shipment_id != 0 ) {
+                        if ($visitingDetail->quality_check != 2) {
+                            $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions"
                                     style="background-color: #007bff"
                                                     data-toggle="tooltip" data-placement="top" title="' . __('files.Qulaity Approve') . '"><i class="fa fa-check"></i></a>';
                         }
+                    }
+
 
                 }
 
