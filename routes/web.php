@@ -266,3 +266,13 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 // #truck , #person , #car => admin.new.scan
 // Add Images To Visit     => admin.view.scan.page
 //
+
+
+
+// ahmed.azzam@example.com
+// khaled.nehmedo@example.com
+
+
+
+// mahmoud.ali@qudra-tech.com
+// ahmed.employee@example.com

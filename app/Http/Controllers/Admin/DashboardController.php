@@ -45,15 +45,35 @@ class DashboardController extends BackendController
             $totalEmployees = count($employees);
         } else {
             $visitors = VisitingDetails::query()
-                ->with('employee')
+            //`                ->with('employee')
+            //                ->with('visitor')
+            //                ->where('approval_status' , '<=' ,1)
+            //                ->where('creator_id', $user->id)
+            //                ->orWhere('editor_id', $user->id)
+            //                ->orWhere('employee_id', $user->employee->id)
+            //                ->orWhere('user_id', $user->id)
+            //                ->with('type')
+            //                ->take(5)
+            //                ->get();`
+
+
+
+            ->where('creator_id', $user->id)
                 ->with('visitor')
-                ->where('approval_status' , '>=' ,1)
-                ->where('creator_id', $user->id)
+//                ->where('approval_status',0)
+//                ->orWhere('approval_status',1)
+                ->orWhere('creator_employee', $user->employee->id)
+                ->orWhere('emp_one', $user->employee->id)
+                ->orWhere('emp_two', $user->employee->id)
                 ->orWhere('editor_id', $user->id)
                 ->orWhere('employee_id', $user->employee->id)
                 ->orWhere('user_id', $user->id)
-                ->with('type')
-                ->take(5)->get();
+                ->orderBy('id', 'desc')
+                ->take(5)
+                ->get();
+
+
+
 
             $preregister = PreRegister::query()
                 ->where(['employee_id' => auth()->user()->employee->id])->orderBy('id', 'desc')
@@ -62,7 +82,8 @@ class DashboardController extends BackendController
         }
 
         $totalVisitor = Visitor::query()->count();
-        $totalPrerigister = count($preregister);
+        // $totalPrerigister = count($preregister);
+        $totalPrerigister = count($visitors);
 
 
         $this->data['totalVisitor'] = $totalVisitor;

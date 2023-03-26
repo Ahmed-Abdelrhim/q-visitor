@@ -173,7 +173,7 @@ class VisitorController extends Controller
 
                 if ($visitingDetail->approval_status == 1) {
                     if ($level == 1) {
-                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id )  {
+                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
                             // ReSendSms
                             $msg = __('files.Re-Send Sms');
                             $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
@@ -181,7 +181,7 @@ class VisitorController extends Controller
                     }
 
                     if ($level == 2) {
-                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_two == auth()->user()->employee->id  ) {
+                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_two == auth()->user()->employee->id) {
                             $msg = __('files.Second Approve');
                             $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                         }
@@ -225,13 +225,14 @@ class VisitorController extends Controller
                 }
 
 
-                //                if (auth()->user()->hasRole(14) && $visitingDetail->car_type == 'T') {
-                //                    if ($visitingDetail->quality_check != 2) {
-                //                        $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions"
-                //                    style="background-color: #007bff"
-                //                                    data-toggle="tooltip" data-placement="top" title="' . __('files.Qulaity Approve') . '"><i class="fa fa-check"></i></a>';
-                //                 fasdfdasdasdaasrwe   }
-                //                }
+                if (auth()->user()->hasRole(14) && $visitingDetail->car_type == 'T') {
+                    if ($visitingDetail->quality_check != 2) {
+                        $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions"
+                                    style="background-color: #007bff"
+                                                    data-toggle="tooltip" data-placement="top" title="' . __('files.Qulaity Approve') . '"><i class="fa fa-check"></i></a>';
+                        }
+
+                }
 
                 if (auth()->user()->can('visitors_edit')) {
                     $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary actions"

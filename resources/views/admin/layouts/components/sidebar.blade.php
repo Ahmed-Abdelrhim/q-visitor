@@ -142,7 +142,8 @@
                 auth()->user()->hasAnyPermission(['types','types_create','types_edit','types_delete','types_show']))
                 <li class="role">
                     <a class="nav-link" href="{{route('admin.types.index')}}">
-                        <i class="fas fa-layer-group"></i>
+{{--                        <i class="fas fa-layer-group"></i>--}}
+                        <i class="fa-sharp fa fa-braille"></i>
                         <span>{{__('files.Types')}}</span>
                     </a>
                 </li>
