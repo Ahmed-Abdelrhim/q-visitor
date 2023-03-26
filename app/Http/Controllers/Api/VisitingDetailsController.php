@@ -128,8 +128,6 @@ class VisitingDetailsController extends Controller
         if (!$visit) {
             return response()->json(['data' => 'No Data Found'],404);
         }
-
         return response()->json(['data' => $visit],200);
     }
-
 }

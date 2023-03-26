@@ -278,7 +278,7 @@ return [
     'Employee Updated Successfully' => 'تم تحديث بيانات الموظف بنجاح',
     'Second Approve' => 'الموافقة الثانية',
     'First Approve' => 'الموافقة الأولي',
-    '' => '',
+    'Choose Employee' => 'Choose Employee',
     '' => '',
     '' => '',
     '' => '',

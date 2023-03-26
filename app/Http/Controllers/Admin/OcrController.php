@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Employee\EmployeeService;
 use App\Jobs\BackgroundJob;
@@ -69,7 +70,10 @@ class OcrController extends Controller
             $notifications = array('message' => 'Invalid car type', 'alert-type' => 'error');
             return redirect()->back()->with($notifications);
         }
-        return view('admin.ocr.new_scan', ['car_type' => $car_type]);
+
+        $employees = Employee::query()->where('status', Status::ACTIVE)->get(['id','first_name','last_name']);
+
+        return view('admin.ocr.new_scan', ['car_type' => $car_type , 'employees' => $employees]);
     }
 
     public function searchVisitingDetails()
