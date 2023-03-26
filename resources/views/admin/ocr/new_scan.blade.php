@@ -385,45 +385,18 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
 
 
 
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-3 " style="margin-top: 10px;">
                                     <div class="input-group-prepend">
-                                        <label class="input-group-text" for="inputGroupSelect01">{{__('files.Employee')}}</label>
+                                        <label class="input-group-text" for="employee">{{__('files.Employee')}}</label>
                                     </div>
-                                    <select class="custom-select" id="inputGroupSelect01">
-                                        <option selected>{{__('files.Choose Employee')}}...</option>
+                                    <select class="custom-select " id="employee">
+                                        <option selected value="0">{{__('files.Choose Employee')}}...</option>
 
                                     @foreach($employees as $employee)
-                                            <option value="1">One</option>
-
+                                            <option value="{{$employee->id}}">{{$employee->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-
-
-
-                                <div class="form-group col">
-                                    <label for="employee_id">{{ __('files.Select Employee') }}</label> <span
-                                            class="text-danger">*</span>
-                                    <select id="employee_id" name="employee_id"
-                                            class="form-control select2 @error('employee_id') is-invalid @enderror">
-                                        @foreach($employees as $key => $employee)
-                                            <option
-                                                    value="{{ $employee->id }}" {{ (old('employee_id') == $employee->id) ? 'selected' : '' }}>{{ $employee->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('employee_id')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-
-
-
-
-
-
 
 
                                 <div class="dbox w-100 d-flex align-items-center"

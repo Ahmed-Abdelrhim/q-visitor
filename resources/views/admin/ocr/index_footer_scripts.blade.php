@@ -346,8 +346,15 @@ $.post('{{route('admin.ocr.save')}}', {
             perpic = $('.perpic').text();
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
+
+
+            employee_id = $('#employee').val();
+
+
+
             car_type = @if(isset($car_type))
         '{{$car_type}}'
+
     @endif
 
     $.post('{{route('admin.new.scan.post')}}', {
@@ -361,6 +368,11 @@ $.post('{{route('admin.ocr.save')}}', {
                 perpic: perpic,
                 exdate: exdate,
                 plate_no: plate_no,
+
+
+                employee_id : employee_id,
+
+
                 add: add,
                 car_type : car_type,
             }, function (data) {
@@ -379,14 +391,23 @@ $.post('{{route('admin.ocr.save')}}', {
                         position: 'topRight',
                     });
                 }
+
+                if(data == 'Employee Is Not Specified') {
+                        iziToast.error({
+                        title: 'Error',
+                        message: 'يجب أن تختار موظف لهذة الزيارة',
+                        position: 'topRight',
+                    });
+                }
+
                 else {
                     console.log(data);
 
 
 
-                    wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
-                    wnd.print();
-                    location.reload();
+                    // wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
+                    // wnd.print();
+                    // location.reload();
 
 
 
@@ -405,6 +426,7 @@ $.post('{{route('admin.ocr.save')}}', {
 
 
     });
+
 
 
 </script>

@@ -339,6 +339,16 @@ class OcrController extends Controller
 
     public function newScanSaveData()
     {
+
+        $emp_id = NULL;
+        if (isset($_POST['employee_id'])) {
+            $emp_id = $_POST['employee_id'];
+        }
+
+        if (empty($emp_id) || $emp_id == 0) {
+            return 'Employee Is Not Specified';
+        }
+
         $name = null;
         $last_name = null;
         $notifications = array('message' => 'Success', 'alert-type' => 'success');
@@ -484,7 +494,7 @@ class OcrController extends Controller
                     'checkin_at' => Carbon::now(),
                     'checkout_at' => NULL,
                     'status' => 5,
-                    'user_id' => $user->id,
+                    'user_id' => $emp_id,
                     'creator_employee' => $employee->id,
                     'emp_one' => $emp_one,
                     'emp_two' => $emp_two,
