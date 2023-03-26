@@ -168,7 +168,8 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                     @if(isset($visits) && count($visits) > 0)
                                         @foreach($visits as $visit)
                                             {{-- <tr class="approved_visit" > --}}
-                                            <tr style="@if($visit->employee->level == $visit->approval_status) background-color: #24ba64 @endif">
+                                            <tr style="@if($visit->approval_status == 2) background-color: #24ba64 @endif">
+{{--                                            <tr style="@if($visit->employee->level == $visit->approval_status) background-color: #24ba64 @endif">--}}
                                                 <td>{{$visit->id}}</td>
                                                 <td>{{$visit->visitor->name}}</td>
                                                 <td>{{$visit->visitor->phone}}</td>
