@@ -45,34 +45,19 @@ class DashboardController extends BackendController
             $totalEmployees = count($employees);
         } else {
             $visitors = VisitingDetails::query()
-            //`                ->with('employee')
-            //                ->with('visitor')
-            //                ->where('approval_status' , '<=' ,1)
-            //                ->where('creator_id', $user->id)
-            //                ->orWhere('editor_id', $user->id)
-            //                ->orWhere('employee_id', $user->employee->id)
-            //                ->orWhere('user_id', $user->id)
-            //                ->with('type')
-            //                ->take(5)
-            //                ->get();`
-
-
-
-            ->where('creator_id', $user->id)
                 ->with('visitor')
-//                ->where('approval_status',0)
-//                ->orWhere('approval_status',1)
+                ->where('creator_id', $user->id)
+                // creators employees and visit user owner
+                ->orWhere('user_id', $user->id)
+                ->orWhere('employee_id', $user->employee->id)
                 ->orWhere('creator_employee', $user->employee->id)
+                // Emps
                 ->orWhere('emp_one', $user->employee->id)
                 ->orWhere('emp_two', $user->employee->id)
-                ->orWhere('editor_id', $user->id)
-                ->orWhere('employee_id', $user->employee->id)
-                ->orWhere('user_id', $user->id)
+                // order by newest
                 ->orderBy('id', 'desc')
                 ->take(5)
                 ->get();
-
-
 
 
             $preregister = PreRegister::query()
@@ -113,3 +98,15 @@ class DashboardController extends BackendController
 //            $employees      = Employee::orderBy('id', 'desc')->get();
 //            $totalEmployees = count($employees);
 //        }
+
+
+//`                ->with('employee')
+//                ->with('visitor')
+//                ->where('approval_status' , '<=' ,1)
+//                ->where('creator_id', $user->id)
+//                ->orWhere('editor_id', $user->id)
+//                ->orWhere('employee_id', $user->employee->id)
+//                ->orWhere('user_id', $user->id)
+//                ->with('type')
+//                ->take(5)
+//                ->get();`
