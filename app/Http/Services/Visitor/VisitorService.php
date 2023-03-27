@@ -62,29 +62,19 @@ class VisitorService
                 ->with('empvisit')
 
                 ->where('car_type', 'T')
-                ->orWhere('user_id', $user->id)
+
+                ->orWhere('user_id', $user->employee->id)
                 ->orWhere('creator_employee', $user->employee->id)
+
+
                 ->orWhere('emp_one', $user->employee->id)
                 ->orWhere('emp_two', $user->employee->id)
+
+
                 ->orWhere('creator_id', $user->id)
                 ->orderBy('id', 'desc')
                 ->get();
         }
-//        if (auth()->user()->hasRole(14) ) {
-//            return VisitingDetails::query()
-//                ->Where('user_id', $user->id)
-//                ->where(function ($query) {
-//                    $query->where('car_type', 'T')
-//                        ->where_not_null('shipment_number')
-//                        ->where_not_null('shipment_id');
-//                })
-//                ->orWhere('creator_employee', $user->employee->id)
-//                ->orWhere('emp_one', $user->employee->id)
-//                ->orWhere('emp_two', $user->employee->id)
-//                ->orWhere('creator_id', $user->id)
-//                ->orderBy('id', 'desc')
-//                ->get();
-//        }
 
 
         else {
@@ -92,12 +82,17 @@ class VisitorService
                 ->with('visitor')
                 ->with('companions')
                 ->with('empvisit')
+
                 ->where('creator_id', $user->id)
+                ->orWhere('user_id', $user->employee->id)
+                ->orWhere('creator_employee', $user->employee->id)
+
                 ->orWhere('emp_one', $user->employee->id)
                 ->orWhere('emp_two', $user->employee->id)
-                ->orWhere('editor_id', $user->id)
-                ->orWhere('employee_id', $user->employee->id)
-                ->orWhere('user_id', $user->id)
+
+
+                // ->orWhere('editor_id', $user->id)
+                // ->orWhere('employee_id', $user->employee->id)
                 ->orderBy('id', 'desc')
                 ->get();
         }
@@ -433,4 +428,24 @@ class VisitorService
 //            return VisitingDetails::query()->where(['employee_id' => auth()->user()->employee->id])->orderBy('id', 'desc')->get();
 //        } else {
 //            return VisitingDetails::query()->orderBy('id', 'desc')->get();
+//        }
+
+
+
+
+
+//        if (auth()->user()->hasRole(14) ) {
+//            return VisitingDetails::query()
+//                ->Where('user_id', $user->id)
+//                ->where(function ($query) {
+//                    $query->where('car_type', 'T')
+//                        ->where_not_null('shipment_number')
+//                        ->where_not_null('shipment_id');
+//                })
+//                ->orWhere('creator_employee', $user->employee->id)
+//                ->orWhere('emp_one', $user->employee->id)
+//                ->orWhere('emp_two', $user->employee->id)
+//                ->orWhere('creator_id', $user->id)
+//                ->orderBy('id', 'desc')
+//                ->get();
 //        }
