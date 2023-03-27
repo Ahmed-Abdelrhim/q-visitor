@@ -42,6 +42,11 @@ class Employee extends Model implements  HasMedia
         return $this->hasMany(VisitingDetails::class,'creator_id','id');
     }
 
+    public function visit()
+    {
+        return $this->hasMany(VisitingDetails::class,'user_id','id');
+    }
+
     public function bookings()
     {
         return $this->hasMany(Booking::class,'employee_id');

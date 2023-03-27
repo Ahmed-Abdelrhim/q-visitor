@@ -13,6 +13,7 @@ use App\Models\Types;
 use App\Models\VisitingDetails;
 use App\Http\Services\Visitor\VisitorService;
 use App\Models\Visitor;
+use App\User;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Carbon;
@@ -302,7 +303,13 @@ class VisitorController extends Controller
                 return Str::limit($visitingDetail->visitor->phone, 50);
             })
             ->editColumn('employee_id', function ($visitingDetail) {
-                return $visitingDetail->employee->user->name;
+                //return $visitingDetail->employee->user->name;
+                return $visitingDetail->empvisit->name;
+
+
+                // $user = Employee::query()->find($visitingDetail->user_id);
+                // return $user->name;
+                // return $visitingDetail->employeeVisit->first_name;
             })
             ->editColumn('date', function ($visitingDetail) {
                 return date('d-m-Y h:i A', strtotime($visitingDetail->checkin_at));
@@ -407,7 +414,6 @@ class VisitorController extends Controller
         }
         $notifications = array('message' => __('files.Visit Quality Approved Successfully'), 'alert-type' => 'success');
         return redirect()->back()->with($notifications);
-
     }
 
     public function visitFirstApprove($approval_status)

@@ -47,11 +47,20 @@ class VisitorService
 
 
         if ($user->hasRole(1)) {
-            return VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
+            return VisitingDetails::query()
+                ->with('visitor')
+                ->with('companions')
+                ->with('empvisit')
+                ->orderBy('id', 'desc')
+                ->get();
         }
 
         if (auth()->user()->hasRole(14) || auth()->user()->hasRole(15)) {
             return VisitingDetails::query()
+                ->with('visitor')
+                ->with('companions')
+                ->with('empvisit')
+
                 ->where('car_type', 'T')
                 ->orWhere('user_id', $user->id)
                 ->orWhere('creator_employee', $user->employee->id)
@@ -82,6 +91,7 @@ class VisitorService
             return VisitingDetails::query()
                 ->with('visitor')
                 ->with('companions')
+                ->with('empvisit')
                 ->where('creator_id', $user->id)
                 ->orWhere('emp_one', $user->employee->id)
                 ->orWhere('emp_two', $user->employee->id)
@@ -195,12 +205,12 @@ class VisitorService
             $visiting['status'] = Status::ACTIVE;
 
 
-            // $visiting['user_id'] = $request->input('employee_id');
-            $visiting['user_id'] = auth()->user()->id;
+            $visiting['user_id'] = $request->input('employee_id');
+            // $visiting['user_id'] = auth()->user()->id;
 
 
             // $visiting['creator_employee'] = auth()->user()->employee->id;
-            $visiting['creator_employee'] = $request->input('employee_id');
+            $visiting['creator_employee'] = auth()->user()->employee->id;
 
             $emp_one = NULL;
             $emp_two = NULL;
@@ -331,7 +341,9 @@ class VisitorService
             $visiting['employee_id'] = $request->input('employee_id');
             $visiting['visitor_id'] = $visitingDetails->visitor->id;
             $visiting['status'] = Status::ACTIVE;
+
             $visiting['user_id'] = $request->input('employee_id');
+
             // $visiting['qrcode'] = $request->input('qrcode');
 
             // $visiting['expiry_date'] = $request->input('expiry_date');
@@ -341,6 +353,8 @@ class VisitorService
 
             $visiting['from_date'] = $request->input('from_date');
             $visiting['type_id'] = $request->input('type');
+
+
             $visiting['car_type'] = $request->input('car_type');
 
 

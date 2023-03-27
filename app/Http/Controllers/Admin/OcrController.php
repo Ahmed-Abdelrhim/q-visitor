@@ -12,6 +12,7 @@ use App\Models\Languages;
 use App\Models\VisitingDetails;
 use App\Models\Visitor;
 use DateTime;
+use http\Client\Curl\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -556,6 +557,22 @@ class OcrController extends Controller
 
     public function playy()
     {
+//        $users = Employee::query()->pluck('id');
+//        $users_arr = [3,40,44,45,46,47,49,50,51,52,53,54,55,56,57,58,59];
+//
+//        $visits = VisitingDetails::query()->whereNotIn('user_id',$users_arr)->get();
+//        foreach ($visits as $visit ) {
+//            $visit->delete();
+//        }
+//        return 'Done';
+
+        //        $visit = VisitingDetails::query()
+        //            ->with('empvisit')
+        //            ->where('id',380)
+        //            ->get();
+        //
+        //        return $visit->empvisit;
+
         //        $visits = VisitingDetails::query()->pluck('visitor_id');
         //
         //        $visitors = Visitor::query()->whereNotIn('id', $visits)->get();
