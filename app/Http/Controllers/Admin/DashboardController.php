@@ -75,11 +75,8 @@ class DashboardController extends BackendController
         $this->data['totalEmployees'] = $totalEmployees;
         $this->data['totalPrerigister'] = $totalPrerigister;
         $this->data['visitors'] = $visitors;
-
         // return $visitors;
-
         // return $visitors[0]->employee;
-
         return view('admin.dashboard.index', $this->data);
     }
 }

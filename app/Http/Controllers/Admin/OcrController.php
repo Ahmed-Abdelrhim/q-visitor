@@ -327,8 +327,9 @@ class OcrController extends Controller
             }
 
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
-        } catch (\Exception $e) {
-        }
+        } catch (\Exception $e) {}
+
+        // notify the employee here
 
         return $visit->id;
     }
