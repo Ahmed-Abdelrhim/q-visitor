@@ -6,13 +6,13 @@ use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Employee\EmployeeService;
 use App\Jobs\BackgroundJob;
+use App\Jobs\NotifyEmployee;
 use App\Models\Companion;
 use App\Models\Employee;
 use App\Models\Languages;
 use App\Models\VisitingDetails;
 use App\Models\Visitor;
 use DateTime;
-use http\Client\Curl\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
+use App\User;
+
 use function PHPUnit\Framework\throwException;
 
 class OcrController extends Controller
@@ -329,7 +331,13 @@ class OcrController extends Controller
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
         } catch (\Exception $e) {}
 
-        // notify the employee here
+
+
+        // notify the employee here···
+        //        try {
+        //            $JOB = NotifyEmployee::dispatch($visit);
+        //        } catch (\Exception $e) {}
+
 
         return $visit->id;
     }
