@@ -305,11 +305,6 @@ class VisitorController extends Controller
             ->editColumn('employee_id', function ($visitingDetail) {
                 //return $visitingDetail->employee->user->name;
                 return $visitingDetail->empvisit->name;
-
-
-                // $user = Employee::query()->find($visitingDetail->user_id);
-                // return $user->name;
-                // return $visitingDetail->employeeVisit->first_name;
             })
             ->editColumn('date', function ($visitingDetail) {
                 return date('d-m-Y h:i A', strtotime($visitingDetail->checkin_at));
