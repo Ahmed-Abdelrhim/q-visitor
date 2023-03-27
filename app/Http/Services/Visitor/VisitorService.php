@@ -193,8 +193,14 @@ class VisitorService
             $visiting['checkin_at'] = $request->input('from_date');// date('y-m-d H:i');
             $visiting['visitor_id'] = $visitor->id;
             $visiting['status'] = Status::ACTIVE;
-            $visiting['user_id'] = $request->input('employee_id');
-            $visiting['creator_employee'] = auth()->user()->employee->id;
+
+
+            // $visiting['user_id'] = $request->input('employee_id');
+            $visiting['user_id'] = auth()->user()->id;
+
+
+            // $visiting['creator_employee'] = auth()->user()->employee->id;
+            $visiting['creator_employee'] = $request->input('employee_id');
 
             $emp_one = NULL;
             $emp_two = NULL;

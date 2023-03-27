@@ -63,13 +63,23 @@ class VisitorController extends Controller
 
     public function store(VisitorRequest $request)
     {
-        if (auth()->user()->hasRole(15) && $request->input('car_type') == 'T') {
-            if (empty($request->input('shipemnt_number')) || empty($request->input('shipment_id'))) {
-                $notifications = array('message' => __('files.You Should Select Shipmet Type And Shipment Number'), 'alert-type' => 'info');
-                return redirect()->back()->with($notifications);
+        if (auth()->user()->hasRole(15)) {
+            if ($request->input('car_type') == 'T') {
+                if (empty($request->input('shipemnt_number')) || empty($request->input('shipment_id'))) {
+                    $notifications = array('message' => __('files.You Should Select Shipmet Type And Shipment Number'), 'alert-type' => 'info');
+                    return redirect()->back()->with($notifications);
+                }
             }
         }
+
+        if ($request->input('car_type') != 'T' && $request->input('car_type') != 'C' && $request->input('car_type') != 'P') {
+            $notifications = array('message' => __('files.You Should Choose A Valid Car Type For The Visit'), 'alert-type' => 'error');
+            return redirect()->back()->with($notifications);
+        }
+
         // return $request;
+
+
         $this->visitorService->make($request);
         return redirect()->route('admin.visitors.index')->withSuccess('The data inserted successfully!');
     }
@@ -226,7 +236,7 @@ class VisitorController extends Controller
 
 
                 if (auth()->user()->hasRole(14) && $visitingDetail->car_type == 'T') {
-                    if (!empty($visitingDetail->shipment_number) && $visitingDetail->shipment_id != 0 ) {
+                    if (!empty($visitingDetail->shipment_number) && $visitingDetail->shipment_id != 0) {
                         if ($visitingDetail->quality_check != 2) {
                             $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions"
                                     style="background-color: #007bff"

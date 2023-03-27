@@ -29,6 +29,7 @@ class VisitorRequest extends FormRequest
         } else {
             $email    = ['required', 'email', 'string'];//, 'unique:visitors,email'
         }
+        $array_values = ['T','P','C'];
         return [
             'first_name'                => 'required|string|max:100',
             'last_name'                 => 'required|string|max:100',
@@ -38,6 +39,9 @@ class VisitorRequest extends FormRequest
             'gender'                    => 'required|numeric',
             'company_name'              => 'nullable|max:100',
             'national_identification_no'=> 'nullable|max:100',
+            // 'car_type'                  => [ 'required' , Rule::in($this->array_values) ],
+            // 'car_type'                  => 'required|in_array:array_values.*',
+            'car_type'                  => 'required|string',
             'purpose'                   => 'required|max:191',
             'address'                   => 'nullable|max:191',
             'shipment_id'               => 'nullable|numeric|exists:shipments,id',
