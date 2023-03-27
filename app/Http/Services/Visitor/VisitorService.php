@@ -25,26 +25,6 @@ class VisitorService
     public function all()
     {
         $user = auth()->user();
-        // if (!$user->hasRole(1) && !$user->hasRole(14)) {
-        // Return Only The VisitingDetails Created By This User Or Edit By The Current User
-//            return VisitingDetails::query()
-//                ->with('visitor')
-//                ->with('companions')
-//                ->where('creator_id', $user->id)
-//                ->orWhere('emp_one', $user->employee->id)
-//                ->orWhere('emp_two' ,$user->employee->id)
-//                ->orWhere('editor_id', $user->id)
-//                ->orWhere('employee_id', $user->employee->id)
-//                ->orWhere('user_id', $user->id)
-//
-//                ->orderBy('id', 'desc')
-//                ->get();
-//        }
-//        else {
-//            // The User Is Of Type ADMIN So Return All The VisitingDetails
-//            return VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
-//        }
-
 
         if ($user->hasRole(1)) {
             return VisitingDetails::query()
@@ -61,8 +41,10 @@ class VisitorService
                 ->with('companions')
                 ->with('empvisit')
 
+                // Here The Difference
                 ->where('car_type', 'T')
 
+                ->where('creator_id', $user->id)
                 ->orWhere('user_id', $user->employee->id)
                 ->orWhere('creator_employee', $user->employee->id)
 
@@ -71,7 +53,6 @@ class VisitorService
                 ->orWhere('emp_two', $user->employee->id)
 
 
-                ->orWhere('creator_id', $user->id)
                 ->orderBy('id', 'desc')
                 ->get();
         }
@@ -448,4 +429,43 @@ class VisitorService
 //                ->orWhere('creator_id', $user->id)
 //                ->orderBy('id', 'desc')
 //                ->get();
+//        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// if (!$user->hasRole(1) && !$user->hasRole(14)) {
+// Return Only The VisitingDetails Created By This User Or Edit By The Current User
+//            return VisitingDetails::query()
+//                ->with('visitor')
+//                ->with('companions')
+//                ->where('creator_id', $user->id)
+//                ->orWhere('emp_one', $user->employee->id)
+//                ->orWhere('emp_two' ,$user->employee->id)
+//                ->orWhere('editor_id', $user->id)
+//                ->orWhere('employee_id', $user->employee->id)
+//                ->orWhere('user_id', $user->id)
+//
+//                ->orderBy('id', 'desc')
+//                ->get();
+//        }
+//        else {
+//            // The User Is Of Type ADMIN So Return All The VisitingDetails
+//            return VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
 //        }
