@@ -288,7 +288,7 @@ return [
     'Second Approve' => 'Second Approve',
     'First Approve' => 'First Approve',
     'Choose Employee' => 'Choose Employee',
-    '' => '',
+    'Visit Not Found While Approving From Qulaity Control' => 'Visit Not Found While Approving From Qulaity Control',
     '' => '',
     '' => '',
     '' => '',

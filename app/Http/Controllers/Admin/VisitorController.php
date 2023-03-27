@@ -322,7 +322,6 @@ class VisitorController extends Controller
 //                    }
                 }
 
-
                 if ($visitingDetail->approval_status == 2) {
                     return '<span class="Approved"  style="font-size: 15px"> ' . __('files.Approved') . ' </span> ';
                 }
@@ -380,7 +379,7 @@ class VisitorController extends Controller
         $visit_id = decrypt($visit_id);
         $visit = VisitingDetails::query()->with('shipment')->find($visit_id);
         if (!$visit) {
-            $notifications = array('message' => 'Visit Not Found While Approving From Qulaity Control', 'alert-type' => 'error');
+            $notifications = array('message' => __('files.Visit Not Found While Approving From Qulaity Control'), 'alert-type' => 'error');
             return redirect()->back()->with($notifications);
         }
         if (empty($visit->shipment_number) || $visit->shipment_id == 0) {
