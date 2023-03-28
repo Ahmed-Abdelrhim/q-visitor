@@ -236,7 +236,7 @@ return [
 
     'Last Car plate' => 'Last Car plate',
     'Add Another Companion' => 'Add Another Companion',
-    'Last Companion' => 'Last Companion',
+    'Last Companion' => 'Save All Companions',
     'Finish' => 'Finish',
     'Add Companion' => 'Add Companion',
     'View Visitors' => 'View Visitors',

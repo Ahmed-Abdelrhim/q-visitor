@@ -231,7 +231,7 @@ return [
     'Last Car plate' => 'رقم اخر عربية',
     'Scan' => 'بحث',
     'Add Another Companion' => 'إضافة مرافق اخر',
-    'Last Companion' => 'اخر مرافق',
+    'Last Companion' => 'حفظ كل المرافقين',
     'Finish' => 'إنهاء',
     'Add Companion' => 'إضافة مرافق',
     'View Visitors' => 'عرض الزيارات',

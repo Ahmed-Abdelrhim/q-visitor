@@ -44,7 +44,7 @@ class VisitorService
                 // Here The Difference
                 ->where('car_type', 'T')
 
-                ->where('creator_id', $user->id)
+                ->orWhere('creator_id', $user->id)
                 ->orWhere('user_id', $user->employee->id)
                 ->orWhere('creator_employee', $user->employee->id)
 
