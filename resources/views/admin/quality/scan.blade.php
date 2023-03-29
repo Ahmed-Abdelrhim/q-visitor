@@ -2,7 +2,7 @@
 @section('main-content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('files.Visit Reservation') }}</h1>
+            <h1>{{ __('files.Quality Scan') }}</h1>
             {{ Breadcrumbs::render('visitors') }}
         </div>
 

@@ -291,7 +291,7 @@ return [
     'Visit Not Found While Approving From Qulaity Control' => 'Visit Not Found While Approving From Qulaity Control',
     'You Should Choose A Valid Car Type For The Visit' => 'You Should Choose A Valid Car Type For The Visit',
     'Quality Control' => 'Quality Control',
-    '' => '',
+    'Quality Scan' => 'Quality Scan',
     '' => '',
     '' => '',
     '' => '',
