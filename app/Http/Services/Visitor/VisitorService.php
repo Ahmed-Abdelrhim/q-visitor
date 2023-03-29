@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Http;
 
 class VisitorService
 {
-
     public function all()
     {
         $user = auth()->user();

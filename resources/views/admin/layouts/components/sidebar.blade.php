@@ -142,7 +142,7 @@
                 auth()->user()->hasAnyPermission(['types','types_create','types_edit','types_delete','types_show']))
                 <li class="role">
                     <a class="nav-link" href="{{route('admin.types.index')}}">
-{{--                        <i class="fas fa-layer-group"></i>--}}
+                        {{--                        <i class="fas fa-layer-group"></i>--}}
                         <i class="fa-sharp fa fa-braille"></i>
                         <span>{{__('files.Types')}}</span>
                     </a>
@@ -165,7 +165,7 @@
             <!-- End  Shipments -->
 
 
-            <!-- Start  Settings -->
+            <!-- Start Settings -->
             @if(auth()->user()->hasRole(1) || auth()->user()->hasPermissionTo('setting'))
                 <li class="settings">
                     <a class="nav-link" href="{{route('admin.setting.index')}}">
@@ -175,7 +175,24 @@
                     </a>
                 </li>
             @endif
-            <!-- End  Settings -->
+            <!-- End Settings -->
+
+
+            <!-- Start Quality Control -->
+            @if(auth()->user()->hasRole(1) ||
+                auth()->user()->hasAnyPermission(['Quality Control']))
+
+                <li class="settings">
+                    <a class="nav-link" href="{{route('admin.setting.index')}}">
+                        <!-- <i class="fa fa-star"></i> -->
+                        {{--  <i class="fa fa-wrench"></i>    --}}
+                        <i class="fa fa-eye"></i>
+                        <span>{{__('files.Quality Control')}}</span>
+
+                    </a>
+                </li>
+            @endif
+            <!-- End Quality Control -->
 
             @if(auth()->user()->hasRole(1) ||
                 auth()->user()->hasAnyPermission(['ocr','ocr_create','ocr_edit','ocr_show','ocr_delete']))
