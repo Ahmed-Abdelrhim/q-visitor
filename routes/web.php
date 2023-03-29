@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-
+use App\Http\Controllers\Admin\QrController;
 
 Route::group(['middleware' => 'prevent-back-history'], function () {
 
@@ -110,6 +110,11 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('ocr/view', [OcrController::class, 'viewFirstPage'])->name('reload.ocr.view');
         Route::get('Optical/Character/Recognition/View/Scan/{visit_id?}', [OcrController::class, 'viewScanPage'])->name('view.scan.page');
+
+        // QRController···
+        Route::get('Qr/Index',[QrController::class,'index'])->name('qr.index');
+
+
 
         // New Scan To Create A Visit...
         Route::get('New/Scan/{car_type}', [OcrController::class, 'newScan'])->name('new.scan');

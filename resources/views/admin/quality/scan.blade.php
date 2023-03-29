@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="card">
 
-                        <div id="reader" style="width: 60px;" width="600px"></div>
+                        <div id="reader" width="600px"></div>
 
                     </div>
                 </div>

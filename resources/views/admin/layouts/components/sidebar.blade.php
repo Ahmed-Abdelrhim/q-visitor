@@ -183,7 +183,7 @@
                 auth()->user()->hasAnyPermission(['Quality Control']))
 
                 <li class="settings">
-                    <a class="nav-link" href="{{route('admin.setting.index')}}">
+                    <a class="nav-link" href="{{route('admin.qr.index')}}">
                         <!-- <i class="fa fa-star"></i> -->
                         {{--  <i class="fa fa-wrench"></i>    --}}
                         <i class="fa fa-eye"></i>
