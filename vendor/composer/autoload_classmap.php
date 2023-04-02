@@ -37,6 +37,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\OcrController' => $baseDir . '/app/Http/Controllers/Admin/OcrController.php',
     'App\\Http\\Controllers\\Admin\\PreRegisterController' => $baseDir . '/app/Http/Controllers/Admin/PreRegisterController.php',
     'App\\Http\\Controllers\\Admin\\ProfileController' => $baseDir . '/app/Http/Controllers/Admin/ProfileController.php',
+    'App\\Http\\Controllers\\Admin\\QrController' => $baseDir . '/app/Http/Controllers/Admin/QrController.php',
     'App\\Http\\Controllers\\Admin\\RoleController' => $baseDir . '/app/Http/Controllers/Admin/RoleController.php',
     'App\\Http\\Controllers\\Admin\\SettingController' => $baseDir . '/app/Http/Controllers/Admin/SettingController.php',
     'App\\Http\\Controllers\\Admin\\ShipmentController' => $baseDir . '/app/Http/Controllers/Admin/ShipmentController.php',

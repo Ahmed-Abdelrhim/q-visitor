@@ -69,7 +69,7 @@ class QrController extends Controller
         $visit->quality_check = 2;
         $visit->save();
 
-        return response()->json(['status' => 200 , 'data' =>  'Success Transaction']);
+            return response()->json(['status' => 200 , 'data' =>  'quality check is now 2']);
     }
 
     public function rejectVisit()
@@ -103,3 +103,24 @@ class QrController extends Controller
         return response()->json(['status' => 200 , 'data' => 'Sucess Transaction']);
     }
 }
+
+
+
+
+
+
+
+
+
+//{{--                                iziToast.success({--}}
+//    {{--                                    title: 'Success',--}}
+//    {{--                                    message: "{{__('files.Visit Rejected Successfully')}}",--}}
+//    {{--                                    position: 'topRight',--}}
+//    {{--                                });--}}
+//
+//{{--                                setTimeout(reload, 2000);--}}
+//
+//{{--                                function reload() {--}}
+//    {{--                                    location.replace('127.0.0.1:8000/admin/Qr/Index');--}}
+//    {{--                                    // location.replace('https://qudratech-eg.net/visitorpass/public/index.php/admin/Qr/Index');--}}
+//                                {{--                                }--}}

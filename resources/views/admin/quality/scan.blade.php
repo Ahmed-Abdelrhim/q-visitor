@@ -155,18 +155,19 @@
                             if(response.status == 200) {
                                 // izi fire
 
-                                iziToast.success({
-                                    title: 'Success',
-                                    message: "{{__('files.Visit Rejected Successfully')}}",
-                                    position: 'topRight',
-                                });
+                                // location.replace('127.0.0.1:8000/admin/Qr/Index');
+
+                                alert('Yes');
+
+
 
                             } else {
-                                    iziToast.success({
-                                        title: 'Error',
-                                        message: "{{__('files.Something Went Wrong')}}",
-                                        position: 'topRight',
-                                    });
+                                    // iziToast.success({
+                                    //     title: 'error',
+                                    //     message: "{{__('files.Something Went Wrong')}}",
+                                    //     position: 'topRight',
+                                    // });
+
                                 }
                         }
                     }); // end of function accept visit

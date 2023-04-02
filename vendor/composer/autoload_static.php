@@ -762,6 +762,7 @@ class ComposerStaticInit720a1b4ff47f0b6b11d0ab01a08d2b72
         'App\\Http\\Controllers\\Admin\\OcrController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/OcrController.php',
         'App\\Http\\Controllers\\Admin\\PreRegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PreRegisterController.php',
         'App\\Http\\Controllers\\Admin\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProfileController.php',
+        'App\\Http\\Controllers\\Admin\\QrController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/QrController.php',
         'App\\Http\\Controllers\\Admin\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RoleController.php',
         'App\\Http\\Controllers\\Admin\\SettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SettingController.php',
         'App\\Http\\Controllers\\Admin\\ShipmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ShipmentController.php',
