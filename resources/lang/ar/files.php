@@ -287,7 +287,7 @@ return [
     'Reject Visit' => 'رفض هذة الزيارة',
     'Visit Approved Successfully' => 'تمت الموافقة علي الزيارة بنجاح',
     'Visit Rejected Successfully' => 'تمت رفض هذة الزيارة بنجاح',
-    '' => '',
+    'Something Went Wrong Becausr Visit ID Was Not Found' => 'حدث خطأ لأنه لم يتم إيجاد رقم هذة الزيارة',
     '' => '',
     '' => '',
     '' => '',

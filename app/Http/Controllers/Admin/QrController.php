@@ -112,15 +112,3 @@ class QrController extends Controller
 
 
 
-//{{--                                iziToast.success({--}}
-//    {{--                                    title: 'Success',--}}
-//    {{--                                    message: "{{__('files.Visit Rejected Successfully')}}",--}}
-//    {{--                                    position: 'topRight',--}}
-//    {{--                                });--}}
-//
-//{{--                                setTimeout(reload, 2000);--}}
-//
-//{{--                                function reload() {--}}
-//    {{--                                    location.replace('127.0.0.1:8000/admin/Qr/Index');--}}
-//    {{--                                    // location.replace('https://qudratech-eg.net/visitorpass/public/index.php/admin/Qr/Index');--}}
-//                                {{--                                }--}}

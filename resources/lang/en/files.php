@@ -296,7 +296,7 @@ return [
     'Reject Visit' => 'Reject Visit',
     'Visit Approved Successfully' => 'Visit Approved Successfully',
     'Visit Rejected Successfully' => 'Visit Rejected Successfully',
-    '' => '',
+    'Something Went Wrong Becausr Visit ID Was Not Found' => 'Something Went Wrong Becausr Visit ID Was Not Found',
     '' => '',
     '' => '',
     '' => '',

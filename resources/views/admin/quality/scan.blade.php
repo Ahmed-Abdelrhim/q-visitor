@@ -10,13 +10,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-
                         <div id="reader" width="600px" style="width: 500px;" class="mx-auto"></div>
 
 
                         <div class="mx-auto" style="display: none;" id="visit-control">
-                            <a class="accept btn btn-primary" id="accept-visit">{{__('files.Accept Visit')}}</a>
-                            <a class="reject btn btn-danger" id="reject-visit">{{__('files.Reject Visit')}}</a>
+                            <a class="accept btn btn-primary" id="accept-visit" style="height: 38px;" >{{__('files.Accept Visit')}}</a>
+                            <a class="reject btn btn-danger" id="reject-visit" style="height: 38px;" >{{__('files.Reject Visit')}}</a>
                         </div>
 
                     </div>
@@ -98,9 +97,9 @@
 
 
         $('#accept-visit').on('click',function() {
+            $("#reject-visit").off('click');
+
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-
                     $.ajax({
                         url: "{{ route('admin.accept.visit.from.quality') }}",
                         type: 'POST',
@@ -120,12 +119,16 @@
                                     position: 'topRight',
                                 });
 
-                                console.log(response.data);
+                                setTimeout(reload, 2000);
+
+                                function reload () {
+                                    location.reload();
+                                }
 
                             } else {
                                     iziToast.success({
                                         title: 'Error',
-                                        message: ".response.",
+                                        message: "{{__('files.Something Went Wrong Becausr Visit ID Was Not Found')}}",
                                         position: 'topRight',
                                     });
                                 }
@@ -137,11 +140,6 @@
 
         $('#reject-visit').on('click',function() {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-
-
-
-
                     $.ajax({
                         url: "{{ route('admin.reject.visit.from.quality') }}",
                         type: 'POST',
@@ -155,18 +153,25 @@
                             if(response.status == 200) {
                                 // izi fire
 
-                                // location.replace('127.0.0.1:8000/admin/Qr/Index');
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: "{{__('files.Visit Rejected Successfully')}}",
+                                    position: 'topRight',
+                                });
 
-                                alert('Yes');
+                                setTimeout(reload, 2000);
 
-
+                                function reload() {
+                                    location.reload();
+                                    // location.replace('https://qudratech-eg.net/visitorpass/public/index.php/admin/Qr/Index');
+                                }
 
                             } else {
-                                    // iziToast.success({
-                                    //     title: 'error',
-                                    //     message: "{{__('files.Something Went Wrong')}}",
-                                    //     position: 'topRight',
-                                    // });
+                                    iziToast.success({
+                                        title: 'error',
+                                        message: "{{__('files.Something Went Wrong Becausr Visit ID Was Not Found')}}",
+                                        position: 'topRight',
+                                    });
 
                                 }
                         }
