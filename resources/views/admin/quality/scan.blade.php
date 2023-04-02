@@ -13,6 +13,12 @@
 
                         <div id="reader" width="600px" style="width: 500px;" class="mx-auto"></div>
 
+
+                        <div class="mx-auto">
+                            <a class="accept btn btn-primary">{{__('files.Accept Visit')}}</a>
+                            <a class="reject btn btn-danger">{{__('files.Reject Visit')}}</a>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -23,7 +29,8 @@
 @section('scripts')
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
         function onScanSuccess(decodedText, decodedResult) {
@@ -31,12 +38,6 @@
             let id = decodedText;
             html5QrcodeScanner.clear().then(_ => {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-
-
-
-
-
 
             $.ajax({
                         url: "{{ route('admin.scan.qr') }}",
@@ -49,12 +50,15 @@
                         success: function (response) {
                             console.log(response);
                             if(response.status == 200) {
-                                alert('berhasil');
+                                // alert('berhasil');
+                                console.log(response);
+                                // 965491165
 
-                            }else{
-                                alert('gagal');
+                            } else {
+                                alert(response);
+                                // alert('gagal');
+                                console.log(response);
                             }
-
                         }
                     });
                 }).catch(error => {
@@ -81,5 +85,6 @@
         { fps: 10, qrbox: {width: 250, height: 250} },
         /* verbose= */ false);
         html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+
     </script>
 @endsection

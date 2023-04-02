@@ -566,6 +566,27 @@ class OcrController extends Controller
 
     public function playy()
     {
+        $visit = VisitingDetails::query()->find(355);
+
+        if ($visit->car_type != 'T') {
+            return 'This Visit Is Not Of Type Truck';
+        }
+
+
+        if ( empty($visit->shipment_id) ) {
+            return 'This Visit Does Not Have Shipment ID';
+        }
+
+
+        if ( empty($visit->shipment_number) ) {
+            return 'This Visit Does Not Have Shipment Number';
+        }
+
+
+        return $visit;
+
+
+
 //        $users = Employee::query()->pluck('id');
 //        $users_arr = [3,40,44,45,46,47,49,50,51,52,53,54,55,56,57,58,59];
 //
