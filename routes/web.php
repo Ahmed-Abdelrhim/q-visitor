@@ -113,6 +113,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         // QRController···
         Route::get('Qr/Index',[QrController::class,'index'])->name('qr.index');
+        Route::post('Scan/Qr',[QrController::class,'scanQr'])->name('scan.qr');
 
 
 

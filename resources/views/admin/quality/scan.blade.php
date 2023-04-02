@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="card">
 
-                        <div id="reader" width="600px"></div>
+                        <div id="reader" width="600px" style="width: 500px;" class="mx-auto"></div>
 
                     </div>
                 </div>
@@ -27,8 +27,47 @@
 
     <script>
         function onScanSuccess(decodedText, decodedResult) {
+            $('#result').val(decodedText);
+            let id = decodedText;
+            html5QrcodeScanner.clear().then(_ => {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+
+
+
+
+
+
+            $.ajax({
+                        url: "{{ route('admin.scan.qr') }}",
+                        type: 'POST',
+                        data: {
+                            _methode : "POST",
+                            _token: CSRF_TOKEN,
+                            qr_code : id
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if(response.status == 200) {
+                                alert('berhasil');
+
+                            }else{
+                                alert('gagal');
+                            }
+
+                        }
+                    });
+                }).catch(error => {
+                    alert('something wrong');
+                });
+
+
+
+
         // handle the scanned code as you like, for example:
-        console.log(`Code matched = ${decodedText}`, decodedResult);
+
+
+        // console.log(`Code matched = ${decodedText}`, decodedResult);
         }
 
     function onScanFailure(error) {
