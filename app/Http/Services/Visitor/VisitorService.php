@@ -215,9 +215,9 @@ class VisitorService
 
             //$visiting['qrcode'] = $request->input('qrcode');
             try {
-
+                $visit_id_qr = $visitor->id + 1 ;
                 // $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
-                $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
+                $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit_id_qr;
 
                 $data = file_get_contents($url);
 

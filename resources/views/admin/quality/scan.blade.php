@@ -14,8 +14,8 @@
 
 
                         <div class="mx-auto" style="display: none;" id="visit-control">
-                            <a class="accept btn btn-primary" id="accept-visit" style="height: 38px;" >{{__('files.Accept Visit')}}</a>
-                            <a class="reject btn btn-danger" id="reject-visit" style="height: 38px;" >{{__('files.Reject Visit')}}</a>
+                            <button class="accept btn btn-primary" id="accept-visit" style="height: 38px;" >{{__('files.Accept Visit')}}</button>
+                            <button class="reject btn btn-danger" id="reject-visit" style="height: 38px;"   >{{__('files.Reject Visit')}}</button>
                         </div>
 
                     </div>
@@ -97,7 +97,7 @@
 
 
         $('#accept-visit').on('click',function() {
-            $("#reject-visit").off('click');
+            $('#reject-visit').prop('disabled', true);
 
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                     $.ajax({
@@ -139,6 +139,8 @@
 
 
         $('#reject-visit').on('click',function() {
+            $('#accept-visit').prop('disabled', true);
+
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                     $.ajax({
                         url: "{{ route('admin.reject.visit.from.quality') }}",
