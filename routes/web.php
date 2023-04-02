@@ -115,6 +115,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('Qr/Index',[QrController::class,'index'])->name('qr.index');
         Route::post('Scan/Qr',[QrController::class,'scanQr'])->name('scan.qr');
 
+        Route::post('Accept/Quality-Control/Visit/Check',[QrController::class,'acceptVisit'])->name('accept.visit.from.quality');
+        Route::post('Reject/Quality-Control/Visit/Check',[QrController::class,'rejectVisit'])->name('reject.visit.from.quality');
+
 
 
         // New Scan To Create A Visit...

@@ -14,9 +14,9 @@
                         <div id="reader" width="600px" style="width: 500px;" class="mx-auto"></div>
 
 
-                        <div class="mx-auto">
-                            <a class="accept btn btn-primary">{{__('files.Accept Visit')}}</a>
-                            <a class="reject btn btn-danger">{{__('files.Reject Visit')}}</a>
+                        <div class="mx-auto" style="display: none;" id="visit-control">
+                            <a class="accept btn btn-primary" id="accept-visit">{{__('files.Accept Visit')}}</a>
+                            <a class="reject btn btn-danger" id="reject-visit">{{__('files.Reject Visit')}}</a>
                         </div>
 
                     </div>
@@ -33,6 +33,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
+        var visit_id = 0;
         function onScanSuccess(decodedText, decodedResult) {
             $('#result').val(decodedText);
             let id = decodedText;
@@ -52,7 +53,10 @@
                             if(response.status == 200) {
                                 // alert('berhasil');
                                 console.log(response);
-                                // 965491165
+                            $('#visit-control').css({"display":""});
+
+                            visit_id = response.data;
+
 
                             } else {
                                 alert(response);
@@ -77,7 +81,9 @@
     function onScanFailure(error) {
       // handle scan failure, usually better to ignore and keep scanning.
       // for example:
-        console.warn(`Code scan error = ${error}`);
+
+
+        // console.warn(`Code scan error = ${error}`);
         }
 
     let html5QrcodeScanner = new Html5QrcodeScanner(
@@ -85,6 +91,86 @@
         { fps: 10, qrbox: {width: 250, height: 250} },
         /* verbose= */ false);
         html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+
+
+
+
+
+
+        $('#accept-visit').on('click',function() {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+
+                    $.ajax({
+                        url: "{{ route('admin.accept.visit.from.quality') }}",
+                        type: 'POST',
+                        data: {
+                            _methode : "POST",
+                            _token: CSRF_TOKEN,
+                            visit_id : visit_id,
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if(response.status == 200) {
+                                // izi fire
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: "{{__('files.Visit Approved Successfully')}}",
+                                    position: 'topRight',
+                                });
+
+                                console.log(response.data);
+
+                            } else {
+                                    iziToast.success({
+                                        title: 'Error',
+                                        message: ".response.",
+                                        position: 'topRight',
+                                    });
+                                }
+                        }
+                    }); // end of function accept visit
+
+        }); // end of accept visit
+
+
+        $('#reject-visit').on('click',function() {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+
+
+
+
+                    $.ajax({
+                        url: "{{ route('admin.reject.visit.from.quality') }}",
+                        type: 'POST',
+                        data: {
+                            _methode : "POST",
+                            _token: CSRF_TOKEN,
+                            visit_id : visit_id,
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if(response.status == 200) {
+                                // izi fire
+
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: "{{__('files.Visit Rejected Successfully')}}",
+                                    position: 'topRight',
+                                });
+
+                            } else {
+                                    iziToast.success({
+                                        title: 'Error',
+                                        message: "{{__('files.Something Went Wrong')}}",
+                                        position: 'topRight',
+                                    });
+                                }
+                        }
+                    }); // end of function accept visit
+        }); // end reject visit
 
     </script>
 @endsection

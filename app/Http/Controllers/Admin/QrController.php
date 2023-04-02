@@ -40,4 +40,66 @@ class QrController extends Controller
 
         return response()->json(['status' => 200 , 'data' =>  $visit->id]);
     }
+
+    public function acceptVisit()
+    {
+        $visit_id = 0;
+        if (isset($_POST['visit_id'])) {
+            $visit_id = $_POST['visit_id'];
+        }
+
+        $visit = VisitingDetails::query()->find($visit_id);
+
+        if (!$visit) {
+            return response()->json('الزيارة غير موجودة');
+        }
+
+        if ($visit->car_type != 'T') {
+            return response()->json('This Visit Is Not Of Type Truck');
+        }
+
+        if ( empty($visit->shipment_id) ) {
+            return 'This Visit Does Not Have Shipment ID';
+        }
+
+        if ( empty($visit->shipment_number) ) {
+            return 'This Visit Does Not Have Shipment Number';
+        }
+
+        $visit->quality_check = 2;
+        $visit->save();
+
+        return response()->json(['status' => 200 , 'data' =>  'Success Transaction']);
+    }
+
+    public function rejectVisit()
+    {
+        $visit_id = 0;
+        if (isset($_POST['visit_id'])) {
+            $visit_id = $_POST['visit_id'];
+        }
+
+        $visit = VisitingDetails::query()->find($visit_id);
+
+        if (!$visit) {
+            return response()->json('الزيارة غير موجودة');
+        }
+
+        if ($visit->car_type != 'T') {
+            return response()->json('This Visit Is Not Of Type Truck');
+        }
+
+        if ( empty($visit->shipment_id) ) {
+            return 'This Visit Does Not Have Shipment ID';
+        }
+
+        if ( empty($visit->shipment_number) ) {
+            return 'This Visit Does Not Have Shipment Number';
+        }
+
+        $visit->quality_check = 5;
+        $visit->save();
+
+        return response()->json(['status' => 200 , 'data' => 'Sucess Transaction']);
+    }
 }
