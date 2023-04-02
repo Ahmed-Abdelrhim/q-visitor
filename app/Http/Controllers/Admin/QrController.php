@@ -22,7 +22,8 @@ class QrController extends Controller
         $visit = VisitingDetails::query()->find($code);
 
         if (!$visit) {
-            return response()->json('الزيارة غير موجودة');
+            // return response()->json('الزيارة غير موجودة');
+            return response()->json('Visit Was Not Found \'ID Of Qr Code '.$code.' \' ');
         }
 
         if ($visit->car_type != 'T') {
