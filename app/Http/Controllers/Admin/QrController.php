@@ -23,20 +23,21 @@ class QrController extends Controller
 
         if (!$visit) {
             // return response()->json('الزيارة غير موجودة');
-            return response()->json('Visit Was Not Found \'ID Of Qr Code '.$code.' \' ');
+            return response()->json(__('files.This Visit Does Not Exisit'));
+            // return response()->json('Visit Was Not Found \'ID Of Qr Code '.$code.' \' ');
         }
 
         if ($visit->car_type != 'T') {
-            return response()->json('This Visit Is Not Of Type Truck');
+            return response()->json(__('files.This Visit Is Not Of Type Truck'));
         }
 
 
         if ( empty($visit->shipment_id) ) {
-            return 'This Visit Does Not Have Shipment ID';
+            return __('files.This Visit Does Not Have Shipment ID');
         }
 
         if ( empty($visit->shipment_number) ) {
-            return 'This Visit Does Not Have Shipment Number';
+            return __('files.This Visit Does Not Have Shipment Number');
         }
 
         return response()->json(['status' => 200 , 'data' =>  $visit->id]);
