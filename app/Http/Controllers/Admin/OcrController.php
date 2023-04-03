@@ -566,6 +566,7 @@ class OcrController extends Controller
 
     public function playy()
     {
+        return auth()->user()->employee->level;
         return auth()->user()->creatorEmployee;
         $visit_id_for_qr_code = VisitingDetails::query()->orderBy('id','desc')->first()->id;
         $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit_id_for_qr_code;

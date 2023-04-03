@@ -201,13 +201,17 @@ class VisitorService
                 $emp_two = auth()->user()->employee->emp_two;
             }
 
+
             if (auth()->user()->employee->level == 0) {
-                if ($request->input('car_type' != 'T')) {
+                if ( $request->input('car_type') == 'P'  ||  $request->input('car_type') == 'C'   ) {
+
                     $visiting['approval_status'] = 2;
                     // $visiting['approval_status']  =  1;
                     $flag = true;
                 } else {
+
                     $visiting['approval_status'] = 0;
+
                 }
             }
 
