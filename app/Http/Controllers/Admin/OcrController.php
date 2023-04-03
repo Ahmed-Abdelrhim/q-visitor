@@ -566,6 +566,14 @@ class OcrController extends Controller
 
     public function playy()
     {
+        //        $lang = Languages::query()->create([
+        //            'iso' => 'es',
+        //            'active' => 1,
+        //            'created_at' => Carbon::now(),
+        //        ]);
+        //
+        //        return 'Done';
+
         $visit = VisitingDetails::query()->find(355);
 
         if ($visit->car_type != 'T') {
