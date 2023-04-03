@@ -160,8 +160,10 @@ class VisitorController extends Controller
                 if ($visitingDetail->approval_status == 0) {
                     // check if car type is truck
                     if ($level == 0) {
-                        $msg = __('files.Approve');
-                        $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->id == auth()->user()->employee->id ) {
+                            $msg = __('files.Approve');
+                            $retAction .= '<a href="' . route('admin.visit.approval', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        }
                     }
 
 
@@ -236,17 +238,15 @@ class VisitorController extends Controller
                 }
 
 
-                if (auth()->user()->hasRole(14) && $visitingDetail->car_type == 'T') {
-                    if (!empty($visitingDetail->shipment_number) && $visitingDetail->shipment_id != 0) {
-                        if ($visitingDetail->quality_check != 2) {
-                            $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions"
-                                    style="background-color: #007bff"
-                                                    data-toggle="tooltip" data-placement="top" title="' . __('files.Qulaity Approve') . '"><i class="fa fa-check"></i></a>';
-                        }
-                    }
-
-
-                }
+            //                if (auth()->user()->hasRole(14) && $visitingDetail->car_type == 'T') {
+            //                    if (!empty($visitingDetail->shipment_number) && $visitingDetail->shipment_id != 0) {
+            //                        if ($visitingDetail->quality_check != 2) {
+            //                            $retAction .= '<a href="' . route('admin.visitors.qulaity.approve', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-dark actions"
+            //                                    style="background-color: #007bff"
+            //                                                    data-toggle="tooltip" data-placement="top" title="' . __('files.Qulaity Approve') . '"><i class="fa fa-check"></i></a>';
+            //                        }
+            //                    }
+            //                }
 
                 if (auth()->user()->can('visitors_edit')) {
                     $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary actions"

@@ -133,6 +133,8 @@ class VisitorService
 
         if ($visitor) {
             $reg_no = $visitor->reg_no + 1;
+            $visit_id_for_qr_code = $visitor->id + 1 ;
+
         } else {
             $reg_no = rand(11111111, 99999999);
         }
@@ -214,17 +216,6 @@ class VisitorService
             $visiting['emp_two'] = $emp_two;
 
             //$visiting['qrcode'] = $request->input('qrcode');
-            try {
-                $visit_id_qr = $visitor->id + 1 ;
-                // $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
-                $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit_id_qr;
-
-                $data = file_get_contents($url);
-
-                $visiting['qrcode'] = $data;
-            } catch (\Exception $e) {
-                $visiting['qrcode'] = NULL;
-            }
 
             // $visiting['expiry_date'] = Carbon::parse( $request->input('expiry_date'));
             $visiting['expiry_date'] = date('Y-m-d H:i:s', strtotime($request->input('expiry_date')));
@@ -239,7 +230,30 @@ class VisitorService
 
             $visitingDetails = VisitingDetails::query()->create($visiting);
 
+            $visit= VisitingDetails::query()->orderBy('id','desc')->first();
+
+            try {
+                // $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
+                $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit->id;
+
+                $data = file_get_contents($url);
+
+
+                // $visiting['qrcode'] = $data;
+                $visit->qrcode = $data;
+                $visit->save();
+
+            } catch (\Exception $e) {
+                $visiting['qrcode'] = NULL;
+            }
+
             if ($flag) {
+                // Here The Visit Should Be Accepted Because The User Created The Visit Is Admin Or Does Not Have Managaers
+                // Accept The Visit
+                $visit->approval_status = 2;
+                $visit->save();
+
+                // Sending Qr Code And Sms
                 $job = BackgroundJob::dispatch($visiting);
             }
 
