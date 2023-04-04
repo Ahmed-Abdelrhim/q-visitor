@@ -494,9 +494,13 @@ class VisitorController extends Controller
         }
     }
 
+
+
     public
     function play(string $locale)
     {
         return auth()->user()->employee();
     }
+
+
 }

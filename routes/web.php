@@ -133,6 +133,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('Add/Visit/Companion/{visit_id}', [CompanionController::class, 'addVisitCompanion'])->name('add.companion.to.visit');
         Route::post('Add/Another/Companion', [CompanionController::class, 'addAnotherCompanion'])->name('add.another.companion');
         Route::post('Add/Last/Companion', [CompanionController::class, 'addLastCompanion'])->name('add.last.companion');
+        Route::post('Remove/Companion/{id}',[CompanionController::class,'removeCompanion'])->name('remove.companion');
+
 
 
 

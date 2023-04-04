@@ -292,8 +292,8 @@ return [
     'This Visit Is Not Of Type Truck' => 'هذة الزيارة ليست من نوع شاحنة',
     'This Visit Does Not Have Shipment ID' => 'هذة الزيارة ليس لديها نوع شحنة',
     'This Visit Does Not Have Shipment Number' => 'هذة الزيارة ليس لديها رقم شحنة',
-    '' => '',
-    '' => '',
+    'Companion Deleted Successfully' => 'تم حذف المرافق بنجاح',
+    'Companion Was Not Found' => 'لم يتم إيجاد هذا المرافق',
     '' => '',
     '' => '',
 

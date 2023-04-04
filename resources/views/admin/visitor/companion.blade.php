@@ -68,11 +68,11 @@
 
                                             <td>
 
-                                                <a href="#" class="btn btn-sm btn-icon float-left btn-danger"
-                                                   data-toggle="tooltip" data-placement="top"
-                                                   title="{{__('files.Delete')}}">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
+                                                    {{--                                                <a href="#" class="btn btn-sm btn-icon float-left btn-danger"--}}
+                                                    {{--                                                   data-toggle="tooltip" data-placement="top"--}}
+                                                    {{--                                                   title="{{__('files.Delete')}}">--}}
+                                                    {{--                                                    <i class="fa fa-trash"></i>--}}
+                                                    {{--                                                </a>--}}
 
                                             </td>
                                         </tr>
@@ -111,11 +111,19 @@
 
 
                                                 <td>
+
+
                                                     <a href="#" class="btn btn-sm btn-icon float-left btn-danger"
                                                        data-toggle="tooltip" data-placement="top"
-                                                       title="{{__('files.Delete')}}">
+                                                       title="{{__('files.Delete')}}" onclick="event.preventDefault();document.getElementById('remove-companion').submit();">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
+
+                                                    <form id="remove-companion" class="d-none" method="POST" action="{{route('admin.remove.companion',encrypt($companion->id))}}">
+                                                        @csrf
+                                                    </form>
+
+
                                                 </td>
                                             </tr>
                                         @endforeach

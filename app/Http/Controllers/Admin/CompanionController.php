@@ -190,4 +190,43 @@ class CompanionController extends Controller
 
         return (int) $visit->id;
     }
+
+
+    public function removeCompanion($companion_id)
+    {
+        $id = decrypt($companion_id);
+        $companion = Companion::query()->with('visit')->find($id);
+        if (!$companion) {
+            $notifications = array('message'=> __('files.Companion Was Not Found'), 'alert-type' => 'error');
+            return redirect()->back()->with($notifications);
+        }
+
+        // Delete Companion Images Int The Per_Images Folder
+        try {
+            $reg_no = $companion->visit->reg_no;
+            if (File::exists(storage_path('app/public' . '/per_images' . '/' . $reg_no .'/companions' ))) {
+
+                $image_path = storage_path('app/public' .'/per_images' . '/' . $reg_no . '/companions/' . $companion->id . '.png');
+                File::delete($image_path);
+            }
+        } catch (\Exception $e) {}
+
+
+
+        // Delete Companion Images In The Images Folder
+        try {
+            if (File::exists(storage_path('app/public' . '/images' . '/' . $reg_no .'/companions' ))) {
+                for ($i = 1 ; $i <= 5 ; $i ++) {
+                    $image_path = storage_path('app/public' .'/images' . '/' . $reg_no . '/companions/' . $reg_no . '-' . $companion->id . '-' . $i . '.jpg');
+                    File::delete($image_path);
+                }
+            }
+
+        } catch (\Exception $e) {}
+
+
+        $companion->delete();
+        $notifications = array('message'=> __('files.Companion Deleted Successfully') , 'alert-type' => 'success');
+        return redirect()->back()->with($notifications);
+    }
 }
