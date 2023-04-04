@@ -282,7 +282,7 @@ return [
     'Visit Not Found While Approving From Qulaity Control' => 'لم يتم إيجاد الزيارة اثناء الموالفقة من قسم مراقبة الجودة',
     'You Should Choose A Valid Car Type For The Visit' => 'يجب أن تختار نوع عربية صالح لهذة الزيارة',
     'Quality Control' => 'مراقبة الجودة',
-    'Quality Scan' => 'فحص قسم مراقبة الجودة',
+    'Quality Scan' => 'مراقبة الجودة',
     'Accept Visit' => 'موافقة علي هذة الزيارة',
     'Reject Visit' => 'رفض هذة الزيارة',
     'Visit Approved Successfully' => 'تمت الموافقة علي الزيارة بنجاح',

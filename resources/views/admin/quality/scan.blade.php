@@ -59,8 +59,9 @@
 
                             } else {
                                 alert(response);
+                                location.reload();
                                 // alert('gagal');
-                                console.log(response);
+                                // console.log(response);
                             }
                         }
                     });

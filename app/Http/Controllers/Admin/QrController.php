@@ -32,15 +32,15 @@ class QrController extends Controller
         }
 
 
-        if ( empty($visit->shipment_id) ) {
+        if (empty($visit->shipment_id)) {
             return __('files.This Visit Does Not Have Shipment ID');
         }
 
-        if ( empty($visit->shipment_number) ) {
+        if (empty($visit->shipment_number)) {
             return __('files.This Visit Does Not Have Shipment Number');
         }
 
-        return response()->json(['status' => 200 , 'data' =>  $visit->id]);
+        return response()->json(['status' => 200, 'data' => $visit->id]);
     }
 
     public function acceptVisit()
@@ -60,18 +60,18 @@ class QrController extends Controller
             return response()->json('This Visit Is Not Of Type Truck');
         }
 
-        if ( empty($visit->shipment_id) ) {
+        if (empty($visit->shipment_id)) {
             return 'This Visit Does Not Have Shipment ID';
         }
 
-        if ( empty($visit->shipment_number) ) {
+        if (empty($visit->shipment_number)) {
             return 'This Visit Does Not Have Shipment Number';
         }
 
         $visit->quality_check = 2;
         $visit->save();
 
-            return response()->json(['status' => 200 , 'data' =>  'quality check is now 2']);
+        return response()->json(['status' => 200, 'data' => 'quality check is now 2']);
     }
 
     public function rejectVisit()
@@ -91,18 +91,18 @@ class QrController extends Controller
             return response()->json('This Visit Is Not Of Type Truck');
         }
 
-        if ( empty($visit->shipment_id) ) {
+        if (empty($visit->shipment_id)) {
             return 'This Visit Does Not Have Shipment ID';
         }
 
-        if ( empty($visit->shipment_number) ) {
+        if (empty($visit->shipment_number)) {
             return 'This Visit Does Not Have Shipment Number';
         }
 
         $visit->quality_check = 5;
         $visit->save();
 
-        return response()->json(['status' => 200 , 'data' => 'Sucess Transaction']);
+        return response()->json(['status' => 200, 'data' => 'Sucess Transaction']);
     }
 }
 
