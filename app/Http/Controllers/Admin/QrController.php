@@ -19,7 +19,7 @@ class QrController extends Controller
         if (!is_numeric($code)) {
             return response()->json('Not Valid Qr Code');
         }
-        $visit = VisitingDetails::query()->find($code);
+        $visit = VisitingDetails::query()->with('visitor')->find($code);
 
         if (!$visit) {
             // return response()->json('الزيارة غير موجودة');
@@ -40,7 +40,7 @@ class QrController extends Controller
             return __('files.This Visit Does Not Have Shipment Number');
         }
 
-        return response()->json(['status' => 200, 'data' => $visit->id]);
+        return response()->json(['status' => 200, 'data' => $visit->id , 'visit' => $visit]);
     }
 
     public function acceptVisit()

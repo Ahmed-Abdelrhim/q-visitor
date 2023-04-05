@@ -44,14 +44,14 @@
                                                 @if (auth()->user()->can('shipment_show') || auth()->user()->can('shipment_edit') || auth()->user()->can('shipment_delete'))
                                                     <td class="td-style td-actions">
 
-{{--                                                        @if (auth()->user()->can('shipment_show'))--}}
-{{--                                                            <a href="{{ route('admin.shipment.show', $shipment->id) }}"--}}
-{{--                                                               class="btn btn-sm btn-icon float-left btn-info"--}}
-{{--                                                               data-toggle="tooltip" data-placement="top"--}}
-{{--                                                               title="{{__('files.Permission')}}">--}}
-{{--                                                                <i class="far fa-eye"></i>--}}
-{{--                                                            </a>--}}
-{{--                                                        @endif--}}
+                                                        {{--  @if (auth()->user()->can('shipment_show'))                    --}}
+                                                        {{--  <a href="{{ route('admin.shipment.show', $shipment->id) }}"   --}}
+                                                        {{--  class="btn btn-sm btn-icon float-left btn-info"               --}}
+                                                        {{--  data-toggle="tooltip" data-placement="top"                    --}}
+                                                        {{--  title="{{__('files.Permission')}}">                           --}}
+                                                        {{--  <i class="far fa-eye"></i>                                    --}}
+                                                        {{--  </a>                                                          --}}
+                                                        {{--  @endif                                                        --}}
 
                                                         @if (auth()->user()->can('shipment_edit'))
                                                             <a href="{{ route('admin.shipment.edit', $shipment->id) }}"
@@ -69,7 +69,8 @@
                                                                 <button class="btn btn-sm btn-icon btn-danger"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="{{__('files.Delete')}}"><i
-                                                                            class="fa fa-trash"></i></button>
+                                                                            class="fa fa-trash"></i>
+                                                                </button>
                                                             </form>
                                                         @endif
                                                     </td>

@@ -14,8 +14,76 @@
 
 
                         <div class="mx-auto" style="display: none;" id="visit-control">
-                            <button class="accept btn btn-primary" id="accept-visit" style="height: 38px;" >{{__('files.Accept Visit')}}</button>
-                            <button class="reject btn btn-danger" id="reject-visit" style="height: 38px;"   >{{__('files.Reject Visit')}}</button>
+                            {{--                        <div class="mx-auto" id="visit-control">--}}
+                            {{-- Visit Data --}}
+
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header " style="font-weight: bold">
+                                    {{__('files.Visit Data')}}
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <span style="font-weight: bold">  {{__('files.Visit Register No :')}} </span>
+                                        <span id="visit-reg_no"></span>
+                                    </li>
+
+                                    <li class="list-group-item">
+
+                                        @if(app()->getLocale() == 'ar' )
+                                            <span id="visitor-name"></span>
+                                            <span style="font-weight: bold"> : {{__('files.Visitor Name')}}   </span>
+                                        @else
+                                            <span style="font-weight: bold"> {{__('files.Visitor Name')}} :  </span>
+                                            <span id="visitor-name"></span>
+                                        @endif
+
+                                    </li>
+
+
+                                    <li class="list-group-item">
+
+                                        @if(app()->getLocale() == 'ar' )
+                                            <span id="visitor-identification-number"></span>
+                                            <span style="font-weight: bold"> : {{__('files.Visitor ID Number')}}   </span>
+                                        @else
+                                            <span style="font-weight: bold"> {{__('files.Visitor ID Number ')}} :  </span>
+                                            <span id="visitor-identification-number"></span>
+                                        @endif
+
+
+                                    </li>
+
+
+                                    <li class="list-group-item">
+                                        @if(app()->getLocale() == 'ar' )
+                                            <span id="visit-type"></span>
+                                            <span style="font-weight: bold">  : {{__('files.Visit Type')}} </span>
+                                            @else
+                                            <span style="font-weight: bold">  {{__('files.Visit Type')}} </span>
+                                            <span id="visit-type"></span>
+                                        @endif
+
+
+                                    </li>
+                                    {{--  <li class="list-group-item" id="visitor-id">A third item</li>  --}}
+
+                                </ul>
+                                <div class="row mx-auto ">
+                                    <a href="#" class="btn btn-primary" style="margin-right: 10px; width: 80px;"
+                                       id="accept-visit"> {{__('files.Accept')}}</a>
+                                    <a href="#" class="btn btn-danger" style="margin-left: 10px; width: 80px;"
+                                       id="reject-visit">{{__('files.Reject')}}</a>
+                                </div>
+
+
+                            </div>
+
+                            {{--                            <button class="accept btn btn-primary" id="accept-visit"--}}
+                            {{--                                    style="height: 38px;">{{__('files.Accept')}}</button>--}}
+                            {{--                            <button class="reject btn btn-danger" id="reject-visit"--}}
+                            {{--                                    style="height: 38px;">{{__('files.Reject')}}</button>--}}
+
+
                         </div>
 
                     </div>
@@ -27,6 +95,7 @@
 
 @section('scripts')
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -54,8 +123,17 @@
                                 console.log(response);
                             $('#visit-control').css({"display":""});
 
-                            visit_id = response.data;
+                            // visit_id = response.data;
+                            // console.log(response.visit.visitor.first_name);
 
+
+                            $('#visit-reg_no').text(response.visit.reg_no);
+                            $('#visitor-name').text(response.visit.visitor.first_name +  " " + response.visit.visitor.last_name);
+                            $('#visitor-identification-number').text(  response.visit.visitor.national_identification_no);
+
+                            if( response.visit.car_type == 'T' ) {
+                                $('#visit-type').text('Truck');
+                            }
 
                             } else {
                                 alert(response);
@@ -180,6 +258,12 @@
                         }
                     }); // end of function accept visit
         }); // end reject visit
+
+
+
+
+
+
 
     </script>
 @endsection
