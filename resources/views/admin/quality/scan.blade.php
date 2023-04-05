@@ -10,11 +10,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-{{--                        <div id="reader" width="600px" style="width: 500px;" class="mx-auto"></div>--}}
+                        <div id="reader" width="600px" style="width: 500px;" class="mx-auto"></div>
 
 
-                        {{--                        <div class="mx-auto" style="display: none;" id="visit-control">                 --}}
-                        <div class="mx-auto" id="visit-control">
+                        <div class="mx-auto" style="display: none;" id="visit-control">
                             {{-- Visit Data --}}
 
                             <div class="card" style="width: 18rem;">
@@ -28,7 +27,6 @@
                                     </li>
 
                                     <li class="list-group-item">
-
                                         @if(app()->getLocale() == 'ar' )
                                             <span id="visitor-name"></span>
                                             <span style="font-weight: bold"> : {{__('files.Visitor Name')}}   </span>
@@ -36,12 +34,10 @@
                                             <span style="font-weight: bold"> {{__('files.Visitor Name')}} :  </span>
                                             <span id="visitor-name"></span>
                                         @endif
-
                                     </li>
 
 
                                     <li class="list-group-item">
-
                                         @if(app()->getLocale() == 'ar' )
                                             <span id="visitor-identification-number"></span>
                                             <span style="font-weight: bold"> : {{__('files.Visitor ID Number')}}   </span>
@@ -49,8 +45,6 @@
                                             <span style="font-weight: bold"> {{__('files.Visitor ID Number')}} :  </span>
                                             <span id="visitor-identification-number"></span>
                                         @endif
-
-
                                     </li>
 
 
@@ -119,12 +113,10 @@
                         success: function (response) {
                             console.log(response);
                             if(response.status == 200) {
-                                // alert('berhasil');
                                 console.log(response);
                             $('#visit-control').css({"display":""});
 
-                            // visit_id = response.data;
-                            // console.log(response.visit.visitor.first_name);
+                            visit_id = response.data;
 
 
                             $('#visit-reg_no').text(response.visit.reg_no);
@@ -205,11 +197,12 @@
                                 }
 
                             } else {
-                                    iziToast.success({
-                                        title: 'Error',
-                                        message: "{{__('files.Something Went Wrong Becausr Visit ID Was Not Found')}}",
+                                    iziToast.info({
+                                        title: 'info',
+                                        message: "{{__('files.Something Went Wrong Because Visit ID Was Not Found')}}",
                                         position: 'topRight',
                                     });
+
                                 }
                         }
                     }); // end of function accept visit
@@ -248,16 +241,20 @@
                                 }
 
                             } else {
-                                    iziToast.success({
-                                        title: 'error',
+                                    iziToast.info({
+                                        title: 'info',
                                         message: "{{__('files.Something Went Wrong Becausr Visit ID Was Not Found')}}",
                                         position: 'topRight',
                                     });
-
                                 }
                         }
                     }); // end of function accept visit
         }); // end reject visit
+
+
+
+
+
 
 
 

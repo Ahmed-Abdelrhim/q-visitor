@@ -27,6 +27,7 @@ class QrController extends Controller
             // return response()->json('Visit Was Not Found \'ID Of Qr Code '.$code.' \' ');
         }
 
+
         if ($visit->car_type != 'T') {
             return response()->json(__('files.This Visit Is Not Of Type Truck'));
         }
@@ -50,11 +51,14 @@ class QrController extends Controller
             $visit_id = $_POST['visit_id'];
         }
 
+        return $visit_id;
+
         $visit = VisitingDetails::query()->find($visit_id);
 
         if (!$visit) {
             return response()->json('الزيارة غير موجودة');
         }
+
 
         if ($visit->car_type != 'T') {
             return response()->json('This Visit Is Not Of Type Truck');
@@ -84,7 +88,7 @@ class QrController extends Controller
         $visit = VisitingDetails::query()->find($visit_id);
 
         if (!$visit) {
-            return response()->json('الزيارة غير موجودة');
+            return response()->json('الزيارة غير موجودة' );
         }
 
         if ($visit->car_type != 'T') {
