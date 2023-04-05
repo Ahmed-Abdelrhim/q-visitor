@@ -299,7 +299,7 @@ return [
     'Visit Data' => 'تفاصيل الزيارة',
     'Visit Register No :' => 'رقم الزيارة :',
     'Visitor Name' => 'أسم الزائر',
-    'Visitor ID Number ' => 'رقم هوية الزائر ',
+    'Visitor ID Number' => 'رقم هوية الزائر ',
     'Visit Type' => 'نوع الزيارة ',
     '' => '',
     '' => '',

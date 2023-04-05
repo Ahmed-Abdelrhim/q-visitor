@@ -10,11 +10,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div id="reader" width="600px" style="width: 500px;" class="mx-auto"></div>
+{{--                        <div id="reader" width="600px" style="width: 500px;" class="mx-auto"></div>--}}
 
 
-                        <div class="mx-auto" style="display: none;" id="visit-control">
-                            {{--                        <div class="mx-auto" id="visit-control">--}}
+                        {{--                        <div class="mx-auto" style="display: none;" id="visit-control">                 --}}
+                        <div class="mx-auto" id="visit-control">
                             {{-- Visit Data --}}
 
                             <div class="card" style="width: 18rem;">
@@ -46,7 +46,7 @@
                                             <span id="visitor-identification-number"></span>
                                             <span style="font-weight: bold"> : {{__('files.Visitor ID Number')}}   </span>
                                         @else
-                                            <span style="font-weight: bold"> {{__('files.Visitor ID Number ')}} :  </span>
+                                            <span style="font-weight: bold"> {{__('files.Visitor ID Number')}} :  </span>
                                             <span id="visitor-identification-number"></span>
                                         @endif
 
@@ -58,7 +58,7 @@
                                         @if(app()->getLocale() == 'ar' )
                                             <span id="visit-type"></span>
                                             <span style="font-weight: bold">  : {{__('files.Visit Type')}} </span>
-                                            @else
+                                        @else
                                             <span style="font-weight: bold">  {{__('files.Visit Type')}} </span>
                                             <span id="visit-type"></span>
                                         @endif
@@ -68,7 +68,7 @@
                                     {{--  <li class="list-group-item" id="visitor-id">A third item</li>  --}}
 
                                 </ul>
-                                <div class="row mx-auto ">
+                                <div class="row mx-auto mt-3">
                                     <a href="#" class="btn btn-primary" style="margin-right: 10px; width: 80px;"
                                        id="accept-visit"> {{__('files.Accept')}}</a>
                                     <a href="#" class="btn btn-danger" style="margin-left: 10px; width: 80px;"
@@ -258,6 +258,7 @@
                         }
                     }); // end of function accept visit
         }); // end reject visit
+
 
 
 
