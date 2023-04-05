@@ -296,7 +296,7 @@ return [
     'Reject Visit' => 'Reject Visit',
     'Visit Approved Successfully' => 'Visit Approved Successfully',
     'Visit Rejected Successfully' => 'Visit Rejected Successfully',
-    'Something Went Wrong Becausr Visit ID Was Not Found' => 'Visit ID Was Not Found Scan Valid Qr Code First.',
+    'Something Went Wrong Because Visit ID Was Not Found' => 'Visit ID Was Not Found Scan Valid Qr Code First.',
     'This Visit Does Not Exisit' => 'This Visit Does Not Exisit',
     'This Visit Is Not Of Type Truck' => 'This Visit Is Not Of Type Truck',
     'This Visit Does Not Have Shipment ID' => 'This Visit Does Not Have Shipment ID',

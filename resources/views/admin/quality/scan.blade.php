@@ -202,7 +202,6 @@
                                         message: "{{__('files.Something Went Wrong Because Visit ID Was Not Found')}}",
                                         position: 'topRight',
                                     });
-
                                 }
                         }
                     }); // end of function accept visit

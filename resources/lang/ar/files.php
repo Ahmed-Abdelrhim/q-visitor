@@ -287,7 +287,7 @@ return [
     'Reject Visit' => 'رفض هذة الزيارة',
     'Visit Approved Successfully' => 'تمت الموافقة علي الزيارة بنجاح',
     'Visit Rejected Successfully' => 'تمت رفض هذة الزيارة بنجاح',
-    'Something Went Wrong Becausr Visit ID Was Not Found' => ' رقم الزيارة غير موجود يجب عمل سكان الي كيو ار كود صالح أولا',
+    'Something Went Wrong Because Visit ID Was Not Found' => ' رقم الزيارة غير موجود يجب عمل سكان الي كيو ار كود صالح أولا',
     'This Visit Does Not Exisit' => 'هذة الزيارة غير موجودة',
     'This Visit Is Not Of Type Truck' => 'هذة الزيارة ليست من نوع شاحنة',
     'This Visit Does Not Have Shipment ID' => 'هذة الزيارة ليس لديها نوع شحنة',

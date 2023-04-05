@@ -51,8 +51,6 @@ class QrController extends Controller
             $visit_id = $_POST['visit_id'];
         }
 
-        return $visit_id;
-
         $visit = VisitingDetails::query()->find($visit_id);
 
         if (!$visit) {
