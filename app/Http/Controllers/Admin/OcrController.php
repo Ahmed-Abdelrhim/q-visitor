@@ -566,25 +566,27 @@ class OcrController extends Controller
 
     public function playy()
     {
-        if (File::exists(storage_path('app/public' . '/images' . '/' . '26102276' .'/companions' ))) {
-            for ($i = 1 ; $i <= 5 ; $i ++) {
-                $image_path = storage_path('app/public' .'/images' . '/' . '26102276' . '/companions/' . '26102276'. '-' . 19 . '-' . $i . '.jpg');
-                File::delete($image_path);
-            }
-        }
+        DB::connection('sqlsrv')->table('polimek_user.visits')->get();
 
-            return 'Done';
-
-
-
-
-        return auth()->user()->employee->level;
-        return auth()->user()->creatorEmployee;
-        $visit_id_for_qr_code = VisitingDetails::query()->orderBy('id','desc')->first()->id;
-        $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit_id_for_qr_code;
-
-
-        return $data = file_get_contents($url);
+        //        if (File::exists(storage_path('app/public' . '/images' . '/' . '26102276' .'/companions' ))) {
+        //            for ($i = 1 ; $i <= 5 ; $i ++) {
+        //                $image_path = storage_path('app/public' .'/images' . '/' . '26102276' . '/companions/' . '26102276'. '-' . 19 . '-' . $i . '.jpg');
+        //                File::delete($image_path);
+        //            }
+        //        }
+        //
+        //            return 'Done';
+        //
+        //
+        //
+        //
+        //        return auth()->user()->employee->level;
+        //        return auth()->user()->creatorEmployee;
+        //        $visit_id_for_qr_code = VisitingDetails::query()->orderBy('id','desc')->first()->id;
+        //        $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit_id_for_qr_code;
+        //
+        //
+        //        return $data = file_get_contents($url);
 
 
         //        $lang = Languages::query()->create([

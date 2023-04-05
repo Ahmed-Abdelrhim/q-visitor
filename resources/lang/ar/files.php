@@ -301,7 +301,7 @@ return [
     'Visitor Name' => 'أسم الزائر',
     'Visitor ID Number' => 'رقم هوية الزائر ',
     'Visit Type' => 'نوع الزيارة ',
-    '' => '',
+    'Visit Date Start' => 'تاريخ الزيارة',
     '' => '',
     '' => '',
     '' => '',

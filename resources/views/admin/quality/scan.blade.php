@@ -53,12 +53,23 @@
                                             <span id="visit-type"></span>
                                             <span style="font-weight: bold">  : {{__('files.Visit Type')}} </span>
                                         @else
-                                            <span style="font-weight: bold">  {{__('files.Visit Type')}} </span>
+                                            <span style="font-weight: bold">  {{__('files.Visit Type')}} : </span>
                                             <span id="visit-type"></span>
                                         @endif
-
-
                                     </li>
+
+
+                                    <li class="list-group-item">
+                                        @if(app()->getLocale() == 'ar' )
+                                            <span id="visit-date"></span>
+                                            <span style="font-weight: bold">  : {{__('files.Visit Date Start')}} </span>
+                                        @else
+                                            <span style="font-weight: bold">  {{__('files.Visit Date Start')}} : </span>
+                                            <span id="visit-date"></span>
+                                        @endif
+                                    </li>
+
+
                                     {{--  <li class="list-group-item" id="visitor-id">A third item</li>  --}}
 
                                 </ul>
@@ -88,13 +99,20 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('assets/modules/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
+
+
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
 
     <script>
+        // var time = $.datepicker.formatDate('dd M yy', new Date());
+
         var visit_id = 0;
         function onScanSuccess(decodedText, decodedResult) {
             $('#result').val(decodedText);
@@ -126,6 +144,18 @@
                             if( response.visit.car_type == 'T' ) {
                                 $('#visit-type').text('Truck');
                             }
+
+                            // var date = Date.parse(  response.visit.checkin_at ).toString('yyyy-MM-dd');
+
+                            var date = response.visit.checkin_at;
+
+                            // var date = $.datepicker.formatDate( "D dd-M-yy", response.visit.checkin_at ) // Output "Fri 08-Sep-2017"
+                            var date =  date.toString('yyyy-M-d')
+
+                            $('#visit-date').text(date);
+
+
+
 
                             } else {
                                 alert(response);
@@ -249,6 +279,7 @@
                         }
                     }); // end of function accept visit
         }); // end reject visit
+
 
 
 

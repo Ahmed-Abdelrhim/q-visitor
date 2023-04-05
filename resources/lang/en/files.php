@@ -310,7 +310,7 @@ return [
     'Visitor Name' => 'Visitor Name ',
     'Visitor ID Number' => 'Visitor ID Number',
     'Visit Type' => 'Visit Type ',
-    '' => '',
+    'Visit Date Start' => 'Visit Date',
     '' => '',
     '' => '',
     '' => '',
