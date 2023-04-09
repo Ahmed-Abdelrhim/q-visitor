@@ -14,11 +14,11 @@ use App\Models\VisitingDetails;
 use App\Models\Visitor;
 use App\Notifications\SendVisitorToEmployee;
 use Illuminate\Http\Request;
-use DB;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 
 class VisitorService
 {
@@ -43,31 +43,21 @@ class VisitorService
 
                 // Here The Difference
                 ->where('car_type', 'T')
-
                 ->orWhere('creator_id', $user->id)
                 ->orWhere('user_id', $user->employee->id)
                 ->orWhere('creator_employee', $user->employee->id)
-
-
                 ->orWhere('emp_one', $user->employee->id)
                 ->orWhere('emp_two', $user->employee->id)
-
-
                 ->orderBy('id', 'desc')
                 ->get();
-        }
-
-
-        else {
+        } else {
             return VisitingDetails::query()
                 ->with('visitor')
                 ->with('companions')
                 ->with('empvisit')
-
                 ->where('creator_id', $user->id)
                 ->orWhere('user_id', $user->employee->id)
                 ->orWhere('creator_employee', $user->employee->id)
-
                 ->orWhere('emp_one', $user->employee->id)
                 ->orWhere('emp_two', $user->employee->id)
 
@@ -134,7 +124,7 @@ class VisitorService
 
         if ($visitor) {
             $reg_no = $visitor->reg_no + 1;
-            $visit_id_for_qr_code = $visitor->id + 1 ;
+            $visit_id_for_qr_code = $visitor->id + 1;
 
         } else {
             $reg_no = rand(11111111, 99999999);
@@ -204,7 +194,7 @@ class VisitorService
 
 
             if (auth()->user()->employee->level == 0) {
-                if ( $request->input('car_type') == 'P'  ||  $request->input('car_type') == 'C'   ) {
+                if ($request->input('car_type') == 'P' || $request->input('car_type') == 'C') {
 
                     $visiting['approval_status'] = 2;
                     // $visiting['approval_status']  =  1;
@@ -235,7 +225,7 @@ class VisitorService
 
             $visitingDetails = VisitingDetails::query()->create($visiting);
 
-            $visit = VisitingDetails::query()->orderBy('id','desc')->first();
+            $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
 
             try {
                 // $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
@@ -285,12 +275,13 @@ class VisitorService
             $time = date('H:i');
             $vid = $visiting['visitor_id'];
 
+
             try {
                 // Here Send To Sql Server Database The ID of The Visit And The Visitor Name
-                $sql = SqlServerJob::dispatch($visit->id , $visitor->name);
+                DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' ); ");
 
+                // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->first_name . $visitor->visitor->last_name );
             } catch (\Exception $e) {
-
             }
 
             //$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
@@ -441,9 +432,6 @@ class VisitorService
 //        }
 
 
-
-
-
 //        if (auth()->user()->hasRole(14) ) {
 //            return VisitingDetails::query()
 //                ->Where('user_id', $user->id)
@@ -459,24 +447,6 @@ class VisitorService
 //                ->orderBy('id', 'desc')
 //                ->get();
 //        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // if (!$user->hasRole(1) && !$user->hasRole(14)) {
