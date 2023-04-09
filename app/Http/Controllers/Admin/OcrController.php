@@ -566,10 +566,10 @@ class OcrController extends Controller
 
     public function playy()
     {
-        // $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
+        $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
         // DB::connection('sqlsrv')->statement(" INSERT INTO visits  (visit_id, visitor_name) VALUES (" . $visit->id . " , " . $visit->visitor_name . "  ) ; ");
 
-
+        $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
 
         // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES ( ". $visit->id . " ,'" . $visit->visitor->name . "' ); ");
         return DB::connection('sqlsrv')->table('visits')->get();

@@ -279,8 +279,7 @@ class VisitorService
             try {
                 // Here Send To Sql Server Database The ID of The Visit And The Visitor Name
                 DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' ); ");
-
-                // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->first_name . $visitor->visitor->last_name );
+                // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
             } catch (\Exception $e) {
             }
 
