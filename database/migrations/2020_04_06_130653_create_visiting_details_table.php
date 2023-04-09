@@ -29,7 +29,7 @@ class CreateVisitingDetailsTable extends Migration
             $table->unsignedBigInteger('visitor_id');
 
             $table->integer('shipment_id')->default(0);
-            $table->integer('shipment_number')->nullable();
+            $table->text('shipment_number')->nullable();
             $table->integer('qulaity_check')->nullable();
 
 
