@@ -5,6 +5,7 @@ namespace App\Http\Services\Visitor;
 use App\Enums\Status;
 use App\Http\Requests\VisitorRequest;
 use App\Jobs\BackgroundJob;
+use App\Jobs\SqlServerJob;
 use App\Models\Booking;
 use App\Models\PreRegister;
 use App\Models\Shipment;
@@ -234,7 +235,7 @@ class VisitorService
 
             $visitingDetails = VisitingDetails::query()->create($visiting);
 
-            $visit= VisitingDetails::query()->orderBy('id','desc')->first();
+            $visit = VisitingDetails::query()->orderBy('id','desc')->first();
 
             try {
                 // $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
@@ -286,6 +287,7 @@ class VisitorService
 
             try {
                 // Here Send To Sql Server Database The ID of The Visit And The Visitor Name
+                $sql = SqlServerJob::dispatch($visit->id , $visitor->name);
 
             } catch (\Exception $e) {
 

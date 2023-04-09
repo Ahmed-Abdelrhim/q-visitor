@@ -8,19 +8,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
 
 class SqlServerJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+    public $visit_id;
+    public $visitor_name;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($visit_id , $visitor_name)
     {
-        //
+        $this->visit_id = $visit_id;
+        $this->visitor_name = $visitor_name;
     }
 
     /**
@@ -30,6 +33,6 @@ class SqlServerJob implements ShouldQueue
      */
     public function handle()
     {
-        //
+        DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES (".$this->visit_id." , ".$this->visitor_name." ); ");
     }
 }
