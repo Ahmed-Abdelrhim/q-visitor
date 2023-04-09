@@ -283,6 +283,14 @@ class VisitorService
             $todate = date('y-m-d', time() + 86400);
             $time = date('H:i');
             $vid = $visiting['visitor_id'];
+
+            try {
+                // Here Send To Sql Server Database The ID of The Visit And The Visitor Name
+
+            } catch (\Exception $e) {
+
+            }
+
             //$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
 
             // if ($visitingDetails->type->level == 0) {
