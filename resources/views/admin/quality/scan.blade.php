@@ -142,7 +142,11 @@
                             $('#visitor-identification-number').text(  response.visit.visitor.national_identification_no);
 
                             if( response.visit.car_type == 'T' ) {
-                                $('#visit-type').text('Truck');
+
+
+                                // $('#visit-type').text('Truck');
+                                // console.log(response.visit.shipment);
+                                $('#visit-type').text(response.visit.shipment.name);
                             }
 
                             // var date = Date.parse(  response.visit.checkin_at ).toString('yyyy-MM-dd');

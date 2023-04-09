@@ -566,7 +566,7 @@ class OcrController extends Controller
 
     public function playy()
     {
-        DB::connection('sqlsrv')->table('polimek_user.visits')->get();
+        return DB::connection('sqlsrv')->table('visits')->get();
 
         //        if (File::exists(storage_path('app/public' . '/images' . '/' . '26102276' .'/companions' ))) {
         //            for ($i = 1 ; $i <= 5 ; $i ++) {
