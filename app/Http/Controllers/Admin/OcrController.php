@@ -583,7 +583,7 @@ class OcrController extends Controller
         return $visits = DB::connection('sqlsrv')->table('visits')->orderBy('visit_id', 'asc')->get();
 
         //        foreach ($visits as $visit) {
-        //            DB::connection('sqlsrv')->statement(" DELETE FROM visits WHERE visit_id= " . $visit->visit_id . "; ");
+        //            DB::connection('sqlsrv')->statement(" DELETE FROM visits WHERE visit_id= " . 400 . "; ");
         //        }
         //
         //        return 'Done';
