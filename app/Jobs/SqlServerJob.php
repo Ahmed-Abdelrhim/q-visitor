@@ -15,15 +15,19 @@ class SqlServerJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     public $visit_id;
     public $visitor_name;
+    public $date_from;
+    public $date_to;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($visit_id , $visitor_name)
+    public function __construct($visit_id , $visitor_name , $date_from , $date_to)
     {
         $this->visit_id = $visit_id;
         $this->visitor_name = $visitor_name;
+        $this->date_from = $date_from;
+        $this->date_to = $date_to;
     }
 
     /**
@@ -33,6 +37,8 @@ class SqlServerJob implements ShouldQueue
      */
     public function handle()
     {
-        DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES ( ". $this->visit_id . " ,'" . $this->visitor_name . "' ); ");
+        DB::connection('sqlsrv')
+            ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to) 
+                                    VALUES ( ". $this->visit_id . " ,'" . $this->visitor_name . "'  , '".$this->date_from ."' , '". $this->date_to."' ); ");
     }
 }
