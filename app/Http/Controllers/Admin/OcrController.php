@@ -568,6 +568,10 @@ class OcrController extends Controller
     {
         return DB::connection('sqlsrv')->table('visits')->get();
 
+        DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES (355 , ' Ahmed Abdelrhim ' ); ");
+
+        // DB::connection('sqlsrv')->insert();
+
         //        if (File::exists(storage_path('app/public' . '/images' . '/' . '26102276' .'/companions' ))) {
         //            for ($i = 1 ; $i <= 5 ; $i ++) {
         //                $image_path = storage_path('app/public' .'/images' . '/' . '26102276' . '/companions/' . '26102276'. '-' . 19 . '-' . $i . '.jpg');
