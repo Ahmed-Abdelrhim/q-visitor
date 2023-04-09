@@ -76,9 +76,9 @@ class OcrController extends Controller
             return redirect()->back()->with($notifications);
         }
 
-        $employees = Employee::query()->where('status', Status::ACTIVE)->get(['id','first_name','last_name']);
+        $employees = Employee::query()->where('status', Status::ACTIVE)->get(['id', 'first_name', 'last_name']);
 
-        return view('admin.ocr.new_scan', ['car_type' => $car_type , 'employees' => $employees]);
+        return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees]);
     }
 
     public function searchVisitingDetails()
@@ -331,8 +331,8 @@ class OcrController extends Controller
             }
 
             $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visit->visitor_id);
-        } catch (\Exception $e) {}
-
+        } catch (\Exception $e) {
+        }
 
 
         // notify the employee here···
@@ -569,18 +569,21 @@ class OcrController extends Controller
     public function playy()
     {
         // $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
-        // DB::connection('sqlsrv')->statement(" INSERT INTO visits  (visit_id, visitor_name) VALUES (" . $visit->id . " , " . $visit->visitor_name . "  ) ; ");
 
         // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
         // $sql = SqlServerJob::dispatch(410 , "Muhammed Ahmed" );
+        $date_from= Carbon::now();
+        $date_to = Carbon::now()->addHours(3);
 
         // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES ( ". $visit->id . " ,'" . $visit->visitor->name . "' ); ");
 
+        //        DB::connection('sqlsrv')
+        //            ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to ) VALUES ( 400 , 'Ahmed Abdelrhim' , '". $date_from ."' , '".$date_to ."' ) " );
 
-        return $visits = DB::connection('sqlsrv')->table('visits')->orderBy('visit_id','asc')->get();
+        return $visits = DB::connection('sqlsrv')->table('visits')->orderBy('visit_id', 'asc')->get();
 
         //        foreach ($visits as $visit) {
-        //            DB::connection('sqlsrv')->statement("DELETE FROM visits WHERE visit_id= " . $visit->visit_id . "; ");
+        //            DB::connection('sqlsrv')->statement(" DELETE FROM visits WHERE visit_id= " . $visit->visit_id . "; ");
         //        }
         //
         //        return 'Done';
@@ -626,18 +629,17 @@ class OcrController extends Controller
         }
 
 
-        if ( empty($visit->shipment_id) ) {
+        if (empty($visit->shipment_id)) {
             return 'This Visit Does Not Have Shipment ID';
         }
 
 
-        if ( empty($visit->shipment_number) ) {
+        if (empty($visit->shipment_number)) {
             return 'This Visit Does Not Have Shipment Number';
         }
 
 
         return $visit;
-
 
 
 //        $users = Employee::query()->pluck('id');
@@ -702,19 +704,19 @@ class OcrController extends Controller
 
 
         //        $arr = array('T','C','P');
-//        $vistis = VisitingDetails::query()->get();
-//        foreach ($vistis as $visit) {
-//            if ($visit->creatorEmployee->level == 0) {
-//                $visit->approval_status = 2;
-//                $visit->save();
-//            }
-//
-//            if ($visit->creatorEmployee->level == 1 || $visit->creatorEmployee->level == 2) {
-//                $visit->approval_status = 0;
-//                $visit->save();
-//            }
-//
-//        }
-//        return 'Done';
+        //        $vistis = VisitingDetails::query()->get();
+        //        foreach ($vistis as $visit) {
+        //            if ($visit->creatorEmployee->level == 0) {
+        //                $visit->approval_status = 2;
+        //                $visit->save();
+        //            }
+        //
+        //            if ($visit->creatorEmployee->level == 1 || $visit->creatorEmployee->level == 2) {
+        //                $visit->approval_status = 0;
+        //                $visit->save();
+        //            }
+        //
+        //        }
+        //        return 'Done';
     }
 }
