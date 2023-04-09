@@ -275,17 +275,16 @@ class VisitorService
             $time = date('H:i');
             $vid = $visiting['visitor_id'];
 
-
             try {
                 // Here Send To Sql Server Database The ID of The Visit And The Visitor Name
 
-                // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_at ."' ); ");
+                DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' ); ");
 
-
-                $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name , $visit->checkin_at , $visit->expiry_at);
+                // $sql = SqlServerJob::dispatch($visit->id, $visit->visitor->name, $visit->checkin_at, $visit->expiry_date );
 
                 // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
 
             //$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
 

@@ -37,8 +37,15 @@ class SqlServerJob implements ShouldQueue
      */
     public function handle()
     {
+        //        DB::connection('sqlsrv')
+        //            ->statement("INSERT INTO visits  ( visit_id, visitor_name , date_from , date_to )
+        //                                    VALUES ( ". $this->visit_id . " , '" . $this->visitor_name . "'  , '". $this->date_from ."' , '". $this->date_to. "' ); ");
+
+
         DB::connection('sqlsrv')
-            ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to) 
-                                    VALUES ( ". $this->visit_id . " ,'" . $this->visitor_name . "'  , '".$this->date_from ."' , '". $this->date_to."' ); ");
+            ->statement("INSERT INTO visits  ( visit_id , visitor_name , date_from , date_to ) 
+                                    VALUES ( ". $this->visit_id . "  , '".$this->visit_name."' , '" . $this->date_from ."' , '" . $this->date_to. "' ) ") ;
+
+
     }
 }

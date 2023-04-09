@@ -572,8 +572,19 @@ class OcrController extends Controller
 
         // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
         // $sql = SqlServerJob::dispatch(410 , "Muhammed Ahmed" );
-        $date_from= Carbon::now();
+        $date_from = Carbon::now();
         $date_to = Carbon::now()->addHours(3);
+        $name = "Ahmed Abdelrhim Ahmed Mohamed";
+
+
+        // $sql = SqlServerJob::dispatch(400, $name, $date_from, $date_to);
+
+
+
+        //        DB::connection('sqlsrv')
+        //            ->statement("INSERT INTO visits  ( visit_id , visitor_name , date_from , date_to )
+        //                                    VALUES ( ". 400 . " ,'" . $name . "'  , '". $date_from  ."' , '". $date_to . "' ); ");
+
 
         // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES ( ". $visit->id . " ,'" . $visit->visitor->name . "' ); ");
 
@@ -582,11 +593,13 @@ class OcrController extends Controller
 
         return $visits = DB::connection('sqlsrv')->table('visits')->orderBy('visit_id', 'asc')->get();
 
-        //        foreach ($visits as $visit) {
-        //            DB::connection('sqlsrv')->statement(" DELETE FROM visits WHERE visit_id= " . 400 . "; ");
-        //        }
+        //                $visits = DB::connection('sqlsrv')->table('visits')->orderBy('visit_id', 'asc')->get();
         //
-        //        return 'Done';
+        //                foreach ($visits as $visit) {
+        //                    DB::connection('sqlsrv')->statement(" DELETE FROM visits WHERE visit_id= " . $visit->visit_id . "; ");
+        //                }
+        //
+        //                return 'Done';
 
 
         // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES (355 , ' Ahmed Abdelrhim ' ); ");
