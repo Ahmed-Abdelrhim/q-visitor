@@ -28,6 +28,8 @@ use Spatie\Permission\Models\Role;
 use App\User;
 
 use function PHPUnit\Framework\throwException;
+use App\Jobs\SqlServerJob;
+
 
 class OcrController extends Controller
 {
@@ -566,13 +568,22 @@ class OcrController extends Controller
 
     public function playy()
     {
-        $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
+        // $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
         // DB::connection('sqlsrv')->statement(" INSERT INTO visits  (visit_id, visitor_name) VALUES (" . $visit->id . " , " . $visit->visitor_name . "  ) ; ");
 
-        $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
+        // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
+        // $sql = SqlServerJob::dispatch(410 , "Muhammed Ahmed" );
 
         // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES ( ". $visit->id . " ,'" . $visit->visitor->name . "' ); ");
-        return DB::connection('sqlsrv')->table('visits')->get();
+
+
+        return $visits = DB::connection('sqlsrv')->table('visits')->orderBy('visit_id','asc')->get();
+
+        //        foreach ($visits as $visit) {
+        //            DB::connection('sqlsrv')->statement("DELETE FROM visits WHERE visit_id= " . $visit->visit_id . "; ");
+        //        }
+        //
+        //        return 'Done';
 
 
         // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES (355 , ' Ahmed Abdelrhim ' ); ");
