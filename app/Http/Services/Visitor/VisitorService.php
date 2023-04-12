@@ -278,15 +278,17 @@ class VisitorService
             try {
                 // Here Send To Sql Server Database The ID of The Visit And The Visitor Name
 
-                DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' ); ");
+                DB::connection('sqlsrv')
+                    ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' );" );
 
                 // $sql = SqlServerJob::dispatch($visit->id, $visit->visitor->name, $visit->checkin_at, $visit->expiry_date );
 
                 // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
-            } catch (\Exception $e) {
-            }
+            } catch (\Exception $e) {}
 
-            //$dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
+            // $dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
+
+
 
             // if ($visitingDetails->type->level == 0) {
 
