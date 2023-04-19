@@ -591,7 +591,9 @@ class OcrController extends Controller
         //        DB::connection('sqlsrv')
         //            ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to ) VALUES ( 400 , 'Ahmed Abdelrhim' , '". $date_from ."' , '".$date_to ."' ) " );
 
-        return $visits = DB::connection('sqlsrv')->table('visits')->orderBy('visit_id', 'asc')->get();
+        return $visits = DB::connection('sqlsrv')->table('visits')->get();
+
+            // ->orderBy('visit_id', 'asc')->get();
 
         //                $visits = DB::connection('sqlsrv')->table('visits')->orderBy('visit_id', 'asc')->get();
         //
