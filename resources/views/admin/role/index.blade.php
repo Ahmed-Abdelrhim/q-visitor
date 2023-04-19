@@ -15,7 +15,9 @@
                         
                         @can('role_create')
                             <div class="card-header ">
-                                <a href="{{ route('admin.role.create') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> {{ __('files.Add Role') }}</a>
+                                <a href="{{ route('admin.role.create') }}" class="btn btn-icon icon-left btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    {{ __('files.Add Role') }}</a>
                             </div>
                         @endcan
 

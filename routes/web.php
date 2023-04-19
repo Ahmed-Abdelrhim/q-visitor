@@ -286,3 +286,15 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 //DB_DATABASE_TWO=ph20922595621_polimek
 //DB_USERNAME_TWO=polimek_user
 //DB_PASSWORD_TWO=j9@8Nt8q
+
+
+
+
+// Heerr
+
+//DB_CONNECTION_TWO=sqlsrv
+//DB_HOST_TWO=N1NWPLSK12SQL-v01.shr.prod.ams1.secureserver.net
+//DB_PORT_TWO=1433
+//DB_DATABASE_TWO=ph20922595621_polimek
+//DB_USERNAME_TWO=dbeditor
+//DB_PASSWORD_TWO=py2%1Oj8

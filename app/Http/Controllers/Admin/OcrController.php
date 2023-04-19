@@ -8,6 +8,7 @@ use App\Http\Services\Employee\EmployeeService;
 use App\Jobs\BackgroundJob;
 use App\Jobs\NotifyEmployee;
 use App\Models\Companion;
+use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Languages;
 use App\Models\VisitingDetails;
@@ -529,7 +530,7 @@ class OcrController extends Controller
                 $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
 
                 DB::connection('sqlsrv')
-                    ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' );" );
+                    ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' , 1 );" );
 
 
             } catch
@@ -575,6 +576,18 @@ class OcrController extends Controller
 
     public function playy()
     {
+        //        $emps = Employee::query()->get();
+        //
+        //        $deps = [38,39,40,41];
+        //
+        //
+        //        foreach ($emps as $emp) {
+        //            $emp->department_id = $deps[array_rand($deps,1)];
+        //            $emp->save();
+        //        }
+        //
+        //        return 'Done';
+
         // $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
 
         // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );

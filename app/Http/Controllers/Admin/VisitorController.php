@@ -54,7 +54,9 @@ class VisitorController extends Controller
 
     public function create(Request $request)
     {
+        // $this->data['employees'] = Employee::query()->with('department')->where('status', Status::ACTIVE)->get();
         $this->data['employees'] = Employee::query()->where('status', Status::ACTIVE)->get();
+
         $this->data['types'] = Types::query()->where('status', Status::ACTIVE)->get();
 
 
