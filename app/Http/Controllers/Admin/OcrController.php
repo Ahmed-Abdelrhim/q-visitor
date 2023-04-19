@@ -610,7 +610,7 @@ class OcrController extends Controller
         //                return 'Done';
 
 
-        // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES (355 , ' Ahmed Abdelrhim ' ); ");
+        // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES (355 , ' Ahmed' ); ");
 
         // DB::connection('sqlsrv')->insert();
 
