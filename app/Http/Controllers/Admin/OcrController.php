@@ -525,6 +525,13 @@ class OcrController extends Controller
                     'expiry_date' => NULL,
                 ]);
                 DB::commit();
+
+                $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
+
+                DB::connection('sqlsrv')
+                    ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' );" );
+
+
             } catch
             (\Exception $e) {
                 DB::rollBack();
