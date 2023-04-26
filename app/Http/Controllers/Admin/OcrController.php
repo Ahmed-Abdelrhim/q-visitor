@@ -353,14 +353,18 @@ class OcrController extends Controller
     public function newScanSaveData()
     {
 
-        $emp_id = NULL;
+        // $emp_id = NULL;
+        $emp_id = auth()->user()->id;
         if (isset($_POST['employee_id'])) {
             $emp_id = $_POST['employee_id'];
+            if ($emp_id == 0 || empty($emp_id) || !is_numeric($emp_id)) {
+                $emp_id = auth()->user()->id;
+            }
         }
 
-        if (empty($emp_id) || $emp_id == 0) {
-            return 'Employee Is Not Specified';
-        }
+        //        if (empty($emp_id) || $emp_id == 0) {
+        //            return 'Employee Is Not Specified';
+        //        }
 
         $name = null;
         $last_name = null;
@@ -526,13 +530,6 @@ class OcrController extends Controller
                     'expiry_date' => NULL,
                 ]);
                 DB::commit();
-
-                $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
-
-                DB::connection('sqlsrv')
-                    ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' , 1 );" );
-
-
             } catch
             (\Exception $e) {
                 DB::rollBack();
@@ -540,6 +537,17 @@ class OcrController extends Controller
                 // $notifications = array('message' => 'visit was not created , something went wrong', 'alert-type' => 'error');
                 // return redirect()->route('OCR.index')->with($notifications);
             }
+        }
+
+        try {
+            $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
+
+            DB::connection('sqlsrv')
+                ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag) 
+                                    VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' , 1 );" );
+
+        } catch (\Exception $e) {
+            return 'SQL Server Connection Error';
         }
 
 
@@ -576,6 +584,9 @@ class OcrController extends Controller
 
     public function playy()
     {
+        return $visits = DB::connection('sqlsrv')->table('visits')->get();
+
+
         //        $emps = Employee::query()->get();
         //
         //        $deps = [38,39,40,41];
@@ -599,7 +610,6 @@ class OcrController extends Controller
         // $sql = SqlServerJob::dispatch(400, $name, $date_from, $date_to);
 
 
-
         //        DB::connection('sqlsrv')
         //            ->statement("INSERT INTO visits  ( visit_id , visitor_name , date_from , date_to )
         //                                    VALUES ( ". 400 . " ,'" . $name . "'  , '". $date_from  ."' , '". $date_to . "' ); ");
@@ -610,9 +620,8 @@ class OcrController extends Controller
         //        DB::connection('sqlsrv')
         //            ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to ) VALUES ( 400 , 'Ahmed ' , '". $date_from ."' , '".$date_to ."' ) " );
 
-        return $visits = DB::connection('sqlsrv')->table('visits')->get();
 
-            // ->orderBy('visit_id', 'asc')->get();
+        // ->orderBy('visit_id', 'asc')->get();
 
         //                $visits = DB::connection('sqlsrv')->table('visits')->orderBy('visit_id', 'asc')->get();
         //

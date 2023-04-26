@@ -355,6 +355,7 @@ $.post('{{route('admin.ocr.save')}}', {
             car_type = @if(isset($car_type))
         '{{$car_type}}'
 
+
     @endif
 
     $.post('{{route('admin.new.scan.post')}}', {
@@ -400,14 +401,19 @@ $.post('{{route('admin.ocr.save')}}', {
                     });
                 }
 
+                // if(data == 'SQL Server Connection Error') {
+                //        iziToast.error({
+                //        title: 'Error',
+                //        message: 'حدث خطأ اثنتاء الاتصال بقاعدة بيانات ال sql server',
+                //        position: 'topRight',
+                //    });
+                //  }
+
                 else {
-                    // console.log(data);
+                    console.log(data);
                     wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
                     wnd.print();
                     location.reload();
-
-
-
                 }
             });
         });
@@ -420,12 +426,7 @@ $.post('{{route('admin.ocr.save')}}', {
             });
 
         });
-
-
     });
-
-
-
 </script>
 
 

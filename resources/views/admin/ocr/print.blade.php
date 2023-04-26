@@ -1,4 +1,5 @@
 <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <title>Passport Scanner</title>
@@ -40,14 +41,24 @@
                             {{--                             @endif-->--}}
 
                             {{--  <img src="<?php echo 'per_images/' . $reg_no . '.png'; ?>" alt=""--}}
+                            @if(isset($data->images))
+                                <img src="{{$data->images  }}" alt="not-found" style="clip-path: circle();width:50%">
+                            @else
+                                <img src="" alt="not-found" style="clip-path: circle();width:50%">
+                            @endif
 
-
-                            <img src="{{ $data->images}}" alt="not-found" style="clip-path: circle();width:50%">
                             {{--                            <img src="{{asset('storage/per_images/'. $data->reg_no.'.png') }} " alt="not-found" style="clip-path: circle();width:50%">--}}
                             {{--                            <img src="{{$data->images}} " alt="not-found"--}}
                             {{--                                 style="clip-path: circle();width:50%">--}}
                         </div>
-                        <h2>{{$data->visitor->first_name}} {{$data->visitor->last_name}} </h2>
+
+
+                        @if(isset($data->visitor->first_name))
+                            <h2>{{$data->visitor->first_name}} {{$data->visitor->last_name}} </h2>
+                        @else
+                            <h2>No Valid Name</h2>
+                        @endif
+
                         {{--                        <!--<h3>Ph:<?php echo $phone ?></h3>--}}
                         {{--						<h3>{{__('ID#')}}{{$visitingDetails->reg_no}}</h3>-->--}}
 
@@ -71,7 +82,7 @@
                         <hr>
 
 
-                        <img src="{{$data->qrcode }}" alt="" style="max-width: 60% !important;">
+                        <img src="{{ $data->qrcode }}" alt="" style="max-width: 60% !important;">
 
                     </div>
                 </div>
