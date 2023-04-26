@@ -278,8 +278,13 @@ class VisitorService
             try {
                 // Here Send To Sql Server Database The ID of The Visit And The Visitor Name
 
+//                DB::connection('sqlsrv')
+//                    ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' , 1 );" );
+
+
                 DB::connection('sqlsrv')
-                    ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag) VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' , 1 );" );
+                    ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag)
+                                        VALUES ( " . $visit->id . " , N' " . $visit->visitor->name . " ' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
 
                 // $sql = SqlServerJob::dispatch($visit->id, $visit->visitor->name, $visit->checkin_at, $visit->expiry_date );
 

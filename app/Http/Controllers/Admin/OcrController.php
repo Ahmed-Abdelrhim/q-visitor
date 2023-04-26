@@ -540,11 +540,16 @@ class OcrController extends Controller
         }
 
         try {
-            $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
+            $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
+
+            //            DB::connection('sqlsrv')
+            //                ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag)
+            //                                    VALUES ( " . $visit->id . " , N'" . $visit->visitor->name . "' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
+
 
             DB::connection('sqlsrv')
-                ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag) 
-                                    VALUES ( " . $visit->id . " ,'" . $visit->visitor->name . "' , '". $visit->checkin_at."' , '".  $visit->expiry_date ."' , 1 );" );
+                ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag)
+                                        VALUES ( " . $visit->id . " , N' " . $visit->visitor->name . " ' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
 
         } catch (\Exception $e) {
             return 'SQL Server Connection Error';
@@ -584,27 +589,82 @@ class OcrController extends Controller
 
     public function playy()
     {
-        return $visits = DB::connection('sqlsrv')->table('visits')->get();
 
 
-        //        $emps = Employee::query()->get();
-        //
-        //        $deps = [38,39,40,41];
-        //
-        //
-        //        foreach ($emps as $emp) {
-        //            $emp->department_id = $deps[array_rand($deps,1)];
-        //            $emp->save();
-        //        }
-        //
-        //        return 'Done';
+    //        $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
+    //
+    //            DB::connection('sqlsrv')
+    //                ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag)
+    //                                        VALUES ( " . $visit->id . " , N' " . $visit->visitor->name . " ' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
+    //
+    //
+    return $visits = DB::connection('sqlsrv')->table('visits')->get();
+    //
+    //        foreach ($visits as $visit) {
+    //            DB::connection('sqlsrv')->table('visits')->where('vid', $visit->vid)->delete();
+    //        }
+    //        return 'Done';
 
-        // $visit = VisitingDetails::query()->with('visitor')->orderBy('id','desc')->first();
 
-        // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
-        // $sql = SqlServerJob::dispatch(410 , "Muhammed Ahmed" );
-        $date_from = Carbon::now();
-        $date_to = Carbon::now()->addHours(3);
+        $main = Http::get('https://api.hik-proconnect.com/');
+
+        // Token Get
+        //        $response = Http::post('https://api.hik-proconnect.com/api/hpcgw/v1/token/get' , [
+        //            'appKey' => '1945zr2ue3ncrg9ypwimwtv27v061uba',
+        //            'secretKey' => 'prqezqcgnpgdrj0gldiw95vtcetj9b9t'
+        //        ]);
+        //
+        //        return $response->json();
+
+
+        // Site Add
+        //        $add = Http::withHeaders([
+        //            'Content-Type' => 'application/json',
+        //            'Authorization' => 'Bearer hpc.xksnvqy1rg2crxa77421b7kxeh179ckj'
+        //        ])->post('https://api.hik-proconnect.com/api/hpcgw/v1/site/add', [
+        //            'name' => 'QudraTech',
+        //            'siteState' => 'Cairo',
+        //            'siteCity' => 'Cairo',
+        //            'timeZone' => '147',
+        //            'location' => 'Egypt , Cairo , Nasr City'
+        //        ]);
+        //
+        //        return $add->json();
+
+
+        //        Site Search
+        //        $site_search = Http::withHeaders([
+        //            'Content-Type' => 'application/json',
+        //            'Authorization' => 'Bearer hpc.xksnvqy1rg2crxa77421b7kxeh179ckj'
+        //        ])->post('https://api.hik-proconnect.com/api/hpcgw/v1/site/search', [
+        //            'page' => 0,
+        //            'pageSie' => 0,
+        //            'search' => 'QudraTech'
+        //        ]);
+        //
+        //        id = 8a7488ec87bb9a010187bd2f7fee0743
+        //        return $site_search->json();
+
+
+        // Device Add
+        $device_add = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer hpc.xksnvqy1rg2crxa77421b7kxeh179ckj'
+        ])->post('https://api.hik-proconnect.com/api/hpcgw/v2/device/add', [
+            'deviceList' => [
+                'deviceSerial' => 'j21312692',
+                'validateCode' => 'Camera01'
+            ],
+            'siteId' => '8a7488ec87bb9a010187bd2f7fee0743',
+        ]);
+
+        return $device_add->json();
+
+
+        //        $date_from = Carbon::now();
+        //        $date_to = Carbon::now()->addHours(3);
+        //
+        //        return $visits = DB::connection('sqlsrv')->table('visits')->get();
 
 
         // $sql = SqlServerJob::dispatch(400, $name, $date_from, $date_to);
@@ -763,3 +823,13 @@ class OcrController extends Controller
         //        return 'Done';
     }
 }
+
+
+//{
+//    "data": {
+//    "accessToken": "hpc.xksnvqy1rg2crxa77421b7kxeh179ckj",
+//"expireTime": 1683108522930,
+//"areaDomain": "https://ieuapi.hik-partner.com"
+//},
+//"errorCode": "0"
+//}
