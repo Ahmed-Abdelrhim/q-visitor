@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\VisitorMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -9,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class BackgroundJob implements ShouldQueue
 {
@@ -30,8 +32,17 @@ class BackgroundJob implements ShouldQueue
     public function handle()
     {
         // sleep(10);
-        $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $this->visitingDetails->visitor->id);
-        $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $this->visitingDetails->visitor->phone);
+
+        // $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $this->visitingDetails->visitor->id);
+
+        $send_email = Mail::to($this->visitingDetails->visitor->email)->send(new VisitorMail($this->visitingDetails));
+
+
+
+
+
+
+        // $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $this->visitingDetails->visitor->phone);
     }
 
     public function failed(\Throwable $e)

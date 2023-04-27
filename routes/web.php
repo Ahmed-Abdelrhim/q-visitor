@@ -298,3 +298,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 //DB_DATABASE_TWO=ph20922595621_polimek
 //DB_USERNAME_TWO=dbeditor
 //DB_PASSWORD_TWO=py2%1Oj8
+
+
+
+// eruuszjdfgjktzpu

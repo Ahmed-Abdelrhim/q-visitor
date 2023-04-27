@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\Employee\EmployeeService;
 use App\Jobs\BackgroundJob;
 use App\Jobs\NotifyEmployee;
+use App\Mail\VisitorMail;
 use App\Models\Companion;
 use App\Models\Department;
 use App\Models\Employee;
@@ -22,6 +23,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -589,21 +591,26 @@ class OcrController extends Controller
 
     public function playy()
     {
+        $visit = VisitingDetails::query()->with('visitor')->find(338);
+        // $send_email = Mail::to($this->visitingDetails->visitor->email)->send(new VisitorMail($this->visitingDetails));
+        // $send_email = Mail::to($visit->visitor->email)->send(new VisitorMail($visit));
+        $send_email = BackgroundJob::dispatch($visit);
 
+        return 'Done';
 
-    //        $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
-    //
-    //            DB::connection('sqlsrv')
-    //                ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag)
-    //                                        VALUES ( " . $visit->id . " , N' " . $visit->visitor->name . " ' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
-    //
-    //
-    return $visits = DB::connection('sqlsrv')->table('visits')->get();
-    //
-    //        foreach ($visits as $visit) {
-    //            DB::connection('sqlsrv')->table('visits')->where('vid', $visit->vid)->delete();
-    //        }
-    //        return 'Done';
+        //        $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
+        //
+        //            DB::connection('sqlsrv')
+        //                ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag)
+        //                                        VALUES ( " . $visit->id . " , N' " . $visit->visitor->name . " ' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
+        //
+        //
+        return $visits = DB::connection('sqlsrv')->table('visits')->get();
+        //
+        //        foreach ($visits as $visit) {
+        //            DB::connection('sqlsrv')->table('visits')->where('vid', $visit->vid)->delete();
+        //        }
+        //        return 'Done';
 
 
         $main = Http::get('https://api.hik-proconnect.com/');
