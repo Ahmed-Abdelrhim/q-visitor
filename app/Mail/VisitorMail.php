@@ -30,9 +30,12 @@ class VisitorMail extends Mailable
      */
     public function build()
     {
-        return $this->from('aabdelrhim974@gmail.com' , 'Canal For Sugar')
+        return $this->from('qudra-tech@gmail.com' , 'Canal For Sugar')
             ->subject('Visit Accepted')
-            ->view('admin.email.visitor_mail',['visitor_name' => $this->visitingDetail->visitor->name , 'visit_date' => $this->visitingDetail->checkin_at]);
+            ->view('admin.email.visitor_mail',[
+                'visitor_name' => $this->visitingDetail->visitor->name ,
+                'visit_date' => $this->visitingDetail->checkin_at ,
+                'qr_code' => $this->visitingDetail->qrcode]);
         // return $this->view('view.name');
     }
 }

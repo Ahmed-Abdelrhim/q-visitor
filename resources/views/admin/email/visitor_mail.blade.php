@@ -22,14 +22,16 @@
 <body>
 <div>
     <h3>
-        Dear {{$visitor_name}} your visit has been accepted
+        Dear {{ $visitor_name}} your visit has been accepted
     </h3>
     <p>
-        Qr Code
-        <img src="{{}}" alt=""/>
+        Qr Code :
+        <br />
+        <img src="{{ $qr_code }}" alt="Qr Code Was Not Loaded" style="max-width: 60% !important;"/>
 
+        <br />
 
-        your visit date : {{\Illuminate\Support\Carbon::parse($visit_date)->diffForHumans() }}
+        your visit date : {{\Illuminate\Support\Carbon::parse($visit_date)->toDateTimeString() }}
     </p>
 </div>
 </body>

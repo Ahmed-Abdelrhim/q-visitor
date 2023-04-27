@@ -592,11 +592,20 @@ class OcrController extends Controller
     public function playy()
     {
         $visit = VisitingDetails::query()->with('visitor')->find(338);
+
+
         // $send_email = Mail::to($this->visitingDetails->visitor->email)->send(new VisitorMail($this->visitingDetails));
         // $send_email = Mail::to($visit->visitor->email)->send(new VisitorMail($visit));
-        $send_email = BackgroundJob::dispatch($visit);
 
-        return 'Done';
+
+        //        $send_email = BackgroundJob::dispatch($visit);
+        //
+        //        return 'Done';
+
+        return view('admin.email.visitor_mail',[
+                'visitor_name' =>$visit->visitor->name ,
+                'visit_date' => $visit->checkin_at ,
+                'qr_code' => $visit->qrcode]);
 
         //        $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
         //
