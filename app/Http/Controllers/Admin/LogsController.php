@@ -18,16 +18,17 @@ class LogsController extends Controller
     {
         if (auth()->user()->employee->level == 0) {
             $date = Carbon::parse($request->input('logs_date'))->format('y-m-d');
-            return $visits = VisitingDetails::query()
+            $visits = VisitingDetails::query()
                 ->with('visitor:id,first_name,last_name')
                 ->with('companions:id,first_name,last_name')
                 ->with('empvisit')
                 ->where('checkin_at', '>=', $date)
-                ->where('creator_id', auth()->user()->id)
+
                 ->where(function ($query) {
                     $query->where('creator_employee', auth()->user()->employee->id)
                         ->orWhere('emp_one' , auth()->user()->employee->id)
-                        ->orWhere('emp_two' , auth()->user()->employee->id)
+                        ->orWhere('creator_id', auth()->user()->id)
+                        ->orWhere('emp_two' , auth()->user()->employee->id);
                 })
                 ->get();
 
