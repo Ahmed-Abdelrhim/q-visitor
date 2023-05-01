@@ -58,6 +58,8 @@
                                                     <td> {{$visit->id}} </td>
                                                     <td> {{$visit->visitor->first_name}}    {{$visit->visitor->last_name}}  </td>
                                                     <td> {{ \Illuminate\Support\Carbon::parse($visit->checkin_at)->format('H:m:s') }} </td>
+
+                                                    {{-- Visit Type --}}
                                                     <td>
                                                         @if($visit->car_type == 'T')
                                                             {{__('files.Truck')}}
@@ -70,18 +72,31 @@
                                                         @if($visit->car_type == 'P')
                                                             {{__('files.Person')}}
                                                         @endif
-
-
                                                     </td>
-                                                    <td>
-                                                        {{$visit->car_type }}
-                                                    </td>
+
+                                                    {{-- Shipment Type --}}
                                                     <td>
                                                         @if($visit->car_type == 'T')
                                                             @if( !empty($visit->shipment_number) )
                                                                 {{$visit->shipment_number }}
                                                             @else
-                                                                ...
+                                                                ---
+                                                            @endif
+                                                        @else
+                                                            ---
+                                                        @endif
+
+
+                                                        {{$visit->car_type }}
+                                                    </td>
+
+                                                    {{-- Shipment Number --}}
+                                                    <td>
+                                                        @if($visit->car_type == 'T')
+                                                            @if( !empty($visit->shipment_number) )
+                                                                {{$visit->shipment_number }}
+                                                            @else
+                                                                ---
                                                             @endif
                                                         @else
                                                             ---
@@ -90,7 +105,6 @@
 
                                                     <td>
                                                         @if(!empty($visit->companions ))
-
                                                         @else
                                                         @endif
                                                     </td>
@@ -119,6 +133,7 @@
         $(document).ready(function() {
             // $('#logs_filter').on();
         });
+
 
 
 
