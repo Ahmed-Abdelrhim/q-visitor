@@ -16,15 +16,22 @@ class LogsController extends Controller
 
     public function search(Request $request)
     {
-        if (auth()->user()->employee->level == 0 ) {
+        if (auth()->user()->employee->level == 0) {
             $date = Carbon::parse($request->input('logs_date'))->format('y-m-d');
-            $visits = VisitingDetails::query()
+            return $visits = VisitingDetails::query()
                 ->with('visitor:id,first_name,last_name')
                 ->with('companions:id,first_name,last_name')
-                ->where('checkin_at' , '>=', $date)
+                ->with('empvisit')
+                ->where('checkin_at', '>=', $date)
+                ->where('creator_id', auth()->user()->id)
+                ->where(function ($query) {
+                    $query->where('creator_employee', auth()->user()->employee->id)
+                        ->orWhere('emp_one' , auth()->user()->employee->id)
+                        ->orWhere('emp_two' , auth()->user()->employee->id)
+                })
                 ->get();
 
-            return view('admin.logs.index' , ['visits' => $visits , 'show_data' => true]);
+            return view('admin.logs.index', ['visits' => $visits, 'show_data' => true]);
         }
 
         $notifications = array('message' => 'غير مسموح بعرض البيانات', 'alert-type' => 'info');

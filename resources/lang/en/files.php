@@ -311,7 +311,7 @@ return [
     'Visitor ID Number' => 'Visitor ID Number',
     'Visit Type' => 'Visit Type ',
     'Visit Date Start' => 'Visit Date',
-    'Logs' => 'Logs',
+    'Logs' => 'Reports',
     'Filter Logs' => 'Filter Logs',
     'Visit ID' => 'Visit ID',
     'Visit Car Type' => 'Visit Car Type',

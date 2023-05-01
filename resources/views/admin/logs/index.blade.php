@@ -89,8 +89,9 @@
                                                     </td>
 
                                                     <td>
-                                                        @if(empty($visit->companions ))
-                                                            mm
+                                                        @if(!empty($visit->companions ))
+
+                                                        @else
                                                         @endif
                                                     </td>
                                                 </tr>

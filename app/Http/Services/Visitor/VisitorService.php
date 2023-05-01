@@ -173,7 +173,9 @@ class VisitorService
             $visiting['status'] = Status::ACTIVE;
 
 
+            // This Visit Is Going To This User
             $visiting['user_id'] = $request->input('employee_id');
+
             // $visiting['user_id'] = auth()->user()->id;
 
 
