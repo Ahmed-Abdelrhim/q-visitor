@@ -21,7 +21,7 @@ class LogsController extends Controller
             $visits = VisitingDetails::query()
                 ->with('visitor:id,first_name,last_name')
                 ->with('companions:id,first_name,last_name')
-                ->with('shipment')
+                ->with('shipment:id,name')
                 ->where('checkin_at', '>=', $date)
 
                 ->where(function ($query) {

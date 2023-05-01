@@ -77,8 +77,8 @@
                                                     {{-- Shipment Type --}}
                                                     <td>
                                                         @if($visit->car_type == 'T')
-                                                            @if( !empty($visit->shipment_number) )
-                                                                {{$visit->shipment_number }}
+                                                            @if( !empty($visit->shipment_id) && $visit->shipment_id != 0)
+                                                                {{$visit->shipment->name }}
                                                             @else
                                                                 ---
                                                             @endif
@@ -86,8 +86,6 @@
                                                             ---
                                                         @endif
 
-
-                                                        {{$visit->car_type }}
                                                     </td>
 
                                                     {{-- Shipment Number --}}
@@ -104,8 +102,13 @@
                                                     </td>
 
                                                     <td>
-                                                        @if(!empty($visit->companions ))
+                                                        @if( !empty($visit->companions))
+                                                            <a href="{{route('admin.visitors.companions', encrypt($visit->id)) }}" class="btn btn-sm btn-icon float-left btn-info actions"
+                                                                title="{{ __('files.Companions') }} " style="margin-left: 10px;">
+                                                                <i class="far fa-user"></i>
+                                                            </a>
                                                         @else
+                                                            ---
                                                         @endif
                                                     </td>
                                                 </tr>
