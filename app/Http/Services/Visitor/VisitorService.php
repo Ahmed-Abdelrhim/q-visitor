@@ -227,6 +227,7 @@ class VisitorService
 
             $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
 
+
             try {
                 // $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
                 $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit->id;
@@ -242,6 +243,7 @@ class VisitorService
                 $visiting['qrcode'] = NULL;
             }
 
+
             if ($flag) {
                 // Here The Visit Should Be Accepted Because The User Created The Visit Is Admin Or Does Not Have Managaers
                 // Accept The Visit
@@ -249,7 +251,7 @@ class VisitorService
                 $visit->save();
 
                 // Sending Qr Code And Sms
-                $job = BackgroundJob::dispatch($visiting);
+                $job = BackgroundJob::dispatch($visit);
             }
 
 
@@ -289,26 +291,10 @@ class VisitorService
                 // $sql = SqlServerJob::dispatch($visit->id, $visit->visitor->name, $visit->checkin_at, $visit->expiry_date );
 
                 // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
+
+
             } catch (\Exception $e) {}
 
-            // $dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
-
-
-
-            // if ($visitingDetails->type->level == 0) {
-
-
-            //            if (auth()->user()->employee->level == 0) {
-            //                try {
-            //                    $job = BackgroundJob::dispatch($visitingDetails);
-            //                    // $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $visitingDetails->visitor->id);
-            //                    // $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $visitingDetails->visitor->phone);
-            //                } catch
-            //                (\Exception $e) {
-            //                    $notification = array('message' => 'Message was not sent', 'alert-type' => 'info');
-            //                    return redirect()->back()->with($notification);
-            //                }
-            //            }
 
 
             return $visitingDetails;
@@ -390,7 +376,9 @@ class VisitorService
             $visitingDetails->addMedia($request->file('image'))->toMediaCollection('visitor');
         }
         try {
+            $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
             $visitingDetails->employee->user()->notify(new SendVisitorToEmployee($visitingDetails));
+
         } catch (\Exception $e) {
             // Using a generic exception·..
 
@@ -477,3 +465,31 @@ class VisitorService
 //            // The User Is Of Type ADMIN So Return All The VisitingDetails
 //            return VisitingDetails::query()->with('visitor')->with('companions')->orderBy('id', 'desc')->get();
 //        }
+
+
+
+
+
+
+
+
+
+
+// $dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
+
+
+
+// if ($visitingDetails->type->level == 0) {
+
+
+//            if (auth()->user()->employee->level == 0) {
+//                try {
+//                    $job = BackgroundJob::dispatch($visitingDetails);
+//                    // $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $visitingDetails->visitor->id);
+//                    // $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $visitingDetails->visitor->phone);
+//                } catch
+//                (\Exception $e) {
+//                    $notification = array('message' => 'Message was not sent', 'alert-type' => 'info');
+//                    return redirect()->back()->with($notification);
+//                }
+//            }

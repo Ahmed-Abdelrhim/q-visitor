@@ -32,7 +32,7 @@ use App\User;
 
 use function PHPUnit\Framework\throwException;
 use App\Jobs\SqlServerJob;
-
+use Twilio\Rest\Client;
 
 class OcrController extends Controller
 {
@@ -591,21 +591,31 @@ class OcrController extends Controller
 
     public function playy()
     {
-        $visit = VisitingDetails::query()->with('visitor')->find(338);
+        return $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . '01152067271');
 
-
-        // $send_email = Mail::to($this->visitingDetails->visitor->email)->send(new VisitorMail($this->visitingDetails));
-        // $send_email = Mail::to($visit->visitor->email)->send(new VisitorMail($visit));
-
-
-        //        $send_email = BackgroundJob::dispatch($visit);
+        //        $twilio_sid = 'ACdd4597bb33934ae1d78536fb528d3c80';
+        //        $twilio_token = 'f04d3ff44c05dfc02c52c43ff5e64b04';
+        //        $twilio_from = '+15005550006';
+        //
+        //        $client = new Client('ACdd4597bb33934ae1d78536fb528d3c80', 'f04d3ff44c05dfc02c52c43ff5e64b04');
+        //
+        //        $client->messages->create('+20 1152067271', [
+        //            'from' => $twilio_from,
+        //            'body' => 'Body']);
         //
         //        return 'Done';
 
-        return view('admin.email.visitor_mail',[
-                'visitor_name' =>$visit->visitor->name ,
-                'visit_date' => $visit->checkin_at ,
-                'qr_code' => $visit->qrcode]);
+        //        $visit = VisitingDetails::query()->with('visitor')->find(338);
+        //
+        //
+        //                $send_email = BackgroundJob::dispatch($visit);
+        //
+        //                return 'Done';
+        //
+        //        return view('admin.email.visitor_mail',[
+        //                'visitor_name' =>$visit->visitor->name ,
+        //                'visit_date' => $visit->checkin_at ,
+        //                'qr_code' => $visit->qrcode]);
 
         //        $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
         //
@@ -614,6 +624,7 @@ class OcrController extends Controller
         //                                        VALUES ( " . $visit->id . " , N' " . $visit->visitor->name . " ' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
         //
         //
+
         return $visits = DB::connection('sqlsrv')->table('visits')->get();
         //
         //        foreach ($visits as $visit) {
@@ -649,17 +660,17 @@ class OcrController extends Controller
 
 
         //        Site Search
-        //        $site_search = Http::withHeaders([
-        //            'Content-Type' => 'application/json',
-        //            'Authorization' => 'Bearer hpc.xksnvqy1rg2crxa77421b7kxeh179ckj'
-        //        ])->post('https://api.hik-proconnect.com/api/hpcgw/v1/site/search', [
-        //            'page' => 0,
-        //            'pageSie' => 0,
-        //            'search' => 'QudraTech'
-        //        ]);
+        //                $site_search = Http::withHeaders([
+        //                    'Content-Type' => 'application/json',
+        //                    'Authorization' => 'Bearer hpc.xksnvqy1rg2crxa77421b7kxeh179ckj'
+        //                ])->post('https://api.hik-proconnect.com/api/hpcgw/v1/site/search', [
+        //                    'page' => 0,
+        //                    'pageSie' => 0,
+        //                    'search' => 'QudraTech'
+        //                ]);
         //
-        //        id = 8a7488ec87bb9a010187bd2f7fee0743
-        //        return $site_search->json();
+        //                // id = 8a7488ec87bb9a010187bd2f7fee0743
+        //                return $site_search->json();
 
 
         // Device Add
@@ -669,7 +680,7 @@ class OcrController extends Controller
         ])->post('https://api.hik-proconnect.com/api/hpcgw/v2/device/add', [
             'deviceList' => [
                 'deviceSerial' => 'j21312692',
-                'validateCode' => 'Camera01'
+                'validateCode' => 'Camera01',
             ],
             'siteId' => '8a7488ec87bb9a010187bd2f7fee0743',
         ]);

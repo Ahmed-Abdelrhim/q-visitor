@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\QrController;
+use App\Http\Controllers\Admin\LogsController;
 
 Route::group(['middleware' => 'prevent-back-history'], function () {
 
@@ -134,6 +135,12 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('Add/Another/Companion', [CompanionController::class, 'addAnotherCompanion'])->name('add.another.companion');
         Route::post('Add/Last/Companion', [CompanionController::class, 'addLastCompanion'])->name('add.last.companion');
         Route::post('Remove/Companion/{id}',[CompanionController::class,'removeCompanion'])->name('remove.companion');
+
+
+
+        // Logs ···
+        Route::get('Index' , [LogsController::class,'index'])->name('logs.index');
+        Route::get('Search' , [LogsController::class,'search'])->name('logs.search');
 
 
 

@@ -103,9 +103,11 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
 
                                     <div class="actions-btns">
                                         <button class="btn btn-sm btn-icon mr-2  float-left btn-success find"
-                                                data-toggle="tooltip" data-placement="top" title="Search"><i
+                                                data-toggle="tooltip" data-placement="top" title="Search">
+                                            <i
                                                 class="fa fa-search"></i> {{__('files.Search')}}
                                         </button>
+
                                         <button class="btn btn-sm btn-icon mr-2  float-left btn-success clr"
                                                 data-toggle="tooltip" data-placement="top" title="clear"><i
                                                 class="fa fa-refresh"></i> {{__('files.Clear Search')}}

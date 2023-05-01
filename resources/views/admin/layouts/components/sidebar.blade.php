@@ -87,6 +87,19 @@
             <!-- End Employees -->
 
 
+            <!-- Start  Logs -->
+            @if(auth()->user()->employee->level == 0)
+                <li class="employees">
+                    <a class="nav-link" href="{{route('admin.logs.index')}}">
+                        {{--  <i class="fas fa-user-secret"></i>      --}}
+                        <i class="fa fa-table"></i>
+                        <span>{{__('files.Logs')}}</span>
+                    </a>
+                </li>
+            @endif
+            <!-- End Logs -->
+
+
             <!-- Start  Visitors -->
             @if(auth()->user()->hasRole(1) ||
                 auth()->user()->hasAnyPermission(['visitors','visitors_create','visitors_edit','visitors_delete','visitors_show']))

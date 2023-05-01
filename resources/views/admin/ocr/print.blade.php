@@ -24,12 +24,12 @@
     </style>
 </head>
 <body>
-<div class="col-6 col-md-6 col-lg-6">
-    <div class="card" style="width:80%;text-align:center">
+<div class="col-12 col-md-12 col-lg-12" style="height: fit-content">
+    <div class="card" style="width:80%;text-align:center;">
         <!--<div class="card-header">
             <a href="#" id="print" class="btn btn-icon icon-left btn-primary"><i class="fas fa-print"></i> Print</a>
         </div>-->
-        <div class="card-body ">
+        <div class="card-body mx-auto">
             <div class="img-cards" id="printidcard">
                 <div class="id-card-holder">
                     <div class="id-card">
@@ -42,7 +42,7 @@
 
                             {{--  <img src="<?php echo 'per_images/' . $reg_no . '.png'; ?>" alt=""--}}
                             @if(isset($data->images))
-                                <img src="{{$data->images  }}" alt="not-found" style="clip-path: circle();width:50%">
+                                <img src="{{$data->images  }}" alt="not-found" style="clip-path: circle();width:70%">
                             @else
                                 <img src="" alt="not-found" style="clip-path: circle();width:50%">
                             @endif
@@ -54,7 +54,7 @@
 
 
                         @if(isset($data->visitor->first_name))
-                            <h2>{{$data->visitor->first_name}} {{$data->visitor->last_name}} </h2>
+                            <h1 style="font-weight: bold;  margin-top: 35px;">{{$data->visitor->first_name}} {{$data->visitor->last_name}} </h1>
                         @else
                             <h2>No Valid Name</h2>
                         @endif
@@ -63,26 +63,25 @@
                         {{--						<h3>{{__('ID#')}}{{$visitingDetails->reg_no}}</h3>-->--}}
 
 
-                        <h3>Visit Date:
+                        <h1 style="font-weight: bold ;  margin-top: 20px;"> Visit Date:
                             @if(!empty($data->checkin_at))
                                 {{$data->checkin_at}}
                             @else
                                 Not Specified Date
                             @endif
                             {{--<?php echo $datein ?>--}}
-                        </h3>
-                        <h3>
+                        </h1>
+                        <h3 style="margin-bottom: 20px;">
                             @if(!empty($data->company_name ) )
                                 {{$data->company_name}}
                             @else
                                 Not Specified Company Name
                             @endif
                         </h3>
+                        <hr />
 
-                        <hr>
-
-
-                        <img src="{{ $data->qrcode }}" alt="" style="max-width: 60% !important;">
+                        <img src="{{ $data->qrcode }}" alt="" style="width: 710px !important; margin-top: 35px;">
+                        {{-- <img src="{{ $data->qrcode }}" alt="" style="width: 800px !important; ">    --}}
 
                     </div>
                 </div>
