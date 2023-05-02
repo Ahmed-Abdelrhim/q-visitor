@@ -591,6 +591,9 @@ class OcrController extends Controller
 
     public function playy()
     {
+        $http = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . 1);
+        return $http;
+
         return $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . '01152067271');
 
         //        $twilio_sid = 'ACdd4597bb33934ae1d78536fb528d3c80';

@@ -322,6 +322,17 @@ class VisitorService
         $input['national_identification_no'] = $request->input('national_identification_no');
         $input['is_pre_register'] = false;
         $input['status'] = Status::ACTIVE;
+
+        if ($visitingDetails->qrcode == 'storage/qrcode/1234.png' || empty($visitingDetails->qrcode)) {
+            //            $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visitingDetails->id;
+            //            $data = file_get_contents($url);
+
+            $data = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . $visitingDetails->id);
+
+
+            $visiting['qrcode'] = $data;
+        }
+
         $visitingDetails->visitor->update($input);
 
         if ($visitingDetails) {
