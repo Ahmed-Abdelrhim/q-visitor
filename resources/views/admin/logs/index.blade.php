@@ -34,13 +34,18 @@
                 <div class="col-12">
 
 
-                    {{--                    @if(isset($show_data))--}}
+                    {{--  @if(isset($show_data))      --}}
                     @if(isset($visits) && count($visits)> 0 )
                         <div class="card">
 
                             <div class="card-header">
                                 <a href="#" id="print" class="btn btn-icon icon-left btn-primary"><i
                                             class="fas fa-print"></i> {{ __('files.Print Data') }}</a>
+
+                                <a href="{{route('admin.logs.download.pdf' , 'logs_date=' .$_GET['logs_date'] )}}" id="print" class="btn btn-icon icon-left btn-success"><i
+                                            class="fas fa-print"></i> {{ __('files.Export To Pdf') }}</a>
+
+
                             </div>
 
 
@@ -61,7 +66,6 @@
                                         </thead>
                                         <tbody>
 
-                                        {{--  @if(isset($visits) && count($visits)> 0) --}}
                                         @foreach($visits as $visit)
                                             <tr>
                                                 <td> {{$visit->id}} </td>
@@ -125,7 +129,6 @@
                                             </tr>
                                         @endforeach
 
-                                        {{--                                        @endif--}}
 
                                         </tbody>
                                     </table>

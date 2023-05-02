@@ -309,7 +309,7 @@ return [
     'Visit Type Number' => 'رقم الشحنة',
     'Shipment Type' => 'نوع الشحنة',
     'Print Data' => 'طباعة البيانات',
-    '' => '',
+    'Export To Pdf' => 'تصدير الي pdf',
     '' => '',
     '' => '',
     '' => '',

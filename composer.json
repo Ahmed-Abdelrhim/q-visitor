@@ -13,6 +13,7 @@
     "ext-json": "*",
     "ext-zip": "*",
     "akaunting/setting": "^1.1",
+    "barryvdh/laravel-dompdf": "^2.0",
     "benwilkins/laravel-fcm-notification": "^4.0",
     "braintree/braintree_php": "^5.0",
     "brotzka/laravel-dotenv-editor": "^2.1",
