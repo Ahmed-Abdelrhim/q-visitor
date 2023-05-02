@@ -61,7 +61,7 @@
                                         </thead>
                                         <tbody>
 
-                                        {{--                                        @if(isset($visits) && count($visits)> 0 )           --}}
+                                        {{--  @if(isset($visits) && count($visits)> 0) --}}
                                         @foreach($visits as $visit)
                                             <tr>
                                                 <td> {{$visit->id}} </td>
