@@ -8,6 +8,10 @@
     <title>Visit Details Report</title>
 
     <style>
+        body {
+            font-family: Arial, serif;
+        }
+        
         table {
             width: 95%;
             border-collapse: collapse;

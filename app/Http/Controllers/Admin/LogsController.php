@@ -4,9 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\VisitingDetails;
-use Barryvdh\DomPDF\Facade\Pdf;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
+
+
+//use niklasravnsborg\LaravelPdf\Facades\Pdf;
+//use PDF;
 
 class LogsController extends Controller
 {
@@ -25,12 +33,12 @@ class LogsController extends Controller
                 ->with('visitor:id,first_name,last_name')
                 ->with('companions:id,first_name,last_name')
                 ->with('shipment:id,name')
-                ->whereBetween('checkin_at', [$start , $end])
+                ->whereBetween('checkin_at', [$start, $end])
                 ->where(function ($query) {
                     $query->where('creator_employee', auth()->user()->employee->id)
-                        ->orWhere('emp_one' , auth()->user()->employee->id)
+                        ->orWhere('emp_one', auth()->user()->employee->id)
                         ->orWhere('creator_id', auth()->user()->id)
-                        ->orWhere('emp_two' , auth()->user()->employee->id);
+                        ->orWhere('emp_two', auth()->user()->employee->id);
                 })
                 ->get();
 
@@ -48,8 +56,6 @@ class LogsController extends Controller
             $logs_date = $_GET['logs_date'];
 
 
-
-
             $start_of_day = Carbon::parse($logs_date)->startOfDay();
             $end_of_day = Carbon::parse($logs_date)->endOfDay();
 
@@ -57,23 +63,43 @@ class LogsController extends Controller
                 ->with('visitor:id,first_name,last_name')
                 ->with('companions:id,first_name,last_name')
                 ->with('shipment:id,name')
-                ->whereBetween('checkin_at', [$start_of_day , $end_of_day])
+                ->whereBetween('checkin_at', [$start_of_day, $end_of_day])
                 ->where(function ($query) {
                     $query->where('creator_employee', auth()->user()->employee->id)
-                        ->orWhere('emp_one' , auth()->user()->employee->id)
+                        ->orWhere('emp_one', auth()->user()->employee->id)
                         ->orWhere('creator_id', auth()->user()->id)
-                        ->orWhere('emp_two' , auth()->user()->employee->id);
+                        ->orWhere('emp_two', auth()->user()->employee->id);
                 })
                 ->get();
+            $dompdf = new Dompdf();
+            $dompdf->setPaper('A4', 'portrait');
 
-            $pdf = PDF::loadView('admin.logs.pdf', array('visits' =>  $visits))
+            // $pdf = PDF::loadView('admin.logs.pdf', array('visits' => $visits));
+
+            $html = '<html><body><p>مرحبا بالعالم</p></body></html>';
+            $dompdf->loadHtml($html);
+
+            // set the font
+            $dompdf->set_option('fontDir', '/path/to/fonts/');
+            $dompdf->set_option('fontCache', '/path/to/cache/');
+            $dompdf->set_option('defaultFont', 'Arial');
+
+            $dompdf->render();
+            return $dompdf->stream('visit-report.pdf');
+
+
+
+
+
+
+            $pdf = PDF::loadView('admin.logs.pdf', array('visits' => $visits))
                 ->setPaper('a4', 'portrait');
             return $pdf->download('visit-report.pdf');
 
+            //            $pdf = PDF::loadView('admin.logs.pdf', array('visits' =>  $visits));
+            //            return $pdf->stream('visit-report.pdf');
         }
 
         return 'OutSide';
-
-
     }
 }
