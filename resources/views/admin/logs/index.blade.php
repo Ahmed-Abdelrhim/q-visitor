@@ -153,6 +153,16 @@
 
     <script>
         $(document).ready(function() {
+
+        flatpickr("#v3date", {
+            // enableTime: true,
+            noCalendar: false,
+            // dateFormat: "d-m-Y H:i",
+            dateFormat: "Y-m-d",
+            defaultDate: "today"
+        });
+
+
         var css = idCardCss;
 
         function printData(data,css)
