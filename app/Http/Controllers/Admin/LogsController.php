@@ -39,39 +39,8 @@ class LogsController extends Controller
         return redirect()->back()->with($notifications);
     }
 
-
-    public function create()
+    public function printLogs()
     {
-        //
-    }
 
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
-    public function destroy($id)
-    {
-        //
     }
 }

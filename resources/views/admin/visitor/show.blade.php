@@ -19,6 +19,9 @@
                                         class="fas fa-print"></i> {{ __('files.Print ID card') }}</a>
                         </div>
                         <div class="card-body">
+
+
+
                             <div class="img-cards" id="printidcard">
                                 <div class="id-card-holder">
                                     <div class="id-card">
@@ -59,6 +62,9 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
                         </div>
                         <!-- /.box-body -->
                     </div>

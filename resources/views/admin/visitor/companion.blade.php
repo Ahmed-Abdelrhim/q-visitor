@@ -31,9 +31,10 @@
                                         <th>{{ __('files.Second Photo') }}</th>
                                         <th>{{ __('files.Third Photo') }}</th>
                                         <th>{{ __('files.Fourth Photo') }}</th>
-                                        @if (auth()->user()->can('role_show') || auth()->user()->can('role_edit') || auth()->user()->can('role_delete'))
-                                            <th>{{ __('files.Actions') }}</th>
-                                        @endif
+
+{{--                                        @if (auth()->user()->can('role_show') || auth()->user()->can('role_edit') || auth()->user()->can('role_delete'))--}}
+{{--                                            <th>{{ __('files.Actions') }}</th>--}}
+{{--                                        @endif--}}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -110,21 +111,22 @@
                                                 </td>
 
 
-                                                <td>
+{{--                                                <td>--}}
 
 
-                                                    <a href="#" class="btn btn-sm btn-icon float-left btn-danger"
-                                                       data-toggle="tooltip" data-placement="top"
-                                                       title="{{__('files.Delete')}}" onclick="event.preventDefault();document.getElementById('remove-companion').submit();">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+{{--                                                    <a href="#" class="btn btn-sm btn-icon float-left btn-danger"--}}
+{{--                                                       data-toggle="tooltip" data-placement="top"--}}
+{{--                                                       title="{{__('files.Delete')}}" onclick="event.preventDefault();document.getElementById('remove-companion').submit();">--}}
+{{--                                                        <i class="fa fa-trash"></i>--}}
+{{--                                                    </a>--}}
 
-                                                    <form id="remove-companion" class="d-none" method="POST" action="{{route('admin.remove.companion',encrypt($companion->id))}}">
-                                                        @csrf
-                                                    </form>
+{{--                                                    <form id="remove-companion" class="d-none" method="POST" action="{{route('admin.remove.companion',encrypt($companion->id))}}">--}}
+{{--                                                        @csrf--}}
+{{--                                                    </form>--}}
 
 
-                                                </td>
+{{--                                                </td>--}}
+{{--                                                --}}
                                             </tr>
                                         @endforeach
                                     @endif

@@ -141,6 +141,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         // Logs ···
         Route::get('Index' , [LogsController::class,'index'])->name('logs.index');
         Route::get('Search' , [LogsController::class,'search'])->name('logs.search');
+        Route::get('print/logs',[LogsController::class,'printLogs'])->name('print.logs');
 
 
 

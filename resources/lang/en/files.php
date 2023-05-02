@@ -317,7 +317,7 @@ return [
     'Visit Car Type' => 'Visit Car Type',
     'Visit Type Number' => 'Visit Type Number',
     'Shipment Type' => 'Shipment Type',
-    '' => '',
+    'Print Data' => 'Print Data',
     '' => '',
     '' => '',
     '' => '',
