@@ -480,13 +480,13 @@ class OcrController extends Controller
             // return throwException($e);
         }
 
-        try {
-            $qrcode = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . $name[0] . $reg_no);
-            // $qrcode = file_get_contents('https://www.qudratech-eg.net/qrcode/index.php?data=' . $name[0] . $reg_no);
-        } catch (\Exception $e) {
-            $qrcode = NULL;
-            $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
-        }
+        //        try {
+        //            $qrcode = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . $name[0] . $reg_no);
+        //            // $qrcode = file_get_contents('https://www.qudratech-eg.net/qrcode/index.php?data=' . $name[0] . $reg_no);
+        //        } catch (\Exception $e) {
+        //            $qrcode = NULL;
+        //            $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
+        //        }
 
 
         if ($visitor) {
@@ -528,7 +528,7 @@ class OcrController extends Controller
                     'car_type' => $car_type,
                     'approval_status' => 0,
                     'created_at' => Carbon::now(),
-                    'qrcode' => $qrcode,
+                    'qrcode' => Null,
                     'expiry_date' => Carbon::now()->endOfDay(),
                 ]);
                 DB::commit();
@@ -536,19 +536,23 @@ class OcrController extends Controller
             (\Exception $e) {
                 DB::rollBack();
                 return 'Visit Error';
-                // $notifications = array('message' => 'visit was not created , something went wrong', 'alert-type' => 'error');
-                // return redirect()->route('OCR.index')->with($notifications);
             }
         }
 
         try {
+            $visit = VisitingDetails::query()->orderBy('id', 'desc')->first();
+            $qrcode = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit->id);
+            $visit->qrcode = $qrcode;
+            $visit->save();
+
+        } catch (\Exception $e) {
+            $qrcode = NULL;
+            $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
+        }
+
+
+        try {
             $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
-
-            //            DB::connection('sqlsrv')
-            //                ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag)
-            //                                    VALUES ( " . $visit->id . " , N'" . $visit->visitor->name . "' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
-
-
             DB::connection('sqlsrv')
                 ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag)
                                         VALUES ( " . $visit->id . " , N' " . $visit->visitor->name . " ' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
@@ -591,6 +595,8 @@ class OcrController extends Controller
 
     public function playy()
     {
+        return $visits = DB::connection('sqlsrv')->table('visits')->get();
+
         return Carbon::now()->endOfDay();
         $http = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . 1);
         return $http;

@@ -80,7 +80,17 @@
                         </h3>
                         <hr />
 
-                        <img src="{{ $data->qrcode }}" alt="" style="width: 710px !important; margin-top: 35px;">
+                        @if(isset($data->qrcode))
+                            @if(!empty($data->qrcode) || $data->qrcode != 'storage/qrcode/1234.png')
+                                <img src="{{ $data->qrcode }}" alt="" style="width: 710px !important; margin-top: 35px;">
+                            @else
+                                QR Code Was Not Generated
+                            @endif
+                        @else
+                            No QR Code
+                        @endif
+
+
                         {{-- <img src="{{ $data->qrcode }}" alt="" style="width: 800px !important; ">    --}}
 
                     </div>
