@@ -232,9 +232,11 @@ class VisitorService
 
             try {
                 // $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
-                $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit->id;
 
-                $data = file_get_contents($url);
+                $data = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit->id);
+                // $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit->id;
+
+                // $data = file_get_contents($url);
 
 
                 // $visiting['qrcode'] = $data;
