@@ -529,7 +529,7 @@ class OcrController extends Controller
                     'approval_status' => 0,
                     'created_at' => Carbon::now(),
                     'qrcode' => $qrcode,
-                    'expiry_date' => NULL,
+                    'expiry_date' => Carbon::now()->endOfDay(),
                 ]);
                 DB::commit();
             } catch
@@ -591,6 +591,7 @@ class OcrController extends Controller
 
     public function playy()
     {
+        return Carbon::now()->endOfDay();
         $http = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . 1);
         return $http;
 
