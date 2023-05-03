@@ -143,7 +143,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('Search' , [LogsController::class,'search'])->name('logs.search');
         Route::get('print/logs',[LogsController::class,'printLogs'])->name('print.logs');
 
-        Route::get('Logs/Download/Report',[LogsController::class,'downloadPdf'])->name('logs.download.pdf');
+        Route::get('Logs/Download/Report/{logs_date}',[LogsController::class,'downloadPdf'])->name('logs.download.pdf');
 
 
 

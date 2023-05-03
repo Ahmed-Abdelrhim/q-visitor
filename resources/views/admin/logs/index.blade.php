@@ -38,12 +38,12 @@
                         <div class="card">
 
                             <div class="card-header">
-{{--                                <a href="#" id="print" class="btn btn-icon icon-left btn-primary"><i--}}
-{{--                                            class="fas fa-print"></i> {{ __('files.Print Data') }}</a>--}}
+                                {{--                                <a href="#" id="print" class="btn btn-icon icon-left btn-primary"><i--}}
+                                {{--                                            class="fas fa-print"></i> {{ __('files.Print Data') }}</a>--}}
 
-                                <a href="{{route('admin.logs.download.pdf' , 'logs_date=' .$_GET['logs_date'] )}}"
+                                <a href="{{route('admin.logs.download.pdf' , $logs_date)}}"
                                    id="print" class="btn btn-icon icon-left btn-success">
-{{--                                    <i class="fa fa-file-pdf"></i>--}}
+                                    {{--                                    <i class="fa fa-file-pdf"></i>      --}}
                                     <i class="fas fa-file-pdf"></i>
                                     {{ __('files.Export To Pdf') }}
                                 </a>
@@ -153,6 +153,7 @@
     <script>
         // var idCardCss = "{{ asset('css/id-card-print.css') }}";
         var idCardCss = "{{ asset('assets/css/style.css') }} ";
+
 
     </script>
 @endsection

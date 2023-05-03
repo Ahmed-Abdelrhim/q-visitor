@@ -558,7 +558,7 @@ class OcrController extends Controller
                                         VALUES ( " . $visit->id . " , N' " . $visit->visitor->name . " ' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
 
         } catch (\Exception $e) {
-            return 'SQL Server Connection Error';
+            // return 'SQL Server Connection Error';
         }
 
 

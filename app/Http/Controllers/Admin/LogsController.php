@@ -42,64 +42,68 @@ class LogsController extends Controller
                 })
                 ->get();
 
-            return view('admin.logs.index', ['visits' => $visits, 'show_data' => true]);
+            return view('admin.logs.index', ['visits' => $visits, 'show_data' => true, 'logs_date' => $date]);
         }
 
         $notifications = array('message' => 'غير مسموح بعرض البيانات', 'alert-type' => 'info');
         return redirect()->back()->with($notifications);
     }
 
-    public function downloadPdf()
+    public function downloadPdf($logs_date)
     {
-        if (isset($_GET['logs_date'])) {
+        $start_of_day = Carbon::parse($logs_date)->startOfDay();
+        $end_of_day = Carbon::parse($logs_date)->endOfDay();
 
-            $logs_date = $_GET['logs_date'];
-
-
-            $start_of_day = Carbon::parse($logs_date)->startOfDay();
-            $end_of_day = Carbon::parse($logs_date)->endOfDay();
-
-            $visits = VisitingDetails::query()
-                ->with('visitor:id,first_name,last_name')
-                ->with('companions:id,first_name,last_name')
-                ->with('shipment:id,name')
-                ->whereBetween('checkin_at', [$start_of_day, $end_of_day])
-                ->where(function ($query) {
-                    $query->where('creator_employee', auth()->user()->employee->id)
-                        ->orWhere('emp_one', auth()->user()->employee->id)
-                        ->orWhere('creator_id', auth()->user()->id)
-                        ->orWhere('emp_two', auth()->user()->employee->id);
-                })
-                ->get();
-            $dompdf = new Dompdf();
-            $dompdf->setPaper('A4', 'portrait');
-
-            // $pdf = PDF::loadView('admin.logs.pdf', array('visits' => $visits));
-
-            $html = '<html><body><p>مرحبا بالعالم</p></body></html>';
-            $dompdf->loadHtml($html);
-
-            // set the font
-            $dompdf->set_option('fontDir', '/path/to/fonts/');
-            $dompdf->set_option('fontCache', '/path/to/cache/');
-            $dompdf->set_option('defaultFont', 'Arial');
-
-            $dompdf->render();
-            return $dompdf->stream('visit-report.pdf');
+        $visits = VisitingDetails::query()
+            ->with('visitor:id,first_name,last_name')
+            ->with('companions:id,first_name,last_name')
+            ->with('shipment:id,name')
+            ->whereBetween('checkin_at', [$start_of_day, $end_of_day])
+            ->where(function ($query) {
+                $query->where('creator_employee', auth()->user()->employee->id)
+                    ->orWhere('emp_one', auth()->user()->employee->id)
+                    ->orWhere('creator_id', auth()->user()->id)
+                    ->orWhere('emp_two', auth()->user()->employee->id);
+            })
+            ->get();
 
 
-
-
-
-
-            $pdf = PDF::loadView('admin.logs.pdf', array('visits' => $visits))
-                ->setPaper('a4', 'portrait');
-            return $pdf->download('visit-report.pdf');
-
-            //            $pdf = PDF::loadView('admin.logs.pdf', array('visits' =>  $visits));
-            //            return $pdf->stream('visit-report.pdf');
+        if (count($visits) < 0 ) {
+            $notifications = array('message' => 'Can Not Download Data' , 'alert-type' => 'info');
+            return redirect()->back()->with($notifications);
         }
 
-        return 'OutSide';
+        $pdf = PDF::loadView('admin.logs.pdf', array('visits' => $visits))
+            ->setPaper('a4', 'portrait');
+        return $pdf->download('visit-report.pdf');
     }
 }
+
+
+
+//            $dompdf = new Dompdf();
+//            $dompdf->setPaper('A4', 'portrait');
+//
+//            // $pdf = PDF::loadView('admin.logs.pdf', array('visits' => $visits));
+//
+//            $html = '<html><body><p>مرحبا بالعالم</p></body></html>';
+//            $dompdf->loadHtml($html);
+//
+//            // set the font
+//            $dompdf->set_option('fontDir', '/path/to/fonts/');
+//            $dompdf->set_option('fontCache', '/path/to/cache/');
+//            $dompdf->set_option('defaultFont', 'Arial');
+//
+//            $dompdf->render();
+//            return $dompdf->stream('visit-report.pdf');
+//
+//
+
+
+
+
+//            $pdf = PDF::loadView('admin.logs.pdf', array('visits' =>  $visits));
+//            return $pdf->stream('visit-report.pdf');
+
+
+//        }
