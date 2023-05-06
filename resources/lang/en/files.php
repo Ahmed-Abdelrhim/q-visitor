@@ -319,7 +319,7 @@ return [
     'Shipment Type' => 'Shipment Type',
     'Print Data' => 'Print Data',
     'Export To Pdf' => 'Export To PDF',
-    '' => '',
+    'Visit Approved From Quality' => 'Visit Approved',
     '' => '',
     '' => '',
     '' => '',

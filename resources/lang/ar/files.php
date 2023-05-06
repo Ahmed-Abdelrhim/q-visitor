@@ -310,7 +310,7 @@ return [
     'Shipment Type' => 'نوع الشحنة',
     'Print Data' => 'طباعة البيانات',
     'Export To Pdf' => 'تصدير الي PDF',
-    '' => '',
+    'Visit Approved From Quality' => 'تمت الموافقة',
     '' => '',
     '' => '',
     '' => '',

@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
+    {{--    <meta charset="UTF-8">  --}}
+{{--    <meta charset="utf-8">--}}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
+
+{{--    <link rel="preconnect" href="https://fonts.googleapis.com">--}}
+{{--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>--}}
+{{--    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">--}}
+
+
+
     <title>Visit Details Report</title>
 
     <style>
-        body {
-            font-family: Arial, serif;
-        }
-        
+        /*body {*/
+        /*    font-family: 'Scheherazade New', serif;*/
+        /*    */
+        /*    }*/
+        body { font-family: DejaVu Sans, sans-serif; }
         table {
             width: 95%;
             border-collapse: collapse;
@@ -45,9 +61,9 @@
 <body>
 
 <div style="width: 95%; margin: 0 auto;">
-        {{--    <div style="width: 10%; float:left; margin-right: 20px;">--}}
-        {{--        <img src="{{ public_path('assets/images/logo.png') }}" width="100%"  alt="">--}}
-        {{--    </div>--}}
+    {{--    <div style="width: 10%; float:left; margin-right: 20px;">--}}
+    {{--        <img src="{{ public_path('assets/images/logo.png') }}" width="100%"  alt="">--}}
+    {{--    </div>--}}
     <div style="width: 50%; float: left;">
         <h1>Visit Details Report </h1>
     </div>
@@ -56,13 +72,13 @@
 <table style="position: relative; top: 50px;">
     <thead>
     <tr>
-{{--        <th>{{ __('files.Visit ID') }}</th>--}}
-{{--        <th>{{ __('files.Visitor Name') }}</th>--}}
-{{--        <th>{{ __('files.Visit Time') }}</th>--}}
-{{--        <th>{{ __('files.Visit Car Type') }}</th>--}}
-{{--        <th>{{ __('files.Shipment Type') }}</th>--}}
-{{--        <th>{{ __('files.Visit Type Number') }}</th>--}}
-{{--        <th>{{ __('files.Companions') }}</th>--}}
+        {{--        <th>{{ __('files.Visit ID') }}</th>--}}
+        {{--        <th>{{ __('files.Visitor Name') }}</th>--}}
+        {{--        <th>{{ __('files.Visit Time') }}</th>--}}
+        {{--        <th>{{ __('files.Visit Car Type') }}</th>--}}
+        {{--        <th>{{ __('files.Shipment Type') }}</th>--}}
+        {{--        <th>{{ __('files.Visit Type Number') }}</th>--}}
+        {{--        <th>{{ __('files.Companions') }}</th>--}}
 
         <th>Visit ID</th>
         <th>Visitor Name</th>
@@ -120,8 +136,6 @@
                     ---
                 @endif
             </td>
-
-
 
 
         </tr>

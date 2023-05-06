@@ -68,15 +68,62 @@ class LogsController extends Controller
             ->get();
 
 
-        if (count($visits) < 0 ) {
-            $notifications = array('message' => 'Can Not Download Data' , 'alert-type' => 'info');
-            return redirect()->back()->with($notifications);
-        }
 
-        $pdf = PDF::loadView('admin.logs.pdf', array('visits' => $visits))
-            ->setPaper('a4', 'portrait');
-        return $pdf->download('visit-report.pdf');
+
+
+
+
+        // Instantiate a new Dompdf object
+        $pdf = new Dompdf();
+
+        // Load the HTML view with Arabic data
+        $html = view('admin.logs.pdf', compact('visits'))->render();
+
+        $options = new \Dompdf\Options();
+        // Set options to support Arabic characters
+        $options->set('isRemoteEnabled', true);
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('defaultFont', 'Scheherazade');
+        $options->set('fontHeightRatio', 0.7);
+        $options->set('enable_font_subsetting', true);
+        $options->set('chroot', public_path());
+
+
+
+
+        // Set Dompdf options to support Arabic characters
+        $pdf->setOptions($options);
+
+
+
+
+        // Load the HTML into Dompdf
+        $pdf->loadHtml($html);
+
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $pdf->render();
+
+        // Output the generated PDF to the browser
+        return $pdf->stream('visit-report.pdf');
+
+
+
+        //        if (count($visits) < 0 ) {
+        //            $notifications = array('message' => 'Can Not Download Data' , 'alert-type' => 'info');
+        //            return redirect()->back()->with($notifications);
+        //        }
+        //
+        //        $pdf = PDF::loadView('admin.logs.pdf', array('visits' => $visits))
+        //            ->setPaper('a4', 'portrait');
+        //        return $pdf->download('visit-report.pdf');
+
+
+
     }
+
 }
 
 

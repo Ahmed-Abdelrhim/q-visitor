@@ -41,7 +41,16 @@ class QrController extends Controller
             return __('files.This Visit Does Not Have Shipment Number');
         }
 
-        return response()->json(['status' => 200, 'data' => $visit->id , 'visit' => $visit]);
+
+        $quality_check = 'No';
+        if ($visit->shipment->quality_check == 1 ) {
+            $quality_check = 'Yes';
+        }
+
+
+
+
+        return response()->json(['status' => 200, 'data' => $visit->id , 'visit' => $visit , 'quality_check' => $quality_check]);
     }
 
     public function acceptVisit()

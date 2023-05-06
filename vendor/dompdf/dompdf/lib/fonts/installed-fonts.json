@@ -1,0 +1,10 @@
+{
+    "scheherazade new": {
+        "normal": "C:\\xampp\\htdocs\\visitorpass\\vendor\\dompdf\\dompdf\/lib\/fonts\/scheherazade_new_normal_45d404473527e797b483ab776c9627d4",
+        "bold": "scheherazade_new_bold_ac79c55f18e59a87b8cca4bc11669db2"
+    },
+    "cairo": {
+        "200": "C:\\xampp\\htdocs\\visitorpass\\vendor\\dompdf\\dompdf\/lib\/fonts\/cairo_200_016e91f80693ea9a39f3f8b45871b529",
+        "300": "cairo_300_adebfb94605daa8752959c1403988edc"
+    }
+}

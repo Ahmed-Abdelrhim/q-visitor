@@ -1,22 +1,26 @@
 @extends('admin.layouts.master')
 @section('main-content')
+
+
     <section class="section">
         <div class="section-header">
             <h1>{{ __('files.Quality Scan') }}</h1>
             {{ Breadcrumbs::render('visitors') }}
         </div>
 
+
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div id="reader" width="600px" style="width: 500px;" class="mx-auto"></div>
 
+{{--                        <div id="reader" style="width: 500px;" class="mx-auto"></div>--}}
+                        <div id="reader"  class="mx-auto scan-visit"></div>
 
                         <div class="mx-auto" style="display: none;" id="visit-control">
-                            {{-- Visit Data --}}
+                             Visit Data
 
-                            <div class="card" style="width: 18rem;">
+                            <div class="card-body" style="width: 18rem;">
                                 <div class="card-header " style="font-weight: bold">
                                     {{__('files.Visit Data')}}
                                 </div>
@@ -70,10 +74,11 @@
                                     </li>
 
 
-                                    {{--  <li class="list-group-item" id="visitor-id">A third item</li>  --}}
+                                      <li class="list-group-item" id="visitor-id">A third item</li>
 
                                 </ul>
-                                <div class="row mx-auto mt-3">
+
+                                <div class="row mx-auto mt-3" id="visit_control_buttons">
                                     <a href="#" class="btn btn-primary" style="margin-right: 10px; width: 80px;"
                                        id="accept-visit"> {{__('files.Accept')}}</a>
                                     <a href="#" class="btn btn-danger" style="margin-left: 10px; width: 80px;"
@@ -83,18 +88,20 @@
 
                             </div>
 
-                            {{--                            <button class="accept btn btn-primary" id="accept-visit"--}}
-                            {{--                                    style="height: 38px;">{{__('files.Accept')}}</button>--}}
-                            {{--                            <button class="reject btn btn-danger" id="reject-visit"--}}
-                            {{--                                    style="height: 38px;">{{__('files.Reject')}}</button>--}}
+                                                        <button class="accept btn btn-primary" id="accept-visit"
+                                                                style="height: 38px;">{{__('files.Accept')}}</button>
+                                                        <button class="reject btn btn-danger" id="reject-visit"
+                                                                style="height: 38px;">{{__('files.Reject')}}</button>
 
 
                         </div>
-
+                        <h3 class="mx-auto" style="display: none; font-weight: bold" id="no_need_for_quality_check">{{__('files.Visit Approved From Quality')}}</h3>
                     </div>
                 </div>
             </div>
         </div>
+
+
     </section>
 @endsection
 
@@ -105,10 +112,10 @@
 
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script>
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"--}}
+{{--            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="--}}
+{{--            crossorigin="anonymous" referrerpolicy="no-referrer">--}}
+{{--    </script>--}}
 
     <script>
         // var time = $.datepicker.formatDate('dd M yy', new Date());
@@ -129,10 +136,20 @@
                             qr_code : id
                         },
                         success: function (response) {
-                            console.log(response);
+                            // console.log(response);
+
                             if(response.status == 200) {
                                 console.log(response);
-                            $('#visit-control').css({"display":""});
+
+                                if(response.quality_check == 'Yes') {
+                                    $('#visit-control').css({"display":""});
+                                } else {
+                                    $('#visit-control').css({"display":""});
+                                    $('#visit_control_buttons').css({"display":"none"});
+                                    $('#no_need_for_quality_check').css({"display":""});
+                                }
+
+
 
                             visit_id = response.data;
 
@@ -142,29 +159,20 @@
                             $('#visitor-identification-number').text(  response.visit.visitor.national_identification_no);
 
                             if( response.visit.car_type == 'T' ) {
-
-
                                 // $('#visit-type').text('Truck');
                                 // console.log(response.visit.shipment);
                                 $('#visit-type').text(response.visit.shipment.name);
                             }
 
                             // var date = Date.parse(  response.visit.checkin_at ).toString('yyyy-MM-dd');
-
                             var date = response.visit.checkin_at;
-
                             // var date = $.datepicker.formatDate( "D dd-M-yy", response.visit.checkin_at ) // Output "Fri 08-Sep-2017"
                             var date =  date.toString('yyyy-M-d')
-
                             $('#visit-date').text(date);
-
-
-
 
                             } else {
                                 alert(response);
                                 location.reload();
-                                // alert('gagal');
                                 // console.log(response);
                             }
                         }
@@ -195,11 +203,6 @@
         { fps: 10, qrbox: {width: 250, height: 250} },
         /* verbose= */ false);
         html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-
-
-
-
-
 
         $('#accept-visit').on('click',function() {
             $('#reject-visit').prop('disabled', true);
