@@ -42,15 +42,14 @@ class QrController extends Controller
         }
 
 
+        // if ($visit->shipment->quality_check == 1) {}
         $quality_check = 'No';
-        if ($visit->shipment->quality_check == 1 ) {
+        if ($visit->quality_check == 2) {
             $quality_check = 'Yes';
         }
 
 
-
-
-        return response()->json(['status' => 200, 'data' => $visit->id , 'visit' => $visit , 'quality_check' => $quality_check]);
+        return response()->json(['status' => 200, 'data' => $visit->id, 'visit' => $visit, 'quality_check' => $quality_check]);
     }
 
     public function acceptVisit()
@@ -95,7 +94,7 @@ class QrController extends Controller
         $visit = VisitingDetails::query()->find($visit_id);
 
         if (!$visit) {
-            return response()->json('الزيارة غير موجودة' );
+            return response()->json('الزيارة غير موجودة');
         }
 
         if ($visit->car_type != 'T') {

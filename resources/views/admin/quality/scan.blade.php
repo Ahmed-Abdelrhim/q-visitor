@@ -1,7 +1,6 @@
 @extends('admin.layouts.master')
 @section('main-content')
 
-
     <section class="section">
         <div class="section-header">
             <h1>{{ __('files.Quality Scan') }}</h1>
@@ -14,11 +13,11 @@
                 <div class="col-12">
                     <div class="card">
 
-{{--                        <div id="reader" style="width: 500px;" class="mx-auto"></div>--}}
-                        <div id="reader"  class="mx-auto scan-visit"></div>
+                        {{--                        <div id="reader" style="width: 500px;" class="mx-auto"></div>--}}
+                        <div id="reader" class="mx-auto scan-visit"></div>
 
                         <div class="mx-auto" style="display: none;" id="visit-control">
-                             Visit Data
+                            Visit Data
 
                             <div class="card-body" style="width: 18rem;">
                                 <div class="card-header " style="font-weight: bold">
@@ -74,28 +73,25 @@
                                     </li>
 
 
-                                      <li class="list-group-item" id="visitor-id">A third item</li>
+                                    <li class="list-group-item" id="visitor-id">A third item</li>
 
                                 </ul>
 
                                 <div class="row mx-auto mt-3" id="visit_control_buttons">
-                                    <a href="#" class="btn btn-primary" style="margin-right: 10px; width: 80px;"
-                                       id="accept-visit"> {{__('files.Accept')}}</a>
-                                    <a href="#" class="btn btn-danger" style="margin-left: 10px; width: 80px;"
-                                       id="reject-visit">{{__('files.Reject')}}</a>
+                                    {{--  <a href="#" class="btn btn-primary" style="margin-right: 10px; width: 80px;"  --}}
+                                    {{-- id="accept-visit"> {{__('files.Accept')}}</a>  --}}
+                                    {{-- <a href="#" class="btn btn-danger" style="margin-left: 10px; width: 80px;" --}}
+                                    {{-- id="reject-visit">{{__('files.Reject')}}</a>   --}}
+                                    <button class="accept btn btn-primary" id="accept-visit"
+                                            style="height: 38px; margin: 10px;">{{__('files.Accept')}}</button>
+                                    <button class="reject btn btn-danger" id="reject-visit"
+                                            style="height: 38px; margin: 10px;">{{__('files.Reject')}}</button>
                                 </div>
-
-
                             </div>
 
-                                                        <button class="accept btn btn-primary" id="accept-visit"
-                                                                style="height: 38px;">{{__('files.Accept')}}</button>
-                                                        <button class="reject btn btn-danger" id="reject-visit"
-                                                                style="height: 38px;">{{__('files.Reject')}}</button>
-
-
                         </div>
-                        <h3 class="mx-auto" style="display: none; font-weight: bold" id="no_need_for_quality_check">{{__('files.Visit Approved From Quality')}}</h3>
+                        <h3 class="mx-auto" style="display: none; font-weight: bold"
+                            id="no_need_for_quality_check">{{__('files.Visit Approved From Quality')}}</h3>
                     </div>
                 </div>
             </div>
@@ -112,10 +108,10 @@
 
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"--}}
-{{--            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="--}}
-{{--            crossorigin="anonymous" referrerpolicy="no-referrer">--}}
-{{--    </script>--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
 
     <script>
         // var time = $.datepicker.formatDate('dd M yy', new Date());
@@ -143,10 +139,11 @@
 
                                 if(response.quality_check == 'Yes') {
                                     $('#visit-control').css({"display":""});
-                                } else {
-                                    $('#visit-control').css({"display":""});
                                     $('#visit_control_buttons').css({"display":"none"});
                                     $('#no_need_for_quality_check').css({"display":""});
+                                } else {
+                                    console.log(response);
+                                    $('#visit-control').css({"display":""});
                                 }
 
 
@@ -286,6 +283,8 @@
                         }
                     }); // end of function accept visit
         }); // end reject visit
+
+
 
 
 
