@@ -45,6 +45,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
     Route::group(['prefix' => 'admin', 'middleware' => ['installed'], 'namespace' => 'Admin', 'as' => 'admin.'], function () {
         Route::get('login', 'Auth\LoginController@showLoginForm')->name('show.login.form');
+        Route::post('login', [LoginController::class,'login'])->name('custom.login');
         Route::post('Code/Activation', [LoginController::class, 'codeActivation'])->name('code.activation');
     });
 

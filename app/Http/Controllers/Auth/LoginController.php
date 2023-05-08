@@ -169,18 +169,47 @@ class LoginController extends Controller
         //        return 'No'; .
     }
 
-    protected function attemptLogin(Request $request): bool
+    public function attemptLogin(Request $request)
     {
-
-        return $this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
-        );
+            if (Auth::attempt($this->credentials($request))) {
+            // auth()->logoutOtherDevices( $request->password);
+            return $this->authenticated( $request->password);
+        }
     }
 
-//    protected function authenticated(Request $request, $user)
-//    {
-//        return redirect(route('dashboard.index'));
-//    }
+    public function login(Request $request)
+    {
+        if (Auth::attempt($this->credentials($request))) {
+            // auth()->logoutOtherDevices($request->password);
+            return $this->authenticated($request->password);
+        }
+    }
+
+    public function credentials($request)
+    {
+        return $request->only($this->username(), 'password');
+    }
+
+    public function username(): string
+    {
+        return 'email';
+    }
+
+    public function authenticated($password): Redirector|Application|RedirectResponse
+    {
+        Auth::logoutOtherDevices($password);
+        sleep(2);
+        return redirect(route('admin.dashboard.index'));
+    }
+
+    //    protected function authenticated(Request $request, $user)
+    //    {
+    //        Auth::logoutOtherDevices($request('password'));
+    //
+    //        return redirect()->intended();
+    //    }
+
+
 
     public function logout(): RedirectResponse
     {
