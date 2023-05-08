@@ -595,6 +595,8 @@ class OcrController extends Controller
 
     public function playy()
     {
+        session()->flush();
+        return 'Done';
         return $visits = DB::connection('sqlsrv')->table('visits')->get();
 
         return Carbon::now()->endOfDay();

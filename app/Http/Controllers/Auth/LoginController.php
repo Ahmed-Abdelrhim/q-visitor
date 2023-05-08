@@ -171,17 +171,18 @@ class LoginController extends Controller
 
     public function attemptLogin(Request $request)
     {
-            if (Auth::attempt($this->credentials($request))) {
+        if (Auth::attempt($this->credentials($request))) {
             // auth()->logoutOtherDevices( $request->password);
-            return $this->authenticated( $request->password);
+            return $this->authenticated($request->password);
         }
     }
 
     public function login(Request $request)
     {
+        session()->flush();
         if (Auth::attempt($this->credentials($request))) {
-            // auth()->logoutOtherDevices($request->password);
-            return $this->authenticated($request->password);
+            $password = $request->input('password');
+            return $this->authenticated($password);
         }
     }
 
@@ -198,7 +199,6 @@ class LoginController extends Controller
     public function authenticated($password): Redirector|Application|RedirectResponse
     {
         Auth::logoutOtherDevices($password);
-        sleep(2);
         return redirect(route('admin.dashboard.index'));
     }
 
@@ -208,7 +208,6 @@ class LoginController extends Controller
     //
     //        return redirect()->intended();
     //    }
-
 
 
     public function logout(): RedirectResponse
