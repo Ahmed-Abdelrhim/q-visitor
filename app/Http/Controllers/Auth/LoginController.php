@@ -179,9 +179,14 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        session()->flush();
+        // session()->flush();
         if (Auth::attempt($this->credentials($request))) {
+            $user = auth()->user();
+            Auth::login($user);
             $password = $request->input('password');
+
+
+            // return $user;
             return $this->authenticated($password);
         }
     }

@@ -595,8 +595,10 @@ class OcrController extends Controller
 
     public function playy()
     {
-        session()->flush();
-        return 'Done';
+        // session()->flush();
+        // return 'Done';
+        $data = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . 2);
+        return $data;
         return $visits = DB::connection('sqlsrv')->table('visits')->get();
 
         return Carbon::now()->endOfDay();
