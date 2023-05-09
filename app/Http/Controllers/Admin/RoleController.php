@@ -105,6 +105,10 @@ class RoleController extends BackendController
         if ($_POST) {
             $permissions = $request->all();
             unset($permissions['_token']);
+
+            if (!$request->has('dashboard')) {
+                $request->merge(['dashboard' => '1']);
+            }
             $permissions = array_values($permissions);
 
             $role       = Role::find($id);

@@ -41,7 +41,7 @@
                                             <input type="checkbox" id="<?=$permission->name?>" style="width: 15px ; height: 15px;"
                                                    name="<?=$permission->name?>" value="<?=$permission->id?>"
                                                    <?= isset($permissions[$permission->id]) ? 'checked' : '' ?> onclick="processCheck(this);"
-                                                   class="mainmodule"/>
+                                                   class="mainmodule"  />
                                         </td>
                                         <td data-title="{{ __('Module Name') }}">
                                                 <?= ucfirst($permission->name) ?>
