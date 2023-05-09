@@ -143,6 +143,8 @@
             var mainidDelete = mainmodule + "_delete";
             var mainidShow = mainmodule + "_show";
 
+
+
             if ($('#' + mainmodule).is(':checked')) {
                 $('#' + mainidCreate).prop('disabled', false);
                 $('#' + mainidCreate).prop('checked', true);
@@ -167,6 +169,12 @@
 
                 $('#' + mainidShow).prop('disabled', true);
                 $('#' + mainidShow).prop('checked', false);
+            }
+
+            if(mainmodule == 'dashboard') {
+
+                $('#' + mainmodule).prop('disabled', false);
+                $('#' + mainmodule).prop('checked', true);
             }
         };
     </script>
