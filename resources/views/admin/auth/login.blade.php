@@ -34,8 +34,8 @@
                         </div>
 
                         <div class="card-body">
-                            {{--  <form method="POST" action="{{ route('login') }}">        --}}
-                            <form method="POST" action="{{ route('admin.custom.login') }}">
+                              <form method="POST" action="{{ route('login') }}">
+{{--                            <form method="POST" action="{{ route('admin.custom.login') }}">--}}
                                 @csrf
                                 <div class="form-group">
                                     <label for="email">{{ __('Email') }}</label><span class="text-danger"> *</span>

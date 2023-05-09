@@ -595,6 +595,9 @@ class OcrController extends Controller
 
     public function playy()
     {
+        return session()->get('password_hash_web');
+        return session()->all();
+        return session()->get('session');
         // session()->flush();
         // return 'Done';
         $data = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . 2);

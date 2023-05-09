@@ -171,24 +171,13 @@ class LoginController extends Controller
 
     public function attemptLogin(Request $request)
     {
-        if (Auth::attempt($this->credentials($request))) {
-            // auth()->logoutOtherDevices( $request->password);
-            return $this->authenticated($request->password);
-        }
+        session()->forget('password_hash_web');
+        return $this->guard()->attempt($this->credentials($request));
     }
 
-    public function login(Request $request)
+    public function authenticated()
     {
-        // session()->flush();
-        if (Auth::attempt($this->credentials($request))) {
-            $user = auth()->user();
-            Auth::login($user);
-            $password = $request->input('password');
-
-
-            // return $user;
-            return $this->authenticated($password);
-        }
+        Auth::logoutOtherDevices(request('password'));
     }
 
     public function credentials($request)
@@ -201,18 +190,17 @@ class LoginController extends Controller
         return 'email';
     }
 
-    public function authenticated($password): Redirector|Application|RedirectResponse
-    {
-        Auth::logoutOtherDevices($password);
-        return redirect(route('admin.dashboard.index'));
-    }
 
-    //    protected function authenticated(Request $request, $user)
+    //    public function login(Request $request)
     //    {
-    //        Auth::logoutOtherDevices($request('password'));
+    //        // session()->flush();
+    //        if (Auth::attempt($this->credentials($request))) {
     //
-    //        return redirect()->intended();
+    //            return $this->authenticated(request('password'));
+    //            // return redirect(route('admin.dashboard.index'));
+    //        }
     //    }
+    //
 
 
     public function logout(): RedirectResponse
@@ -222,3 +210,8 @@ class LoginController extends Controller
     }
 }
 
+
+//        if (Auth::attempt($this->credentials($request))) {
+//            // auth()->logoutOtherDevices( $request->password);
+//            return $this->authenticated($request->password);
+//        }
