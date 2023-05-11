@@ -211,12 +211,17 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 </div>
 
                                 @if(!empty($car_type))
-                                    @if($car_type == 'T' || $car_type == 'C')
+                                    @if($car_type == 'T' || $car_type == 'C' || $car_type == 'TWIN_TRUCK')
                                         <div class="row" style="text-align:center">
                                             <h5>{{__('files.Car Plate')}} :</h5><input type="text" class="form-control plate_no"
                                                                                        value="<?php echo $plate; ?>" />
                                             <input type="button" value="{{__('files.Last Car plate')}}" class="btn btn-success get_plate"
                                                    style="height: 35px; padding: 7px 14px;margin-left: 7%">
+
+                                            @if($car_type == 'TWIN_TRUCK')
+                                                <h5>{{__('files.Twin Truck Number')}} :</h5>
+                                                <input type="text" class="form-control plate_no" name="twin_truck_number" style="width: 150px; height: 35px; margin-left: 10px; "/>
+                                            @endif
 
                                             <a class="btn btn-primary dashboard" href="{{ route('admin.dashboard.index') }}"
                                                style="height: 35px; padding: 7px 14px;margin-left: 7%">
@@ -301,12 +306,12 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 </div>
 
 
-                                <div class="dbox w-25 d-flex align-items-center">
+                                <div class="dbox w-25 d-flex align-items-center" >
                                     <div class="icon d-flex align-items-center justify-content-center">
                                         <span class="fa fa-exclamation-triangle"></span>
                                     </div>
                                     <div class="text pl-3">
-                                        <p><span>{{__('files.Expiry Date')}} :</span> <a id="exdate" class="txt"></a></p>
+                                        <p id="expiration_date"><span>{{__('files.Expiry Date')}} :</span> <a id="exdate" class="txt"></a></p>
                                     </div>
                                 </div>
                                 <div class="dbox w-25 d-flex align-items-center">

@@ -21,7 +21,6 @@
                         <div class="card-body">
 
 
-
                             <div class="img-cards" id="printidcard">
                                 <div class="id-card-holder">
                                     <div class="id-card">
@@ -53,8 +52,11 @@
                                         <p>{{__('Ph:')}} {{ setting('site_phone') }} | {{__('E-mail:')}} {{ setting('site_email') }} </p>
 										<img src="{{ asset('images/QRCode/'.$visitingDetails->qrcode.'.png') }}" alt="" style="max-width: 60% !important;">-->
                                             <?php if (str_contains($visitingDetails->qrcode, 'http')) { ?>
+
+
                                         <img src="{{ $visitingDetails->qrcode}}" alt=""
                                              style="max-width: 60% !important;">
+
                                         <?php }else{ ?>
                                         <img src="<?php echo "http://localhost/visitorpass/public/";?>{{ $visitingDetails->qrcode}}"
                                              alt="" style="max-width: 60% !important;">
@@ -62,7 +64,6 @@
                                     </div>
                                 </div>
                             </div>
-
 
 
                         </div>
@@ -243,6 +244,7 @@
 
     <script>
         var idCardCss = "{{ asset('css/id-card-print.css') }}";
+
     </script>
 
     <script src="{{ asset('js/visitor/view.js') }}"></script>

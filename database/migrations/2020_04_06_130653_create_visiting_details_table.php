@@ -22,6 +22,7 @@ class CreateVisitingDetailsTable extends Migration
             $table->string('company_employee_id')->nullable();
             $table->dateTime('checkin_at')->nullable();
             $table->dateTime('checkout_at')->nullable();
+            $table->tinyInteger('is_new_scan')->default(1);
 
             $table->unsignedTinyInteger('status');
             $table->unsignedBigInteger('user_id');

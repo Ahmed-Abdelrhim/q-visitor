@@ -4,6 +4,8 @@
         return date;
     }
 
+
+
     var websocket = null;
 
     function connect() {
@@ -117,6 +119,8 @@
                     console.log('Message state', websocket.readyState);
                     console.log(json.Param);
 
+                    // json.Param.Date_of_expiry =  new Date('2020/09/04').toISOString().split('T')[0];
+
                     if (strwhite != '' && strwhite != null) {
                         imagestr += strwhite + '||' + strhead + '||' + strChipHead + '||' + strpic + '||';
                         $('.images').empty();
@@ -167,9 +171,22 @@
                     if (json.Param.hasOwnProperty('Expity_Data')) {
                         document.getElementById("exdate").innerHTML = json.Param.Expity_Data;
                     }
+
                     if (json.Param.hasOwnProperty('Date_of_expiry')) {
-                        document.getElementById("exdate").innerHTML = json.Param.Date_of_expiry;
+                        if(Date.parse(json.Param.Date_of_expiry) - Date.parse(new Date()) < 0 )
+                        {
+                            console.log('expiration_date');
+                            expiry_date = document.getElementById("exdate");
+                            expiry_date.innerHTML = json.Param.Date_of_expiry;
+
+                            expiration_date = document.getElementById("expiration_date");
+                            expiration_date.style.backgroundColor = "#dc3545";
+                        } else {
+                            document.getElementById("exdate").innerHTML = json.Param.Date_of_expiry;
+                        }
                     }
+
+
                     if (json.Param.hasOwnProperty('Marital_status')) {
                         document.getElementById("mstat").innerHTML = json.Param.Marital_status;
                     }

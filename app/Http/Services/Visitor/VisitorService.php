@@ -13,6 +13,8 @@ use App\Models\Types;
 use App\Models\VisitingDetails;
 use App\Models\Visitor;
 use App\Notifications\SendVisitorToEmployee;
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -99,6 +101,23 @@ class VisitorService
     public function paginate($perPage = 10)
     {
         return VisitingDetails::query()->paginate($perPage);
+    }
+
+    public function generateSubstituteQrCode($visit_id)
+    {
+        $strict_types = 1;
+
+        require_once('./../vendor/autoload.php');
+
+        $options = new QROptions(
+            [
+                'eccLevel' => QRCode::ECC_L,
+                'outputType' => QRCode::OUTPUT_MARKUP_SVG,
+                'version' => 5,
+            ]
+        );
+
+        return $qrcode = (new QRCode($options))->render(strval($visit_id));
     }
 
 
@@ -223,27 +242,25 @@ class VisitorService
 
             $visiting['type_id'] = $request->input('type');
             $visiting['car_type'] = $request->input('car_type');
+            $visiting['is_new_scan'] = 0;
 
 
             $visitingDetails = VisitingDetails::query()->create($visiting);
 
             $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
-
-
             try {
-                // $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $input['first_name'] . $visitor->id;
-
                 $data = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit->id);
-                // $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit->id;
-
-                // $data = file_get_contents($url);
-
-
-                // $visiting['qrcode'] = $data;
                 $visit->qrcode = $data;
                 $visit->save();
 
             } catch (\Exception $e) {
+                //                try {
+                //                    $data = $this->generateSubstituteQrCode($visit->id);
+                //                    $visit->qrcode = $data;
+                //                    $visit->save();
+                //                } catch (\Exception $e) {
+                //                    $visiting['qrcode'] = NULL;
+                //                }
                 $visiting['qrcode'] = NULL;
             }
 
@@ -257,7 +274,6 @@ class VisitorService
                 // Sending Qr Code And Sms
                 $job = BackgroundJob::dispatch($visit);
             }
-
 
             if ($request->file('image')) {
                 $visitingDetails->addMedia($request->file('image'))->toMediaCollection('visitor');

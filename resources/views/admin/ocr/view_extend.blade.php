@@ -29,6 +29,10 @@
             }
         });
 
+        $('#twin_truck').click(function() {
+            $.redirect("{{route('admin.new.scan',encrypt('TWIN_TRUCK'))}}", {}, "GET", null, null, true);
+        });
+
         $('#truck').click(function() {
             $.redirect("{{route('admin.new.scan',encrypt('T'))}}", {}, "GET", null, null, true);
         });

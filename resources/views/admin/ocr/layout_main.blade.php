@@ -24,7 +24,7 @@
             left: 5px;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0,4);
+            background-color: rgba(0, 0, 0, 0, 4);
         }
 
         .loading-content {
@@ -40,9 +40,14 @@
         }
 
         @keyframes spin {
-            0% {transform: rotate(0deg) ;}
-            100% {transform: rotate(360deg);}
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
+
         .contact-wrap {
             background-color: #24ba64 !important;
             background-image: linear-gradient(to bottom right, #24ba64, #c6cdc6) !important;
@@ -182,9 +187,9 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
 <section class="ftco-section">
 
     <div class="container">
-{{--        <div class="row justify-content-right" style="direction:rtl"><a--}}
-{{--                href="{{ route('admin.ocr.indexxar') }}">عربى</a>|<a>English</a>--}}
-{{--        </div>--}}
+        {{--        <div class="row justify-content-right" style="direction:rtl"><a--}}
+        {{--                href="{{ route('admin.ocr.indexxar') }}">عربى</a>|<a>English</a>--}}
+        {{--        </div>--}}
 
         <div class="row justify-content-right" style="direction:rtl">
             <a href="{{route('change_locale','ar')}}">
@@ -213,13 +218,24 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     Data was sent, thank you!
                                 </div>
                                 <div class="row" style="text-align:center">
-                                    <h5>{{__('files.Car Plate')}} :</h5><input type="text" class="form-control plate_no"
-                                                              value="<?php echo $plate; ?>"/>
-                                    <input type="button" value="{{__('files.Last Car plate')}}" class="btn btn-success get_plate"
-                                           style="height: 35px; padding: 5px 14px;margin-left: 7%">
+                                    @if(isset($person_visit))
+                                        <h5>Visit Without Car</h5>
+                                    @else
+                                        <h5>{{__('files.Car Plate')}} :</h5><input type="text"
+                                                                                   class="form-control plate_no"
+                                                                                   value="<?php echo $plate; ?>"/>
+                                        <input type="button" value="{{__('files.Last Car plate')}}"
+                                               class="btn btn-success get_plate"
+                                               style="height: 35px; padding: 5px 14px;margin-left: 7%">
+                                    @endif
+
+
+
+
                                     @if(isset($companion))
-{{--                                        <h1 class="h1 text-capitalize text-lg-left" style="height: 35px; padding: 7px 14px;margin-left: 18%">--}}
-                                        <h1 class="h1 text-capitalize text-lg-left" style="height: 35px; margin-left: 18%">
+                                        {{--                                        <h1 class="h1 text-capitalize text-lg-left" style="height: 35px; padding: 7px 14px;margin-left: 18%">   --}}
+                                        <h1 class="h1 text-capitalize text-lg-left"
+                                            style="height: 35px; margin-left: 18%">
                                             إضافة مرافق إلي الزائر -- {{ $visit->visitor->name }}
                                         </h1>
                                     @else
@@ -235,22 +251,22 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     <div class="col-md-3">
                                         <div class="form-group"
                                              style="text-align:center;float:left;margin-right:20px">
-                                            <img id="pic" src="{{asset('images/personal.png')}}" />
+                                            <img id="pic" src="{{asset('images/personal.png')}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="white_picture" src="{{asset('images/id.jpg')}}" />
+                                            <img id="white_picture" src="{{asset('images/id.jpg')}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="ocr_head" src="{{asset('images/id.jpg')}}" />
+                                            <img id="ocr_head" src="{{asset('images/id.jpg')}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="chip_head" src="{{asset('images/id.jpg')}}" />
+                                            <img id="chip_head" src="{{asset('images/id.jpg')}}"/>
                                         </div>
                                     </div>
 
@@ -308,7 +324,8 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                         <span class="fa fa-exclamation-triangle"></span>
                                     </div>
                                     <div class="text pl-3">
-                                        <p><span>{{__('files.Expiry Date')}} :</span> <a id="exdate" class="txt"></a></p>
+                                        <p><span>{{__('files.Expiry Date')}} :</span> <a id="exdate" class="txt"></a>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="dbox w-25 d-flex align-items-center">
@@ -324,7 +341,8 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                         <span class="fa fa-user"></span>
                                     </div>
                                     <div class="text pl-3">
-                                        <p><span>{{__('files.Marital status')}} :</span> <a id="mstat" class="txt"></a></p>
+                                        <p><span>{{__('files.Marital status')}} :</span> <a id="mstat" class="txt"></a>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -333,7 +351,8 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                         <span class="fa fa-calendar"></span>
                                     </div>
                                     <div class="text pl-3">
-                                        <p><span>{{__('files.Issuing Date')}} :</span> <a id="isdate" class="txt"></a></p>
+                                        <p><span>{{__('files.Issuing Date')}} :</span> <a id="isdate" class="txt"></a>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -343,10 +362,11 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     </div>
                                     <div class="text pl-3">
                                         <p><label for="vdate">{{__('files.Visit Date')}} :</label> <input type="text"
-                                                                                         value="<?php echo date('d-m-Y'); ?>"
-                                                                                         class="vdate form-control"
-                                                                                         id="vdate"
-                                                                                         disabled="disabled"/></p>
+                                                                                                          value="<?php echo date('d-m-Y'); ?>"
+                                                                                                          class="vdate form-control"
+                                                                                                          id="vdate"
+                                                                                                          disabled="disabled"/>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="dbox w-25 d-flex align-items-center">
@@ -355,10 +375,11 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     </div>
                                     <div class="text pl-3">
                                         <p><label for="vtime">{{__('files.Visit Time')}} :</label> <input type="text"
-                                                                                         value="<?php echo date('h:i:s a'); ?>"
-                                                                                         class="vtime form-control"
-                                                                                         id="vtime"
-                                                                                         disabled="disabled"/></p>
+                                                                                                          value="<?php echo date('h:i:s a'); ?>"
+                                                                                                          class="vtime form-control"
+                                                                                                          id="vtime"
+                                                                                                          disabled="disabled"/>
+                                        </p>
 
                                     </div>
                                 </div>
@@ -391,20 +412,31 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     <div class="form-group">
 
                                         @if(isset($companion))
-                                            <input type="button" value="{{__('files.New Scan')}}" class="btn btn-danger new_page">
-                                            <input type="button" value="{{__('files.Scan')}}" class="btn btn-danger scan"
+                                            <input type="button" value="{{__('files.New Scan')}}"
+                                                   class="btn btn-danger new_page">
+                                            <input type="button" value="{{__('files.Scan')}}"
+                                                   class="btn btn-danger scan"
                                                    onclick="connect();">
 
-                                            <input type="button" value="{{__('files.Add Another Companion')}}" class="btn-primary btn another_companion"
-                                                   style="background-color: #0a71db !important;" id="{{encrypt($visit->id)}}">
-                                            <input style="margin-left: 10px;" type="button" value="{{__('files.Last Companion')}}" class="btn btn-dark last_companion" id="{{encrypt($visit->id)}}">
+                                            <input type="button" value="{{__('files.Add Another Companion')}}"
+                                                   class="btn-primary btn another_companion"
+                                                   style="background-color: #0a71db !important;"
+                                                   id="{{encrypt($visit->id)}}">
+                                            <input style="margin-left: 10px;" type="button"
+                                                   value="{{__('files.Last Companion')}}"
+                                                   class="btn btn-dark last_companion" id="{{encrypt($visit->id)}}">
                                         @else
-                                            <input type="button" value="{{__('files.New Scan')}}" class="btn btn-danger new_page">
-                                            <input type="button" value="{{__('files.Scan')}}" class="btn btn-danger scan"
+                                            <input type="button" value="{{__('files.New Scan')}}"
+                                                   class="btn btn-danger new_page">
+                                            <input type="button" value="{{__('files.Scan')}}"
+                                                   class="btn btn-danger scan"
                                                    onclick="connect();">
 
-                                            <input type="button" value="{{__('files.Add Companion')}}" class="btn btn-success save" id="{{encrypt($visit->id)}}">
-                                            <input style="margin-left: 10px;" type="button" value="{{__('files.Finish')}}" class="btn btn-dark finish" id="{{encrypt($visit->id)}}">
+                                            <input type="button" value="{{__('files.Add Companion')}}"
+                                                   class="btn btn-success save" id="{{encrypt($visit->id)}}">
+                                            <input style="margin-left: 10px;" type="button"
+                                                   value="{{__('files.Finish')}}" class="btn btn-dark finish"
+                                                   id="{{encrypt($visit->id)}}">
 
 
                                             <a type="button" class="btn btn-success view"
@@ -412,7 +444,6 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                                 {{__('files.View Visitors')}}
                                             </a>
                                         @endif
-
 
 
                                         <div class="submitting"></div>
@@ -435,7 +466,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
 <script src="{{ asset('assets/modules/izitoast/dist/js/iziToast.min.js') }}"></script>
 <script>
     @if (Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}"
+        var type = "{{ Session::get('alert-type', 'info') }}"
     switch (type) {
         case 'info':
             iziToast.info({
@@ -469,6 +500,8 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
             });
             break;
     }
+
+
     @endif
 </script>
 @include('admin.ocr.index_footer_scripts')

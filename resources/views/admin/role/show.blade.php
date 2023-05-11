@@ -172,7 +172,6 @@
             }
 
             if(mainmodule == 'dashboard') {
-
                 $('#' + mainmodule).prop('disabled', false);
                 $('#' + mainmodule).prop('checked', true);
             }

@@ -27,12 +27,17 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Monolog\Handler\IFTTTHandler;
 use Spatie\Permission\Models\Role;
 use App\User;
 
 use function PHPUnit\Framework\throwException;
 use App\Jobs\SqlServerJob;
 use Twilio\Rest\Client;
+
+
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
 
 class OcrController extends Controller
 {
@@ -67,19 +72,31 @@ class OcrController extends Controller
         if (!$visit) {
             return 'This Visit Was Deleted';
         }
+
+
+        if ($visit->car_type == 'P') {
+            $person_visit = 'Yes';
+            return view('admin.ocr.layout_main', ['visit' => $visit, 'person_visit' => $person_visit]);
+        }
+        // Here Get The Cars Plate Numbers
         return view('admin.ocr.layout_main', ['visit' => $visit]);
     }
 
     public function newScan($car_type)
     {
         $car_type = decrypt($car_type);
-        $car_type_array = ['T', 'C', 'P'];
+        $car_type_array = ['T', 'C', 'P', 'TWIN_TRUCK'];
         if (!in_array($car_type, $car_type_array)) {
             $notifications = array('message' => 'Invalid car type', 'alert-type' => 'error');
             return redirect()->back()->with($notifications);
         }
 
         $employees = Employee::query()->where('status', Status::ACTIVE)->get(['id', 'first_name', 'last_name']);
+        if ($car_type == 'TWIN_TRUCK') {
+            $twin_truck = 'YES';
+            return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees, 'twin_truck' => $twin_truck]);
+        }
+
 
         return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees]);
     }
@@ -354,13 +371,14 @@ class OcrController extends Controller
 
     public function newScanSaveData()
     {
-
-        // $emp_id = NULL;
-        $emp_id = auth()->user()->id;
+        $emp_id = NULL;
+        // $emp_id = auth()->user()->id;
         if (isset($_POST['employee_id'])) {
             $emp_id = $_POST['employee_id'];
             if ($emp_id == 0 || empty($emp_id) || !is_numeric($emp_id)) {
-                $emp_id = auth()->user()->id;
+                $emp_id = auth()->user()->employee->id;
+                // $emp_id = auth()->user()->id;
+                // return 'Employee Is Not Specified';
             }
         }
 
@@ -438,7 +456,6 @@ class OcrController extends Controller
             $car_type = $_POST['car_type'];
         }
 
-
         // $visitingDetail = VisitingDetails::query()->max('reg_no');
         $visitingDetail = VisitingDetails::query()->orderBy('id', 'desc')->first();
         $reg_no = $visitingDetail->reg_no + 1;
@@ -448,7 +465,6 @@ class OcrController extends Controller
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);
         $data = base64_decode($data);
-
 
         try {
             DB::beginTransaction();
@@ -593,8 +609,51 @@ class OcrController extends Controller
         return $visiting_details->id;
     }
 
+    public function xmlData()
+    {
+        $xmlString = file_get_contents(storage_path('app/public' . '/xml/sample.xml'));
+        $xmlObject = simplexml_load_string($xmlString);
+        $json = json_encode($xmlObject);
+        return $data = json_decode($json, true);
+        // return $data['food'][0]['name'];
+    }
+
     public function playy()
     {
+        $user_id = 53;
+        $employee = Employee::query()->find($user_id);
+        return $employee->level;
+        $strict_types = 1;
+
+        require_once('./../vendor/autoload.php');
+
+        $options = new QROptions(
+            [
+                'eccLevel' => QRCode::ECC_L,
+                'imageBase64' => false,
+                'outputType' => QRCode::OUTPUT_MARKUP_SVG,
+                'version' => 5,
+            ]
+        );
+
+
+        $qrcode = (new QRCode($options))->render(37);
+        return $qrcode;
+        // $qrcode = str_replace("data:image/svg+xml;base64,", "", $qrcode);
+
+
+        if (!file_exists(storage_path('app/public' . '/qrcode/37'))) {
+            $file = File::makeDirectory(storage_path('app/public' . '/' . 'qrcode'), 0777, true, true);
+        }
+
+
+        $filePath = Storage::disk('public')->putFileAs('qrcode/37', $qrcode, 'qrcode.png');
+        return Storage::url($filePath);
+
+        // return base64_decode('d52e7e19db409a857b5c21cb6e0b47ae');
+        // declare(strict_types=1);
+
+
         return session()->get('password_hash_web');
         return session()->all();
         return session()->get('session');
@@ -877,3 +936,12 @@ class OcrController extends Controller
 //},
 //"errorCode": "0"
 //}
+
+
+// namisoftgroup@gmail.com
+
+
+// skils
+// Team Player
+// Deliver results
+// Bias for action

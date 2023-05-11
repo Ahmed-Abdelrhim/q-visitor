@@ -311,7 +311,7 @@ return [
     'Print Data' => 'طباعة البيانات',
     'Export To Pdf' => 'تصدير الي PDF',
     'Visit Approved From Quality' => 'تمت الموافقة',
-    '' => '',
+    'Twin Truck Number' => 'رقم المقطورة',
     '' => '',
     '' => '',
     '' => '',

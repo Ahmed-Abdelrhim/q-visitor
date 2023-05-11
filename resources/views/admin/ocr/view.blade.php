@@ -27,8 +27,8 @@
 
     <script type="text/javascript" src="{{asset('DataTables/dataTables.buttons.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('DataTables/jszip.min.js')}}"></script>
-{{--    <script type="text/javascript" src="{{asset('DataTables/buttons.html5.min.js')}}"></script>--}}
-{{--    <script type="text/javascript" src="{{asset('DataTables/buttons.print.min.js')}}"></script>--}}
+    {{--    <script type="text/javascript" src="{{asset('DataTables/buttons.html5.min.js')}}"></script>--}}
+    {{--    <script type="text/javascript" src="{{asset('DataTables/buttons.print.min.js')}}"></script>--}}
 
 
     @if(app()->getLocale() == 'ar')
@@ -83,20 +83,20 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
 
                                     <div class="text pl-3" style="margin-left:3%">
                                         <p><span style="color:#fff">{{__('files.Check in Date')}} :</span> <input
-                                                type="text"
-                                                class="v2date form-control"
-                                                id="v2date"
-                                                style="color:#000 !important"/>
+                                                    type="text"
+                                                    class="v2date form-control"
+                                                    id="v2date"
+                                                    style="color:#000 !important"/>
                                         </p>
                                     </div>
 
 
                                     <div class="text pl-3">
                                         <p><span style="color:#fff">{{__('files.Check out Date')}} :</span> <input
-                                                type="text"
-                                                class="v3date form-control"
-                                                id="v3date"
-                                                style="color:#000 !important"/>
+                                                    type="text"
+                                                    class="v3date form-control"
+                                                    id="v3date"
+                                                    style="color:#000 !important"/>
                                         </p>
                                     </div>
 
@@ -105,12 +105,12 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                         <button class="btn btn-sm btn-icon mr-2  float-left btn-success find"
                                                 data-toggle="tooltip" data-placement="top" title="Search">
                                             <i
-                                                class="fa fa-search"></i> {{__('files.Search')}}
+                                                    class="fa fa-search"></i> {{__('files.Search')}}
                                         </button>
 
                                         <button class="btn btn-sm btn-icon mr-2  float-left btn-success clr"
                                                 data-toggle="tooltip" data-placement="top" title="clear"><i
-                                                class="fa fa-refresh"></i> {{__('files.Clear Search')}}
+                                                    class="fa fa-refresh"></i> {{__('files.Clear Search')}}
                                         </button>
                                     </div>
 
@@ -132,8 +132,16 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                         : </label>
 
                                     <div class="visits-btns">
+                                        <button class="btn btn-sm btn-icon float-left btn-success  twwin_truck"
+                                                id="twin_truck"
+                                                data-toggle="tooltip" data-placement="top" title="twin truck"
+                                                style="width: 125px;height: 54px;margin-right: 30px !important;">
+                                            <i class="fa-solid fa-truck-moving" style="font-size: 25px;"></i>
+                                        </button>
+
                                         <button class="btn btn-sm btn-icon float-left btn-success  truck" id="truck"
-                                                data-toggle="tooltip" data-placement="top" title="truck" style="width: 125px;height: 54px;margin-right: 30px !important;">
+                                                data-toggle="tooltip" data-placement="top" title="truck"
+                                                style="width: 125px;height: 54px;margin-right: 30px !important;">
                                             <i class="fa-solid fa-truck" style="font-size: 25px;"></i>
                                         </button>
                                         <button class="btn btn-sm btn-icon float-left btn-success  car" id="car"
@@ -142,7 +150,9 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                         </button>
 
                                         <button class="btn btn-sm btn-icon float-left btn-success  person" id="person"
-                                                data-toggle="tooltip" data-placement="top" title="person" style="width: 125px; height: 54px;margin-right: 30px!important;"><i class="fa-solid fa-person-walking" style="font-size: 25px;"></i>
+                                                data-toggle="tooltip" data-placement="top" title="person"
+                                                style="width: 125px; height: 54px;margin-right: 30px!important;"><i
+                                                    class="fa-solid fa-person-walking" style="font-size: 25px;"></i>
                                         </button>
                                     </div>
 
@@ -171,7 +181,7 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                         @foreach($visits as $visit)
                                             {{-- <tr class="approved_visit" > --}}
                                             <tr style="@if($visit->approval_status == 2) background-color: #24ba64 @endif">
-{{--                                            <tr style="@if($visit->employee->level == $visit->approval_status) background-color: #24ba64 @endif">--}}
+                                                {{--                                            <tr style="@if($visit->employee->level == $visit->approval_status) background-color: #24ba64 @endif">--}}
                                                 <td>{{$visit->id}}</td>
                                                 <td>{{$visit->visitor->name}}</td>
                                                 <td>{{$visit->visitor->phone}}</td>

@@ -48,7 +48,8 @@ class DashboardController extends BackendController
                 ->with('visitor')
                 ->where('creator_id', $user->id)
                 // creators employees and visit user owner
-                ->orWhere('user_id', $user->id)
+                // ->orWhere('user_id', $user->id)
+                ->orWhere('user_id',  $user->employee->id)
                 ->orWhere('employee_id', $user->employee->id)
                 ->orWhere('creator_employee', $user->employee->id)
                 // Emps

@@ -353,10 +353,8 @@ $.post('{{route('admin.ocr.save')}}', {
 
 
             car_type = @if(isset($car_type))
-        '{{$car_type}}'
-
-
-    @endif
+                            '{{$car_type}}'
+                        @endif
 
     $.post('{{route('admin.new.scan.post')}}', {
                 name: name,

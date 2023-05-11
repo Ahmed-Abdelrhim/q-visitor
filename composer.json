@@ -18,6 +18,7 @@
     "braintree/braintree_php": "^5.0",
     "brotzka/laravel-dotenv-editor": "^2.1",
     "bumbummen99/shoppingcart": "^2.9",
+    "chillerlan/php-qrcode": "^4.3",
     "davejamesmiller/laravel-breadcrumbs": "^5.3",
     "doctrine/dbal": "3.5.0",
     "fideloper/proxy": "^4.2",
@@ -41,7 +42,8 @@
     "staudenmeir/eloquent-json-relations": "^1.1",
     "twilio/sdk": "^6.44",
     "tymon/jwt-auth": "^1.0.2",
-    "yajra/laravel-datatables-oracle": "^9.9"
+    "yajra/laravel-datatables-oracle": "^9.9",
+    "ext-simplexml": "*"
   },
   "require-dev": {
     "facade/ignition": "^2.3.6",
