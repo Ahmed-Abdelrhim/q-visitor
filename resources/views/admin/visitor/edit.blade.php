@@ -8,12 +8,12 @@
 @endsection
 
 @section('main-content')
-<style>
-  .required:after {
-    content:" *";
-    color: red;
-  }
-</style>
+    <style>
+        .required:after {
+            content: " *";
+            color: red;
+        }
+    </style>
 
     <section class="section">
         <div class="section-header">
@@ -33,7 +33,7 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label for="first_name">{{ __('files.First Name') }}</label> <span
-                                            class="text-danger">*</span>
+                                                class="text-danger">*</span>
                                         <input id="first_name" type="text" name="first_name"
                                                class="form-control {{ $errors->has('first_name') ? " is-invalid " : '' }}"
                                                value="{{ old('first_name',$visitingDetails->visitor->first_name) }}">
@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="form-group col">
                                         <label for="last_name">{{ __('files.Last Name') }}</label> <span
-                                            class="text-danger">*</span>
+                                                class="text-danger">*</span>
                                         <input id="last_name" type="text" name="last_name"
                                                class="form-control {{ $errors->has('last_name') ? " is-invalid " : '' }}"
                                                value="{{ old('last_name',$visitingDetails->visitor->last_name) }}">
@@ -84,12 +84,12 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label for="gender">{{ __('files.Gender') }}</label> <span
-                                            class="text-danger">*</span>
+                                                class="text-danger">*</span>
                                         <select id="gender" name="gender"
                                                 class="form-control @error('gender') is-invalid @enderror">
                                             @foreach(trans('genders') as $key => $gender)
                                                 <option
-                                                    value="{{ $key }}" {{ (old('gender',$visitingDetails->visitor->gender) == $key) ? 'selected' : '' }}>{{ $gender }}</option>
+                                                        value="{{ $key }}" {{ (old('gender',$visitingDetails->visitor->gender) == $key) ? 'selected' : '' }}>{{ $gender }}</option>
                                             @endforeach
                                         </select>
                                         @error('gender')
@@ -126,12 +126,12 @@
 
                                     <div class="form-group col">
                                         <label for="employee_id">{{ __('files.Select Employee') }}</label> <span
-                                            class="text-danger">*</span>
+                                                class="text-danger">*</span>
                                         <select id="employee_id" name="employee_id"
                                                 class="form-control select2 @error('employee_id') is-invalid @enderror">
                                             @foreach($employees as $key => $employee)
                                                 <option
-                                                    value="{{ $employee->id }}" {{ (old('employee_id',$visitingDetails->employee_id) == $employee->id) ? 'selected' : '' }}>{{ $employee->name }}
+                                                        value="{{ $employee->id }}" {{ (old('employee_id',$visitingDetails->employee_id) == $employee->id) ? 'selected' : '' }}>{{ $employee->name }}
                                                     ( {{$employee->department->name}} )
                                                 </option>
                                             @endforeach
@@ -144,43 +144,45 @@
                                     </div>
                                 </div>
 
-                                @if(auth()->user()->hasRole(15) && $visitingDetails->car_type == 'T')
-                                    <!-- Start Logisitcs -->
-                                    <div class="form-row">
-                                        <div class="form-group col">
-                                            <label id="shipment_number">{{ __('files.Shipment Number') }}</label>
-                                            <input type="text" name="shipment_number" id="shipment_number"
-                                                   @if(!empty($visitingDetails->shipment_number)) value="{{$visitingDetails->shipment_number}}" @endif
-                                                   class="form-control @error('shipment_number') is-invalid @enderror">
-                                            @error('shipment_number')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
+                                @if(auth()->user()->hasRole(15))
+                                    @if($visitingDetails->car_type == 'T' || $visitingDetails->car_type == 'TWIN_TRUCK')
+                                        <!-- Start Logistics -->
+                                        <div class="form-row">
+                                            <div class="form-group col">
+                                                <label id="shipment_number">{{ __('files.Shipment Number') }}</label>
+                                                <input type="text" name="shipment_number" id="shipment_number"
+                                                       @if(!empty($visitingDetails->shipment_number)) value="{{$visitingDetails->shipment_number}}"
+                                                       @endif
+                                                       class="form-control @error('shipment_number') is-invalid @enderror">
+                                                @error('shipment_number')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
-                                            @enderror
-                                        </div>
 
-                                        <div class="form-group col">
-                                            <label for="shipment_id">{{ __('files.Select Shipment') }}</label> <span
-                                                    class="text-danger">*</span>
-                                            <select id="shipment_id" name="shipment_id"
-                                                    class="form-control select2 @error('shipment_id') is-invalid @enderror">
-                                                @foreach($shipments as $key => $shipment)
-                                                    <option value="{{ $shipment->id }}"
-                                                    @if($visitingDetails->shipment_id == $shipment->id) selected @endif >
-                                                        {{ $shipment->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @error('shipment_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
+                                            <div class="form-group col">
+                                                <label for="shipment_id">{{ __('files.Select Shipment') }}</label> <span
+                                                        class="text-danger">*</span>
+                                                <select id="shipment_id" name="shipment_id"
+                                                        class="form-control select2 @error('shipment_id') is-invalid @enderror">
+                                                    @foreach($shipments as $key => $shipment)
+                                                        <option value="{{ $shipment->id }}"
+                                                                @if($visitingDetails->shipment_id == $shipment->id) selected @endif >
+                                                            {{ $shipment->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('shipment_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
-                                            @enderror
                                         </div>
-                                    </div>
-                                    <!-- End Logistics-->
+                                        <!-- End Logistics-->
+                                    @endif
                                 @endif
-
 
                                 <div class="form-row">
                                     <div class="form-group col">
@@ -206,8 +208,8 @@
                                                     {{--                                                        value="{{ $type->id }}" {{ (old('type',$visitingDetails->type) == $type->id) ? 'selected' : '' }} >{{ $type->name }}--}}
                                                     {{--                                                    </option>--}}
                                                     <option
-                                                        value="{{ $type->id }}"
-                                                        @if($visitingDetails->type_id == $type->id) selected @endif>
+                                                            value="{{ $type->id }}"
+                                                            @if($visitingDetails->type_id == $type->id) selected @endif>
                                                         {{ $type->name }}
                                                     </option>
                                                 @endforeach
@@ -224,9 +226,12 @@
                                         <label for="car_type">{{ __('files.Car Type') }}</label>
                                         <select id="car_type" name="car_type"
                                                 class="form-control select2 @error('car_type') is-invalid @enderror">
-                                            <option value="T" @if($visitingDetails->car_type == 'T') selected @endif >{{__('files.Truck')}}</option>
-                                            <option value="C" @if($visitingDetails->car_type == 'C') selected @endif >{{__('files.Car')}}</option>
-                                            <option value="P" @if($visitingDetails->car_type == 'P') selected @endif >{{__('files.Person')}}</option>
+                                            <option value="T"
+                                                    @if($visitingDetails->car_type == 'T') selected @endif >{{__('files.Truck')}}</option>
+                                            <option value="C"
+                                                    @if($visitingDetails->car_type == 'C') selected @endif >{{__('files.Car')}}</option>
+                                            <option value="P"
+                                                    @if($visitingDetails->car_type == 'P') selected @endif >{{__('files.Person')}}</option>
                                         </select>
                                         @error('car_type')
                                         <div class="invalid-feedback">
@@ -236,13 +241,13 @@
                                     </div>
 
 
-
                                 </div>
 
 
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label class="purbose-label required col-md-12" for="purpose">{{ __('files.Purpose') }}</label>
+                                        <label class="purbose-label required col-md-12"
+                                               for="purpose">{{ __('files.Purpose') }}</label>
                                         <textarea name="purpose"
                                                   class="summernote-simple summernote form-control height-textarea @error('purpose')
                                                       is-invalid @enderror"
@@ -257,7 +262,8 @@
                                     </div>
 
                                     <div class="form-group col">
-                                        <label class="address-label required col-md-12" for="address">{{ __('files.Address') }}</label>
+                                        <label class="address-label required col-md-12"
+                                               for="address">{{ __('files.Address') }}</label>
                                         <textarea name="address"
                                                   class="summernote-simple summernote form-control height-textarea @error('address')
                                                       is-invalid @enderror"
@@ -327,5 +333,6 @@
                 }
             }
         });
+
     </script>
 @endsection

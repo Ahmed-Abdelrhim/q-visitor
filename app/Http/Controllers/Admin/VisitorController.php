@@ -577,8 +577,6 @@ class VisitorController extends Controller
 
         if ($visit->car_type == 'T') {
             // if ($visit->quality_check != 2) {
-
-
             if (empty($visit->shipment_number) || $visit->shipment_id == 0) {
                 $notifications = array('message' => __('files.Visit Needs Shipment Number And Shipment Type'), 'alert-type' => 'info');
                 return redirect()->back()->with($notifications);

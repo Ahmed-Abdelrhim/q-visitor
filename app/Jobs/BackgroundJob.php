@@ -37,6 +37,7 @@ class BackgroundJob implements ShouldQueue
 
         if (empty($this->visitingDetails->visitor->email)) {
             $notifications = array('message' => __('files.This Visitor does not have email') , 'alert-type' => 'info');
+            return redirect()->back()->with($notifications);
         }
 
         $send_email = Mail::to($this->visitingDetails->visitor->email)->send(new VisitorMail($this->visitingDetails));
