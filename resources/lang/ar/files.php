@@ -315,7 +315,7 @@ return [
     'Car Plate Number' => 'رقم السيارة',
     'Select Car Plate Number' => 'قم بإختيار رقم لوحة السيارة',
     'This Visitor does not have email' => 'لايوجد إايميل لهذا الزائر',
-    '' => '',
+    'National Number' => 'الرقم القومي',
     '' => '',
     '' => '',
 

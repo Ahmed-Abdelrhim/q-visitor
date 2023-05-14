@@ -115,7 +115,6 @@ class VisitorController extends Controller
     public function update(VisitorRequest $request, VisitingDetails $visitor)
     {
         if (auth()->user()->hasRole(15)) {
-
             if (!$request->has('shipment_id') || empty($request->input('shipment_id'))) {
                 $nottifications = array('message' => __('files.You Should Select A Shipment'), 'alert-type' => 'error');
                 return redirect()->back()->with($nottifications);
@@ -124,8 +123,9 @@ class VisitorController extends Controller
                 $nottifications = array('message' => __('files.You Should Add A Shipment Number'), 'alert-type' => 'error');
                 return redirect()->back()->with($nottifications);
             }
-
         }
+
+
         // return $request;
         $this->visitorService->update($request, $visitor->id);
         return redirect()->route('admin.visitors.index')->withSuccess('The data updated successfully!');
@@ -373,6 +373,12 @@ class VisitorController extends Controller
                     $retAction .= '<a href="' . route('admin.visitors.edit', $visitingDetail) . '" class="btn btn-sm btn-icon float-left btn-primary actions"
                                     data-toggle="tooltip" data-placement="top" title="' . __('files.Edit') . '">
                                     <i class="far fa-edit"></i></a>';
+                }
+
+                if (auth()->user()->can('visitors_edit')) {
+                    $retAction .= '<a href="' . route('admin.contractor.index', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon float-left btn-warning actions"
+                                    data-toggle="tooltip" data-placement="top" title="Contractor" style="margin-left: 5px; margin-right: 5px;">
+                                    <i class="fa fa-building"></i></a>';
                 }
 
                 if (count($visitingDetail->companions) > 0) {

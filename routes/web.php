@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CompanionController;
+use App\Http\Controllers\Admin\ContractorController;
 use App\Http\Controllers\Admin\OcrController;
 use App\Http\Controllers\Admin\VisitorController;
 use App\Http\Controllers\HomeController;
@@ -101,6 +102,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
         Route::get('visitors/{id}/Companions',[VisitorController::class,'companions'])->name('visitors.companions');
         Route::get('visitors/Qulaity/Approve/{id}',[VisitorController::class,'visitApproveFromQulaity'])->name('visitors.qulaity.approve');
+
+        // Contractor Controller···
+        Route::get('Contractor/Index/{contractor_id}',[ContractorController::class,'index'])->name('contractor.index');
+        Route::post('Contractor/Store/{contractor_id}',[ContractorController::class,'store'])->name('contractor.store');
 
         // Ocr Resource Controller···
         Route::resource('OCR', 'OcrController');
@@ -317,3 +322,5 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 
 // eruuszjdfgjktzpu
+
+// name nat_id , visit_id

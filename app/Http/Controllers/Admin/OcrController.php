@@ -657,7 +657,6 @@ class OcrController extends Controller
 
     public function playy()
     {
-
         return $visits = VisitingDetails::query()->with('owner')
             ->join('employees', 'visiting_details.user_id', '=', 'employees.id')
             //->join('users', 'owners.emp_one', '=', 'users.id')

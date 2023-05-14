@@ -324,7 +324,7 @@ return [
     'Car Plate Number' => 'Car Plate Number',
     'Select Car Plate Number' => 'Select Car Plate Number',
     'This Visitor does not have email' => 'This Visitor does not have email',
-    '' => '',
+    'National Number' => 'National Number',
     '' => '',
     '' => '',
     '' => '',
