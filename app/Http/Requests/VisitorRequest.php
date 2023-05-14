@@ -33,8 +33,8 @@ class VisitorRequest extends FormRequest
         return [
             'first_name'                => 'required|string|max:100',
             'last_name'                 => 'required|string|max:100',
-            'email'                     => $email,
-            'phone'                     => 'required|string|max:20',
+            // 'email'                     => $email,
+            'phone'                     => 'nullable|string|max:20',
             'employee_id'               => 'required|numeric',
             'gender'                    => 'required|numeric',
             'company_name'              => 'nullable|max:100',

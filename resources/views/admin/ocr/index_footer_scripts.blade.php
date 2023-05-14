@@ -346,15 +346,15 @@ $.post('{{route('admin.ocr.save')}}', {
             perpic = $('.perpic').text();
             exdate = $('#exdate').text();
             plate_no = $('.plate_no').val();
-
-
             employee_id = $('#employee').val();
+            car_plate_number = $('#plate_number_input').val();
 
 
 
             car_type = @if(isset($car_type))
-                            '{{$car_type}}'
-                        @endif
+        '{{$car_type}}'
+
+    @endif
 
     $.post('{{route('admin.new.scan.post')}}', {
                 name: name,
@@ -367,9 +367,8 @@ $.post('{{route('admin.ocr.save')}}', {
                 perpic: perpic,
                 exdate: exdate,
                 plate_no: plate_no,
-
-
                 employee_id : employee_id,
+                car_plate_number : car_plate_number,
 
 
                 add: add,
@@ -399,6 +398,16 @@ $.post('{{route('admin.ocr.save')}}', {
                     });
                 }
 
+                if(data == 'Car Plate Is Not Specified') {
+                        iziToast.error({
+                        title: 'Error',
+                        message: 'يجب إختيار رقم السيارة',
+                        position: 'topRight',
+                    });
+                }
+
+
+
                 // if(data == 'SQL Server Connection Error') {
                 //        iziToast.error({
                 //        title: 'Error',
@@ -424,7 +433,15 @@ $.post('{{route('admin.ocr.save')}}', {
             });
 
         });
+
+        $('#car_plate_number').change(function() {
+            var value = $('#car_plate_number').val();
+            console.log(value);
+            $('#plate_number_input').val('');
+            $('#plate_number_input').val(value);
+        });
     });
+
 </script>
 
 

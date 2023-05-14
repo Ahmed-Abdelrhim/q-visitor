@@ -15,6 +15,47 @@
     {{--    <link rel="stylesheet" href="css/style.css"> --}}
     <link rel="stylesheet" href="{{ asset('css/ocr_styles/style.css') }}">
 
+
+    {{--    <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/dist/css/bootstrap.min.css') }}">--}}
+    {{--    <link rel="stylesheet" href="{{ asset('assets/css/style-ar.css') }}">--}}
+    {{--    <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">--}}
+    {{--    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">--}}
+
+    {{--    <script src="{{ asset('assets/modules/jquery/dist/jquery.min.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/modules/popper.js/dist/popper.min.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/js/stisla.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/js/scripts.js') }}"></script>--}}
+
+
+
+
+    {{--    <link rel="stylesheet" href="{{ asset('assets/modules/select2/dist/css/select2.min.css')}}" >--}}
+
+    {{--    @include('admin.layouts.components.head')--}}
+    {{--    @include('admin.layouts.components.custm_styles')--}}
+    {{--    @include('admin.layouts.components.script')--}}
+
+{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
+{{--    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet"/>--}}
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>--}}
+
+
+{{--    <script>--}}
+{{--        $(document).ready(function() {--}}
+{{--            var arr = [];--}}
+{{--            $("#car_plate_number").each(function(){--}}
+{{--                // Add $(this).val() to your list--}}
+{{--                arr.push( $(this).val() );--}}
+{{--            });--}}
+{{--            $('#car_plate_number').select2({--}}
+{{--                data:arr--}}
+{{--            });--}}
+{{--        });--}}
+
+{{--    </script>--}}
+
+
     @include('admin.ocr.index_style')
     <style>
         .loading {
@@ -24,7 +65,7 @@
             left: 5px;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0,4);
+            background-color: rgba(0, 0, 0, 0, 4);
         }
 
         .loading-content {
@@ -40,8 +81,12 @@
         }
 
         @keyframes spin {
-            0% {transform: rotate(0deg) ;}
-            100% {transform: rotate(360deg);}
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
 
@@ -185,7 +230,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
 
     <div class="container">
         <div class="row justify-content-right" style="direction:rtl"><a
-                href="{{ route('change_locale','ar') }}">
+                    href="{{ route('change_locale','ar') }}">
                 عربى
             </a>
             |
@@ -198,10 +243,14 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                 <h2 class="heading-section">{{__('files.Scanner')}}</h2>
             </div>
         </div>
+
+
         <div class="row justify-content-center">
+            {{-- <div class="col-md-14">--}}
             <div class="col-md-14">
                 <div class="wrapper">
                     <div class="row no-gutters">
+                        {{--  Scan Data  --}}
                         <div class="col-md-12">
                             <div class="contact-wrap w-100 p-lg-5 p-4">
 
@@ -213,17 +262,26 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 @if(!empty($car_type))
                                     @if($car_type == 'T' || $car_type == 'C' || $car_type == 'TWIN_TRUCK')
                                         <div class="row" style="text-align:center">
-                                            <h5>{{__('files.Car Plate')}} :</h5><input type="text" class="form-control plate_no"
-                                                                                       value="<?php echo $plate; ?>" />
-                                            <input type="button" value="{{__('files.Last Car plate')}}" class="btn btn-success get_plate"
-                                                   style="height: 35px; padding: 7px 14px;margin-left: 7%">
+                                            <h5>{{__('files.Car Plate')}} :</h5><input type="text" disabled
+                                                                                       class="form-control plate_no"
+                                                                                       id="plate_number_input" name="car_plate_number"/>
+
+                                            {{--  value="<?php echo $plate; ?>"/> -- }}
+
+
+{{--                                            <input type="button" value="{{__('files.Last Car plate')}}"--}}
+{{--                                                   class="btn btn-success get_plate"--}}
+{{--                                                   style="height: 35px; padding: 7px 14px;margin-left: 7%">--}}
 
                                             @if($car_type == 'TWIN_TRUCK')
                                                 <h5>{{__('files.Twin Truck Number')}} :</h5>
-                                                <input type="text" class="form-control plate_no" name="twin_truck_number" style="width: 150px; height: 35px; margin-left: 10px; "/>
+                                                <input type="text" class="form-control plate_no"
+                                                       name="twin_truck_number"
+                                                       style="width: 150px; height: 35px; margin-left: 10px; "/>
                                             @endif
 
-                                            <a class="btn btn-primary dashboard" href="{{ route('admin.dashboard.index') }}"
+                                            <a class="btn btn-primary dashboard"
+                                               href="{{ route('admin.dashboard.index') }}"
                                                style="height: 35px; padding: 7px 14px;margin-left: 7%">
                                                 {{__('files.Dashboard')}}
                                             </a>
@@ -233,35 +291,47 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 @endif
 
 
-                                <br />
+                                <br/>
                                 <div class="row" style="text-align:center">
                                     <div class="col-md-3">
                                         <div class="form-group"
                                              style="text-align:center;float:left;margin-right:20px">
-                                            <img id="pic" src="{{asset('images/personal.png')}}" />
+                                            <img id="pic" src="{{asset('images/personal.png')}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="white_picture" src="{{asset('images/id.jpg')}}" />
+                                            <img id="white_picture" src="{{asset('images/id.jpg')}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="ocr_head" src="{{asset('images/id.jpg')}}" />
+                                            <img id="ocr_head" src="{{asset('images/id.jpg')}}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <img id="chip_head" src="{{asset('images/id.jpg')}}" />
+                                            <img id="chip_head" src="{{asset('images/id.jpg')}}"/>
                                         </div>
                                     </div>
-
-
                                 </div>
-
                             </div>
                         </div>
+
+                        {{-- Start Car Plates class="form-control"  --}}
+                        <div style="margin-top : 20px; margin-bottom: 20px; width: 100%;">
+                            @if(isset($car_plates))
+                                <h5 class="h5 text-center">{{__('files.Car Plate Number')}}</h5>
+                                <select class="custom-select" id="car_plate_number">
+                                    {{--  <option selected> {{__('files.Select Car Plate Number')}} </option>   --}}
+                                    <option value="" selected hidden>-- Select Car Plate Number --</option>
+                                    @foreach($car_plates as $plate)
+                                        <option value="{{$plate->plate_number}}">{{$plate->plate_number}}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                        {{-- End Car Plates --}}
                         <div class="div2">
                             <textarea id="msg" cols="75" rows="20"></textarea>
                         </div>
@@ -306,12 +376,13 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 </div>
 
 
-                                <div class="dbox w-25 d-flex align-items-center" >
+                                <div class="dbox w-25 d-flex align-items-center">
                                     <div class="icon d-flex align-items-center justify-content-center">
                                         <span class="fa fa-exclamation-triangle"></span>
                                     </div>
                                     <div class="text pl-3">
-                                        <p id="expiration_date"><span>{{__('files.Expiry Date')}} :</span> <a id="exdate" class="txt"></a></p>
+                                        <p id="expiration_date"><span>{{__('files.Expiry Date')}} :</span> <a
+                                                    id="exdate" class="txt"></a></p>
                                     </div>
                                 </div>
                                 <div class="dbox w-25 d-flex align-items-center">
@@ -327,7 +398,8 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                         <span class="fa fa-user"></span>
                                     </div>
                                     <div class="text pl-3">
-                                        <p><span>{{__('files.Marital status')}} :</span> <a id="mstat" class="txt"></a></p>
+                                        <p><span>{{__('files.Marital status')}} :</span> <a id="mstat" class="txt"></a>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -336,7 +408,8 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                         <span class="fa fa-calendar"></span>
                                     </div>
                                     <div class="text pl-3">
-                                        <p><span>{{__('files.Issuing Date')}} :</span> <a id="isdate" class="txt"></a></p>
+                                        <p><span>{{__('files.Issuing Date')}} :</span> <a id="isdate" class="txt"></a>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -346,8 +419,11 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     </div>
                                     <div class="text pl-3">
                                         <p><label for="vdate">{{__('files.Visit Date')}} :</label> <input type="text"
-                                                                                         value="<?php echo date('d-m-Y'); ?>" class="vdate form-control"
-                                                                                         id="vdate" disabled="disabled" /></p>
+                                                                                                          value="<?php echo date('d-m-Y'); ?>"
+                                                                                                          class="vdate form-control"
+                                                                                                          id="vdate"
+                                                                                                          disabled="disabled"/>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="dbox w-25 d-flex align-items-center">
@@ -356,8 +432,11 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     </div>
                                     <div class="text pl-3">
                                         <p><label for="vtime">{{__('files.Visit Time')}} :</label> <input type="text"
-                                                                                         value="<?php echo date('h:i:s a'); ?>" class="vtime form-control"
-                                                                                         id="vtime" disabled="disabled" /></p>
+                                                                                                          value="<?php echo date('h:i:s a'); ?>"
+                                                                                                          class="vtime form-control"
+                                                                                                          id="vtime"
+                                                                                                          disabled="disabled"/>
+                                        </p>
 
                                     </div>
                                 </div>
@@ -387,9 +466,6 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 </div>
 
 
-
-
-
                                 <div class="input-group mb-3 " style="margin-top: 10px;">
                                     <div class="input-group-prepend">
                                         <label class="input-group-text" for="employee">{{__('files.Employee')}}</label>
@@ -397,7 +473,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                     <select class="custom-select " id="employee">
                                         <option selected value="0">{{__('files.Choose Employee')}}...</option>
 
-                                    @foreach($employees as $employee)
+                                        @foreach($employees as $employee)
                                             <option value="{{$employee->id}}">{{$employee->name}}</option>
                                         @endforeach
                                     </select>
@@ -407,10 +483,13 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 <div class="dbox w-100 d-flex align-items-center"
                                      style="margin-bottom:0px !important;height: 50px !important;margin-top:55px;text-align:center;padding-left: 35%;">
                                     <div class="form-group">
-                                        <input type="button" value="{{__('files.New Scan')}}" class="btn btn-danger new_page">
+                                        <input type="button" value="{{__('files.New Scan')}}"
+                                               class="btn btn-danger new_page">
                                         <input type="button" value="{{__('files.Scan')}}" class="btn btn-danger scan"
                                                onclick="connect();">
-                                        <input type="button" value="{{__('files.Save Data')}}" class="btn btn-success newscan" style="background-color: #0a71db !important;">
+                                        <input type="button" value="{{__('files.Save Data')}}"
+                                               class="btn btn-success newscan"
+                                               style="background-color: #0a71db !important;">
                                         {{-- <input type="button" value="View Visitors" class="btn btn-success view" --}}
                                         {{-- onclick="{{route('admin.visitors.index')}};"> --}}
                                         <a type="button" class="btn btn-success view"
@@ -422,26 +501,14 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             </div>
 
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </section>
@@ -453,7 +520,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
 <script src="{{ asset('assets/modules/izitoast/dist/js/iziToast.min.js') }}"></script>
 <script>
     @if (Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}"
+        var type = "{{ Session::get('alert-type', 'info') }}"
     switch (type) {
         case 'info':
             iziToast.info({
@@ -487,8 +554,13 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
             });
             break;
     }
+
     @endif
+
 </script>
+
+{{--<script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>--}}
+
 {{--@include('admin.ocr.ocr_new_visit')--}}
 {{--@extends('admin.ocr.view_extend')--}}
 

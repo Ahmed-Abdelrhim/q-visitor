@@ -8,6 +8,7 @@ use App\Http\Services\Employee\EmployeeService;
 use App\Jobs\BackgroundJob;
 use App\Jobs\NotifyEmployee;
 use App\Mail\VisitorMail;
+use App\Models\CarPlate;
 use App\Models\Companion;
 use App\Models\Department;
 use App\Models\Employee;
@@ -97,8 +98,17 @@ class OcrController extends Controller
             return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees, 'twin_truck' => $twin_truck]);
         }
 
+        $start = Carbon::now()->startOfDay();
+        $end = Carbon::now()->endOfDay();
 
-        return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees]);
+        // Get Car Plates Today
+        $car_plates = CarPlate::query()
+            ->whereBetween('created_at', [$start, $end])
+            ->where('flag', false)
+            ->get();
+
+
+        return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees, 'car_plates' => $car_plates]);
     }
 
     public function searchVisitingDetails()
@@ -382,9 +392,19 @@ class OcrController extends Controller
             }
         }
 
+        $plate_number = null;
+        if (isset($_POST['car_plate_number'])) {
+            $plate_number = $_POST['car_plate_number'];
+        }
+
+        if (empty($plate_number)) {
+            return 'Car Plate Is Not Specified';
+        }
+
         //        if (empty($emp_id) || $emp_id == 0) {
         //            return 'Employee Is Not Specified';
         //        }
+
 
         $name = null;
         $last_name = null;
@@ -471,8 +491,8 @@ class OcrController extends Controller
             $visitor = Visitor::query()->insert([
                 'first_name' => $name[0],
                 'last_name' => $last_name,
-                'email' => 'visit@example.com',
-                'phone' => '+15555555555',
+                // 'email' => 'visit@example.com',
+                // 'phone' => '+15555555555',
                 'gender' => $gender,
                 'address' => $address,
                 'national_identification_no' => $nat_id,
@@ -540,7 +560,7 @@ class OcrController extends Controller
                     'creator_id' => $user->id,
                     'editor_type' => 'App\User',
                     'editor_id' => $user->id,
-                    'plate_no' => $plate_no,
+                    'plate_no' => $plate_number,
                     'car_type' => $car_type,
                     'approval_status' => 0,
                     'created_at' => Carbon::now(),
@@ -556,11 +576,17 @@ class OcrController extends Controller
         }
 
         try {
+            $car = CarPlate::query()->where('plate_number', $plate_number)->first();
+            $car->flag = 1;
+            $car->save();
+        } catch (\Exception) {
+        }
+
+        try {
             $visit = VisitingDetails::query()->orderBy('id', 'desc')->first();
             $qrcode = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit->id);
             $visit->qrcode = $qrcode;
             $visit->save();
-
         } catch (\Exception $e) {
             $qrcode = NULL;
             $notifications = array('message' => 'visitor was not created , something went wrong', 'alert-type' => 'error');
@@ -594,13 +620,24 @@ class OcrController extends Controller
                 }
                 File::makeDirectory(storage_path('app/public' . '/images' . '/' . $reg_no), 0777, true, true);
 
-                foreach ($images as $counter => $img) {
-                    $img = str_replace("data:image/jpeg;base64,", "", $img);
-                    if ($img != '' or $img != ' ') {
-                        file_put_contents(storage_path('app/public' . '/' . 'images' . '/' . $reg_no . '/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
+                for ($i = 0; $i <= 7; $i++) {
+                    if ($i == 0 || $i == 1 || $i == 5) {
+                        $img = str_replace("data:image/jpeg;base64,", "", $images[$i]);
+                        if ($img != '' or $img != ' ') {
+                            file_put_contents(storage_path('app/public' . '/' . 'images' . '/' . $reg_no . '/' . $nat_id . '-' . ($i + 1) . '.jpg'), base64_decode($img));
+                        }
+                    } else {
+                        continue;
                     }
                 }
-                $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
+
+                //                foreach ($images as $counter => $img) {
+                //                    $img = str_replace("data:image/jpeg;base64,", "", $img);
+                //                    if ($img != '' or $img != ' ') {
+                //                        file_put_contents(storage_path('app/public' . '/' . 'images' . '/' . $reg_no . '/' . $nat_id . '-' . ($counter + 1) . '.jpg'), base64_decode($img));
+                //                    }
+                //                }
+                // $create = file_get_contents('https://www.qudratech-eg.net/addimg.php?id=' . $visitor->id);
             }
         } catch (\Exception $e) {
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
@@ -620,6 +657,31 @@ class OcrController extends Controller
 
     public function playy()
     {
+
+        return $visits = VisitingDetails::query()->with('owner')
+            ->join('employees', 'visiting_details.user_id', '=', 'employees.id')
+            //->join('users', 'owners.emp_one', '=', 'users.id')
+            //->where('employees.emp_one', '=', auth()->user()->employee->id)
+            ->find(451);
+
+
+        return $visit = VisitingDetails::query()
+            ->with(['owner' => function ($query) {
+                $query->where('emp_one', '=' , auth()->user()->employee->id);
+            }])->find(451);
+
+
+        return $visit = VisitingDetails::query()->with('owner')->find(449);
+        $start = Carbon::now()->startOfDay();
+        $end = Carbon::now()->endOfDay();
+
+        $car_plates = CarPlate::query()
+            ->whereBetween('created_at', [$start, $end])
+            ->where('flag', false)
+            ->get();
+
+        return $car_plates;
+
         $user_id = 53;
         $employee = Employee::query()->find($user_id);
         return $employee->level;

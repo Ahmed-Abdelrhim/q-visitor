@@ -321,10 +321,12 @@ return [
     'Export To Pdf' => 'Export To PDF',
     'Visit Approved From Quality' => 'Visit Approved',
     'Twin Truck Number' => 'Twin Truck Number',
+    'Car Plate Number' => 'Car Plate Number',
+    'Select Car Plate Number' => 'Select Car Plate Number',
+    'This Visitor does not have email' => 'This Visitor does not have email',
     '' => '',
     '' => '',
     '' => '',
     '' => '',
-
-
+    '' => '',
 ];

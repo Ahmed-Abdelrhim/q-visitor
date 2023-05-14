@@ -7,6 +7,7 @@ use App\Http\Requests\VisitorRequest;
 use App\Jobs\BackgroundJob;
 use App\Jobs\SqlServerJob;
 use App\Models\Booking;
+use App\Models\Employee;
 use App\Models\PreRegister;
 use App\Models\Shipment;
 use App\Models\Types;
@@ -33,6 +34,7 @@ class VisitorService
                 ->with('visitor')
                 ->with('companions')
                 ->with('empvisit')
+                ->with('owner')
                 ->orderBy('id', 'desc')
                 ->get();
         }
@@ -42,9 +44,19 @@ class VisitorService
                 ->with('visitor')
                 ->with('companions')
                 ->with('empvisit')
+                ->with('owner')
 
                 // Here The Difference
                 ->where('car_type', 'T')
+                ->orWhere(function ($query) {
+                    $query->whereExists(function ($subquery) {
+                        $subquery->from('employees')
+                            ->whereColumn('employees.id', '=', 'visiting_details.user_id')
+                            ->where('emp_one', auth()->user()->employee->id);
+                    });
+                })
+
+
                 ->orWhere('creator_id', $user->id)
                 ->orWhere('user_id', $user->employee->id)
                 ->orWhere('creator_employee', $user->employee->id)
@@ -57,22 +69,37 @@ class VisitorService
                 ->with('visitor')
                 ->with('companions')
                 ->with('empvisit')
+                ->with('owner')
                 ->where('creator_id', $user->id)
+                ->orWhere(function ($query) use ($user) {
+                    $query->whereExists(function ($subquery) {
+                        $subquery->from('employees')
+                            ->whereColumn('employees.id', '=', 'visiting_details.user_id')
+                            ->where('emp_one', auth()->user()->employee->id);
+                    });
+                })
                 ->orWhere('user_id', $user->employee->id)
                 ->orWhere('creator_employee', $user->employee->id)
                 ->orWhere('emp_one', $user->employee->id)
                 ->orWhere('emp_two', $user->employee->id)
 
-
                 // ->orWhere('editor_id', $user->id)
                 // ->orWhere('employee_id', $user->employee->id)
+
                 ->orderBy('id', 'desc')
                 ->get();
         }
     }
 
 
-    public function find($id)
+    //                    $query->where('user_id', function ($query) {
+    //                        $query->select('emp_one')
+    //                            ->from('employees')
+    //                            ->where('employees.id', 'visiting_details.user_id');
+    //                    });
+
+    public
+    function find($id)
     {
         // if(auth()->user()->getrole->name == 'Employee') {
 
@@ -85,25 +112,29 @@ class VisitorService
     }
 
 
-    public function findWhere($column, $value)
+    public
+    function findWhere($column, $value)
     {
         return VisitingDetails::query()->where($column, $value)->get();
     }
 
 
-    public function findWhereFirst($column, $value)
+    public
+    function findWhereFirst($column, $value)
     {
 
         return VisitingDetails::query()->where($column, $value)->first();
     }
 
 
-    public function paginate($perPage = 10)
+    public
+    function paginate($perPage = 10)
     {
         return VisitingDetails::query()->paginate($perPage);
     }
 
-    public function generateSubstituteQrCode($visit_id)
+    public
+    function generateSubstituteQrCode($visit_id)
     {
         $strict_types = 1;
 
@@ -121,7 +152,8 @@ class VisitorService
     }
 
 
-    public function make(VisitorRequest $request)
+    public
+    function make(VisitorRequest $request)
     {
         $visitor = DB::table('visiting_details')->orderBy('reg_no', 'desc')->first();
         $date = date('y-m-d');
@@ -313,8 +345,8 @@ class VisitorService
                 // $sql = SqlServerJob::dispatch($visit->id , $visit->visitor->name );
 
 
-            } catch (\Exception $e) {}
-
+            } catch (\Exception $e) {
+            }
 
 
             return $visitingDetails;
@@ -322,7 +354,8 @@ class VisitorService
         }
     }
 
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         $visitingDetails = VisitingDetails::query()->findOrFail($id);
         $input['first_name'] = $request->input('first_name');
@@ -498,16 +531,7 @@ class VisitorService
 //        }
 
 
-
-
-
-
-
-
-
-
 // $dt = json_encode('name:'.$name.',id:'.$id.',phone:'.$phone.',fdate:'.$fromdate.',todate:'.$todate.',ftime:'.$time.',mail:'.$email);
-
 
 
 // if ($visitingDetails->type->level == 0) {
@@ -524,3 +548,9 @@ class VisitorService
 //                    return redirect()->back()->with($notification);
 //                }
 //            }
+
+
+//                ->where(function ($query) {
+//                    $query->join('employees', 'visiting_details.user_id', '=', 'employees.id')
+//                        ->where('emp_one', '=', auth()->user()->employee->id);
+//                })

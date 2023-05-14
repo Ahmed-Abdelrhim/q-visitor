@@ -158,97 +158,127 @@ class VisitorController extends Controller
                 $approve = false;
                 $status = 'Pending';
                 if ($visitingDetail->is_new_scan == 1) {
-                    //                    if ($visitingDetail->user_id == 100) {
-                    //                        if ($visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
-                    //                            $msg = __('files.Approve');
-                    //                            $retAction .= '<a href="' . route('admin.new.scan.approving', encrypt($visitingDetail->id), encrypt(2)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                    //                        }
-                    //                    }
-
-
-                    $user_id = $visitingDetail->user_id;
-                    $emp = Employee::query()->find($user_id);
-                    // $emp_one = $emp->emp_one;
-                    // $emp_two = $emp->emp_two;
-                    $levelOfEmpWhichThisVisitIsGoingTo = $emp->level;
-                    $creator_level = $visitingDetail->creatorEmployee->level;
-
-                    // Pending
-                    if ($visitingDetail->approval_status == 0) {
-                        // The Employee Which This Visit Is Going To => Manager
-                        if ($levelOfEmpWhichThisVisitIsGoingTo == 0) {
-                            if (auth()->user()->hasRole(1) || $emp->id == auth()->user()->employee->id) {
-                                $msg = __('files.Approve');
-                                $retAction .= '<a href="' . route('admin.new.scan.approving', encrypt($visitingDetail->id), encrypt(1)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                    if ($visitingDetail->user_id == $visitingDetail->creator_employee) {
+                        // Need Only Guard Manager Approval
+                        $level = $visitingDetail->owner->level;
+                        if ($visitingDetail->approval_status == 0) {
+                            if ($level == 0) {
+                                if (auth()->user()->hasRole(1) || $visitingDetail->creator_employee == auth()->user()->employee->id) {
+                                    $msg = __('files.Approve');
+                                    $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(2)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                }
+                            }
+                            if ($level == 1) {
+                                if (auth()->user()->hasRole(1) || $visitingDetail->owner->emp_one == auth()->user()->employee->id) {
+                                    $msg = __('files.Approve');
+                                    $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(2)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                }
                             }
                         }
+                        if ($visitingDetail->approval_status == 2) {
+                            if (auth()->user()->hasRole(1) || $visitingDetail->owner->emp_one == auth()->user()->employee->id) {
+                                $msg = __('files.Re-Send Sms');
+                                $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                            }
 
-                        // The Employee Which This Visit Is Going To => Has One Manager
-                        if ($levelOfEmpWhichThisVisitIsGoingTo == 1) {
-                            if ($visitingDetail->creator_employee == $visitingDetail->user_id) {
-                                $msg = __('files.Approve');
-                                $retAction .= '<a href="' . route('admin.new.scan.approving', encrypt($visitingDetail->id), encrypt(2)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                            } else {
-                                if (auth()->user()->hasRole(1) || $emp->emp_one == auth()->user()->employee->id) {
+                        }
+                    } else {
+                        $level = $visitingDetail->owner->level;
+                        // Pending
+                        if ($visitingDetail->approval_status == 0) {
+                            // The Employee Which This Visit Is Going To => Manager
+                            if ($level == 0) {
+                                if (auth()->user()->hasRole(1) || $visitingDetail->owner->id == auth()->user()->employee->id) {
                                     $msg = __('files.Approve');
-                                    $retAction .= '<a href="' . route('admin.new.scan.approving', encrypt($visitingDetail->id), encrypt(1)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                    $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(1)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                }
+                            }
+
+                            // The Employee Which This Visit Is Going To => Has One Manager
+                            if ($level == 1) {
+                                if (auth()->user()->hasRole(1) || $visitingDetail->owner->emp_one == auth()->user()->employee->id) {
+                                    $msg = __('files.Approve');
+                                    $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(1)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                }
+                                //                            if ($visitingDetail->creator_employee == $visitingDetail->user_id) {
+                                //                                $msg = __('files.Approve');
+                                //                                $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(2)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                //                            } else {
+                                //                                if (auth()->user()->hasRole(1) || $emp->emp_one == auth()->user()->employee->id) {
+                                //                                    $msg = __('files.Approve');
+                                //                                    $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(1)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                //                                }
+                                //                            }
+                            }
+
+                            // The Employee Which This Visit Is Going To => Has Two Managers
+                            if ($level == 2) {
+                                if (auth()->user()->hasRole(1) || $visitingDetail->owner->emp_two == auth()->user()->employee->id) {
+                                    $msg = __('files.First Approve');
+                                    $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(0.5)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                                 }
                             }
                         }
 
-                        // The Employee Which This Visit Is Going To => Has Two Managers
-                        if ($levelOfEmpWhichThisVisitIsGoingTo == 2) {
-                            if (auth()->user()->hasRole(1) || $emp->emp_one == auth()->user()->employee->id) {
-                                $msg = __('files.First Approve');
-                                $retAction .= '<a href="' . route('admin.new.scan.approving', encrypt($visitingDetail->id), encrypt(0.5)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        // Approved From The First Manager
+                        if ($visitingDetail->approval_status == 0.5) {
+                            if (auth()->user()->hasRole(1) || $visitingDetail->owner->emp_two == auth()->user()->employee->id) {
+                                $msg = __('files.Approve');
+                                $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(1)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                             }
-                        }
-                    }
-
-                    // Approved From The First Manager
-                    if ($visitingDetail->approval_status == 0.5) {
-                        if (auth()->user()->hasRole(1) || $emp->emp_two == auth()->user()->employee->id) {
-                            $msg = __('files.Second Approve');
-                            $retAction .= '<a href="' . route('admin.new.scan.approving', encrypt($visitingDetail->id), encrypt(1)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                        }
-                    }
-
-                    // Approved But Waiting For Security Guard Approval
-                    if ($visitingDetail->approval_status == 1) {
-                        if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
-                            $msg = __('files.Second Approve');
-                            $retAction .= '<a href="' . route('admin.new.scan.approving', encrypt($visitingDetail->id), encrypt(2)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                        }
-                    }
-
-                    // Approved From Everyone
-                    if ($visitingDetail->approval_status == 2) {
-                        if ($levelOfEmpWhichThisVisitIsGoingTo == 0) {
-                            $msg = __('files.Re-Send Sms');
-                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                            //                        if (auth()->user()->hasRole(1) || $emp->emp_two == auth()->user()->employee->id) {
+                            //                            $msg = __('files.Second Approve');
+                            //                            $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(1)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                            //                        }
                         }
 
-                        if ($levelOfEmpWhichThisVisitIsGoingTo == 1) {
-                            if (auth()->user()->hasRole(1) || $emp->emp_one == auth()->user()->employee->id) {
-                                $msg = __('files.Re-Send Sms');
-                                $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        // Approved But Waiting For Security Guard Approval
+                        if ($visitingDetail->approval_status == 1) {
+                            if (auth()->user()->hasRole(1) || $visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
+                                $msg = __('files.Second Approve');
+                                $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(2)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                             }
                         }
 
-                        if ($levelOfEmpWhichThisVisitIsGoingTo == 2) {
-                            if (auth()->user()->hasRole(1) || $emp->emp_two == auth()->user()->employee->id) {
-                                $msg = __('files.Re-Send Sms');
-                                $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                        // Approved From Everyone
+                        if ($visitingDetail->approval_status == 2) {
+                            if ($level == 0) {
+                                if (auth()->user()->hasRole(1) || $visitingDetail->creator_emplopyee == auth()->user()->employee->id) {
+                                    $msg = __('files.Re-Send Sms');
+                                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                }
                             }
-                        }
+                            if ($level == 1) {
+                                if (auth()->user()->hasRole(1) || $visitingDetail->owner->emp_one == auth()->user()->employee->id) {
+                                    $msg = __('files.Re-Send Sms');
+                                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                }
+                            }
+                            if ($level == 2) {
+                                if (auth()->user()->hasRole(1) || $visitingDetail->owner->emp_two == auth()->user()->employee->id) {
+                                    $msg = __('files.Re-Send Sms');
+                                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                }
+                            }
+                            if ($visitingDetail->creatorEmployee->level == 0) {
+                                if ($visitingDetail->creator_employee == auth()->user()->employee->id) {
+                                    $msg = __('files.Re-Send Sms');
+                                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                }
+                            }
+                            if ($visitingDetail->creatorEmployee->level == 1) {
+                                if ($visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
+                                    $msg = __('files.Re-Send Sms');
+                                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                                }
+                            }
 
-                        if ($visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
-                            $msg = __('files.Re-Send Sms');
-                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                            //                        if ($visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
+                            //                            $msg = __('files.Re-Send Sms');
+                            //                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+                            //                        }
                         }
-
                     }
-
 
                 } else {
                     $level = $visitingDetail->creatorEmployee->level;
@@ -612,6 +642,20 @@ class VisitorController extends Controller
     {
         return auth()->user()->employee();
     }
-
-
 }
+
+//                    if ($visitingDetail->user_id == 100) {
+//                        if ($visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
+//                            $msg = __('files.Approve');
+//                            $retAction .= '<a href="' . route('admin.new.scan.approving', encrypt($visitingDetail->id), encrypt(2)) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+//                        }
+//                    }
+
+
+
+
+//                    $user_id = $visitingDetail->user_id;
+//                    $emp = Employee::query()->find($user_id);
+//                    $levelOfEmpWhichThisVisitIsGoingTo = $emp->level;
+//                    $creator_level = $visitingDetail->creatorEmployee->level;
+//                    $level = $visitingDetail->owner->level;

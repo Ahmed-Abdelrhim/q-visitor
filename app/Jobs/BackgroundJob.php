@@ -35,6 +35,10 @@ class BackgroundJob implements ShouldQueue
 
         // $send_mail = Http::get('https://qudratech-eg.net/mail/tt.php?vid=' . $this->visitingDetails->visitor->id);
 
+        if (empty($this->visitingDetails->visitor->email)) {
+            $notifications = array('message' => __('files.This Visitor does not have email') , 'alert-type' => 'info');
+        }
+
         $send_email = Mail::to($this->visitingDetails->visitor->email)->send(new VisitorMail($this->visitingDetails));
         // $send_sms = Http::get('https://www.qudratech-eg.net/sms_api.php?mob=' . $this->visitingDetails->visitor->phone);
     }

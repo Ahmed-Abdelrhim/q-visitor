@@ -126,7 +126,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('New/Scan/{car_type}', [OcrController::class, 'newScan'])->name('new.scan');
         Route::post('New/Scan/Post', [OcrController::class, 'newScanSaveData'])->name('new.scan.post');
 
-        Route::get('Approving/New/Scan/Only',[VisitorController::class,'approvingNewScansOnly'])->name('new.scan.approving');
+        Route::get('Approving/New/Scan/Only/{visit_id}/{approval_status}',[VisitorController::class,'approvingNewScansOnly'])->name('new.scan.approving');
 
         Route::get('Visits/Search', [OcrController::class, 'searchVisitingDetails'])->name('ocr.search.visitors');
         Route::get('Visits/Destroy/{id}', [OcrController::class, 'destroy'])->name('ocr.destroy');
