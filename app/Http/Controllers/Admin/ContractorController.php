@@ -42,12 +42,13 @@ class ContractorController extends Controller
                 }
                 Worker::query()->create([
                     'name' => $name,
-                    'nat' => $nat,
+                    'nat_id' => $nat,
                     'visit_id' => $visit->id,
                     'visitor_id' => $visit->visitor->id,
                     'created_at' => Carbon::now(),
                 ]);
-            } catch (\Exception) {
+            } catch (\Exception $exception) {
+                // return $exception;
                 $notifications = array('message' => 'Something Went Wrong ', 'alert-type' => 'error');
                 return redirect()->back()->with($notifications);
             }
