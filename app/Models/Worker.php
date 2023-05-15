@@ -16,7 +16,7 @@ class Worker extends Model
 
     public function visitor(): BelongsTo
     {
-        return $this->belongsTo(VisitorController::class,'visitor_id','id');
+        return $this->belongsTo(Visitor::class,'visitor_id','id');
     }
 
     public function visit(): BelongsTo

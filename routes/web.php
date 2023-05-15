@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CompanionController;
 use App\Http\Controllers\Admin\ContractorController;
 use App\Http\Controllers\Admin\OcrController;
 use App\Http\Controllers\Admin\VisitorController;
+use App\Http\Controllers\Admin\WorkerController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -107,6 +108,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::get('Contractor/Index',[ContractorController::class,'index'])->name('contractor.index');
         Route::get('Contractor/Create/{contractor_id}',[ContractorController::class,'create'])->name('contractor.create');
         Route::post('Contractor/Store/{contractor_id}',[ContractorController::class,'store'])->name('contractor.store');
+
+        Route::post('Workers/Search',[WorkerController::class,'search'])->name('workers.search');
 
         // Ocr Resource Controller···
         Route::resource('OCR', 'OcrController');

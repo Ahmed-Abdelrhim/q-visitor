@@ -16,9 +16,12 @@ class ContractorController extends Controller
     {
         $contractors = VisitingDetails::query()
             ->with('visitor')
-            ->where('is_contractor' , 1)
+            ->where('is_contractor', 1)
             ->get();
+        // return $contractors;
+        return view('admin.ocr.contractor.index', ['contractors' => $contractors]);
     }
+
     public function create($contractor_id)
     {
         $contractor_id = decrypt($contractor_id);
@@ -62,22 +65,18 @@ class ContractorController extends Controller
             }
         }
         DB::commit();
-        $visit->is_contractor = 1 ;
+        $visit->is_contractor = 1;
         $visit->save;
         $notifications = array('message' => 'Data Inserted Successfully', 'alert-type' => 'success');
         return redirect()->back()->with($notifications);
     }
+
+
 }
 
 
 // Table Workers
 // big-int : id , string: name , big-int: nat_id , int: visit_id , int: visitor_id , timestamp: created_at , timestamp: updated_at
-
-
-
-
-
-
 
 
 //        $validator = Validator::make($request->all(), [

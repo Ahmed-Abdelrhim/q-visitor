@@ -14,47 +14,30 @@
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-12">
                     <div class="card">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('admin.workers.search')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col">
-                                        <label>{{ __('files.National Identification No') }}</label>
-                                        <input type="text" name="national_identification_no"
-                                               class="form-control @error('national_identification_no') is-invalid @enderror"
-                                               value="{{ old('national_identification_no') }}">
-                                        @error('national_identification_no')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="form-group col">
-                                        <label for="employee_id">{{ __('files.Select Employee') }}</label> <span
+                                        <label for="contractor">{{ __('files.Select Contractor') }}</label> <span
                                                 class="text-danger">*</span>
-                                        <select id="employee_id" name="employee_id"
-                                                class="form-control select2 @error('employee_id') is-invalid @enderror">
-                                            @foreach($employees as $key => $employee)
-                                                <option
-                                                        value="{{ $employee->id }}" {{ (old('employee_id') == $employee->id) ? 'selected' : '' }}>{{ $employee->name }}
-                                                    ( {{$employee->department->name}} )
-                                                </option>
+                                        <select id="contractor" name="contractor"
+                                                class="form-control select2 @error('contractor') is-invalid @enderror">
+                                            @foreach($contractors as $contractor)
+                                                <option value="{{ $contractor->id }}"> {{ $contractor->visitor->name }}  -- {{ $contractor->visitor->national_identification_no }} </option>
                                             @endforeach
                                         </select>
-                                        @error('employee_id')
+                                        @error('contractor')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
-
-
                                 </div>
                             </div>
-                            <div class="card-footer ">
-                                <button class="btn btn-primary mr-1" type="submit">{{ __('files.Submit') }}</button>
+
+                            <div class="card-footer">
+                                <button class="btn btn-primary mr-1" type="submit">{{ __('files.Search') }}</button>
                             </div>
                         </form>
                     </div>
@@ -72,6 +55,7 @@
         $(document).ready(function () {
             // Write Js Here
         });
+
 
     </script>
 @endsection

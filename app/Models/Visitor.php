@@ -78,4 +78,11 @@ class Visitor extends Model implements HasMedia
     {
         return $this->phone;
     }
+
+    public function workers()
+    {
+        return $this->hasMany(Worker::class);
+    }
+
+
 }

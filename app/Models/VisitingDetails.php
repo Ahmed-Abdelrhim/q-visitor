@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Admin\WorkerController;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Shipu\Watchable\Traits\HasAuditColumn;
@@ -103,6 +104,11 @@ public function employee()
             return asset($this->getFirstMediaUrl('visitor'));
         }
         return asset('assets/img/default/user.png');
+    }
+
+    public function workers()
+    {
+        return $this->hasMany(Worker::class);
     }
 }
 
