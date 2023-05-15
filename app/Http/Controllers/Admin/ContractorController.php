@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\VisitingDetails;
+use App\Models\Worker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ContractorController extends Controller
 {
@@ -15,23 +19,43 @@ class ContractorController extends Controller
 
     public function store(Request $request, $contractor_id)
     {
+        $visit = VisitingDetails::query()->with('visitor')->find($contractor_id);
+        if (!$visit) {
+            $notifications = array('message' => 'This Contractor Visit Was Not Found ', 'alert-type' => 'error');
+            return redirect()->back()->with($notifications);
+        }
+
         $request = $request->except('_token');
-        $name = [];
-        $nat = [];
         $length = count($request) / 2;
+        DB::beginTransaction();
         for ($i = 1; $i <= $length; $i++) {
-            if ($i == 1) {
-                $name[] .= $request['name'];
-                $nat[] .= $request['nat'];
-            } else {
-                $counter = $i;
-                $name_index = 'name' . $counter;
-                $nat_index = 'nat' . $counter;
-                $name[] .= $request[$name_index];
-                $nat[] .= $request[$nat_index];
+            try {
+                if ($i == 1) {
+                    $name = $request['name'];
+                    $nat = $request['nat'];
+                } else {
+                    $counter = $i;
+                    $name_index = 'name' . $counter;
+                    $nat_index = 'nat' . $counter;
+                    $name = $request[$name_index];
+                    $nat = $request[$nat_index];
+                }
+                Worker::query()->create([
+                    'name' => $name,
+                    'nat' => $nat,
+                    'visit_id' => $visit->id,
+                    'visitor_id' => $visit->visitor->id,
+                    'created_at' => Carbon::now(),
+                ]);
+            } catch (\Exception) {
+                $notifications = array('message' => 'Something Went Wrong ', 'alert-type' => 'error');
+                return redirect()->back()->with($notifications);
             }
         }
-        return $nat;
+        DB::commit();
+        $notifications = array('message' => 'Data Inserted Successfully', 'alert-type' => 'success');
+        return redirect()->back()->with($notifications);
+
     }
 }
 
