@@ -10,11 +10,29 @@ class ContractorController extends Controller
     public function index($contractor_id)
     {
         $contractor_id = decrypt($contractor_id);
-        return view('admin.visitor.contractor',['contractor_id' => $contractor_id]);
+        return view('admin.visitor.contractor', ['contractor_id' => $contractor_id]);
     }
 
-    public function store(Request $request , $contractor_id)
+    public function store(Request $request, $contractor_id)
     {
-        return $request;
+        $request = $request->except('_token');
+        $name = [];
+        $nat = [];
+        $length = count($request) / 2;
+        for ($i = 1; $i <= $length; $i++) {
+            if ($i == 1) {
+                $name[] .= $request['name'];
+                $nat[] .= $request['nat'];
+            } else {
+                $counter = $i;
+                $name_index = 'name' . $counter;
+                $nat_index = 'nat' . $counter;
+                $name[] .= $request[$name_index];
+                $nat[] .= $request[$nat_index];
+            }
+        }
+        return $nat;
+
+
     }
 }

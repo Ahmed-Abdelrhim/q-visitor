@@ -32,7 +32,7 @@
                                     <div class="form-group col">
                                         <label for="name">{{ __('files.Name') }}</label> <span
                                                 class="text-danger">*</span>
-                                        <input id="name" type="text" name="name"
+                                        <input id="name" type="text" name="name" required
                                                class="form-control {{ $errors->has('name') ? " is-invalid " : '' }}">
                                         @error('name')
                                         <div class="invalid-feedback">
@@ -44,7 +44,7 @@
                                     <div class="form-group col">
                                         <label for="nat_id">{{ __('files.National Number') }}</label> <span
                                                 class="text-danger">*</span>
-                                        <input id="nat_id" type="text" name="nat"
+                                        <input id="nat_id" type="number" name="nat" required
                                                class="form-control {{ $errors->has('nat_id') ? " is-invalid " : '' }}">
                                         @error('nat_id')
                                         <div class="invalid-feedback">
@@ -88,19 +88,27 @@
         $(document).ready(function() {
             //var counter = 1;
             $('#add').on('click',function() {
-                clone = $('#form-row').clone(true).insertAfter('#form-row:last');
+                clone = $('#form-row').clone().insertAfter('#form-row:last');
+
 
                 name_length = $("input[id='name']").length;
                 national_length = $("input[id='nat_id']").length;
 
+                // clone.find("input[name='name" + name_length + "']").val('');
+                // clone.find("input[name='nat" + national_length + "']").val('');
+                // clone.find("input[name='nat${national_length}']").val('');
+
+
                 clone.find('#name').prop('name' , 'name' + name_length);
                 clone.find('#nat_id').prop('name' , 'nat' + national_length);
+
+                clone.find('#name').val("");
+                clone.find('#nat_id').val("");
+
                 console.log(name_length);
 
                 // counter ++;
             });
         });
-
-
     </script>
 @endsection
