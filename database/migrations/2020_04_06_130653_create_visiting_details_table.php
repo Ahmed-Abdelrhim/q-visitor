@@ -39,6 +39,9 @@ class CreateVisitingDetailsTable extends Migration
 
 
             $table->string('plate_no',100)->nullable();
+
+            $table->integer('is_contractor')->default(0);
+
             $table->string('car_type')->nullable();
             $table->tinyInteger('approval_status')->default(0); // length = 1
             

@@ -8,10 +8,14 @@ use App\Models\Worker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ContractorController extends Controller
 {
-    public function index($contractor_id)
+    public function index()
+    {
+    }
+    public function create($contractor_id)
     {
         $contractor_id = decrypt($contractor_id);
         return view('admin.visitor.contractor', ['contractor_id' => $contractor_id]);
@@ -24,8 +28,8 @@ class ContractorController extends Controller
             $notifications = array('message' => 'This Contractor Visit Was Not Found ', 'alert-type' => 'error');
             return redirect()->back()->with($notifications);
         }
-
         $request = $request->except('_token');
+
         $length = count($request) / 2;
         DB::beginTransaction();
         for ($i = 1; $i <= $length; $i++) {
@@ -54,6 +58,8 @@ class ContractorController extends Controller
             }
         }
         DB::commit();
+        $visit->is_contractor = 1 ;
+        $visit->save;
         $notifications = array('message' => 'Data Inserted Successfully', 'alert-type' => 'success');
         return redirect()->back()->with($notifications);
 
@@ -63,3 +69,19 @@ class ContractorController extends Controller
 
 // Table Workers
 // big-int : id , string: name , big-int: nat_id , int: visit_id , int: visitor_id , timestamp: created_at , timestamp: updated_at
+
+
+
+
+
+
+
+
+//        $validator = Validator::make($request->all(), [
+//            'name' => 'required|string|min:8',
+//            'nat' => 'required|min:10',
+//        ]);
+//
+//        if ($validator->fails()) {
+//            return redirect()->back()->withErrors($validator);
+//        }

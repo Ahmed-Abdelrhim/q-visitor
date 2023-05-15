@@ -376,7 +376,7 @@ class VisitorController extends Controller
                 }
 
                 if (auth()->user()->can('visitors_edit')) {
-                    $retAction .= '<a href="' . route('admin.contractor.index', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon float-left btn-warning actions"
+                    $retAction .= '<a href="' . route('admin.contractor.create', encrypt($visitingDetail->id)) . '" class="btn btn-sm btn-icon float-left btn-warning actions"
                                     data-toggle="tooltip" data-placement="top" title="Contractor" style="margin-left: 5px; margin-right: 5px;">
                                     <i class="fa fa-building"></i></a>';
                 }

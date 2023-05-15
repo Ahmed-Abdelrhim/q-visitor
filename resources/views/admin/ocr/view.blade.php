@@ -154,6 +154,13 @@ if (isset($_POST['v2date']) and isset($_POST['v3date'])) {
                                                 style="width: 125px; height: 54px;margin-right: 30px!important;"><i
                                                     class="fa-solid fa-person-walking" style="font-size: 25px;"></i>
                                         </button>
+
+                                        <button class="btn btn-sm btn-icon float-left btn-success  contractor" id="contractor"
+                                                data-toggle="tooltip" data-placement="top" title="Contractor"
+                                                style="width: 125px; height: 54px;margin-right: 30px!important;">
+                                            <i class="fa fa-building" style="font-size: 25px;"></i>
+                                        </button>
+
                                     </div>
 
 

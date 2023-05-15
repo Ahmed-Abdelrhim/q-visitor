@@ -44,6 +44,10 @@
             $.redirect("{{route('admin.new.scan',encrypt('P'))}}", {}, "GET", null, null, true);
         });
 
+        $('#contractor').click(function() {
+            $.redirect("{{route('admin.contractor.index')}}", {}, "GET", null, null, true);
+        });
+
 
 
 

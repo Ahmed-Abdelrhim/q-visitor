@@ -32,7 +32,7 @@
                                     <div class="form-group col">
                                         <label for="name">{{ __('files.Name') }}</label> <span
                                                 class="text-danger">*</span>
-                                        <input id="name" type="text" name="name" required
+                                        <input id="name" type="text" name="name" required min="3" max="100"
                                                class="form-control {{ $errors->has('name') ? " is-invalid " : '' }}">
                                         @error('name')
                                         <div class="invalid-feedback">
@@ -46,7 +46,7 @@
                                                 class="text-danger">*</span>
                                         <input id="nat_id" type="number" name="nat" required
                                                class="form-control {{ $errors->has('nat_id') ? " is-invalid " : '' }}">
-                                        @error('nat_id')
+                                        @error('nat')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
