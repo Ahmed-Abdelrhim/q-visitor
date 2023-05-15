@@ -32,7 +32,9 @@ class ContractorController extends Controller
             }
         }
         return $nat;
-
-
     }
 }
+
+
+// Table Workers
+// big-int : id , string: name , big-int: nat_id , int: visit_id , int: visitor_id , timestamp: created_at , timestamp: updated_at
