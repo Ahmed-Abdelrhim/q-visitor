@@ -14,6 +14,10 @@ class ContractorController extends Controller
 {
     public function index()
     {
+        $contractors = VisitingDetails::query()
+            ->with('visitor')
+            ->where('is_contractor' , 1)
+            ->get();
     }
     public function create($contractor_id)
     {
@@ -62,7 +66,6 @@ class ContractorController extends Controller
         $visit->save;
         $notifications = array('message' => 'Data Inserted Successfully', 'alert-type' => 'success');
         return redirect()->back()->with($notifications);
-
     }
 }
 
