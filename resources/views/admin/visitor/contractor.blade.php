@@ -28,7 +28,7 @@
                         <form method="POST" action="{{route('admin.contractor.store', $contractor_id)}}">
                             @csrf
                             <div class="card-body">
-                                <div class="form-row" id="form-row">
+                                <div class="form-row" id="form-row" attribute="clone">
                                     <div class="form-group col">
                                         <label for="name">{{ __('files.Name') }}</label> <span
                                                 class="text-danger">*</span>
@@ -86,28 +86,19 @@
 
     <script>
         $(document).ready(function() {
-            //var counter = 1;
+            // var counter = 1;
             $('#add').on('click',function() {
-                clone = $('#form-row').clone().insertAfter('#form-row:last');
-
+                // counter++;
+                clone = $('#form-row').clone().insertAfter('.form-row:last');
 
                 name_length = $("input[id='name']").length;
                 national_length = $("input[id='nat_id']").length;
-
-                // clone.find("input[name='name" + name_length + "']").val('');
-                // clone.find("input[name='nat" + national_length + "']").val('');
-                // clone.find("input[name='nat${national_length}']").val('');
-
 
                 clone.find('#name').prop('name' , 'name' + name_length);
                 clone.find('#nat_id').prop('name' , 'nat' + national_length);
 
                 clone.find('#name').val("");
                 clone.find('#nat_id').val("");
-
-                console.log(name_length);
-
-                // counter ++;
             });
         });
     </script>
