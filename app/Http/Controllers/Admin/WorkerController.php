@@ -20,8 +20,12 @@ class WorkerController extends Controller
             ->with('visitor')
             ->where('visit_id', $visit_id)
             ->get();
-        return $workers;
+        if ( count($workers) <= 0 || empty($workers)) {
+            $notifications = array('message' => 'There are no workers for this contractor' , 'alert-type' => 'info');
+            return redirect()->back()->with($notifications);
+        }
 
-
+        return view('admin.ocr.contractor.workers', ['workers' => $workers]);
     }
+
 }

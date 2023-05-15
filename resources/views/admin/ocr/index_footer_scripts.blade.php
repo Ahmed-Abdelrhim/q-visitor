@@ -425,13 +425,11 @@ $.post('{{route('admin.ocr.save')}}', {
             });
         });
 
-
         $('.get_plate').click(function () {
             $.get('{{route('admin.get.last.car.plate')}}', {}, function (data) {
                 // console.log(data);
                 location.reload();
             });
-
         });
 
         $('#car_plate_number').change(function() {
@@ -441,86 +439,4 @@ $.post('{{route('admin.ocr.save')}}', {
             $('#plate_number_input').val(value);
         });
     });
-
 </script>
-
-
-{{--$.ajax({--}}
-{{--type: 'GET',--}}
-{{--enctype: 'multipart/form-data',--}}
-{{--url: "{{route('admin.ocr.save')}}",--}}
-{{--// dataType: 'JSON',--}}
-{{--// processData: false,--}}
-{{--// contentType: false,--}}
-{{--// cache: false,--}}
-
-{{--async: false,--}}
-{{--data: {--}}
-{{--// '__token': __token,--}}
-{{--// 'name': JSON.stringify(name),--}}
-{{--// 'name': name,--}}
-{{--// 'gender': gender,--}}
-{{--// 'address': full_address,--}}
-{{--// 'nat_id': nat_id,--}}
-{{--// 'checkin_date': checkin_date,--}}
-{{--// 'checkin_time': checkin_time,--}}
-{{--// 'images': JSON.stringify(images),--}}
-{{--'images': images,--}}
-{{--// 'perpic': perpic,--}}
-{{--// 'exdate': exdate,--}}
-{{--// 'plate_no': plate_no,--}}
-{{--// 'add': add,--}}
-{{--},--}}
-
-{{--success: function (data) {--}}
-{{--console.log(data);--}}
-{{--// wnd = window.open("http://localhost/visitorpass/ocr-print?id=" + data, '_blank');--}}
-{{--// wnd.print();--}}
-{{--// location.reload();--}}
-{{--}--}}
-{{--, error: function (reject) {--}}
-{{--console.log(reject);--}}
-{{--// var response = $.parseJSON(reject.responseText);--}}
-{{--// $.each(response.errors , function(key , value) {--}}
-{{--//     $('#'+key+'_error').text(value[0]);--}}
-{{--// })--}}
-{{--},--}}
-
-{{--});--}}
-
-
-{{--name = 'Ahmed Abdelrhim Ahmed';--}}
-{{--gender = 'M';--}}
-{{--address = 'Egypt , cairo';--}}
-{{--nat_id = '29911100104271';--}}
-{{--address2 = 'Cairo';--}}
-{{--checkin_date = {{\Illuminate\Support\Carbon::now()->toDateString()}};--}}
-{{--checkin_time = {{time()}};--}}
-{{--plate_no = 'ل ق أ 284 ';--}}
-{{--full_address = 'Elmassara ,Helwan , Cairo ,Egypt';--}}
-{{--images = ';,' + '{{asset('storage/45/my-pic-2-(2)') }}' ;--}}
-{{--prepic = '{{asset('storage/44/my-pic-2')}}';--}}
-
-{{--// $.post("save.php", {--}}
-{{--// $.post( '{ {storage_path('app/public' . '/' .'save.php')}}', {--}}
-
-
-{{--/*flatpickr("#v2time", {--}}
-{{--enableTime: true,--}}
-{{--noCalendar: true,--}}
-{{--dateFormat: "H:i",--}}
-{{--defaultDate: "13:45"--}}
-{{--});--}}
-{{--flatpickr("#v3date", {--}}
-{{--enableTime: false,--}}
-{{--noCalendar: false,--}}
-{{--dateFormat: "d-m-Y",--}}
-{{--defaultDate: "today"--}}
-{{--});--}}
-{{--$('#vdate').datepicker();--}}
-{{--$('.view').click(function () {--}}
-
-{{--$.redirect("view.php", {}, "POST", null, null, true);--}}
-
-{{--});--}}
-{{--*/--}}
