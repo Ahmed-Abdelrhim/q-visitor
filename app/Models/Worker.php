@@ -12,7 +12,7 @@ class Worker extends Model
     use HasFactory;
 
     protected $table = 'workers';
-    protected $fillable = ['id','name' ,'nat_id','visit_id','visitor_id','created_at','updated_at'];
+    protected $fillable = ['id','name' ,'nat_id','visit_id','visitor_id', 'is_scaned', 'created_at','updated_at'];
 
     public function visitor(): BelongsTo
     {

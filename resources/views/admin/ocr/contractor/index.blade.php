@@ -8,7 +8,7 @@
 @section('main-content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('files.Visit Reservation') }}</h1>
+            <h1>{{ __('files.Contractors') }}</h1>
         </div>
         <div class="section-body">
             <div class="row">

@@ -92,10 +92,11 @@ class OcrController extends Controller
             return redirect()->back()->with($notifications);
         }
 
+        $twin_truck = 'No';
         $employees = Employee::query()->where('status', Status::ACTIVE)->get(['id', 'first_name', 'last_name']);
         if ($car_type == 'TWIN_TRUCK') {
             $twin_truck = 'YES';
-            return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees, 'twin_truck' => $twin_truck]);
+            // return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees, 'twin_truck' => $twin_truck]);
         }
 
         $start = Carbon::now()->startOfDay();
@@ -108,7 +109,7 @@ class OcrController extends Controller
             ->get();
 
 
-        return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees, 'car_plates' => $car_plates]);
+        return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees, 'car_plates' => $car_plates, 'twin_truck' => $twin_truck]);
     }
 
     public function searchVisitingDetails()
@@ -668,7 +669,7 @@ class OcrController extends Controller
 
         return $visit = VisitingDetails::query()
             ->with(['owner' => function ($query) {
-                $query->where('emp_one', '=' , auth()->user()->employee->id);
+                $query->where('emp_one', '=', auth()->user()->employee->id);
             }])->find(451);
 
 
@@ -989,22 +990,3 @@ class OcrController extends Controller
         //        return 'Done';
     }
 }
-
-
-//{
-//    "data": {
-//    "accessToken": "hpc.xksnvqy1rg2crxa77421b7kxeh179ckj",
-//"expireTime": 1683108522930,
-//"areaDomain": "https://ieuapi.hik-partner.com"
-//},
-//"errorCode": "0"
-//}
-
-
-// namisoftgroup@gmail.com
-
-
-// skils
-// Team Player
-// Deliver results
-// Bias for action

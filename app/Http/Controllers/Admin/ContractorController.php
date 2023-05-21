@@ -22,10 +22,15 @@ class ContractorController extends Controller
         return view('admin.ocr.contractor.index', ['contractors' => $contractors]);
     }
 
-    public function create($contractor_id)
+    public function create($visit_id)
     {
-        $contractor_id = decrypt($contractor_id);
-        return view('admin.visitor.contractor', ['contractor_id' => $contractor_id]);
+        $visit_id = decrypt($visit_id);
+        $workers = Worker::query()->where('visit_id' , $visit_id)->first();
+        if ($workers) {
+            $notifications = array('message' => __('files.This Contractor Has Already Workers'), 'alert-type'=> 'info');
+            return redirect()->back()->with($notifications);
+        }
+        return view('admin.visitor.contractor', ['contractor_id' => $visit_id]);
     }
 
     public function store(Request $request, $contractor_id)
@@ -87,3 +92,19 @@ class ContractorController extends Controller
 //        if ($validator->fails()) {
 //            return redirect()->back()->withErrors($validator);
 //        }
+
+
+
+
+
+
+//{
+//    "data": {
+//    "accessToken": "hpc.xksnvqy1rg2crxa77421b7kxeh179ckj",
+//"expireTime": 1683108522930,
+//"areaDomain": "https://ieuapi.hik-partner.com"
+//},
+//"errorCode": "0"
+//}
+
+

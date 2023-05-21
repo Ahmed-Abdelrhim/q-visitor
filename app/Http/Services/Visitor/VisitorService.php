@@ -48,6 +48,7 @@ class VisitorService
 
                 // Here The Difference
                 ->where('car_type', 'T')
+                ->orWhere('car_type', 'TWIN_TRUCK')
                 ->orWhere(function ($query) {
                     $query->whereExists(function ($subquery) {
                         $subquery->from('employees')
@@ -397,7 +398,6 @@ class VisitorService
             $visiting['user_id'] = $request->input('employee_id');
 
             // $visiting['qrcode'] = $request->input('qrcode');
-
             // $visiting['expiry_date'] = $request->input('expiry_date');
             // $visiting['expiry_date'] = Carbon::parse($request->input('expiry_date'))->format('Y-m-d H:i:s');
             $visiting['expiry_date'] = date('Y-m-d H:i:s', strtotime($request->input('expiry_date')));
@@ -436,14 +436,14 @@ class VisitorService
         if ($request->file('image')) {
             $visitingDetails->addMedia($request->file('image'))->toMediaCollection('visitor');
         }
-        try {
-            $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
-            $visitingDetails->employee->user()->notify(new SendVisitorToEmployee($visitingDetails));
 
-        } catch (\Exception $e) {
-            // Using a generic exception·..
+        //        try {
+        //            $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
+        //            $visitingDetails->employee->user()->notify(new SendVisitorToEmployee($visitingDetails));
+        //        } catch (\Exception $e) {
+        //            // Using a generic exception·..
+        //        }
 
-        }
         //        try {
         //            $data = file_get_contents("https://qudratech-eg.net/mail/tt.php?vid=" . $visiting['visitor_id'] . "&name=" . $input['first_name']);
         //            $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . $input['phone']);
@@ -454,16 +454,10 @@ class VisitorService
         return $visitingDetails;
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public
-    function delete($id)
+    public function delete($id)
     {
         return VisitingDetails::find($id)->delete();
     }
-
 
 }
 

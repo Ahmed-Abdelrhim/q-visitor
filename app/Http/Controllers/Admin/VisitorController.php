@@ -182,7 +182,9 @@ class VisitorController extends Controller
                             }
 
                         }
-                    } else {
+                    }
+
+                    else {
                         $level = $visitingDetail->owner->level;
                         // Pending
                         if ($visitingDetail->approval_status == 0) {
@@ -200,15 +202,6 @@ class VisitorController extends Controller
                                     $msg = __('files.Approve');
                                     $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(1)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                                 }
-                                //                            if ($visitingDetail->creator_employee == $visitingDetail->user_id) {
-                                //                                $msg = __('files.Approve');
-                                //                                $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(2)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                                //                            } else {
-                                //                                if (auth()->user()->hasRole(1) || $emp->emp_one == auth()->user()->employee->id) {
-                                //                                    $msg = __('files.Approve');
-                                //                                    $retAction .= '<a href="' . route('admin.new.scan.approving', [encrypt($visitingDetail->id), encrypt(1)]) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                                //                                }
-                                //                            }
                             }
 
                             // The Employee Which This Visit Is Going To => Has Two Managers
@@ -260,27 +253,24 @@ class VisitorController extends Controller
                                     $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
                                 }
                             }
-                            if ($visitingDetail->creatorEmployee->level == 0) {
-                                if ($visitingDetail->creator_employee == auth()->user()->employee->id) {
-                                    $msg = __('files.Re-Send Sms');
-                                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                                }
-                            }
-                            if ($visitingDetail->creatorEmployee->level == 1) {
-                                if ($visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
-                                    $msg = __('files.Re-Send Sms');
-                                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                                }
-                            }
 
-                            //                        if ($visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
-                            //                            $msg = __('files.Re-Send Sms');
-                            //                            $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
-                            //                        }
+//                            if ($visitingDetail->creatorEmployee->level == 0) {
+//                                if ($visitingDetail->creator_employee == auth()->user()->employee->id) {
+//                                    $msg = __('files.Re-Send Sms');
+//                                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+//                                }
+//                            }
+//                            if ($visitingDetail->creatorEmployee->level == 1) {
+//                                if ($visitingDetail->creatorEmployee->emp_one == auth()->user()->employee->id) {
+//                                    $msg = __('files.Re-Send Sms');
+//                                    $retAction .= '<a href="' . route('admin.visitors.send.sms', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 accept float-left btn-success actions" data-toggle="tooltip" data-placement="top" title="' . $msg . '"><i class="far fa-check-circle"></i></a>';
+//                                }
+//                            }
                         }
                     }
 
-                } else {
+                }
+                else {
                     $level = $visitingDetail->creatorEmployee->level;
                     if ($visitingDetail->approval_status == 0) {
                         // check if car type is truck
@@ -348,11 +338,7 @@ class VisitorController extends Controller
 
                     }
                 }
-
-
                 // End Of New Version
-
-
                 if (auth()->user()->can('visitors_show')) {
                     $retAction .= '<a href="' . route('admin.visitors.show', $visitingDetail) . '" class="btn btn-sm btn-icon mr-2 show float-left btn-info actions"
                                     data-toggle="tooltip" data-placement="top" title="' . __('files.View') . '"><i class="far fa-eye"></i></a>';
@@ -398,7 +384,7 @@ class VisitorController extends Controller
             })
             ->setRowClass(function ($visitingDetail) {
                 // if ($visitingDetail->quality_check != 2 && $visitingDetail->car_type == 'T') {
-                if ($visitingDetail->car_type == 'T') {
+                if ($visitingDetail->car_type == 'T' || $visitingDetail->car_type == 'TWIN_TRUCK' ) {
                     if (empty($visitingDetail->shipment_number) || empty($visitingDetail->shipment_id)) {
                         return 'pending_quality_approval';
                     }
@@ -490,7 +476,7 @@ class VisitorController extends Controller
     function sendSms($visitingDetail_id)
     {
         $visit_details = VisitingDetails::query()->with('visitor')->find($visitingDetail_id);
-        if (empty($visit_details->visitor->phone)) {
+        if (empty($visit_details->visitor->email)) {
             $notifications = array('error' => 'يرجي إدخال رقم هاتف الزائر');
             return redirect()->back()->with($notifications);
         }
@@ -500,7 +486,7 @@ class VisitorController extends Controller
             $notifications = array('error' => 'Something Went Wrong');
             return redirect()->back()->with($notifications);
         }
-        $notifications = array('success' => __('جاري إرسال الرسالة والإيميل'));
+        $notifications = array('success' => __('جاري الإرسال'));
         $visit_details->sent_sms_before = 1;
         $visit_details->save();
         return redirect()->back()->with($notifications);

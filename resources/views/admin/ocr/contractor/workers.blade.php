@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Contractors Scan</title>
+    <title>Contractors Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -179,204 +179,238 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5" style="margin-bottom:0px !important">
-                <h2 class="heading-section">{{__('files.Contractor')}}</h2>
+                <h2 class="heading-section">{{__('files.Contractors')}}</h2>
             </div>
         </div>
 
 
         <div class="row justify-content-center">
-            <div class="col-md-14">
-                <div class="wrapper">
-                    <div class="row no-gutters">
-                        <div class="col-md-12">
-                            <div class="contact-wrap w-100 p-lg-5 p-4">
+            <div class="row">
+                <div class="col-md-14">
+                    <div class="wrapper">
+                        <div class="row no-gutters">
+                            <div class="col-md-12">
+                                <div class="contact-wrap w-100 p-lg-5 p-4">
 
-                                <div id="form-message-warning" class="mb-4"></div>
-                                <div id="form-message-success" class="mb-4">
-                                    Data was sent, thank you!
-                                </div>
-                                <br/>
+                                    <div id="form-message-warning" class="mb-4"></div>
+                                    <div id="form-message-success" class="mb-4">
+                                        Data was sent, thank you!
+                                    </div>
+                                    <br/>
 
-                                <div class="row" style="text-align:center">
-                                    <div class="col-md-3">
-                                        <div class="form-group"
-                                             style="text-align:center;float:left;margin-right:20px">
-                                            <img id="pic" src="{{asset('images/personal.png')}}"/>
+                                    <div class="row" style="text-align:center">
+                                        <div class="col-md-3">
+                                            <div class="form-group"
+                                                 style="text-align:center;float:left;margin-right:20px">
+                                                <img id="pic" src="{{asset('images/personal.png')}}"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <img id="white_picture" src="{{asset('images/id.jpg')}}"/>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <img id="white_picture" src="{{asset('images/id.jpg')}}"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <img id="ocr_head" src="{{asset('images/id.jpg')}}"/>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <img id="ocr_head" src="{{asset('images/id.jpg')}}"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <img id="chip_head" src="{{asset('images/id.jpg')}}"/>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <img id="chip_head" src="{{asset('images/id.jpg')}}"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="div2">
+                                <textarea id="msg" cols="75" rows="20"></textarea>
+                            </div>
+
+                            <div class="col-md-12 d-flex align-items-stretch">
+                                <div class="info-wrap w-100 p-lg-5 p-4 img">
+                                    {{ csrf_field() }}
+                                    <div class="dbox w-25 d-flex align-items-start">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-user"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>{{__('files.Name')}} :</span> <a id="name" class="txt"></a></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-calendar"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>{{__('files.Date Of Birth')}} :</span> <a id="dob" class="txt"></a>
+                                            </p>
+                                        </div>
+                                    </div>
 
 
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-id-card"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>{{__('files.ID Number')}} :</span> <a id="mrz" class="txt"></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-intersex"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>{{__('files.Gender')}} :</span> <a id="sex" class="txt"></a></p>
+                                        </div>
+                                    </div>
 
 
-                        <div class="div2">
-                            <textarea id="msg" cols="75" rows="20"></textarea>
-                        </div>
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-exclamation-triangle"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p id="expiration_date"><span>{{__('files.Expiry Date')}} :</span> <a
+                                                        id="exdate" class="txt"></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-tasks"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>{{__('files.Job')}} :</span> <a id="job" class="txt"></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-user"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>{{__('files.Marital status')}} :</span> <a id="mstat"
+                                                                                                class="txt"></a>
+                                            </p>
+                                        </div>
+                                    </div>
 
-                        <div class="col-md-12 d-flex align-items-stretch">
-                            <div class="info-wrap w-100 p-lg-5 p-4 img">
-                                {{ csrf_field() }}
-                                <div class="dbox w-25 d-flex align-items-start">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-user"></span>
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-calendar"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>{{__('files.Issuing Date')}} :</span> <a id="isdate"
+                                                                                              class="txt"></a>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="text pl-3">
-                                        <p><span>{{__('files.Name')}} :</span> <a id="name" class="txt"></a></p>
-                                    </div>
-                                </div>
 
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-calendar"></span>
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-calendar"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><label for="vdate">{{__('files.Visit Date')}} :</label> <input
+                                                        type="text"
+                                                        value="<?php echo date('d-m-Y'); ?>"
+                                                        class="vdate form-control"
+                                                        id="vdate"
+                                                        disabled="disabled"/>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="text pl-3">
-                                        <p><span>{{__('files.Date Of Birth')}} :</span> <a id="dob" class="txt"></a></p>
-                                    </div>
-                                </div>
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-calendar"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><label for="vtime">{{__('files.Visit Time')}} :</label> <input
+                                                        type="text"
+                                                        value="<?php echo date('h:i:s a'); ?>"
+                                                        class="vtime form-control"
+                                                        id="vtime"
+                                                        disabled="disabled"/>
+                                            </p>
 
-
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-id-card"></span>
+                                        </div>
                                     </div>
-                                    <div class="text pl-3">
-                                        <p><span>{{__('files.ID Number')}} :</span> <a id="mrz" class="txt"></a></p>
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-flag"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>{{__('files.Country Code')}} :</span> <a id="icc" class="txt"></a>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-intersex"></span>
+                                    <div class="dbox w-25 d-flex align-items-center" style="display:none !important">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-book"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>{{__('files.Religion')}} :</span> <a id="relg" class="txt"></a></p>
+                                        </div>
                                     </div>
-                                    <div class="text pl-3">
-                                        <p><span>{{__('files.Gender')}} :</span> <a id="sex" class="txt"></a></p>
+                                    <div class="dbox w-25 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-address-card"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>{{__('files.Address')}} :</span> <a id="address" class="txt"></a>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-
-
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-exclamation-triangle"></span>
-                                    </div>
-                                    <div class="text pl-3">
-                                        <p id="expiration_date"><span>{{__('files.Expiry Date')}} :</span> <a
-                                                    id="exdate" class="txt"></a></p>
-                                    </div>
-                                </div>
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-tasks"></span>
-                                    </div>
-                                    <div class="text pl-3">
-                                        <p><span>{{__('files.Job')}} :</span> <a id="job" class="txt"></a></p>
-                                    </div>
-                                </div>
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-user"></span>
-                                    </div>
-                                    <div class="text pl-3">
-                                        <p><span>{{__('files.Marital status')}} :</span> <a id="mstat" class="txt"></a>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-calendar"></span>
-                                    </div>
-                                    <div class="text pl-3">
-                                        <p><span>{{__('files.Issuing Date')}} :</span> <a id="isdate" class="txt"></a>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-calendar"></span>
-                                    </div>
-                                    <div class="text pl-3">
-                                        <p><label for="vdate">{{__('files.Visit Date')}} :</label> <input type="text"
-                                                                                                          value="<?php echo date('d-m-Y'); ?>"
-                                                                                                          class="vdate form-control"
-                                                                                                          id="vdate"
-                                                                                                          disabled="disabled"/>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-calendar"></span>
-                                    </div>
-                                    <div class="text pl-3">
-                                        <p><label for="vtime">{{__('files.Visit Time')}} :</label> <input type="text"
-                                                                                                          value="<?php echo date('h:i:s a'); ?>"
-                                                                                                          class="vtime form-control"
-                                                                                                          id="vtime"
-                                                                                                          disabled="disabled"/>
-                                        </p>
-
-                                    </div>
-                                </div>
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-flag"></span>
-                                    </div>
-                                    <div class="text pl-3">
-                                        <p><span>{{__('files.Country Code')}} :</span> <a id="icc" class="txt"></a></p>
-                                    </div>
-                                </div>
-                                <div class="dbox w-25 d-flex align-items-center" style="display:none !important">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-book"></span>
-                                    </div>
-                                    <div class="text pl-3">
-                                        <p><span>{{__('files.Religion')}} :</span> <a id="relg" class="txt"></a></p>
-                                    </div>
-                                </div>
-                                <div class="dbox w-25 d-flex align-items-center">
-                                    <div class="icon d-flex align-items-center justify-content-center">
-                                        <span class="fa fa-address-card"></span>
-                                    </div>
-                                    <div class="text pl-3">
-                                        <p><span>{{__('files.Address')}} :</span> <a id="address" class="txt"></a></p>
-                                    </div>
-                                </div>
 
 
-                                <div class="dbox w-100 d-flex align-items-center"
-                                     style="margin-bottom:0px !important;height: 50px !important;margin-top:55px;text-align:center;padding-left: 35%;">
-                                    <div class="form-group">
-                                        <input type="button" value="{{__('files.New Scan')}}"
-                                               class="btn btn-danger new_page">
+                                    <div class="dbox w-100 d-flex align-items-center"
+                                         style="margin-bottom:0px !important;height: 50px !important;margin-top:55px;text-align:center;padding-left: 35%;">
+                                        <div class="form-group">
+                                            <input type="button" value="{{__('files.New Scan')}}"
+                                                   class="btn btn-danger new_page">
 
-                                        <input type="button" value="{{__('files.Scan')}}" class="btn btn-danger scan"
-                                               onclick="connect();">
+                                            <input type="button" value="{{__('files.Scan')}}"
+                                                   class="btn btn-danger scan"
+                                                   onclick="connect();">
 
-                                        <div class="submitting"></div>
+                                            <input type="button" value="{{__('files.Search Worker')}}"
+                                                   class="btn btn-danger search_worker">
+
+                                            <div class="submitting"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    {{-- Start Workers --}}
+                    <div class="col-md-12 mt-5">
+                        <table class="table table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">{{__('files.National Number')}}</th>
+                                <th scope="col">{{__('files.Name')}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($workers as $worker)
+                                <tr style="@if($worker->is_scaned == 1 )  background-color : green; @endif">
+                                    <td>{{$worker->nat_id}}</td>
+                                    <td>{{$worker->name}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    {{-- End Workers --}}
                 </div>
+
+
             </div>
+
         </div>
     </div>
 </section>
@@ -421,10 +455,6 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
             });
             break;
     }
-
-
-
-
 
     @endif
 </script>
