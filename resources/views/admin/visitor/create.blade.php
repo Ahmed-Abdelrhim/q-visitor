@@ -126,7 +126,7 @@
                                         <label for="employee_id">{{ __('files.Select Employee') }}</label> <span
                                                 class="text-danger">*</span>
                                         <select id="employee_id" name="employee_id"
-                                                class="form-control select2 @error('employee_id') is-invalid @enderror">
+                                                class="select2 @error('employee_id') is-invalid @enderror">
                                             @foreach($employees as $key => $employee)
                                                 <option
                                                         value="{{ $employee->id }}" {{ (old('employee_id') == $employee->id) ? 'selected' : '' }}>{{ $employee->name }}

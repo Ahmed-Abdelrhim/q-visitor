@@ -477,6 +477,12 @@ class OcrController extends Controller
             $car_type = $_POST['car_type'];
         }
 
+        //        if ($car_type == 'TWIN_TRUCK') {
+        //            if (!isset($_POST['twin_truck_number'])) {
+        //                return 'Twin Truck Error';
+        //            }
+        //        }
+
         // $visitingDetail = VisitingDetails::query()->max('reg_no');
         $visitingDetail = VisitingDetails::query()->orderBy('id', 'desc')->first();
         $reg_no = $visitingDetail->reg_no + 1;
@@ -658,6 +664,8 @@ class OcrController extends Controller
 
     public function playy()
     {
+        return $data = Http::get('http://192.168.2.125:8081/api/Log/ReadAllLogs');
+
         $name = 'name';
         // strpos()
         return $visits = VisitingDetails::query()->with('owner')

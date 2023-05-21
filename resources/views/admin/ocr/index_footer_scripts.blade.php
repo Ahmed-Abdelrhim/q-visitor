@@ -425,6 +425,14 @@ $.post('{{route('admin.ocr.save')}}', {
                     });
                 }
 
+                if(data == 'Twin Truck Error') {
+                        iziToast.error({
+                        title: 'Error',
+                        message: 'يجب إدخال رقم المقطورة',
+                        position: 'topRight',
+                    });
+                }
+
 
 
                 // if(data == 'SQL Server Connection Error') {
