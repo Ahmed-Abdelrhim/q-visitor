@@ -39,19 +39,27 @@ class WorkerController extends Controller
             $nat_id = $_POST['nat_id'];
         }
 
+        $englishNationalNumber = $this->convertNationalNumberToEnglish($nat_id);
+
         $worker = Worker::query()
-            ->where('nat_id' , $nat_id)
+            ->where('nat_id', $englishNationalNumber)
             ->first();
 
         if (!$worker) {
             return 'Worker Was Not Found';
         }
+        // ٢٩٨١٢٢٢٠١٠٢٥٧٦
+        // 29812220102576
 
         $worker->is_scaned = 1;
         $worker->save();
 
-        return response()->json(['status' => 200, 'msg' => 'Success']);
-
+        return response()->json(['status' => 200, 'msg' => 'Success' , 'nat_id' => $worker->nat_id]);
     }
 
+    public function convertNationalNumberToEnglish($national_number): string
+    {
+        return strtr($national_number, array('۰' => '0', '۱' => '1',
+            '۲' => '2', '۳' => '3', '۴' => '4', '۵' => '5', '۶' => '6', '۷' => '7', '۸' => '8', '۹' => '9', '٠' => '0', '١' => '1', '٢' => '2', '٣' => '3', '٤' => '4', '٥' => '5', '٦' => '6', '٧' => '7', '٨' => '8', '٩' => '9'));
+    }
 }

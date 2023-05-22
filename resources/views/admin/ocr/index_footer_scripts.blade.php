@@ -326,10 +326,14 @@ $.post('{{route('admin.ocr.save')}}', {
         $('.search_worker').click(function () {
             name = $('#name').text();
             nat_id = $('#mrz').text();
+            // nat_id = 29911100104274;
             $.post('{{route('admin.find.this.worker')}}', {
                 name: name,
                 nat_id: nat_id,
             }, function (data) {
+                console.log(data);
+
+
                 if(data === 'Worker Was Not Found') {
                     iziToast.error({
                         title: 'Error',
@@ -339,15 +343,15 @@ $.post('{{route('admin.ocr.save')}}', {
                 }
 
                 if(data.status == 200 ) {
-                    iziToast.error({
+                    $('#' + data.nat_id).addClass("green-row");
+                    iziToast.success({
                         title: 'success',
                         message: 'هذا العامل موجود بالفعل',
                         position: 'topRight',
                     });
                 }
-
-
             });
+
         });
 
 
@@ -373,7 +377,9 @@ $.post('{{route('admin.ocr.save')}}', {
             plate_no = $('.plate_no').val();
             employee_id = $('#employee').val();
             car_plate_number = $('#plate_number_input').val();
-            car_type = @if(isset($car_type))        '{{$car_type}}' @endif
+            car_type = @if(isset($car_type))
+        '{{$car_type}}'
+    @endif
 
     $.post('{{route('admin.new.scan.post')}}', {
                 name: name,
@@ -466,4 +472,5 @@ $.post('{{route('admin.ocr.save')}}', {
             $('#plate_number_input').val(value);
         });
     });
+
 </script>

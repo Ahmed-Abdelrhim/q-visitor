@@ -107,7 +107,7 @@
                                                 <h5 class="h5 text-center">{{__('files.Car Plate Number')}}</h5>
                                                 <select class="js-example-templating form-control"
                                                         id="car_plate_number">
-                                                    <option disabled>-- Select Car Plate Number --</option>
+                                                    <option disabled selected>-- Select Car Plate Number --</option>
                                                     @foreach($car_plates as $plate)
                                                         <option value="{{$plate->plate_number}}">{{$plate->plate_number}}</option>
                                                     @endforeach
@@ -292,7 +292,7 @@
                                                         <input type="button" value="{{__('files.New Scan')}}"
                                                                class="btn btn-danger new_page">
                                                         <input type="button" value="{{__('files.Scan')}}"
-                                                               class="btn btn-danger scan"
+                                                               class="btn btn-dark scan"
                                                                onclick="connect();">
                                                         <input type="button" value="{{__('files.Save Data')}}"
                                                                class="btn btn-success newscan"

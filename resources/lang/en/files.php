@@ -330,7 +330,7 @@ return [
     'There are no workers for this contractor' => 'There are no workers for this contractor',
     'Search Worker' => 'Search Worker',
     'This Contractor Has Already Workers' => 'This Contractor Has Already Workers',
-    '' => '',
+    'Scan Document' => 'Scan',
     '' => '',
     '' => '',
     '' => '',

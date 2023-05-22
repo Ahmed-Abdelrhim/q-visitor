@@ -321,7 +321,7 @@ return [
     'There are no workers for this contractor' => 'لا يوجد عمال لهذا المقاول',
     'Search Worker' => 'بحث عن الموظف',
     'This Contractor Has Already Workers' => 'هذا المقاول لدية عمال بالفعل',
-    '' => '',
+    'Scan Document' => 'فحص البيانات',
     '' => '',
     '' => '',
     '' => '',

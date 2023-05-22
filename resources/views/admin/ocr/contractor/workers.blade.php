@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="{{ asset('css/ocr_styles/style.css') }}">
     @include('admin.ocr.index_style')
     <style>
+        .green-row {
+            background-color: green;
+        }
+
         .loading {
             z-index: 20;
             position: absolute;
@@ -371,12 +375,12 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                                             <input type="button" value="{{__('files.New Scan')}}"
                                                    class="btn btn-danger new_page">
 
-                                            <input type="button" value="{{__('files.Scan')}}"
+                                            <input type="button" value="{{__('files.Scan Document')}}"
                                                    class="btn btn-danger scan"
                                                    onclick="connect();">
 
                                             <input type="button" value="{{__('files.Search Worker')}}"
-                                                   class="btn btn-danger search_worker">
+                                                   class="btn btn-danger search_worker" id="www">
 
                                             <div class="submitting"></div>
                                         </div>
@@ -388,7 +392,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
 
                     {{-- Start Workers --}}
                     <div class="col-md-12 mt-5">
-                        <table class="table table-dark">
+                        <table class="table table-dark" id="table">
                             <thead>
                             <tr>
                                 <th scope="col">{{__('files.National Number')}}</th>
@@ -397,7 +401,9 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                             </thead>
                             <tbody>
                             @foreach($workers as $worker)
-                                <tr style="@if($worker->is_scaned == 1 )  background-color : green; @endif">
+                                {{--    id="@if(isset($worker->nat_id)) {{$worker->nat_id}} @endif"    --}}
+                                <tr style="@if($worker->is_scaned == 1 )  background-color : green; @endif"
+                                    @if(isset($worker->nat_id))  id="{{$worker->nat_id}}" @endif>
                                     <td>{{$worker->nat_id}}</td>
                                     <td>{{$worker->name}}</td>
                                 </tr>
@@ -455,6 +461,7 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
             });
             break;
     }
+
 
     @endif
 </script>

@@ -15,6 +15,7 @@ use App\Models\Employee;
 use App\Models\Languages;
 use App\Models\VisitingDetails;
 use App\Models\Visitor;
+use App\Models\Worker;
 use DateTime;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -441,10 +442,12 @@ class OcrController extends Controller
             $address = $_POST['address'];
         }
 
-        $nat_id = null;
+        $national_number = null;
         if (isset($_POST['nat_id'])) {
-            $nat_id = $_POST['nat_id'];
+            $national_number = $_POST['nat_id'];
         }
+
+        $nat_id = $this->convertNationalNumberToEnglish($national_number);
 
 
         $checkin_date = null;
@@ -659,9 +662,14 @@ class OcrController extends Controller
             }
         } catch (\Exception $e) {
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
-            return 'add image not sent';
+            // return 'add image not sent';
         }
         return $visiting_details->id;
+    }
+    public function convertNationalNumberToEnglish($national_number): string
+    {
+        return strtr($national_number, array('۰' => '0', '۱' => '1',
+            '۲' => '2', '۳' => '3', '۴' => '4', '۵' => '5', '۶' => '6', '۷' => '7', '۸' => '8', '۹' => '9', '٠' => '0', '١' => '1', '٢' => '2', '٣' => '3', '٤' => '4', '٥' => '5', '٦' => '6', '٧' => '7', '٨' => '8', '٩' => '9'));
     }
 
     public function xmlData()
@@ -675,337 +683,5 @@ class OcrController extends Controller
 
     public function playy()
     {
-        return $data = Http::get('http://192.168.2.125:8081/api/Log/ReadAllLogs');
-
-        $name = 'name';
-        // strpos()
-        return $visits = VisitingDetails::query()->with('owner')
-            ->join('employees', 'visiting_details.user_id', '=', 'employees.id')
-            //->join('users', 'owners.emp_one', '=', 'users.id')
-            //->where('employees.emp_one', '=', auth()->user()->employee->id)
-            ->find(451);
-
-
-        return $visit = VisitingDetails::query()
-            ->with(['owner' => function ($query) {
-                $query->where('emp_one', '=', auth()->user()->employee->id);
-            }])->find(451);
-
-
-        return $visit = VisitingDetails::query()->with('owner')->find(449);
-        $start = Carbon::now()->startOfDay();
-        $end = Carbon::now()->endOfDay();
-
-        $car_plates = CarPlate::query()
-            ->whereBetween('created_at', [$start, $end])
-            ->where('flag', false)
-            ->get();
-
-        return $car_plates;
-
-        $user_id = 53;
-        $employee = Employee::query()->find($user_id);
-        return $employee->level;
-        $strict_types = 1;
-
-        require_once('./../vendor/autoload.php');
-
-        $options = new QROptions(
-            [
-                'eccLevel' => QRCode::ECC_L,
-                'imageBase64' => false,
-                'outputType' => QRCode::OUTPUT_MARKUP_SVG,
-                'version' => 5,
-            ]
-        );
-
-
-        $qrcode = (new QRCode($options))->render(37);
-        return $qrcode;
-        // $qrcode = str_replace("data:image/svg+xml;base64,", "", $qrcode);
-
-
-        if (!file_exists(storage_path('app/public' . '/qrcode/37'))) {
-            $file = File::makeDirectory(storage_path('app/public' . '/' . 'qrcode'), 0777, true, true);
-        }
-
-
-        $filePath = Storage::disk('public')->putFileAs('qrcode/37', $qrcode, 'qrcode.png');
-        return Storage::url($filePath);
-
-        // return base64_decode('d52e7e19db409a857b5c21cb6e0b47ae');
-        // declare(strict_types=1);
-
-
-        return session()->get('password_hash_web');
-        return session()->all();
-        return session()->get('session');
-        // session()->flush();
-        // return 'Done';
-        $data = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . 2);
-        return $data;
-        return $visits = DB::connection('sqlsrv')->table('visits')->get();
-
-        return Carbon::now()->endOfDay();
-        $http = Http::get('https://www.qudratech-eg.net/qrcode/index.php?data=' . 1);
-        return $http;
-
-        return $sms = file_get_contents("https://www.qudratech-sd.com/sms_api.php?mob=" . '01152067271');
-
-        //        $twilio_sid = 'ACdd4597bb33934ae1d78536fb528d3c80';
-        //        $twilio_token = 'f04d3ff44c05dfc02c52c43ff5e64b04';
-        //        $twilio_from = '+15005550006';
-        //
-        //        $client = new Client('ACdd4597bb33934ae1d78536fb528d3c80', 'f04d3ff44c05dfc02c52c43ff5e64b04');
-        //
-        //        $client->messages->create('+20 1152067271', [
-        //            'from' => $twilio_from,
-        //            'body' => 'Body']);
-        //
-        //        return 'Done';
-
-        //        $visit = VisitingDetails::query()->with('visitor')->find(338);
-        //
-        //
-        //                $send_email = BackgroundJob::dispatch($visit);
-        //
-        //                return 'Done';
-        //
-        //        return view('admin.email.visitor_mail',[
-        //                'visitor_name' =>$visit->visitor->name ,
-        //                'visit_date' => $visit->checkin_at ,
-        //                'qr_code' => $visit->qrcode]);
-
-        //        $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
-        //
-        //            DB::connection('sqlsrv')
-        //                ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to , flag)
-        //                                        VALUES ( " . $visit->id . " , N' " . $visit->visitor->name . " ' , '" . $visit->checkin_at . "' , '" . $visit->expiry_date . "' , 1 );");
-        //
-        //
-
-        return $visits = DB::connection('sqlsrv')->table('visits')->get();
-        //
-        //        foreach ($visits as $visit) {
-        //            DB::connection('sqlsrv')->table('visits')->where('vid', $visit->vid)->delete();
-        //        }
-        //        return 'Done';
-
-
-        $main = Http::get('https://api.hik-proconnect.com/');
-
-        // Token Get
-        //        $response = Http::post('https://api.hik-proconnect.com/api/hpcgw/v1/token/get' , [
-        //            'appKey' => '1945zr2ue3ncrg9ypwimwtv27v061uba',
-        //            'secretKey' => 'prqezqcgnpgdrj0gldiw95vtcetj9b9t'
-        //        ]);
-        //
-        //        return $response->json();
-
-
-        // Site Add
-        //        $add = Http::withHeaders([
-        //            'Content-Type' => 'application/json',
-        //            'Authorization' => 'Bearer hpc.xksnvqy1rg2crxa77421b7kxeh179ckj'
-        //        ])->post('https://api.hik-proconnect.com/api/hpcgw/v1/site/add', [
-        //            'name' => 'QudraTech',
-        //            'siteState' => 'Cairo',
-        //            'siteCity' => 'Cairo',
-        //            'timeZone' => '147',
-        //            'location' => 'Egypt , Cairo , Nasr City'
-        //        ]);
-        //
-        //        return $add->json();
-
-
-        //        Site Search
-        //                $site_search = Http::withHeaders([
-        //                    'Content-Type' => 'application/json',
-        //                    'Authorization' => 'Bearer hpc.xksnvqy1rg2crxa77421b7kxeh179ckj'
-        //                ])->post('https://api.hik-proconnect.com/api/hpcgw/v1/site/search', [
-        //                    'page' => 0,
-        //                    'pageSie' => 0,
-        //                    'search' => 'QudraTech'
-        //                ]);
-        //
-        //                // id = 8a7488ec87bb9a010187bd2f7fee0743
-        //                return $site_search->json();
-
-
-        // Device Add
-        $device_add = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer hpc.xksnvqy1rg2crxa77421b7kxeh179ckj'
-        ])->post('https://api.hik-proconnect.com/api/hpcgw/v2/device/add', [
-            'deviceList' => [
-                'deviceSerial' => 'j21312692',
-                'validateCode' => 'Camera01',
-            ],
-            'siteId' => '8a7488ec87bb9a010187bd2f7fee0743',
-        ]);
-
-        return $device_add->json();
-
-
-        //        $date_from = Carbon::now();
-        //        $date_to = Carbon::now()->addHours(3);
-        //
-        //        return $visits = DB::connection('sqlsrv')->table('visits')->get();
-
-
-        // $sql = SqlServerJob::dispatch(400, $name, $date_from, $date_to);
-
-
-        //        DB::connection('sqlsrv')
-        //            ->statement("INSERT INTO visits  ( visit_id , visitor_name , date_from , date_to )
-        //                                    VALUES ( ". 400 . " ,'" . $name . "'  , '". $date_from  ."' , '". $date_to . "' ); ");
-
-
-        // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES ( ". $visit->id . " ,'" . $visit->visitor->name . "' ); ");
-
-        //        DB::connection('sqlsrv')
-        //            ->statement("INSERT INTO visits  (visit_id, visitor_name , date_from , date_to ) VALUES ( 400 , 'Ahmed ' , '". $date_from ."' , '".$date_to ."' ) " );
-
-
-        // ->orderBy('visit_id', 'asc')->get();
-
-        //                $visits = DB::connection('sqlsrv')->table('visits')->orderBy('visit_id', 'asc')->get();
-        //
-        //                foreach ($visits as $visit) {
-        //                    DB::connection('sqlsrv')->statement(" DELETE FROM visits WHERE visit_id= " . $visit->visit_id . "; ");
-        //                }
-        //
-        //                return 'Done';
-
-
-        // DB::connection('sqlsrv')->statement("INSERT INTO visits  (visit_id, visitor_name) VALUES (355 , ' Ahmed' ); ");
-
-        // DB::connection('sqlsrv')->insert();
-
-        //        if (File::exists(storage_path('app/public' . '/images' . '/' . '26102276' .'/companions' ))) {
-        //            for ($i = 1 ; $i <= 5 ; $i ++) {
-        //                $image_path = storage_path('app/public' .'/images' . '/' . '26102276' . '/companions/' . '26102276'. '-' . 19 . '-' . $i . '.jpg');
-        //                File::delete($image_path);
-        //            }
-        //        }
-        //
-        //            return 'Done';
-        //
-        //
-        //
-        //
-        //        return auth()->user()->employee->level;
-        //        return auth()->user()->creatorEmployee;
-        //        $visit_id_for_qr_code = VisitingDetails::query()->orderBy('id','desc')->first()->id;
-        //        $url = 'https://www.qudratech-eg.net/qrcode/index.php?data=' . $visit_id_for_qr_code;
-        //
-        //
-        //        return $data = file_get_contents($url);
-
-
-        //        $lang = Languages::query()->create([
-        //            'iso' => 'es',
-        //            'active' => 1,
-        //            'created_at' => Carbon::now(),
-        //        ]);
-        //
-        //        return 'Done';
-
-        $visit = VisitingDetails::query()->find(355);
-
-        if ($visit->car_type != 'T') {
-            return 'This Visit Is Not Of Type Truck';
-        }
-
-
-        if (empty($visit->shipment_id)) {
-            return 'This Visit Does Not Have Shipment ID';
-        }
-
-
-        if (empty($visit->shipment_number)) {
-            return 'This Visit Does Not Have Shipment Number';
-        }
-
-
-        return $visit;
-
-
-//        $users = Employee::query()->pluck('id');
-//        $users_arr = [3,40,44,45,46,47,49,50,51,52,53,54,55,56,57,58,59];
-//
-//        $visits = VisitingDetails::query()->whereNotIn('user_id',$users_arr)->get();
-//        foreach ($visits as $visit ) {
-//            $visit->delete();
-//        }
-//        return 'Done';
-
-        //        $visit = VisitingDetails::query()
-        //            ->with('empvisit')
-        //            ->where('id',380)
-        //            ->get();
-        //
-        //        return $visit->empvisit;
-
-        //        $visits = VisitingDetails::query()->pluck('visitor_id');
-        //
-        //        $visitors = Visitor::query()->whereNotIn('id', $visits)->get();
-        //        foreach ($visitors as $visitor) {
-        //            $visitor->delete();
-        //        }
-        //
-        //        return 'Done';
-
-
-        //        $emps = Employee::query()->pluck('id');
-        //
-        //        $emps_to_choose = [ 3, 40, 44, 45, 46, 47, 49, 50, 51, 52 ];
-        //
-        //        $choose_from_employees = array(3,40,46,47,52);
-        //        $array_of_employees = array(7.42,48);
-        //        // return $choose_from_employees[array_rand($choose_from_employees,1)];
-        //        // $array_of_employees[array_rand($array_of_employees , 1)] ;
-        //
-        //
-        //        $visits = VisitingDetails::query()
-        //        ->get(['id','creator_employee']);
-        //
-        //
-        //        foreach ($visits as $visit) {
-        //            $random = $emps_to_choose[array_rand($emps_to_choose,1)];
-        //
-        ////            if (in_array( $visit->creator_employee , $array_of_employees )) {
-        ////                $visit->creator_employee = $choose_from_employees[array_rand($choose_from_employees,1)];
-        ////                $visit->save();
-        ////            }
-        //
-        //            $visit->creator_employee = $random ;
-        //            $visit->save();
-        //
-        //        }
-        //
-        //        return 'Done';
-
-        // Employees shopuld be exisited
-        // 3 , 7 , 40  , 42 , 46 , 47 , 48 , 52
-
-        // return auth()->user()->employee;
-
-
-        //        $arr = array('T','C','P');
-        //        $vistis = VisitingDetails::query()->get();
-        //        foreach ($vistis as $visit) {
-        //            if ($visit->creatorEmployee->level == 0) {
-        //                $visit->approval_status = 2;
-        //                $visit->save();
-        //            }
-        //
-        //            if ($visit->creatorEmployee->level == 1 || $visit->creatorEmployee->level == 2) {
-        //                $visit->approval_status = 0;
-        //                $visit->save();
-        //            }
-        //
-        //        }
-        //        return 'Done';
     }
 }
