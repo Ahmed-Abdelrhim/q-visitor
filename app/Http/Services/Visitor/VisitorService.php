@@ -456,7 +456,7 @@ class VisitorService
 
     public function delete($id)
     {
-        $visit = VisitingDetails::query()->with('visitor')->with('workers')->with('companions')->find($id)->delete();
+        return VisitingDetails::query()->find($id)->delete();
     }
 
 }
