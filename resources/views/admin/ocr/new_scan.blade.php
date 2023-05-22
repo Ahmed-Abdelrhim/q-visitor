@@ -275,7 +275,7 @@
                                                         <label class="input-group-text"
                                                                for="employee">{{__('files.Employee')}}</label>
                                                     </div>
-                                                    <select class="custom-select " id="employee">
+                                                    <select class="form-control select2" id="employee">
                                                         <option selected value="0">{{__('files.Choose Employee')}}...
                                                         </option>
 
@@ -377,7 +377,8 @@
             // });
             
             $(".js-example-templating").select2({});
-            $(document).on('keyup', '.select2-search__field', function (e) {
+            $("#employee").select2({});
+            $(document).on('keyup', '.select2-search__field:first', function (e) {
                 value = $('.select2-search__field')[0].value;
                 console.log( value );
                 $.ajax({
@@ -389,7 +390,8 @@
                         // console.log(data[0].plate_number);
                         $('#car_plate_number').empty();
                         for (var i = 0; i < data.length; i++) {
-                            $('#car_plate_number').append('<option value="${data[i].plate_number}">'+data[i].plate_number+'</option>')
+                            value = data[i].plate_number;
+                            $('#car_plate_number').append('<option value="'+value+'">'+value+'</option>')
                         }
                     }
                 });
