@@ -683,6 +683,7 @@ class OcrController extends Controller
 
     public function playy()
     {
-        return auth()->user()->employee->id;
+        VisitingDetails::query()->find(457)->delete();
+        return 'Done';
     }
 }

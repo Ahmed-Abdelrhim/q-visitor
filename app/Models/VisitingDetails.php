@@ -108,7 +108,19 @@ public function employee()
 
     public function workers()
     {
-        return $this->hasMany(Worker::class);
+        return $this->hasMany(Worker::class , 'visit_id', 'id');
     }
+
+    // Deleting Every Thing Related To Visit When Visit Is Deleted
+    protected static function booted () {
+        static::deleting(function(VisitingDetails $visit) {
+            // before delete() method call this
+            $visit?->workers()->delete();
+            $visit?->visitor()->delete();
+            $visit?->companions()->delete();
+            // do the rest of the cleanup...
+        });
+    }
+
 }
 
