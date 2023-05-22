@@ -181,13 +181,11 @@
                     if (json.Param.hasOwnProperty('Expity_Data')) {
                         document.getElementById("exdate").innerHTML = json.Param.Expity_Data;
 
-                        console.log('DATE IS HERE ===> ' + json.Param.Expity_Data);
+                        // console.log('DATE IS HERE ===> ' + json.Param.Expity_Data);
 
                         if(new Date().getTime()   >   new Date(json.Param.Expity_Data).getTime()) {
                             expiration_date = document.getElementById("expiration_date");
                             expiration_date.style.backgroundColor = "#dc3545";
-                        } else {
-                            console.log('Not Expired ID Card');
                         }
                     }
 
