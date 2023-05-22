@@ -119,7 +119,17 @@
                     console.log('Message state', websocket.readyState);
                     console.log(json.Param);
 
-                    // json.Param.Date_of_expiry =  new Date('2020/09/04').toISOString().split('T')[0];
+                    // json.Param.Date_of_expiry =  new Date("2020/12/25").toISOString().split('T')[0];
+
+                    // date =  Math.abs(   new Date("2022/5/22")  - new Date("2023/5/22") );
+
+{{--                    date1 = new Date("2021/09/04").getTime() ;--}}
+{{--                    date2 = new Date().getTime() ;--}}
+
+
+{{--                    if (date2 > date1) {--}}
+{{--                        console.log('Expired ID Card')--}}
+{{--                    } else { console.log('Not Expired') }--}}
 
                     if (strwhite != '' && strwhite != null) {
                         imagestr += strwhite + '||' + strhead + '||' + strChipHead + '||' + strpic + '||';
@@ -170,20 +180,31 @@
                     }
                     if (json.Param.hasOwnProperty('Expity_Data')) {
                         document.getElementById("exdate").innerHTML = json.Param.Expity_Data;
-                    }
 
-                    if (json.Param.hasOwnProperty('Date_of_expiry')) {
-                        if(Date.parse(json.Param.Date_of_expiry) - Date.parse(new Date()) < 0 )
-                        {
-                            console.log('expiration_date');
-                            expiry_date = document.getElementById("exdate");
-                            expiry_date.innerHTML = json.Param.Date_of_expiry;
+                        console.log('DATE IS HERE ===> ' + json.Param.Expity_Data);
 
+                        if(new Date().getTime()   >   new Date(json.Param.Expity_Data).getTime()) {
                             expiration_date = document.getElementById("expiration_date");
                             expiration_date.style.backgroundColor = "#dc3545";
                         } else {
-                            document.getElementById("exdate").innerHTML = json.Param.Date_of_expiry;
+                            console.log('Not Expired ID Card');
                         }
+                    }
+
+                    if (json.Param.hasOwnProperty('Date_of_expiry')) {
+                        document.getElementById("exdate").innerHTML = json.Param.Date_of_expiry
+                        {{--                        if(new Date().getTime()   >   new Date(json.Param.Date_of_expiry).getTime())--}}
+                        {{--                        {--}}
+                        {{--                            console.log('Expired ID Card');--}}
+                        {{--                            expiry_date = document.getElementById("exdate");--}}
+                        {{--                            expiry_date.innerHTML = json.Param.Date_of_expiry;--}}
+
+                        {{--                            expiration_date = document.getElementById("expiration_date");--}}
+                        {{--                            expiration_date.style.backgroundColor = "#dc3545";--}}
+                        {{--                        } else {--}}
+                        {{--                            console.log('Not Expired ID Card');--}}
+                        {{--                            document.getElementById("exdate").innerHTML = json.Param.Date_of_expiry;--}}
+                        {{--                        }--}}
                     }
 
 
