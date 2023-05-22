@@ -275,7 +275,7 @@
                                                         <label class="input-group-text"
                                                                for="employee">{{__('files.Employee')}}</label>
                                                     </div>
-                                                    <select class="form-control select2" id="employee">
+                                                    <select class="form-control" id="employee">
                                                         <option selected value="0">{{__('files.Choose Employee')}}...
                                                         </option>
 
@@ -377,9 +377,10 @@
             // });
             
             $(".js-example-templating").select2({});
-            $("#employee").select2({});
+            // $("#employee").select2({});
+
             $(document).on('keyup', '.select2-search__field:first', function (e) {
-                value = $('.select2-search__field')[0].value;
+                value = $('.select2-search__field:first')[0].value;
                 console.log( value );
                 $.ajax({
                     url: '{{ route('admin.search.car.plate') }}',
@@ -396,6 +397,7 @@
                     }
                 });
             });
+
         });
         // var isInitialLoad = true; // Flag to track initial load
         // $('.search-select').select2({
