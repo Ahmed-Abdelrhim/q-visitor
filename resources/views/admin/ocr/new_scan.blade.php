@@ -11,7 +11,6 @@
 @include('admin.ocr.index_style')
 @include('admin.ocr.script')
 
-
 <body>
 <div id="app">
     <div class="main-wrapper">
