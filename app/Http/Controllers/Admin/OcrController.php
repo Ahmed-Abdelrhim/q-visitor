@@ -683,5 +683,6 @@ class OcrController extends Controller
 
     public function playy()
     {
+        return auth()->user()->employee->id;
     }
 }

@@ -395,7 +395,7 @@ class VisitorService
             $visiting['visitor_id'] = $visitingDetails->visitor->id;
             $visiting['status'] = Status::ACTIVE;
 
-            $visiting['user_id'] = $request->input('employee_id');
+            // $visiting['user_id'] = $request->input('employee_id');
 
             // $visiting['qrcode'] = $request->input('qrcode');
             // $visiting['expiry_date'] = $request->input('expiry_date');
