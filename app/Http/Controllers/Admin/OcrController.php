@@ -25,7 +25,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Request;
+// use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Monolog\Handler\IFTTTHandler;
@@ -83,6 +84,14 @@ class OcrController extends Controller
         return view('admin.ocr.layout_main', ['visit' => $visit]);
     }
 
+    public function searchWithCarPlateNumber(Request $request)
+    {
+        $searchTerm = $request->value;
+        $data = CarPlate::query()->where('plate_number', 'like', "%{$searchTerm}%")
+            ->get(); // Customize the columns you want to retrieve
+        return response()->json($data);
+    }
+
     public function newScan($car_type)
     {
         $car_type = decrypt($car_type);
@@ -102,13 +111,15 @@ class OcrController extends Controller
         $start = Carbon::now()->startOfDay();
         $end = Carbon::now()->endOfDay();
 
+
+
         // Get Car Plates Today
         $car_plates = CarPlate::query()
             ->whereBetween('created_at', [$start, $end])
             ->where('flag', false)
             ->get();
 
-
+        // return $car_plates;
         return view('admin.ocr.new_scan', ['car_type' => $car_type, 'employees' => $employees, 'car_plates' => $car_plates, 'twin_truck' => $twin_truck]);
     }
 

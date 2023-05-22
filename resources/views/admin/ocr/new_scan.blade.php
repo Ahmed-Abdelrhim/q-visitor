@@ -105,9 +105,9 @@
                                         <div style="margin-top : 20px; margin-bottom: 20px; width: 100%;">
                                             @if(isset($car_plates))
                                                 <h5 class="h5 text-center">{{__('files.Car Plate Number')}}</h5>
-                                                <select class="form-control select2" id="car_plate_number">
-{{--                                                    <option selected> {{__('files.Select Car Plate Number')}} </option>--}}
-                                                    <option disabled selected>-- Select Car Plate Number --</option>
+                                                <select class="js-example-templating form-control"
+                                                        id="car_plate_number">
+                                                    <option disabled>-- Select Car Plate Number --</option>
                                                     @foreach($car_plates as $plate)
                                                         <option value="{{$plate->plate_number}}">{{$plate->plate_number}}</option>
                                                     @endforeach
@@ -297,9 +297,8 @@
                                                         <input type="button" value="{{__('files.Save Data')}}"
                                                                class="btn btn-success newscan"
                                                                style="background-color: #0a71db !important;">
-                                                        <input type="button" value="View Visitors"
-                                                               class="btn btn-success view"
-                                                               onclick="{{route('admin.visitors.index')}};">
+
+
                                                         <a type="button" class="btn btn-success view"
                                                            href="{{ route('admin.OCR.index') }}">
                                                             {{__('files.View Visitors')}}
@@ -371,6 +370,73 @@
 
 
     @endif
+        $(document).ready(function() {
+            // console.log( $('.select2-search__field').val() );
+            // $('.select2-search__field').on('change' , function () {
+            //     console.log('dklasjhdklaisjd');
+            // });
+            
+            $(".js-example-templating").select2({});
+            $(document).on('keyup', '.select2-search__field', function (e) {
+                value = $('.select2-search__field')[0].value;
+                console.log( value );
+                $.ajax({
+                    url: '{{ route('admin.search.car.plate') }}',
+                    type:"GET",
+                    data : {value},
+                    success: function(data) {
+                        console.log(data);
+                        // console.log(data[0].plate_number);
+                        $('#car_plate_number').empty();
+                        for (var i = 0; i < data.length; i++) {
+                            $('#car_plate_number').append('<option value="${data[i].plate_number}">'+data[i].plate_number+'</option>')
+                        }
+                    }
+                });
+            });
+        });
+        // var isInitialLoad = true; // Flag to track initial load
+        // $('.search-select').select2({
+        //     placeholder: '...جاري البحث',
+        //     ajax: {
+        //         url: '{{ route('admin.search.car.plate') }}',
+        //         dataType: 'json',
+        //         type:"GET",
+        //         delay: 250,
+        //         processResults: function (data) {
+        //             // console.log(data);
+        //             return {
+        //                 results: data.map(function (item) {
+        //                     return {
+        //                         text: item.plate_number,
+        //                         id: item.id
+        //                     }
+        //                 })
+        //                 // End Of Search Is Here
+        //             };
+        //         },
+        //         cache: true
+        //     }
+        // }).on('select2:open', function() {
+        //         console.log('opned');
+        //         console.log( $('.select2-search__field') );
+        //         var searchInput = $('.select2-search__field').val();
+        //         if ( searchInput == '') {
+        //             console.log('Yes Empty');
+        //         }
+        //         if (searchInput) {
+        //             console.log('Search input value:', searchInput);
+        //             // Perform desired logic with the search input value
+        //         }
+        //     }).on('select2:close', function() {
+        //         // Clear the search input
+        //         $('.select2-search__field').val('');
+        //     });
+
+
+
+
+
 </script>
 </body>
 </html>
