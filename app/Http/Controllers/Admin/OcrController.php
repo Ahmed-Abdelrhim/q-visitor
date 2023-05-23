@@ -670,6 +670,18 @@ class OcrController extends Controller
             $notifications = array('message' => 'add image not sent', 'alert-type' => 'info');
             // return 'add image not sent';
         }
+
+        $add = null;
+        if (isset($_POST['add'])) {
+            $add = $_POST['add'];
+        }
+
+
+        if ($add == 'Y') {
+            $visit = VisitingDetails::query()->with('visitor')->orderBy('id', 'desc')->first();
+            return view('admin.ocr.companion_from_new_scan',['visit' =>$visit]);
+        }
+
         return $visiting_details->id;
     }
     public function convertNationalNumberToEnglish($national_number): string

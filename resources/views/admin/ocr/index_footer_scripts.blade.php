@@ -323,6 +323,8 @@ $.post('{{route('admin.ocr.save')}}', {
             });
         });
 
+
+
         $('.search_worker').click(function () {
             name = $('#name').text();
             nat_id = $('#mrz').text();
@@ -355,11 +357,11 @@ $.post('{{route('admin.ocr.save')}}', {
         });
 
 
-        $('.newscan').click(function () {
+        $('.add_companion_from_new_scan').click(function () {
             $(this).serialize();
             // cnf = confirm("Add another Person ID?");
             // if (cnf == true) add = 'Y'; else add = 'N';
-            add = 'N';
+            add = 'Y';
             $(this).prop('disabled', true);
             obj = $(this);
             $(this).attr('value', 'Saving...');
@@ -471,6 +473,116 @@ $.post('{{route('admin.ocr.save')}}', {
             $('#plate_number_input').val('');
             $('#plate_number_input').val(value);
         });
-    });
 
+        // Start Here
+        $('.newscan').click(function () {
+            $(this).serialize();
+            // cnf = confirm("Add another Person ID?");
+            // if (cnf == true) add = 'Y'; else add = 'N';
+            add = 'N';
+            $(this).prop('disabled', true);
+            obj = $(this);
+            $(this).attr('value', 'Saving...');
+            name = $('#name').text();
+            gender = $('#sex').text();
+            address = $('#icc').text();
+            nat_id = $('#mrz').text();
+            address2 = $('#address').text();
+            full_address = address2 + ' ' + address;
+            checkin_date = $('#vdate').val();
+            checkin_time = $('#vtime').val();
+            images = $('.images').text();
+            perpic = $('.perpic').text();
+            exdate = $('#exdate').text();
+            plate_no = $('.plate_no').val();
+            employee_id = $('#employee').val();
+            car_plate_number = $('#plate_number_input').val();
+            car_type = @if(isset($car_type))
+        '{{$car_type}}'
+    @endif
+
+    $.post('{{route('admin.new.scan.post')}}', {
+                name: name,
+                gender: gender,
+                address: full_address,
+                nat_id: nat_id,
+                checkin_date: checkin_date,
+                checkin_time: checkin_time,
+                images: images,
+                perpic: perpic,
+                exdate: exdate,
+                plate_no: plate_no,
+                employee_id : employee_id,
+                car_plate_number : car_plate_number,
+
+
+                add: add,
+                car_type : car_type,
+            }, function (data) {
+                if(data === 'Visitor Error') {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'حدث خطأ أثناء إدخال بيانات الزائر',
+                        position: 'topRight',
+                    });
+                }
+
+                if(data === 'Visit Error') {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'حدث خطأ أثناء إنشاء بيانات الزيارة',
+                        position: 'topRight',
+                    });
+                }
+
+                if(data == 'Employee Is Not Specified') {
+                        iziToast.error({
+                        title: 'Error',
+                        message: 'يجب أن تختار موظف لهذة الزيارة',
+                        position: 'topRight',
+                    });
+                }
+
+                if(data == 'Car Plate Is Not Specified') {
+                        iziToast.error({
+                        title: 'Error',
+                        message: 'يجب إختيار رقم السيارة',
+                        position: 'topRight',
+                    });
+                }
+
+                if(data == 'Twin Truck Error') {
+                        iziToast.error({
+                        title: 'Error',
+                        message: 'يجب إدخال رقم المقطورة',
+                        position: 'topRight',
+                    });
+                }
+
+
+
+                // if(data == 'SQL Server Connection Error') {
+                //        iziToast.error({
+                //        title: 'Error',
+                //        message: 'حدث خطأ اثنتاء الاتصال بقاعدة بيانات ال sql server',
+                //        position: 'topRight',
+                //    });
+                //  }
+
+                else {
+                    console.log(data);
+                    wnd = window.open("http://127.0.0.1:8000/admin/ocr-print/?id=" + data, '_blank');
+                    wnd.print();
+                    location.reload();
+                }
+            });
+        });
+
+        //End Here
+
+
+
+
+
+    });
 </script>

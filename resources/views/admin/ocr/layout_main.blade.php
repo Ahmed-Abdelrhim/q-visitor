@@ -214,19 +214,20 @@ if (!file_exists(storage_path('app/public' . '/plate.txt'))) {
                             <div class="contact-wrap w-100 p-lg-5 p-4">
 
                                 <div id="form-message-warning" class="mb-4"></div>
-                                <div id="form-message-success" class="mb-4">
-                                    Data was sent, thank you!
-                                </div>
+{{--                                <div id="form-message-success" class="mb-4">--}}
+{{--                                    Data was sent, thank you!--}}
+{{--                                </div>--}}
                                 <div class="row" style="text-align:center">
                                     @if(isset($person_visit))
                                         <h5>Visit Without Car</h5>
                                     @else
                                         <h5>{{__('files.Car Plate')}} :</h5><input type="text"
-                                                                                   class="form-control plate_no"
+                                                                                   class="form-control plate_no" disabled
                                                                                    value="<?php echo $plate; ?>"/>
-                                        <input type="button" value="{{__('files.Last Car plate')}}"
-                                               class="btn btn-success get_plate"
-                                               style="height: 35px; padding: 5px 14px;margin-left: 7%">
+
+{{--                                        <input type="button" value="{{__('files.Last Car plate')}}"--}}
+{{--                                               class="btn btn-success get_plate"--}}
+{{--                                               style="height: 35px; padding: 5px 14px;margin-left: 7%">--}}
                                     @endif
 
 

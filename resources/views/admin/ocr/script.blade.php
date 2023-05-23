@@ -168,6 +168,8 @@
                     }
                     if (json.Param.hasOwnProperty('National_ID')) {
                         if (json.Param.National_ID != '') document.getElementById("mrz").innerHTML = json.Param.National_ID;
+                        console.log('Print ID Card');
+                        searchWorker();
                     }
                     if (json.Param.hasOwnProperty('Sex')) {
                         document.getElementById("sex").innerHTML = json.Param.Sex;
@@ -297,6 +299,40 @@
         var len = ('' + num).length;
         return (Array(fill > len ? (fill - len + 1) || 0 : 0).join(0) + num);
     }
+
+
+
+    function searchWorker() {
+        name = $('#name').text();
+        nat_id = $('#mrz').text();
+        $.post('{{route('admin.find.this.worker')}}', {
+                name: name,
+                nat_id: nat_id,
+            }, function (data) {
+                console.log(data);
+
+
+                if(data === 'Worker Was Not Found') {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'لم يتم إيجاد هذا بيانات العامل',
+                        position: 'topRight',
+                    });
+                }
+
+                if(data.status == 200 ) {
+                    $('#' + data.nat_id).addClass("green-row");
+                    iziToast.success({
+                        title: 'success',
+                        message: 'هذا العامل موجود بالفعل',
+                        position: 'topRight',
+                    });
+                }
+        });
+    }
+
+
+
 
 
 </script>

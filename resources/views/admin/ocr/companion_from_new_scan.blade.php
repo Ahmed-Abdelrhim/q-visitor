@@ -14,7 +14,6 @@
 <body>
 <div id="app">
     <div class="main-wrapper">
-        {{--        @include('admin.layouts.components.navigation')--}}
         <!-- Main Content -->
         <div class="main-contentt">
             <div id="loading">
@@ -54,25 +53,22 @@
                                                                                                        disabled
                                                                                                        class="form-control plate_no"
                                                                                                        id="plate_number_input"
-                                                                                                       name="car_plate_number" style="margin-top: -9px;"/>
-
-                                                            @if($car_type == 'TWIN_TRUCK')
-                                                                <h5 style="margin-top: -3px;">{{__('files.Twin Truck Number')}} :</h5>
-                                                                <input type="text" class="form-control plate_no"
-                                                                       name="twin_truck_number"
-                                                                       style="width: 150px; height: 35px; margin-left: 10px; margin-top: -7px;"/>
-                                                            @endif
+                                                                                                       name="car_plate_number"/>
 
 {{--                                                            <a class="btn btn-primary dashboard"--}}
-{{--                                                               href="{{ route('admin.dashboard.index') }}"--}}
-{{--                                                               style="height: 35px; padding: 7px 14px;margin-left: 7%">--}}
-{{--                                                                {{__('files.Dashboard')}}--}}
-{{--                                                            </a>--}}
+                                                            {{--                                                               href="{{ route('admin.dashboard.index') }}"--}}
+                                                            {{--                                                               style="height: 35px; padding: 7px 14px;margin-left: 7%">--}}
+                                                            {{--                                                                {{__('files.Dashboard')}}--}}
+                                                            {{--                                                            </a>--}}
 
                                                         </div>
                                                     @endif
                                                 @endif
 
+                                                <h2 class="h2 text-capitalize text-lg-left"
+                                                    style="height: 35px; margin-left: 18%">
+                                                    إضافة مرافق إلي الزائر -- {{ $visit->visitor->name }}
+                                                </h2>
 
                                                 <br/>
                                                 <div class="row" style="text-align:center">
@@ -102,7 +98,7 @@
                                         </div>
 
                                         {{-- Start Car Plates--}}
-                                        @if($car_type != 'P')
+                                        @if($visit->car_type != 'P')
                                             <div style="margin-top : 20px; margin-bottom: 20px; width: 100%;">
                                                 @if(isset($car_plates))
                                                     <h5 class="h5 text-center">{{__('files.Car Plate Number')}}</h5>
@@ -300,16 +296,15 @@
                                                                class="btn btn-success newscan"
                                                                style="background-color: #0a71db !important;">
 
-{{--                                                        <input type="button" value="{{__('files.Add Companion')}}"--}}
-{{--                                                               class="btn btn-success add_companion_from_new_scan"--}}
-{{--                                                               style="background-color: #0a71db !important;">--}}
+                                                        <input type="button" value="{{__('files.Add Companion')}}"
+                                                               class="btn btn-success add_companion_from_new_scan"
+                                                               style="background-color: #0a71db !important;">
 
 
                                                         <a type="button" class="btn btn-success view"
                                                            href="{{ route('admin.OCR.index') }}">
                                                             {{__('files.View Visitors')}}
                                                         </a>
-
 
                                                         <div class="submitting"></div>
                                                     </div>
@@ -378,16 +373,10 @@
 
 
 
+
     @endif
     $(document).ready(function() {
-        // console.log( $('.select2-search__field').val() );
-        // $('.select2-search__field').on('change' , function () {
-        //     console.log('dklasjhdklaisjd');
-        // });
-
         $(".js-example-templating").select2({});
-        // $("#employee").select2({});
-
         $(document).on('keyup', '.select2-search__field:first', function (e) {
             value = $('.select2-search__field:first')[0].value;
             console.log( value );
@@ -406,50 +395,7 @@
                     }
                 });
             });
-
         });
-        // var isInitialLoad = true; // Flag to track initial load
-        // $('.search-select').select2({
-        //     placeholder: '...جاري البحث',
-        //     ajax: {
-        //         url: '{{ route('admin.search.car.plate') }}',
-        //         dataType: 'json',
-        //         type:"GET",
-        //         delay: 250,
-        //         processResults: function (data) {
-        //             // console.log(data);
-        //             return {
-        //                 results: data.map(function (item) {
-        //                     return {
-        //                         text: item.plate_number,
-        //                         id: item.id
-        //                     }
-        //                 })
-        //                 // End Of Search Is Here
-        //             };
-        //         },
-        //         cache: true
-        //     }
-        // }).on('select2:open', function() {
-        //         console.log('opned');
-        //         console.log( $('.select2-search__field') );
-        //         var searchInput = $('.select2-search__field').val();
-        //         if ( searchInput == '') {
-        //             console.log('Yes Empty');
-        //         }
-        //         if (searchInput) {
-        //             console.log('Search input value:', searchInput);
-        //             // Perform desired logic with the search input value
-        //         }
-        //     }).on('select2:close', function() {
-        //         // Clear the search input
-        //         $('.select2-search__field').val('');
-        //     });
-
-
-
-
-
 
 </script>
 </body>

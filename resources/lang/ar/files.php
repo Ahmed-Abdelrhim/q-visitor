@@ -322,7 +322,7 @@ return [
     'Search Worker' => 'بحث عن الموظف',
     'This Contractor Has Already Workers' => 'هذا المقاول لدية عمال بالفعل',
     'Scan Document' => 'فحص البيانات',
-    '' => '',
+    'Choose Contractor' => 'إختر مقاول',
     '' => '',
     '' => '',
     '' => '',

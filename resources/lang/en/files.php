@@ -331,7 +331,7 @@ return [
     'Search Worker' => 'Search Worker',
     'This Contractor Has Already Workers' => 'This Contractor Has Already Workers',
     'Scan Document' => 'Scan',
-    '' => '',
+    'Choose Contractor' => 'Choose Contractor',
     '' => '',
     '' => '',
     '' => '',
