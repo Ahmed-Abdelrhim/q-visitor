@@ -3,13 +3,44 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Import\ImportWorkers;
+use App\Models\VisitingDetails;
 use App\Models\Worker;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class WorkerController extends Controller
 {
     public function index()
     {
+    }
+
+    public function importToExcel(Request $request, $visit_id)
+    {
+        if (!$request->has('file')) {
+            $notifications = array('message' => 'You Have To Choose An Excel File', 'alert-type' => 'error');
+            return redirect()->back()->with($notifications);
+        }
+
+        $visit = VisitingDetails::query()->with('visitor')->find($visit_id);
+        if (!$visit) {
+            $notifications = array('message' => 'Visit Was Not Found', 'alert-type' => 'info');
+            return redirect()->back()->with($notifications);
+        }
+
+        try {
+            Excel::import(new ImportWorkers($visit->id, $visit->visitor->id),
+                $request->file('file')->store('files'));
+        } catch (\Exception) {
+            $notifications = array('message' => 'Something Went Wrong , You Have To Make Columns in The Excel Sheet With Names "name" , "national_number" ', 'alert-type' => 'error');
+            return redirect()->back()->with($notifications);
+        }
+
+        $visit->is_contractor = 1;
+        $visit->save();
+
+        $notifications = array('message' => __('files.Data Created Successfully'), 'alert-type' => 'success');
+        return redirect(route('admin.visitors.index'))->with($notifications);
     }
 
     public function search(Request $request)
@@ -54,7 +85,7 @@ class WorkerController extends Controller
         $worker->is_scaned = 1;
         $worker->save();
 
-        return response()->json(['status' => 200, 'msg' => 'Success' , 'nat_id' => $worker->nat_id]);
+        return response()->json(['status' => 200, 'msg' => 'Success', 'nat_id' => $worker->nat_id]);
     }
 
     public function convertNationalNumberToEnglish($national_number): string

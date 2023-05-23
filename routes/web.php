@@ -110,7 +110,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
         Route::post('Contractor/Store/{contractor_id}',[ContractorController::class,'store'])->name('contractor.store');
 
         Route::post('Workers/Search',[WorkerController::class,'search'])->name('workers.search'); 
-        Route::post('Workers/Find',[WorkerController::class,'findWorkerWithNationalNum'])->name('find.this.worker'); 
+        Route::post('Workers/Find',[WorkerController::class,'findWorkerWithNationalNum'])->name('find.this.worker');
+        Route::post('Workers/Import/To/Excel/{visit_id}',[WorkerController::class,'importToExcel'])->name('import.excel');
+
 
         // Ocr Resource Controller···
         Route::resource('OCR', 'OcrController');

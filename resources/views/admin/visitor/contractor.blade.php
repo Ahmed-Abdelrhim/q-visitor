@@ -25,6 +25,26 @@
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-12">
                     <div class="card">
+                        <div class="card-header ">
+                            <form action="{{route('admin.import.excel',$contractor_id)}}" method="POST" enctype="multipart/form-data" class="d-flex" style="width: 100%; justify-content: space-between">
+                                @csrf
+                                <div>
+                                    <input type="file" name="file"
+                                           class="form-control-file">
+                                </div>
+
+{{--                                <div class="middle">--}}
+{{--                                    <img src="{{asset('images/excel.png')}}" style="width: 100px;" height="100px;" alt=""/>--}}
+{{--                                </div>--}}
+
+                                <div style="margin-left: 30px;">
+                                    <button class="btn btn-success">
+                                        {{__('files.Import Data')}}
+                                        <i class="fa fa-file-excel"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                         <form method="POST" action="{{route('admin.contractor.store', $contractor_id)}}">
                             @csrf
                             <div class="card-body">
@@ -101,5 +121,7 @@
                 clone.find('#nat_id').val("");
             });
         });
+
+
     </script>
 @endsection

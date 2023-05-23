@@ -25,6 +25,7 @@ class ContractorController extends Controller
     public function create($visit_id)
     {
         $visit_id = decrypt($visit_id);
+
         $workers = Worker::query()->where('visit_id' , $visit_id)->first();
         if ($workers) {
             $notifications = array('message' => __('files.This Contractor Has Already Workers'), 'alert-type'=> 'info');
