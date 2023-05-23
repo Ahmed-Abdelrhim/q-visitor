@@ -60,7 +60,7 @@
                                                                 <h5 style="margin-top: -3px;">{{__('files.Twin Truck Number')}} :</h5>
                                                                 <input type="text" class="form-control plate_no"
                                                                        name="twin_truck_number"
-                                                                       style="width: 150px; height: 35px; margin-left: 10px; margin-top: -7px;"/>
+                                                                       style="width: 150px; height: 35px; margin-left: 10px; margin-top: -7px; border-color: white"/>
                                                             @endif
 
 {{--                                                            <a class="btn btn-primary dashboard"--}}
