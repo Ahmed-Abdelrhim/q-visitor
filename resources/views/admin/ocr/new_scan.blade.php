@@ -101,18 +101,21 @@
                                             </div>
                                         </div>
 
-                                        <div style="margin-top : 20px; margin-bottom: 20px; width: 100%;">
-                                            @if(isset($car_plates))
-                                                <h5 class="h5 text-center">{{__('files.Car Plate Number')}}</h5>
-                                                <select class="js-example-templating form-control"
-                                                        id="car_plate_number">
-                                                    <option disabled selected>-- Select Car Plate Number --</option>
-                                                    @foreach($car_plates as $plate)
-                                                        <option value="{{$plate->plate_number}}">{{$plate->plate_number}}</option>
-                                                    @endforeach
-                                                </select>
-                                            @endif
-                                        </div>
+                                        {{-- Start Car Plates--}}
+                                        @if($car_type != 'P')
+                                            <div style="margin-top : 20px; margin-bottom: 20px; width: 100%;">
+                                                @if(isset($car_plates))
+                                                    <h5 class="h5 text-center">{{__('files.Car Plate Number')}}</h5>
+                                                    <select class="js-example-templating form-control"
+                                                            id="car_plate_number">
+                                                        <option disabled selected>-- Select Car Plate Number --</option>
+                                                        @foreach($car_plates as $plate)
+                                                            <option value="{{$plate->plate_number}}">{{$plate->plate_number}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @endif
+                                            </div>
+                                        @endif
                                         {{-- End Car Plates--}}
 
 
@@ -368,21 +371,22 @@
 
 
 
-    @endif
-        $(document).ready(function() {
-            // console.log( $('.select2-search__field').val() );
-            // $('.select2-search__field').on('change' , function () {
-            //     console.log('dklasjhdklaisjd');
-            // });
-            
-            $(".js-example-templating").select2({});
-            // $("#employee").select2({});
 
-            $(document).on('keyup', '.select2-search__field:first', function (e) {
-                value = $('.select2-search__field:first')[0].value;
-                console.log( value );
-                $.ajax({
-                    url: '{{ route('admin.search.car.plate') }}',
+    @endif
+    $(document).ready(function() {
+        // console.log( $('.select2-search__field').val() );
+        // $('.select2-search__field').on('change' , function () {
+        //     console.log('dklasjhdklaisjd');
+        // });
+
+        $(".js-example-templating").select2({});
+        // $("#employee").select2({});
+
+        $(document).on('keyup', '.select2-search__field:first', function (e) {
+            value = $('.select2-search__field:first')[0].value;
+            console.log( value );
+            $.ajax({
+                url: '{{ route('admin.search.car.plate') }}',
                     type:"GET",
                     data : {value},
                     success: function(data) {
@@ -435,6 +439,7 @@
         //         // Clear the search input
         //         $('.select2-search__field').val('');
         //     });
+
 
 
 

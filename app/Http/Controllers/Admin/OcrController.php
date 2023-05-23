@@ -405,15 +405,6 @@ class OcrController extends Controller
             }
         }
 
-        $plate_number = null;
-        if (isset($_POST['car_plate_number'])) {
-            $plate_number = $_POST['car_plate_number'];
-        }
-
-        if (empty($plate_number)) {
-            return 'Car Plate Is Not Specified';
-        }
-
         //        if (empty($emp_id) || $emp_id == 0) {
         //            return 'Employee Is Not Specified';
         //        }
@@ -490,6 +481,20 @@ class OcrController extends Controller
         if (isset($_POST['car_type'])) {
             $car_type = $_POST['car_type'];
         }
+
+
+        $plate_number = null;
+        if ($car_type != 'P' && $car_type != 'p') {
+            if (isset($_POST['car_plate_number'])) {
+                $plate_number = $_POST['car_plate_number'];
+            }
+
+            if (empty($plate_number)) {
+                return 'Car Plate Is Not Specified';
+            }
+        }
+
+
 
         //        if ($car_type == 'TWIN_TRUCK') {
         //            if (!isset($_POST['twin_truck_number'])) {
@@ -596,11 +601,12 @@ class OcrController extends Controller
             }
         }
 
-        try {
-            $car = CarPlate::query()->where('plate_number', $plate_number)->first();
-            $car->flag = 1;
-            $car->save();
-        } catch (\Exception) {
+        if ($car_type != 'P' && $car_type != 'p') {
+            try {
+                $car = CarPlate::query()->where('plate_number', $plate_number)->first();
+                $car->flag = 1;
+                $car->save();
+            } catch (\Exception) {}
         }
 
         try {
