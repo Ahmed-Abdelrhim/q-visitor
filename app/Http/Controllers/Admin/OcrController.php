@@ -705,6 +705,6 @@ class OcrController extends Controller
         $email = BackgroundJob::dispatch($visit);
 
         // VisitingDetails::query()->find(457)->delete();
-        // return 'Done';;
+        // return 'Done';
     }
 }
