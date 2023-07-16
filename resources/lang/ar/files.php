@@ -312,6 +312,7 @@ return [
     'Export To Pdf' => 'تصدير الي PDF',
     'Visit Approved From Quality' => 'تمت الموافقة',
     'Twin Truck Number' => 'رقم المقطورة',
+    'Twin Truck' => 'مقطورة',
     'Car Plate Number' => 'رقم السيارة',
     'Select Car Plate Number' => 'قم بإختيار رقم لوحة السيارة',
     'This Visitor does not have email' => 'لايوجد إايميل لهذا الزائر',

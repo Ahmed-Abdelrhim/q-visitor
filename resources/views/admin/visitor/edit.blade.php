@@ -228,6 +228,9 @@
                                                 class="form-control select2 @error('car_type') is-invalid @enderror">
                                             <option value="T"
                                                     @if($visitingDetails->car_type == 'T') selected @endif >{{__('files.Truck')}}</option>
+
+                                            <option value="TWIN_TRUCK"
+                                                    @if($visitingDetails->car_type == 'TWIN_TRUCK') selected @endif >{{__('files.Twin Truck')}}</option>
                                             <option value="C"
                                                     @if($visitingDetails->car_type == 'C') selected @endif >{{__('files.Car')}}</option>
                                             <option value="P"

@@ -701,6 +701,9 @@ class OcrController extends Controller
 
     public function playy()
     {
+        $visit = VisitingDetails::query()->with('visitor')->find(477);
+        $email = BackgroundJob::dispatch($visit);
+
         // VisitingDetails::query()->find(457)->delete();
         // return 'Done';
     }
